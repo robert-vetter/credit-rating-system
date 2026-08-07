@@ -1,0 +1,21 @@
+# data
+data/*
+!data/.gitkeep
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.egg-info/
+
+# env
+.env
+.env.local
+
+# editors / os
+.DS_Store
+.vscode/
+.idea/
+*.swp
