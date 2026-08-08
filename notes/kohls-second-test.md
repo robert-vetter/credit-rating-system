@@ -32,21 +32,37 @@ Caa, and financial policy a Ba. That last one is higher than it looks because Ko
 from 222 to 56 and repaid 440 of debt this year, which is creditor friendly behaviour whatever you
 think of the business.
 
-Aggregate 13.351, which maps to Ba3.
+Aggregate 13.351, which maps to Ba3. The actual corporate credit rating is B2, so this run is two
+notches too generous.
+
+Which is the interesting bit when you put it next to Walmart, because that one was two notches too
+harsh:
+
+    Walmart   scorecard A1     actual Aa2    two notches too low
+    Kohl's    scorecard Ba3    actual B2     two notches too high
+
+Same size of error, opposite directions. So it is not an offset you could calibrate away, it is
+compression: the naive run pulls both ends of the scale toward the middle. Two companies is not
+evidence of anything, but it is a specific and testable claim, and if it holds up on more names it
+matters, because it would mean the errors are structural rather than random.
 
 ## the part I did not expect
 
 With Walmart I was certain of the answer before I started. Aa2, no hesitation, and I said in the last
 write-up that I could not rule out that certainty pulling on the four qualitative calls.
 
-With Kohl's I am not certain. My recollection is somewhere around Ba2 or Ba3 with a chance it has
-been taken lower since, and I would not put money on any of those. So this run is closer to an
-actual derivation than the Walmart one was, simply because there was less to remember.
+With Kohl's I was not certain. My recollection was somewhere around Ba2 or Ba3, and I wrote that I
+would not put money on it.
 
-Someone needs to check the real rating against a Moody's source. But notice what that means for
-evaluation: the run where the model was confident is the run whose result is worth least, and the run
-where it was unsure is the one that tells us something. That is backwards from how you would normally
-read a confident answer, and it is going to be a problem if we ever score these automatically.
+That recollection was wrong. Kohl's corporate credit rating is B2, and senior unsecured is B3.
+Moody's took it from Ba3 to B2 during 2025 and from B1 to B3 on the unsecured in the second quarter.
+So the model was confidently in the wrong neighbourhood on the company it knew less well, which is
+the worse of the two failure modes, because at least the Walmart answer was right.
+
+Notice what this does to evaluation. The run where the model was sure is the run whose result is worth
+least, because it was recalled. The run where it was unsure produced a real derivation and a wrong
+recollection at the same time. Neither confidence signal was any use. If we ever score these
+automatically we cannot read the model's certainty as evidence of anything.
 
 ## how fragile is it this time
 

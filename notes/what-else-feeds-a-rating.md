@@ -1,8 +1,70 @@
 # what else feeds a rating
 
+## first, the thing that has to be dealt with before anything else
+
+The answer is printed inside the input document. Both 10-Ks disclose their own credit ratings, because
+companies discuss their ratings in the liquidity and financing section, and for good reason: Kohl's
+notes that a downgrade already triggered a 175 basis point coupon step-up on its 2031 notes, so the
+rating is material to its financing costs and has to be disclosed.
+
+Walmart's filing lists Moody's at Aa2. Kohl's says outright that Moody's took its corporate credit
+rating from Ba3 to B2 during 2025, with a table showing B2, and separately that senior unsecured went
+from B1 to B3.
+
+So a pipeline that feeds a whole 10-K to a model and asks for a rating is handing over the label with
+the input. Any evaluation built that way measures retrieval, not analysis, and it would look like it
+was working. This has to be stripped before anything else is built, and stripping it is not trivial,
+because the rating turns up in running prose in the MD&A as well as in a labelled table, and it also
+shows up indirectly through things like coupon step-up clauses that only exist because of a
+downgrade.
+
+Worth noting this is a second, separate leak from the memorisation problem in the Walmart write-up.
+That one is about what the model already knows. This one is about what we hand it.
+
+## what a rating needs beyond the filing
+
 Both runs so far used one document, the 10-K, and that is clearly not enough. This is a first pass at
 what else there is. It is not a plan, it is a list of things I found while doing the two runs, with a
 note on which of them I have actually checked and which I am only assuming.
+
+## subfactor by subfactor, what is actually available
+
+Going through all eight and asking only one question, can this be sourced from the 10-K:
+
+Revenue is the one clean case. Single line, direct read, no reconstruction.
+
+Debt/EBITDA has its raw parts in the filing but spread across three chapters. Operating income from
+the income statement, D&A from the cash flow, and seven separate balance sheet lines for debt. The
+Moody's restatements on top of that are partly in the notes, partly in the debt exhibits, and partly
+judgment.
+
+(EBITDA-capex)/interest depends on the company. Walmart splits debt interest and finance lease
+interest on the face, so gross interest is available. Kohl's reports only interest expense net, and
+does not disclose gross interest or interest income separately anywhere in the filing, so the
+denominator we used is not the one the methodology asks for. We had no alternative.
+
+RCF/net debt is the worst of the four. FFO is not a US GAAP line item and does not appear in any
+filing. We rebuilt it from operating cash flow minus the working capital swing. Moody's has its own
+definition and it is not published, so this number is a guess at somebody else's definition.
+
+Market characteristics is partly there. Item 1 and Item 1A describe competition, but self-reported
+and in general terms. Kohl's says the industry is highly competitive and lists categories of
+competitor without naming any. The economic strength of the countries of operation, which the
+scorecard explicitly asks for, is external macro data.
+
+Market position needs market share to distinguish a share leader from one of several leaders, and
+market share appears in no 10-K, neither the company's own nor anyone else's.
+
+Revenue and earnings stability cannot be sourced from the filing at all. It is scored against the
+peer group and against the company's own financial targets. Neither is in there. Kohl's states in the
+10-K that it does not reconcile its forward guidance, so even the targets it does have are elsewhere.
+
+Financial policy has its history in the filing, dividends paid, buybacks, debt repaid, and its
+substance elsewhere, since the scorecard descriptions are about expectations, event risk and public
+commitments.
+
+So one of eight is clean, three need reconstruction plus definitional choices nobody publishes, and
+four need sources outside the filing.
 
 ## the methodology asks for things the filing does not contain
 

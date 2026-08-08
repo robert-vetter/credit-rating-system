@@ -32,10 +32,11 @@ Then the four qualitative ones. I gave market characteristics an A, market posit
 and earnings stability an Aa, and financial policy an Aa. Weighted sum comes to 4.503, which maps to
 A1.
 
-Walmart is actually Aa2 as far as I know, though somebody should confirm that against a Moody's
-source rather than my memory. So the naive run lands two notches low. That is not a disaster, a
-scorecard output sitting a notch or two off the assigned rating is normal because the committee
-applies other considerations on top. But the interesting part is not the gap.
+Walmart is Aa2. I originally wrote that from memory and flagged it as needing a source, and then found
+the source in the filing itself, see the note on leakage below. So the naive run lands two notches
+low. That is not a disaster, a scorecard output sitting a notch or two off the assigned rating is
+normal because the committee applies other considerations on top. But the interesting part is not the
+gap.
 
 ## the interesting part
 

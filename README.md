@@ -12,12 +12,14 @@ The first sector methodology in scope is Moody's Retail and Apparel.
 Early. Reading the methodology and background material. Nothing built yet.
 
 Two runs of the rating task done by hand so far, no system around them, just the methodology and one
-10-K each. Walmart in notes/walmart-first-test.md, Kohl's in notes/kohls-second-test.md. Both landed
-close to a notch boundary and in both cases the outcome was decided by the four qualitative scores
-rather than by anything computed. The scoring arithmetic itself is exact and is in notes/scorecard.py.
+10-K each. Walmart in notes/walmart-first-test.md, Kohl's in notes/kohls-second-test.md. Walmart came
+out A1 against an actual Aa2, Kohl's came out Ba3 against an actual B2, so both are two notches off in
+opposite directions. In both cases the outcome was decided by the four qualitative scores rather than
+by anything computed. The scoring arithmetic itself is exact and is in notes/scorecard.py.
 
-notes/what-else-feeds-a-rating.md is a first pass at which documents beyond the 10-K a rating
-actually needs, including a few the methodology asks for that no single filing contains.
+notes/what-else-feeds-a-rating.md goes through all eight subfactors and asks which of them a 10-K can
+actually support. One can. It also covers the leakage problem, which is that companies disclose their
+own credit ratings in the filing, so the label sits inside the input.
 
 Waiting on the lab's initial dataset and the rest of the reading material before sketching the
 architecture.
