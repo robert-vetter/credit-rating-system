@@ -11,6 +11,12 @@ The first sector methodology in scope is Moody's Retail and Apparel.
 
 Early. Reading the methodology and background material. Nothing built yet.
 
+Ran the rating task by hand on Walmart as a baseline, no system around it, just the retail
+methodology and the FY2026 10-K. Write-up in notes/walmart-first-test.md. Short version: the
+arithmetic is trivial and exact, the outcome landed 0.003 away from a notch boundary, and seven
+defensible changes to the inputs flip it. The qualitative subfactors and the Moody's restatements are
+where the real work is.
+
 Waiting on the lab's initial dataset and the rest of the reading material before sketching the
 architecture.
 
