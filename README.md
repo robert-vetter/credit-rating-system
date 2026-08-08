@@ -11,11 +11,13 @@ The first sector methodology in scope is Moody's Retail and Apparel.
 
 Early. Reading the methodology and background material. Nothing built yet.
 
-Ran the rating task by hand on Walmart as a baseline, no system around it, just the retail
-methodology and the FY2026 10-K. Write-up in notes/walmart-first-test.md. Short version: the
-arithmetic is trivial and exact, the outcome landed 0.003 away from a notch boundary, and seven
-defensible changes to the inputs flip it. The qualitative subfactors and the Moody's restatements are
-where the real work is.
+Two runs of the rating task done by hand so far, no system around them, just the methodology and one
+10-K each. Walmart in notes/walmart-first-test.md, Kohl's in notes/kohls-second-test.md. Both landed
+close to a notch boundary and in both cases the outcome was decided by the four qualitative scores
+rather than by anything computed. The scoring arithmetic itself is exact and is in notes/scorecard.py.
+
+notes/what-else-feeds-a-rating.md is a first pass at which documents beyond the 10-K a rating
+actually needs, including a few the methodology asks for that no single filing contains.
 
 Waiting on the lab's initial dataset and the rest of the reading material before sketching the
 architecture.
