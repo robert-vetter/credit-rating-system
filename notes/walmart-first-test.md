@@ -1,125 +1,124 @@
-# first go at Walmart
+# Baseline run 1: Walmart
 
-Xiaowei suggested trying the task on a model before building anything, so I did that today. Nothing
-clever, just the Retail and Apparel methodology and Walmart's FY2026 10-K pulled off EDGAR, and then
-working through the scorecard by hand. No pipeline, no tools, no retrieval. The point was to see
-where it falls over.
+*Analysis and write-up by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert set the
+question and the test design; the model did the extraction, the scoring and this write-up. Inputs were
+the Moody's Retail and Apparel methodology of 12 September 2025 and Walmart's FY2026 10-K from SEC
+EDGAR. All arithmetic is reproducible with `scorecard.py` in this directory.*
 
-The arithmetic is in scorecard.py next to this file, so you can rerun it and change the inputs.
+*Caveat on the setup: the model was both the system under test and the author of the assessment. Where
+this write-up judges the quality of the run, that judgement is self-reported and should be treated
+accordingly. The quantitative claims are checkable from the script and the filing.*
 
-## what came out
+## Purpose
 
-Numbers straight off the filing, year ended 31 January 2026, USD millions:
+Establish what a frontier model does with the rating task given no scaffolding at all: the sector
+methodology and one filing, in context, asked for a rating. No retrieval, no tools, no pipeline. The
+point was to locate the failure modes before designing anything.
 
-    revenue                713,163
-    operating income        29,825
-    D&A                     14,203
-    EBITDA                  44,028      operating income + D&A
-    capex                   26,642
-    gross interest           2,799      debt interest 2,318 + finance lease 481
-    total debt              67,095      borrowings + both lease types
-    cash                    10,727
-    net debt                56,368
-    FFO                     40,813      CFO less the working capital swing
-    RCF                     33,306      FFO less common dividends
+## Inputs extracted from the filing
 
-    revenue              $713.2bn      score  0.50
-    debt/EBITDA             1.52x      score  6.07
-    (EBITDA-capex)/int      6.21x      score  9.36
-    RCF/net debt            59.1%      score  4.64
+Walmart Inc., fiscal year ended 31 January 2026, USD millions.
 
-Then the four qualitative ones. I gave market characteristics an A, market position an Aa, revenue
-and earnings stability an Aa, and financial policy an Aa. Weighted sum comes to 4.503, which maps to
-A1.
+| Item | Value | Source in filing |
+|---|---|---|
+| Total revenues | 713,163 | Income statement |
+| Operating income | 29,825 | Income statement |
+| D&A | 14,203 | Cash flow statement |
+| EBITDA | 44,028 | Derived, operating income + D&A |
+| Capex | 26,642 | Cash flow statement |
+| Gross interest | 2,799 | Income statement, debt 2,318 + finance lease 481 |
+| Total debt | 67,095 | Balance sheet, seven lines including both lease types |
+| Cash | 10,727 | Balance sheet |
+| Net debt | 56,368 | Derived |
+| FFO | 40,813 | Derived, CFO less working capital swing |
+| RCF | 33,306 | Derived, FFO less common dividends |
 
-Walmart is Aa2. I originally wrote that from memory and flagged it as needing a source, and then found
-the source in the filing itself, see the note on leakage below. So the naive run lands two notches
-low. That is not a disaster, a scorecard output sitting a notch or two off the assigned rating is
-normal because the committee applies other considerations on top. But the interesting part is not the
-gap.
+EBITDA, FFO and RCF do not exist as line items in any filing. They are reconstructions, and Moody's
+definitions for them are not published.
 
-## the interesting part
+## Scorecard
 
-4.503. The boundary between Aa3 and A1 is at 4.5. The whole thing came out three thousandths on the
-wrong side of a line.
+| Subfactor | Weight | Metric | Numeric score |
+|---|---|---|---|
+| Revenue | 15% | $713.2bn | 0.50 |
+| Market Characteristics | 10% | scored A | 6.00 |
+| Market Position | 10% | scored Aa | 3.00 |
+| Revenue and Earnings Stability | 10% | scored Aa | 3.00 |
+| Debt/EBITDA | 15% | 1.52x | 6.07 |
+| (EBITDA-Capex)/Interest | 15% | 6.21x | 9.36 |
+| RCF/Net Debt | 10% | 59.1% | 4.64 |
+| Financial Policy | 15% | scored Aa | 3.00 |
+| **Aggregate** | | | **4.503** |
 
-So I went back and changed one judgment call at a time to see what it takes to flip it. Seven things
-flip it, and none of them are mistakes, they are all choices a reasonable person could defend:
+Scorecard-indicated outcome: **A1**. Walmart's actual Moody's rating is **Aa2**, disclosed in the
+filing itself. The run is two notches too harsh.
 
-If market characteristics is an Aa instead of an A, it goes to Aa3. Walmart is mostly groceries and
-staples, demand is inelastic, barriers are enormous, but competition is also genuinely fierce. I sat
-between the two categories for a while and picked A more or less on a coin flip.
+A gap of one or two notches between scorecard output and assigned rating is normal, since Moody's
+applies other considerations on top. The gap is not the interesting result.
 
-If market position is Aaa instead of Aa, it flips. Walmart is the biggest retailer on earth with
-dominant positions in multiple broad categories, which is close to the literal Aaa wording. I went
-with Aa only because the Aaa text says no anticipated threats from any front and Amazon exists.
+## Finding 1: the outcome sits on a notch boundary
 
-Same for revenue and earnings stability at Aaa, and financial policy at Aaa. Both flip it.
+The aggregate of 4.503 lies 0.003 above the Aa3/A1 boundary at 4.5.
 
-If I use interest net of interest income, 2,431 instead of 2,799, coverage goes from 6.21x to 7.15x
-and it flips. The methodology says interest expense and I read that as gross, but net is a defensible
-reading.
+Re-running with one input changed at a time, seven changes flip the outcome to Aa3. None of them are
+errors; each is a defensible reading.
 
-If I leave operating leases out of debt, leverage drops from 1.52x to 1.17x and it flips.
+| Change | Aggregate | Outcome |
+|---|---|---|
+| Market Characteristics scored Aa instead of A | 4.203 | Aa3 |
+| Market Position scored Aaa instead of Aa | 4.303 | Aa3 |
+| Revenue and Earnings Stability scored Aaa | 4.303 | Aa3 |
+| Financial Policy scored Aaa | 4.203 | Aa3 |
+| Interest taken net of interest income (7.15x) | 4.409 | Aa3 |
+| Operating leases excluded from debt (1.17x) | 4.022 | Aa3 |
+| RCF taken straight off CFO (60.4%) | 4.483 | Aa3 |
 
-And if I take RCF straight off operating cash flow instead of backing out the working capital swing,
-it flips too.
+The scoring arithmetic is exact and deterministic. All variance in the outcome came from four
+qualitative judgements made from prose and three definitional choices the methodology does not
+specify.
 
-So the outcome is not really A1. The outcome is a coin sitting on its edge, and which way it falls is
-decided by four qualitative calls I made from prose and three definitional choices nobody wrote down.
-The arithmetic is completely deterministic and completely beside the point.
+## Finding 2: the Moody's restatements were not performed
 
-## what I did not do
+The run used reported figures. Moody's restates onto its own definitions before computing anything:
+lease obligations, pension deficits, hybrid securities given partial equity credit, securitisations
+brought back on balance sheet, unusual items stripped out.
 
-I used reported figures. Moody's does not. They restate onto their own definitions before computing
-anything, pensions, hybrids given partial equity credit, securitisations brought back on, unusual
-items stripped out. I did none of that, and for Walmart it probably does not matter much because the
-balance sheet is clean, but for a levered retailer it would move leverage by a lot. That whole layer
-is missing from what I did and I think it is the single biggest gap between this and a real analyst.
+None of that was done. For Walmart the balance sheet is clean enough that it probably does not move
+much, but for a levered retailer it would move leverage materially. This layer sits between extraction
+and scoring and is the largest single gap between this run and an analyst's work.
 
-I also did not look at anything except the 10-K. No peer comparison, no forward view, and the
-methodology is explicit that ratings are forward looking and the scorecard is fed by expectations,
-not just by last year's accounts.
+## Finding 3: the model already knew the answer
 
-## the thing that worries me most
+Asked for Walmart's rating with no filing provided, the model returns Aa2 immediately and with a
+confident explanation. It is recalling, not deriving.
 
-I know Walmart is Aa2. I knew it before I opened the filing. So when I was sitting between A and Aa
-on market characteristics, or between Aa and Aaa on market position, I cannot honestly say the answer
-I already knew was not pulling on me. Four qualitative subfactors carry 45% of the weight and every
-one of them is a judgment made from prose, which is exactly where that kind of leakage would hide,
-and it would be invisible in the output because the reasoning reads fine either way.
+Because four qualitative subfactors carry 45% of the weight and each is a judgement made from
+narrative text, there is no way to establish that the known answer did not influence those four
+scores. The reasoning reads equally plausible either way, so the contamination would be invisible in
+the output.
 
-Quick check on this: if you ask for Walmart's rating with no filing at all, you get Aa2 straight
-back, instantly, with a confident explanation. So the model is not deriving anything, it is
-recalling. Which means the 4.503 above tells us almost nothing about whether this approach works. It
-tells us the model can do arithmetic and write plausible prose about a company it already knows.
+This is the look-ahead problem the lab's EDGAR-Forecast benchmark was built around. Any evaluation run
+on well-known large caps in the current year measures memory to an unknown degree.
 
-This is the same look-ahead problem EDGAR-Forecast was built around, and I think it has to be settled
-before any number from a run like this means anything. Doing it on well-known large caps in the
-current year is close to worthless as evaluation.
+## Implications
 
-## what I take from this for the architecture
+Three, stated as observations rather than design decisions.
 
-Three things, roughly.
+The scoring engine should be a plain function with tests. It is roughly forty lines, it is exact, and
+no variance originated there.
 
-The scoring engine should be a plain function with tests, not anything a model touches. It is forty
-lines and it is exact. Every notch of variance we saw came from the inputs, so that is where the work
-is.
+The qualitative subfactors are the central problem rather than a detail. They carry 45% of the weight
+and they decided this outcome. Scores need to be argued from cited passages and checkable afterwards,
+otherwise analysis cannot be distinguished from recall.
 
-The qualitative subfactors are the actual problem, not a side issue. 45% of the weight, and on this
-run they were also the thing that decided the outcome. Whatever we build needs those scores to be
-argued from cited passages in the filing and checkable afterwards, otherwise we cannot tell an
-analysis from a memory.
+The Moody's adjustments belong in their own stage between extraction and scoring, since some are
+mechanical and some are judgement.
 
-And the Moody's adjustments need to be their own block. They sit between extraction and scoring, some
-of them are mechanical and some are judgment, and skipping them is the difference between reading a
-filing and rating a company.
+Separately, the evaluation harness needs to come early rather than last. Until the point-in-time
+problem is addressed there is no way to tell whether any of this works.
 
-I would also say the evaluation harness has to come early rather than last, because until the
-point-in-time thing is handled we have no way to tell whether any of this is working.
+## Next
 
-## next
-
-Rerun the same thing on a company that is not investment grade and not famous, and on an older filing
-year, and see how much of the apparent competence survives. Also worth doing the same run twice with
-the qualitative scores forced to be justified with quotes, and seeing whether they move.
+Run the same procedure on a company that is neither investment grade nor widely covered, and on an
+older filing year, and measure how much of the apparent competence survives. See
+`kohls-second-test.md` for the first of those.

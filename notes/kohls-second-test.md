@@ -1,116 +1,138 @@
-# second go, Kohl's
+# Baseline run 2: Kohl's
 
-Same exercise as Walmart, different company, to see whether anything from the first run was a fluke.
-I picked Kohl's on purpose because it is the opposite case in three ways at once. It is mid-cap rather
-than the largest retailer on earth, it is speculative grade rather than Aa, and it is a department
-store in a segment that has been shrinking for a decade, so the qualitative descriptions actually
-have to do some work instead of everything landing in the top box.
+*Analysis and write-up by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert set the
+question and chose the test case; the model did the extraction, the scoring and this write-up. Inputs
+were the Moody's Retail and Apparel methodology of 12 September 2025, Kohl's FY2025 10-K, and Kohl's
+Q3 10-Q, all from SEC EDGAR. Arithmetic is reproducible with `scorecard.py`.*
 
-Same inputs as before, nothing else. Retail and Apparel methodology, the FY2025 10-K off EDGAR, year
-ended 31 January 2026. Numbers are in scorecard.py, both companies now run from the same engine.
+*Same caveat as run 1: the model was both the system under test and the author of the assessment.*
 
-## what came out
+## Why this company
 
-    revenue                15,527
-    operating income          624
-    D&A                       700
-    EBITDA                  1,324
-    capex                     372
-    interest expense          288      reported net, Kohl's does not split gross on the face
-    total debt              6,630      revolver at zero, plus long term, plus both lease types
-    cash                      674
-    net debt                5,956
-    RCF                     1,099
+Kohl's was selected as the inverse of Walmart on three axes at once: mid-cap rather than the largest
+retailer globally, speculative grade rather than Aa, and a department store in a structurally
+declining segment. The intent was to force the qualitative descriptions to discriminate instead of
+having everything land in the top category, and to test the interpolation at the other end of the
+scale.
 
-    revenue              $15.5bn      score  9.39
-    debt/EBITDA            5.01x      score 15.01
-    (EBITDA-capex)/int     3.31x      score 12.29
-    RCF/net debt           18.5%      score 12.46
+## Inputs extracted from the filing
 
-Qualitative I gave market characteristics a B, market position a B, revenue and earnings stability a
-Caa, and financial policy a Ba. That last one is higher than it looks because Kohl's cut the dividend
-from 222 to 56 and repaid 440 of debt this year, which is creditor friendly behaviour whatever you
-think of the business.
+Kohl's Corporation, fiscal year ended 31 January 2026, USD millions.
 
-Aggregate 13.351, which maps to Ba3. The actual corporate credit rating is B2, so this run is two
-notches too generous.
+| Item | Value | Note |
+|---|---|---|
+| Total revenue | 15,527 | |
+| Operating income | 624 | |
+| D&A | 700 | |
+| EBITDA | 1,324 | Derived |
+| Capex | 372 | |
+| Interest expense | 288 | Reported net. Kohl's does not disclose gross interest or interest income separately anywhere in the filing. |
+| Total debt | 6,630 | Revolver at zero at year end, plus long-term debt and both lease types |
+| Cash | 674 | |
+| Net debt | 5,956 | Derived |
+| RCF | 1,099 | Derived |
 
-Which is the interesting bit when you put it next to Walmart, because that one was two notches too
-harsh:
+The interest figure is a known defect. The methodology asks for interest expense; the filing provides
+only a net figure. There was no alternative available from this document.
 
-    Walmart   scorecard A1     actual Aa2    two notches too low
-    Kohl's    scorecard Ba3    actual B2     two notches too high
+## Scorecard
 
-Same size of error, opposite directions. So it is not an offset you could calibrate away, it is
-compression: the naive run pulls both ends of the scale toward the middle. Two companies is not
-evidence of anything, but it is a specific and testable claim, and if it holds up on more names it
-matters, because it would mean the errors are structural rather than random.
+| Subfactor | Weight | Metric | Numeric score |
+|---|---|---|---|
+| Revenue | 15% | $15.5bn | 9.39 |
+| Market Characteristics | 10% | scored B | 15.00 |
+| Market Position | 10% | scored B | 15.00 |
+| Revenue and Earnings Stability | 10% | scored Caa | 18.00 |
+| Debt/EBITDA | 15% | 5.01x | 15.01 |
+| (EBITDA-Capex)/Interest | 15% | 3.31x | 12.29 |
+| RCF/Net Debt | 10% | 18.5% | 12.46 |
+| Financial Policy | 15% | scored Ba | 12.00 |
+| **Aggregate** | | | **13.351** |
 
-## the part I did not expect
+Scorecard-indicated outcome: **Ba3**. Kohl's actual Moody's corporate credit rating is **B2**, with
+senior unsecured at **B3**. The run is two notches too generous.
 
-With Walmart I was certain of the answer before I started. Aa2, no hesitation, and I said in the last
-write-up that I could not rule out that certainty pulling on the four qualitative calls.
+Financial Policy was scored Ba, higher than the business would suggest, because Kohl's cut its dividend
+from 222 to 56 and repaid 440 of debt during the year, which is creditor-friendly behaviour regardless
+of the trajectory of the business.
 
-With Kohl's I was not certain. My recollection was somewhere around Ba2 or Ba3, and I wrote that I
-would not put money on it.
+## Finding 1: the errors compress toward the middle of the scale
 
-That recollection was wrong. Kohl's corporate credit rating is B2, and senior unsecured is B3.
-Moody's took it from Ba3 to B2 during 2025 and from B1 to B3 on the unsecured in the second quarter.
-So the model was confidently in the wrong neighbourhood on the company it knew less well, which is
-the worse of the two failure modes, because at least the Walmart answer was right.
+| Company | Scorecard | Actual | Error |
+|---|---|---|---|
+| Walmart | A1 | Aa2 | 2 notches too harsh |
+| Kohl's | Ba3 | B2 | 2 notches too generous |
 
-Notice what this does to evaluation. The run where the model was sure is the run whose result is worth
-least, because it was recalled. The run where it was unsure produced a real derivation and a wrong
-recollection at the same time. Neither confidence signal was any use. If we ever score these
-automatically we cannot read the model's certainty as evidence of anything.
+Equal magnitude, opposite direction. This is not a calibration offset that could be corrected with a
+constant; it is compression. The naive run pulls both ends of the scale toward the centre.
 
-## how fragile is it this time
+Two companies is not evidence. It is, however, a specific and cheaply testable claim, and if it holds
+across more names the errors are structural rather than random, which would matter for design.
 
-Less fragile than Walmart, which is the good news. The aggregate sits 0.149 from the nearest notch
-boundary rather than 0.003. So the Walmart knife edge was partly bad luck rather than a structural
-feature.
+## Finding 2: less fragile than run 1, but the same mechanism decides it
 
-Still not comfortable though. Of the twelve one-step changes I tried on the four qualitative scores,
-five flip the outcome. Market characteristics or market position one step worse takes it to B1.
-Revenue and earnings stability one step better takes it to Ba2. Financial policy one step worse takes
-it to B1, two steps worse also B1.
+The aggregate sits 0.149 from the nearest notch boundary, against 0.003 for Walmart. The Walmart knife
+edge was therefore partly coincidence rather than a structural property.
 
-So the pattern from Walmart holds. The arithmetic is exact and the answer is decided by prose
-judgments. What changed is only how much slack there happens to be around the particular number.
+Of twelve one-step changes applied to the four qualitative scores, five flip the outcome.
 
-## the seasonality test
+| Change | Aggregate | Outcome |
+|---|---|---|
+| Market Characteristics scored Caa | 13.651 | B1 |
+| Market Position scored Caa | 13.651 | B1 |
+| Revenue and Earnings Stability scored Baa | 12.451 | Ba2 |
+| Financial Policy scored B | 13.801 | B1 |
+| Financial Policy scored Caa | 14.251 | B1 |
 
-The methodology has a section on seasonality that says, in short, that year-end metrics may not be
-representative of a retailer's real financial strength, because working capital and debt swing hard
-through the year. Retailers with January year-ends close their books right after converting the
-holiday inventory into cash, which is the most flattering moment of the year.
+The pattern from run 1 holds. What differs is only how much slack happened to exist around the
+particular aggregate.
 
-That is testable, so I tested it. Kohl's Q3 balance sheet, dated 1 November 2025, against the year-end
-one we used:
+## Finding 3: the balance sheet date changes the answer
 
-    cash            144  at Q3      674  at year end
-    inventories   3,895  at Q3    2,745  at year end
-    total debt    6,802  at Q3    6,630  at year end
-    net debt      6,658  at Q3    5,956  at year end
+The methodology contains a section on seasonality stating that year-end metrics may not be
+representative for retailers, because working capital and debt swing through the year. Retailers with
+January year-ends close their books immediately after converting holiday inventory to cash, which is
+the most favourable point in the cycle.
 
-Net debt is 12% higher at the Q3 date, almost entirely because the cash is not there yet. Rerunning
-leverage and RCF off the Q3 balance sheet moves the aggregate from 13.351 to 13.439.
+This is testable. Comparing Kohl's Q3 balance sheet, dated 1 November 2025, against the year-end one
+used above:
 
-It does not flip the rating here, so I want to be careful not to oversell it. But 0.088 of movement
-from nothing more than choosing a different balance sheet date is more than the entire margin Walmart
-had. On a company sitting near a boundary it decides the answer, and there is nothing in the 10-K
-that tells you this is happening. You have to go and pull the 10-Q.
+| Item | Q3 (1 Nov 2025) | Year end (31 Jan 2026) |
+|---|---|---|
+| Cash | 144 | 674 |
+| Inventories | 3,895 | 2,745 |
+| Total debt | 6,802 | 6,630 |
+| Net debt | 6,658 | 5,956 |
 
-## what I take from this one
+Net debt is 12% higher at the Q3 date, almost entirely because the cash has not yet been released from
+inventory. Re-running leverage and RCF off the Q3 balance sheet moves the aggregate from 13.351 to
+13.439.
 
-The mechanics transfer fine. The same engine ran both companies with no changes and the interpolation
-behaved sensibly at both ends of the scale, so the scoring function is not the problem and probably
-never will be.
+That does not flip the rating here, so the effect should not be overstated. But 0.088 of movement from
+nothing but the choice of balance sheet date exceeds the entire margin Walmart had. For a company near
+a boundary it decides the outcome, and nothing in the 10-K signals that it is happening. The 10-Q has
+to be pulled separately.
 
-Two runs is two runs and I am not drawing conclusions from it. But the same thing decided both
-outcomes, which was the four qualitative scores plus a handful of definitional choices about what
-counts as debt and what counts as interest, and it seems worth assuming that keeps being true until
-something shows otherwise.
+## Finding 4: model confidence carried no information
 
-The more useful thing this run produced is the document question, which got long enough that I put it
-in its own file next to this one.
+In run 1 the model knew Walmart's rating before reading anything, and was correct.
+
+In run 2 the model's recollection was "Ba2 or Ba3, possibly lower since", stated with explicit
+uncertainty. The actual answer is B2 corporate credit and B3 senior unsecured, following downgrades
+during 2025. The recollection was wrong by two to three notches.
+
+So the run where the model was confident produced a recalled answer of little evaluative worth, and
+the run where it was uncertain produced a genuine derivation alongside a wrong recollection. Neither
+confidence signal was diagnostic. If runs are ever scored automatically, model-reported certainty
+cannot be used as a proxy for reliability.
+
+## What transfers
+
+The scoring engine ran both companies without modification and the interpolation behaved correctly at
+both ends of the scale. The arithmetic is not the problem and probably never will be.
+
+Two runs support no conclusions, but the same mechanism decided both outcomes: four qualitative scores
+plus a small number of definitional choices about what counts as debt and what counts as interest. That
+is worth treating as the working assumption until something contradicts it.
+
+The document question that came out of this run is in `what-else-feeds-a-rating.md`.

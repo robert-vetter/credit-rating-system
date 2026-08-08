@@ -1,182 +1,163 @@
-# what else feeds a rating
+# Which documents a rating actually needs
 
-## first, the thing that has to be dealt with before anything else
+*Analysis and write-up by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert raised the
+question of whether one filing is sufficient; the model checked it against the methodology text and
+against Kohl's actual EDGAR filing history. Findings marked as verified were checked against source
+documents. Findings marked as assumption were not.*
 
-The answer is printed inside the input document. Both 10-Ks disclose their own credit ratings, because
-companies discuss their ratings in the liquidity and financing section, and for good reason: Kohl's
-notes that a downgrade already triggered a 175 basis point coupon step-up on its 2031 notes, so the
-rating is material to its financing costs and has to be disclosed.
+Both baseline runs used a single document, the 10-K. This file records what else the task requires,
+based on what turned up while doing those runs.
 
-Walmart's filing lists Moody's at Aa2. Kohl's says outright that Moody's took its corporate credit
-rating from Ba3 to B2 during 2025, with a table showing B2, and separately that senior unsecured went
-from B1 to B3.
+## Blocking issue: the label is inside the input
 
-So a pipeline that feeds a whole 10-K to a model and asks for a rating is handing over the label with
-the input. Any evaluation built that way measures retrieval, not analysis, and it would look like it
-was working. This has to be stripped before anything else is built, and stripping it is not trivial,
-because the rating turns up in running prose in the MD&A as well as in a labelled table, and it also
-shows up indirectly through things like coupon step-up clauses that only exist because of a
-downgrade.
+**Verified.** Companies disclose their own credit ratings in the 10-K, because ratings are material to
+financing costs and therefore reportable.
 
-Worth noting this is a second, separate leak from the memorisation problem in the Walmart write-up.
-That one is about what the model already knows. This one is about what we hand it.
+Walmart's filing lists Moody's Investors Service at Aa2. Kohl's states directly that Moody's lowered
+its corporate credit rating from Ba3 to B2 during 2025, includes a table showing B2, and separately
+records that senior unsecured moved from B1 to B3. Kohl's also notes that downgrades have already
+raised the coupon on its 2031 notes by 175 basis points in total, which is exactly why the disclosure
+is required.
 
-## what a rating needs beyond the filing
+Consequence: any pipeline that puts a full 10-K in front of a model and asks for a rating has supplied
+the answer along with the question. An evaluation built that way would partly measure retrieval, and it
+would appear to be working well.
 
-Both runs so far used one document, the 10-K, and that is clearly not enough. This is a first pass at
-what else there is. It is not a plan, it is a list of things I found while doing the two runs, with a
-note on which of them I have actually checked and which I am only assuming.
+Stripping this is not trivial. The rating appears in a labelled table, in running MD&A prose, and
+indirectly through instrument terms such as coupon step-up clauses that only exist because a downgrade
+occurred.
 
-## subfactor by subfactor, what is actually available
+This is a distinct problem from the memorisation issue in `walmart-first-test.md`. That one concerns
+what the model already knows. This one concerns what the pipeline hands it.
 
-Going through all eight and asking only one question, can this be sourced from the 10-K:
+## Subfactor by subfactor: can this be sourced from the 10-K
 
-Revenue is the one clean case. Single line, direct read, no reconstruction.
+**Verified against both filings.**
 
-Debt/EBITDA has its raw parts in the filing but spread across three chapters. Operating income from
-the income statement, D&A from the cash flow, and seven separate balance sheet lines for debt. The
-Moody's restatements on top of that are partly in the notes, partly in the debt exhibits, and partly
-judgment.
+| Subfactor | Weight | Available from 10-K | Note |
+|---|---|---|---|
+| Revenue | 15% | Yes, direct read | The only clean case of the eight |
+| Debt/EBITDA | 15% | Raw parts yes, adjustments no | Spread across three chapters; Moody's restatements partly in notes, partly in debt exhibits, partly judgement |
+| (EBITDA-Capex)/Interest | 15% | Company dependent | Walmart splits gross interest on the face; Kohl's reports only net, with no gross figure anywhere in the filing |
+| RCF/Net Debt | 10% | Reconstruction only | FFO is not a US GAAP line item and appears in no filing; Moody's definition is unpublished |
+| Market Characteristics | 10% | Partly | Item 1 and 1A give self-reported competitive narrative; the economic strength of countries of operation is external macro data |
+| Market Position | 10% | Partly | Distinguishing a share leader from one of several leaders requires market share, which appears in no 10-K |
+| Revenue and Earnings Stability | 10% | No | Scored against the peer group and against the company's own targets; neither is in the filing |
+| Financial Policy | 15% | History yes, substance no | Descriptions concern expectations, event risk and public commitments |
 
-(EBITDA-capex)/interest depends on the company. Walmart splits debt interest and finance lease
-interest on the face, so gross interest is available. Kohl's reports only interest expense net, and
-does not disclose gross interest or interest income separately anywhere in the filing, so the
-denominator we used is not the one the methodology asks for. We had no alternative.
+Summary: one subfactor is cleanly available. Three are constructible with definitional choices that
+nobody publishes. Four require sources outside the filing.
 
-RCF/net debt is the worst of the four. FFO is not a US GAAP line item and does not appear in any
-filing. We rebuilt it from operating cash flow minus the working capital swing. Moody's has its own
-definition and it is not published, so this number is a guess at somebody else's definition.
+By weight, the 10-K supports the 55% of the scorecard that is quantitative. The 45% that is qualitative
+is not in it.
 
-Market characteristics is partly there. Item 1 and Item 1A describe competition, but self-reported
-and in general terms. Kohl's says the industry is highly competitive and lists categories of
-competitor without naming any. The economic strength of the countries of operation, which the
-scorecard explicitly asks for, is external macro data.
+Note on a methodological error in both runs: Revenue and Earnings Stability was scored anyway, without
+peer data, in both Walmart and Kohl's. That score should be treated as unfounded in both cases.
 
-Market position needs market share to distinguish a share leader from one of several leaders, and
-market share appears in no 10-K, neither the company's own nor anyone else's.
+## The methodology asks for inputs no single filing contains
 
-Revenue and earnings stability cannot be sourced from the filing at all. It is scored against the
-peer group and against the company's own financial targets. Neither is in there. Kohl's states in the
-10-K that it does not reconcile its forward guidance, so even the targets it does have are elsewhere.
+**Verified against the methodology text.**
 
-Financial policy has its history in the filing, dividends paid, buybacks, debt repaid, and its
-substance elsewhere, since the scorecard descriptions are about expectations, event risk and public
-commitments.
+Revenue and Earnings Stability is scored relative to the peer group at every level of the scale, from
+performance being on par with peers through to meaningfully lagging them. Scoring it requires a peer
+set, which is itself a judgement, and then financial data for each peer.
 
-So one of eight is clean, three need reconstruction plus definitional choices nobody publishes, and
-four need sources outside the filing.
+The same subfactor asks whether the company meets its own financial targets. Targets appear in guidance
+and on earnings calls. Kohl's states in its 10-K that it does not reconcile forward-looking guidance to
+GAAP measures, so even the targets it publishes are elsewhere.
 
-## the methodology asks for things the filing does not contain
+Market Characteristics states that the economic strength of the countries of operation influences the
+score. That is external macro data.
 
-This is the part I did not expect. If you read the scorecard descriptions closely, several of them
-require information that is simply not in the company's own filing.
+Financial Policy is largely about expectations, event risk, M&A likelihood, shareholder distributions
+and liquidity management, rather than anything readable off a balance sheet.
 
-Revenue and earnings stability is scored against the peer group. The Ba description says performance
-should be at least on par with peers, the B description says it may underperform relative to peers,
-and the Caa one says the company has lagged its peer group. You cannot score that subfactor from one
-company's accounts at all. You need a peer set, which means somebody has to decide who the peers are,
-and then you need their numbers too. I scored it for both companies anyway, which in hindsight I
-should not have done without saying so.
+The methodology also states that ratings are forward-looking and that historical results are useful for
+understanding trends. Both runs treated the prior year's accounts as the input, which is not what the
+document asks for.
 
-The same subfactor also asks whether the company meets its own financial targets. Targets are in
-guidance and on earnings calls, not in the 10-K.
+## What is on EDGAR and was not used
 
-Market characteristics says the economic strength of the countries of operation influences the score.
-That is macro data, external to everything.
+**Verified.** Filing type counts for Kohl's, recent history:
 
-Financial policy is explicitly about expectations, event risk, and management's public commitments,
-and the methodology spends most of that section on M&A likelihood, shareholder distributions and
-liquidity management rather than on anything you can read off a balance sheet.
+| Form | Count | Content |
+|---|---|---|
+| 4 | 637 | Insider transactions |
+| 8-K | 113 | Material events |
+| DFAN14A / PREC14A / DEFC14A / DEFA14A | 108 | Proxy contest material, 2020 to 2026 |
+| 10-Q | 19 | Quarterly |
+| 10-K | 6 | Used |
+| DEF 14A | 5 | Proxy, executive compensation |
+| SD | 7 | Conflict minerals |
 
-And the whole thing is stated as forward looking. The methodology says historical results are useful
-for understanding trends, not that they are the input. We have been treating last year's accounts as
-the input.
+The 10-Q was tested and moved net debt by 12%, see run 2.
 
-## what is on EDGAR that we did not touch
+The 8-K stream carries more than expected. Kohl's has filed 25 since January 2025. The most recent
+several include item code 5.02 three times in three months, which is departure or election of directors
+and officers, plus a 1.01, entry into a material definitive agreement. Management turnover and new
+agreements feed Financial Policy and governance directly and appear in no 10-K.
 
-I pulled the filing index for Kohl's to see what is actually there. Last few years, roughly:
+The proxy contest material is the clearest case: 108 filings across six years, including contested
+proxy statements. An activist campaign is a direct input to event risk and to whether financial policy
+favours creditors or shareholders. Reading only the 10-K gives no indication it is occurring.
 
-    637  Form 4          insider transactions
-    113  8-K             material events
-    108  DFAN14A etc.    proxy contest material, 2020 through 2026
-     19  10-Q            quarterly
-      6  10-K            what we used
-      5  DEF 14A         proxy, exec comp
-      7  SD              conflict minerals
+DEF 14A supplies executive compensation structure, which indicates what management is paid to optimise.
+Compensation tied to earnings per share raises the likelihood of buybacks, which is a Financial Policy
+signal.
 
-The 10-Q matters and I tested it, see the seasonality section in the Kohl's write-up. Net debt was 12%
-higher at the Q3 date than at year end.
+Credit agreements and indentures are filed as exhibits rather than as their own form type. Covenants,
+maturity schedules and security sit there. None were examined, and instrument-level ratings depend on
+them.
 
-The 8-Ks matter more than I thought. Kohl's has filed 25 of them since January 2025. The last few
-carry item codes 5.02 three times in three months, which is departure or election of directors and
-officers, plus a 1.01 which is entry into a material agreement. Management turnover and new
-agreements are exactly the kind of thing that feeds financial policy and governance, and none of it
-is in the 10-K.
+## Staleness
 
-The proxy contest material is the clearest example. 108 filings across six years, including PREC14A
-and DEFC14A which are contested proxy statements. An activist campaign is a direct input to event
-risk and to whether financial policy favours shareholders or creditors. Reading only the 10-K, you
-would not know it was happening.
+**Verified.** As of August 2026, Kohl's most recent 10-K covers the year ended 31 January 2026 and was
+filed on 13 March 2026. Since then there is a 10-Q for the quarter ended 2 May, and eight 8-Ks
+including three management changes.
 
-DEF 14A gives executive compensation structure, which tells you what management is paid to optimise.
-If the incentive plan is built around earnings per share, buybacks become more likely, and that is a
-financial policy signal.
+Rating Kohl's today from the 10-K alone therefore ignores five months of filed events. This is the
+normal state rather than an edge case: a 10-K is current for a few weeks per year.
 
-Credit agreements and indentures are filed as exhibits rather than as their own form type. That is
-where covenants, maturity dates and security sit. We have not looked at a single one, and instrument
-level ratings depend on them.
+## Not on EDGAR at all
 
-## the staleness problem, which I had not thought about
+Earnings call transcripts, where guidance and management tone live. The release is sometimes attached to
+an 8-K as exhibit 99.1; the call itself usually is not.
 
-Today is August 2026. Kohl's 10-K covers the year ended 31 January 2026 and was filed on 13 March.
-Since then there is a 10-Q for the quarter ended 2 May, and eight 8-Ks. So rating Kohl's today off the
-10-K alone means ignoring five months of filed events, including three management changes.
+Peer financials are on EDGAR, but only once the peer set has been chosen, which is a modelling decision
+that directly moves one of the eight subfactors.
 
-That is not an edge case, it is the normal state. A 10-K is only current for a few weeks. Any system
-that reads one filing and emits a rating is answering a question about the past.
+Macro and country data for Market Characteristics.
 
-## things that are not on EDGAR
+Moody's own prior rating actions and press releases. Public, but they contain the answer, so they
+should be excluded as inputs for the same reason as the ratings disclosure above.
 
-Earnings call transcripts. Guidance and management tone live there, and guidance is what the
-methodology means by targets. Sometimes the release is attached to an 8-K as exhibit 99.1 but the
-call itself usually is not.
+## Rough priority ordering
 
-Peer financials are on EDGAR but only if you already know who the peers are. Choosing the peer set is
-itself a judgment and it directly moves one of the eight subfactors.
+**Assumption, not verified.** Based on two companies, so treat as a hypothesis.
 
-Macro and country data for the market characteristics subfactor.
+The 10-Q looks like the highest-value addition. It is cheap, structured identically to the 10-K, and
+directly corrects a measured distortion in three of the four quantitative subfactors.
 
-And Moody's own prior rating actions and press releases, which we should probably stay away from as
-an input even though they are public, because they contain the answer.
+The 8-K stream second, because event risk is written explicitly into the Financial Policy descriptions
+and that is where it surfaces.
 
-## rough sense of what matters most
+Peer data third, and awkward, because it is not a document to fetch but a modelling decision followed by
+a second extraction pipeline per peer.
 
-Very tentative, from two companies, so treat it as a hunch rather than a finding.
+Proxy material is high value but only where a campaign exists, so it fits better as a conditional fetch
+than a standing input.
 
-The 10-Q looks like the highest value addition, because it is cheap, it is structured the same as the
-10-K, and it directly fixes a measurable distortion in three of the four quantitative subfactors.
+## Suggested next checks
 
-After that the 8-K stream, because that is where event risk actually shows up and event risk is
-written into the financial policy descriptions explicitly.
+Re-run Kohl's with a four-quarter average balance sheet rather than a year-end snapshot, to see whether
+the seasonal distortion is systematic rather than visible at one date.
 
-Peer data is probably third and it is the awkward one, because it is not a document you fetch, it is a
-modelling decision about who counts as a peer, and then a whole second extraction pipeline for each
-peer.
+Read every 8-K from one company over two years and measure what fraction is rating-relevant against
+routine. The expectation is that the useful fraction is small but material; that is a guess and it is
+checkable.
 
-The proxy material is high value but only for companies where something is going on, so it is more of
-a conditional fetch than a standing input.
+Select a peer set for Kohl's by hand, score Revenue and Earnings Stability properly against it, and
+measure the distance from the unfounded score used in run 2.
 
-## what I would try next
-
-Rerun Kohl's with the 10-Q included and see whether using a four quarter average balance sheet instead
-of a year-end snapshot changes anything systematically, rather than just at one date.
-
-Take one company and read every 8-K from the last two years to see how much of it is genuinely rating
-relevant versus routine. My guess is most of it is routine and the useful fraction is small but
-important, but that is a guess and it is checkable.
-
-Pick a peer set for Kohl's by hand, score revenue and earnings stability properly against it, and see
-how far that moves from the number I made up.
-
-And a third and fourth company, ideally an apparel one, because the methodology has apparel specific
-wording in the market position descriptions that neither Walmart nor Kohl's exercised at all.
+Add a third and fourth company, including an apparel name, since the methodology contains
+apparel-specific wording in the Market Position descriptions that neither Walmart nor Kohl's exercised.

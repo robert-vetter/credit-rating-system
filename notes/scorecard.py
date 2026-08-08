@@ -1,8 +1,13 @@
 """
 Retail and Apparel scorecard arithmetic, Moody's methodology of 12 Sep 2025.
 
-The engine is the bottom half and is exact. The top half is company inputs, hand-extracted
-from the 10-Ks, and that is where all the arguing happens. See the write-ups next to this file.
+Written by Claude (Opus 5) as part of the baseline runs described in walmart-first-test.md and
+kohls-second-test.md.
+
+The engine in the lower half is exact and deterministic. The upper half is company inputs, extracted
+from the 10-Ks by the model, and that is where every contestable decision sits: which balance sheet
+lines count as debt, whether interest is gross or net, and how FFO is reconstructed given that it is
+not a GAAP line item. Changing those inputs is the point of keeping this separate.
 
 Run with plain python3, no dependencies. python3 scorecard.py
 """
