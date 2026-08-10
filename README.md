@@ -11,11 +11,17 @@ The first sector methodology in scope is Moody's Retail and Apparel.
 
 Early. Reading the methodology and background material. Nothing built yet.
 
-Two baseline runs of the rating task done so far, with no system around them, just the methodology and
-one 10-K each. Walmart came out A1 against an actual Aa2, Kohl's came out Ba3 against an actual B2, so
-both are two notches off in opposite directions. In both cases the outcome was decided by the four
-qualitative scores rather than by anything computed. The scoring arithmetic itself is exact and is in
-notes/scorecard.py.
+Seven companies run through the scorecard so far. The first two, Walmart and Kohl's, were done inside a
+session that already knew the answers. The other five were run blind: separate sessions with no
+conversation history, no web access, and filings with the credit-ratings disclosure stripped out, plus
+a control session that was asked for the same ratings from memory with no documents at all.
+
+The headline result is in notes/blind-test.md. The memory-only control scores 0.40 notches mean
+absolute error. The full document-based analysis scores 1.40. Guessing from a company name beats
+working through the methodology and the filing, so on companies of this profile an accuracy number
+from a pipeline like this cannot be interpreted. Ranking is a different story: Spearman correlation
+against the actual ratings is 0.937, and the errors are compression rather than noise, with the
+predictions squeezing a 12-notch spread into 8.
 
 notes/what-else-feeds-a-rating.md goes through all eight subfactors and asks which of them a 10-K can
 actually support. One can. It also covers the leakage problem, which is that companies disclose their
