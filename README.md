@@ -30,6 +30,11 @@ own credit ratings in the filing, so the label sits inside the input.
 The files under notes/ were produced by Claude working to questions and test designs set by me, and
 they are labelled as such. They are experiment logs, not hand-written notes.
 
+docs/leakage-audit.md is the first piece of that plan, done: five channels through which a rating can
+reach the model, tested against real filings. The one that matters is that credit agreements map
+Moody's symbols straight to interest margins and are attached to 10-Q exhibits, which is the document
+the plan wanted to add next.
+
 docs/experiment-plan.md is the current plan: what to freeze, what to measure, and in what order. The
 headline constraint is that ratings are inert, so the baseline to beat is not zero, it is persistence
 (carry the last known rating forward). Anything that does not beat that is not evidence of anything.

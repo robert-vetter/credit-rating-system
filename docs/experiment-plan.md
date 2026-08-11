@@ -114,6 +114,12 @@ in scope. That decision should be explicit in the baseline spec rather than left
 **Deliverable.** A table of channels with three columns: strippable yes/no, measured prevalence in a
 sample, and decision taken. Stripping code must be regression-tested against that table.
 
+**Status: done for the seven-company sample, see leakage-audit.md.** Two findings change this plan.
+Rating-based pricing grids sit in 10-Q exhibits, so the Phase 4 recommendation to add the 10-Q applies
+to the body only and exhibits are excluded by default; ingestion is per document part, not per filing.
+And at least one leak (Dollar General's fair-value note) sits inside a legitimate disclosure, so
+stripping cannot be purely lexical.
+
 ## Phase 2: Contamination measurement
 
 Three probes, each producing a number rather than an assumption.
