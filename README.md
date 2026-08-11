@@ -30,14 +30,17 @@ own credit ratings in the filing, so the label sits inside the input.
 The files under notes/ were produced by Claude working to questions and test designs set by me, and
 they are labelled as such. They are experiment logs, not hand-written notes.
 
-Waiting on the lab's initial dataset and the rest of the reading material before sketching the
-architecture.
+docs/experiment-plan.md is the current plan: what to freeze, what to measure, and in what order. The
+headline constraint is that ratings are inert, so the baseline to beat is not zero, it is persistence
+(carry the last known rating forward). Anything that does not beat that is not evidence of anything.
+
+Still waiting on the lab's initial dataset before sample construction and sector scope can be fixed.
 
 ## Layout
 
     methodologies/   Moody's rating methodologies, for reference
     notes/           experiment logs and reading notes
-    docs/            design and architecture notes, once there are any
+    docs/            design and architecture notes
     data/            filings and datasets, not tracked in git
 
 ## Open questions
