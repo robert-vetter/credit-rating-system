@@ -38,7 +38,7 @@ constraints that change what the experiment can do.
 execution are tools that must be declared in the request's `tools` array. A request with no `tools`
 array cannot perform retrieval of any kind. This is a property of the request, not an instruction to
 the model, and it is the correct answer to the concern about internet grounding: the guarantee comes
-from the request shape. Note that the earlier blind test did not have this guarantee — it instructed
+from the request shape. Note that the earlier blind test did not have this guarantee: it instructed
 agents not to search and relied on their self-report. That must not be repeated.
 
 **Sampling parameters are gone on current models.** `temperature`, `top_p` and `top_k` are removed on
