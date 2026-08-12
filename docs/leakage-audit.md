@@ -75,7 +75,10 @@ credit-related exhibit on the 10-K (Victoria's Secret, EX-10.18), and that docum
 amendment containing no rating references and no grid. The full agreements are incorporated by
 reference and live in other filings.
 
-Target's case shows where they actually land, and it is the worst possible place for this project:
+They land in 10-Q and 8-K exhibits. Target's case shows the 10-Q path in full; a Gap credit
+agreement attached directly to an 8-K (exhibit 10.1, FY2026) was found later during the assumptions
+review, confirming the 8-K path with a second issuer. Target's case in detail, and it is the worst
+possible place for this project:
 
 Target's 8-K of 9 October 2025 announces a new $1.0bn revolving facility and states that borrowings
 bear interest at a rate plus "an applicable margin, which varies based on the type of loan and

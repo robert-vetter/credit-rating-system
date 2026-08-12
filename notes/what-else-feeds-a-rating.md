@@ -38,15 +38,16 @@ what the model already knows. This one concerns what the pipeline hands it.
 |---|---|---|---|
 | Revenue | 15% | Yes, direct read | The only clean case of the eight |
 | Debt/EBITDA | 15% | Raw parts yes, adjustments no | Spread across three chapters; Moody's restatements partly in notes, partly in debt exhibits, partly judgement |
-| (EBITDA-Capex)/Interest | 15% | Company dependent | Walmart splits gross interest on the face; Kohl's reports only net, with no gross figure anywhere in the filing |
-| RCF/Net Debt | 10% | Reconstruction only | FFO is not a US GAAP line item and appears in no filing; Moody's definition is unpublished |
+| (EBITDA-Capex)/Interest | 15% | Company dependent | Walmart splits gross interest on the face; Kohl's shows only net on the face, and supplemental disclosures (cash interest paid, lease interest) allow partial gross reconstruction, so extraction needs per-field fallback chains |
+| RCF/Net Debt | 10% | Reconstruction only | FFO is not a US GAAP line item and appears in no filing; Moody's definitions are published in its cross-sector adjustments methodology, not yet applied here |
 | Market Characteristics | 10% | Partly | Item 1 and 1A give self-reported competitive narrative; the economic strength of countries of operation is external macro data |
 | Market Position | 10% | Partly | Distinguishing a share leader from one of several leaders requires market share, which appears in no 10-K |
 | Revenue and Earnings Stability | 10% | No | Scored against the peer group and against the company's own targets; neither is in the filing |
 | Financial Policy | 15% | History yes, substance no | Descriptions concern expectations, event risk and public commitments |
 
-Summary: one subfactor is cleanly available. Three are constructible with definitional choices that
-nobody publishes. Four require sources outside the filing.
+Summary: one subfactor is cleanly available. Three are constructible; the definitional layer for them
+is published in Moody's cross-sector adjustments methodology, though applying it takes judgment. Four
+require sources outside the filing.
 
 By weight, the 10-K supports the 55% of the scorecard that is quantitative. The 45% that is qualitative
 is not in it.

@@ -33,8 +33,10 @@ Walmart Inc., fiscal year ended 31 January 2026, USD millions.
 | FFO | 40,813 | Derived, CFO less working capital swing |
 | RCF | 33,306 | Derived, FFO less common dividends |
 
-EBITDA, FFO and RCF do not exist as line items in any filing. They are reconstructions, and Moody's
-definitions for them are not published.
+EBITDA, FFO and RCF do not exist as line items in any filing. They are reconstructions. Moody's
+publishes its standard adjustment definitions in a cross-sector methodology (Financial Statement
+Adjustments in the Analysis of Non-Financial Corporations); this run did not apply them, which is one
+of its known gaps. An earlier version of this note wrongly said the definitions were unpublished.
 
 ## Scorecard
 

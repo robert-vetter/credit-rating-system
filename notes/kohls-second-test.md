@@ -26,14 +26,17 @@ Kohl's Corporation, fiscal year ended 31 January 2026, USD millions.
 | D&A | 700 | |
 | EBITDA | 1,324 | Derived |
 | Capex | 372 | |
-| Interest expense | 288 | Reported net. Kohl's does not disclose gross interest or interest income separately anywhere in the filing. |
+| Interest expense | 288 | Reported net on the face. Supplemental disclosures (cash interest paid, lease interest split) permit partial gross reconstruction; not attempted in this run. |
 | Total debt | 6,630 | Revolver at zero at year end, plus long-term debt and both lease types |
 | Cash | 674 | |
 | Net debt | 5,956 | Derived |
 | RCF | 1,099 | Derived |
 
 The interest figure is a known defect. The methodology asks for interest expense; the filing provides
-only a net figure. There was no alternative available from this document.
+only a net figure. An earlier version of this note said no alternative existed in the document; that
+was overclaimed. The supplemental cash flow disclosure and the lease note allow a partial gross
+reconstruction, which this run did not attempt. The extraction spec needs a per-field fallback chain
+rather than a single source per metric.
 
 ## Scorecard
 

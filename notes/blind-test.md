@@ -122,6 +122,18 @@ concentrates its attention exactly where the instrument is known to be weakest.
 Mean absolute error in notches is reported above alongside it and is not subject to this. If a genuine
 ratio scale is wanted, mapping ratings onto idealised default rates would give one.
 
+## Label caveats found in a later review
+
+Two defects in the ground-truth labels were identified after this write-up, see
+assumptions-review.md. First, the labels are as of each filing's own date (January to March 2026,
+mixed), while the memory control recalls ratings as of the model's May 2026 cutoff; any rating action
+in between would mis-grade the control, and this was checked for only one of the five companies. With
+n=5, one stale label moves an MAE by 0.2. Second, the Macy's label ("long-term debt: Ba1") may be an
+instrument rating rather than the corporate family rating the methodology targets for
+speculative-grade issuers, and the two can differ by a notch. The headline conclusion, that memory
+beats document analysis by a wide margin, survives both caveats; the specific decimals carry more
+uncertainty than the tables above convey.
+
 ## Methodological defect in this test
 
 The ground-truth file was left in the same directory as the stripped filings. Two of the five sessions

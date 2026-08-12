@@ -73,13 +73,17 @@ This is a deliberate trade: the baseline should be a clean measurement, not the 
 requests asynchronously at 50% of standard pricing, which is the right mechanism for a few hundred
 samples with replicates. Prompt caching charges cached content at roughly 0.1x on reads: the
 methodology text is identical across every request in a run, so it should sit behind a cache
-breakpoint. Together these make a several-hundred-sample run with replicates and ablations tractable
-rather than a budget question.
+breakpoint. Whether the two discounts compound inside a batch is unverified: cache hits across
+concurrently processed batch requests are plausibly best-effort, so the budget should be computed
+from the batch discount alone and the cache treated as upside, verified empirically on a small batch
+first.
 
 **Output format.** Structured outputs (`output_config.format` with a JSON schema) constrain the
 response to a schema, which removes the parsing fragility of the earlier text-block approach. The
 schema should require all eight subfactor scores, the four extracted metrics, and a citation span for
-each qualitative score.
+each qualitative score. Caveat: schema-constrained output is incompatible with the API's citations
+feature, so the quote spans are model-asserted strings. They must be validated by exact string match
+against the source document, and a failed match treated as no citation.
 
 ## Phase 1: Leakage audit
 
@@ -129,16 +133,17 @@ from the company name. The gap between this and the document-based run is the co
 This already produced the single most important result so far and should become standard on every run.
 It costs one call per sample.
 
-**Cutoff gradient.** This is the design that turns the cutoff problem from a constraint into a
-measurement. Run the same sample set across models whose training cutoffs differ by month, holding the
-prompt and the documents fixed. If accuracy on a given observation date degrades as the model's cutoff
-moves earlier relative to that date, the degradation is memorisation, measured directly. If accuracy is
-flat across cutoffs, the model is deriving rather than recalling and the whole contamination worry is
-smaller than feared.
+**Cutoff contrast, within model.** An earlier version of this plan proposed comparing accuracy across
+models with different cutoffs and reading degradation as memorisation. That design is confounded:
+models differ in capability as well as cutoff, so cross-model accuracy differences mix the two.
 
-The table above supplies the gradient for free: Opus 5 at May 2026, Sonnet 5 and Opus 4.8 at January
-2026, Opus 4.5 and Opus 4.6 at August 2025, Sonnet 4.5 at July 2025. Four distinct cutoff points
-spanning eleven months, on the same API, with no extra data collection.
+The corrected design uses each model as its own control. For one model, hold the prompt and document
+pipeline fixed and compare accuracy on samples observed before its training cutoff against samples
+observed after it. The drop at the boundary is that model's memorisation estimate, with capability
+held constant. Doing this for several models (Opus 5 at May 2026, Sonnet 5 and Opus 4.8 at January
+2026, Opus 4.5 at August 2025, Sonnet 4.5 at July 2025) then gives cross-model corroboration on top.
+The requirement this creates: the sample must span observation dates on both sides of each cutoff,
+which means historical depth in the dataset, not only the recent window.
 
 **Familiarity gradient.** Contamination is not uniform: the blind test knew Walmart cold and was wrong
 about Kohl's. Stratify the sample by a coverage proxy such as market capitalisation or index
@@ -156,6 +161,18 @@ investment-grade companies and to the corporate family rating for speculative-gr
 the label therefore requires knowing which side of the boundary the issuer is on, which is mildly
 circular. Resolve it by using the actual current rating to determine the category and then taking the
 corresponding label, and write that rule into the spec so it is reproducible.
+
+**Label provenance, which turns out to be its own problem.** Every sample needs the triple observation
+date, label as of that date, documents filed before that date, with no mixed dates. The blind test
+violated this, see assumptions-review.md. Sources for labels: SEC Rule 17g-7(b) obliges every agency
+to publish its complete rating history in free machine-readable XBRL, which is the right backbone for
+historical evaluation and for the persistence baseline. But the rule permits a delay of up to 12
+months for issuer-paid ratings, and the clean window is precisely the most recent months, so the
+public file cannot be assumed to cover it. For the clean window the label must come from the lab's
+dataset or a licensed source; company filings are a fallback with known defects (stale as-of dates,
+and they do not reliably disclose the corporate family rating, which is the required label for
+speculative-grade issuers). How much delay Moody's actually uses inside the permitted 12 months
+should be checked against the real file before designing around the worst case.
 
 **Baselines to beat, in order of severity:**
 
@@ -187,6 +204,14 @@ Lift over persistence on each of the above.
 Where a genuine ratio scale is wanted, ratings can be mapped onto published idealised default rates
 and percentage error computed there; that is defensible in a way that percentage error on ordinal
 codes is not.
+
+**What the label measures, stated once.** The system produces the scorecard-indicated outcome, a
+deterministic function of eight inputs. Moody's assigns the final rating after committee judgment and
+other considerations, and its own Limitations section says the two align loosely at the scale
+extremes. The assigned rating stays the primary label because it is the observable, but the reported
+error therefore contains an irreducible component that no input improvement can remove. Where Moody's
+rating-action announcements state the scorecard-indicated outcome, collect them; even a few dozen
+published SIOs would let the two error components be separated instead of estimated.
 
 **Stratified reporting.** The headline number must be broken out by whether the rating changed since
 the model's cutoff. On unchanged issuers every method looks good and the comparison is uninformative.
