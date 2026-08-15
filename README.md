@@ -52,6 +52,12 @@ scored as lift over persistence on post-cutoff dates, which also neutralises mos
 training memory could contribute. A blinding ladder (numbers only, blinded documents, named documents)
 decomposes the rest.
 
+notes/rating-history-file.md: the official Moody's rating history (SEC 17g-7 disclosure) is downloaded
+and parsed. It verifies all seven study labels with exact action dates, measures the publication
+embargo at the full 12 months, and powers the historical arm of the evaluation. The post-cutoff clean
+window remains uncovered by any public source, which makes the lab's dataset the strictly blocking
+dependency for that arm.
+
 Still waiting on the lab's initial dataset before sample construction and sector scope can be fixed.
 
 ## Layout

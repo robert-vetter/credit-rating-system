@@ -37,9 +37,10 @@ unspecified, commercial feeds cost money, Moody's website has licensing terms we
 is the same open question as the methodology PDFs), and company disclosures are stale and ambiguous
 (next finding).
 
-Also verified in passing: how much delay Moody's actually uses within the allowed 12 months is not
-established. If it publishes faster, the window problem shrinks. **Check the actual file before
-designing around the worst case.**
+**Update, measured (notes/rating-history-file.md): Moody's uses the full 12 months.** The file set
+dated 11 August 2026 ends with actions from August 2025. The worst case is the actual case: the
+public file fully powers the historical arm and provides nothing for the post-cutoff clean window,
+which makes the lab dataset strictly blocking for that arm.
 
 ## Finding 2: our blind-test labels have two defects the write-up did not state
 
@@ -60,8 +61,8 @@ observation date, label as of that date, documents filed before that date. No mi
 corporate family rating for speculative grade. The filings do not always disclose the CFR. Macy's
 discloses "long-term debt: Ba1"; whether that is the CFR or an instrument rating is not determinable
 from the filing, and for a company whose notes sit at a subsidiary with structural subordination the
-two can differ by a notch. The Macy's label, which produced our only exact hit, is therefore
-**unverified**. Walmart (Aa2 senior unsecured, IG), Kohl's (B2 corporate), VSCO (Ba3 corporate), DG
+two can differ by a notch. **Update: resolved.** The 17g-7 file shows Macy's CFR at Ba1 since
+February 2022, matching the filing's disclosure, so the exact hit stands (notes/rating-history-file.md). Walmart (Aa2 senior unsecured, IG), Kohl's (B2 corporate), VSCO (Ba3 corporate), DG
 (Baa3), Gap (Ba2 corporate) are consistent with the rule; Target (A2 long-term debt, IG) is fine.
 
 ## Finding 3, corrected: Moody's adjustment definitions ARE published
@@ -128,7 +129,7 @@ property, as already noted; the decomposition would tell us how much.
 | 13 | Sector methodologies share scoring mechanics | unverified, tolerable (one afternoon, two PDFs) | Multi-sector expansion costs a rewrite instead of config |
 | 14 | Moody's website/PDF licensing permits our use | unverified, open since day one | Legal constraint on data sourcing; ask the lab, it is their relationship |
 | 15 | Market-derived signals (bond coupons) count as input or leakage | **decision**, owner: Robert with the lab | Baseline spec ambiguous; either answer is defensible, silence is not |
-| 16 | Moody's 17g-7(b) rating history is freely downloadable | **verified with a caveat**: the official location is https://ratings.moodys.com/sec-17g-7b, confirmed from Exhibit 1 of Moody's Form NRSRO-CE filed 31 March 2026, but the page redirects to a login; access requires a free Moody's account, whose terms of use fold into open question #14. Actual publication delay and issuer counts unmeasurable until credentialed access exists | Persistence baseline and Task B rating paths blocked until someone registers; alternative label sources (lab dataset, or academic subscriptions such as WRDS, unconfirmed) become more important |
+| 16 | Moody's 17g-7(b) rating history is freely downloadable | **done**: downloaded via Robert's free account and parsed (notes/rating-history-file.md). 21,383 obligors, 106,590 actions, 8,146 corporates. Publication delay measured at the full 12 months; label pipeline requires joining obligor and issuer sets; all seven study labels verified | Historical arm fully powered; clean-window labels still need the lab dataset |
 | 17 | Blinding can hide issuer identity from the model | **measured, mostly no** (notes/blinding-minitest.md): 7 of 7 identified from exact numbers, 6 of 7 from coarsened inputs; works only in crowded strata with ordinary ratios | Rung 2 of the ladder restricted to smaller issuers with per-sample verification; Task B carries contamination control for covered issuers |
 
 ## What was corrected in place today

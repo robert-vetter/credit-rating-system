@@ -249,8 +249,11 @@ months for issuer-paid ratings, and the clean window is precisely the most recen
 public file cannot be assumed to cover it. For the clean window the label must come from the lab's
 dataset or a licensed source; company filings are a fallback with known defects (stale as-of dates,
 and they do not reliably disclose the corporate family rating, which is the required label for
-speculative-grade issuers). How much delay Moody's actually uses inside the permitted 12 months
-should be checked against the real file before designing around the worst case.
+speculative-grade issuers). Measured meanwhile (notes/rating-history-file.md): Moody's uses the full
+12 months, so the public file powers everything up to twelve months back and nothing after. The
+label pipeline additionally has to join the obligor set (CFRs, speculative grade) with the issuer set
+(instrument-level senior unsecured, investment grade), because a CFR is withdrawn when an issuer
+crosses into investment grade and newly assigned when it falls out.
 
 **Baselines to beat, in order of severity:**
 
