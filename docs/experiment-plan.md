@@ -29,6 +29,70 @@ a lookup table, and it will be at least as hard to beat.
 
 Everything below is organised around measuring that lift honestly.
 
+## Two tasks, not one
+
+The system can be asked two different questions, and they need different designs. Conflating them is
+how leakage sneaks back in.
+
+**Task A, level prediction from scratch.** Inputs are fundamentals only, no rating history. This
+tests whether the system understands the methodology: can it place an unfamiliar issuer on the scale.
+The comparison baseline is the sector prior. Rating history in the input would be label leakage here,
+because ratings are inert, so the last rating approximately equals the current one for most
+issuer-dates.
+
+**Task B, update prediction, and this is the primary experiment.** Inputs are fundamentals plus the
+issuer's full rating path up to the observation date; predicted is the rating at that date (or,
+equivalently, the action relative to the last known rating). This matches what an analyst actually
+does, since no analyst works without knowing the current rating. Persistence sits inside the input,
+so the system reproduces it trivially and the only number that matters is lift over persistence,
+concentrated in the changed subset.
+
+Task B has a property that makes it the primary choice: **putting the rating path into the input
+neutralises most of what parametric memory could contribute.** Whatever the model memorised about an
+issuer's rating is handed to it openly, so the memorised copy is redundant. What remains to predict
+is the change, and for observation dates after the training cutoff the change cannot be in the
+weights.
+
+## What "no memory" can and cannot mean
+
+Three different things get called memory, and only two can be switched off.
+
+Session state does not exist on raw API calls; every request is stateless, and the prompt cache
+carries no information between samples (it affects cost and latency only). Retrieval is structurally
+off when no tools are declared; that is a property of the request. **Parametric training knowledge
+cannot be disabled by any means.** There is no switch, no unlearning API, and any instruction to the
+model not to use it is an honour promise of the kind the blind test already measured to be worthless.
+
+The design therefore combines three levers instead of pretending to a guarantee:
+
+**Blinding.** Remove the issuer's name and identifiers from the input. If the model does not know
+which company it is rating, its memorised rating for that company is unusable. The limit: the numbers
+themselves identify large issuers (exactly one retailer has $713bn revenue, and revenue is a scorecard
+input that cannot be perturbed). So blinding degrades with size, and its success is **measured per
+sample** with a de-anonymisation probe, see Phase 2.
+
+**Time.** A rating action after the training cutoff cannot be in the weights. Caveat, which is
+Ding's inertia point in another form: for unchanged issuers the post-cutoff rating equals the
+pre-cutoff rating, which is in the weights. Time protects only the changed subset. A sample is clean
+when it is post-cutoff **and** (changed **or** successfully blinded).
+
+**Measurement.** The probes in Phase 2 quantify whatever the first two levers let through.
+
+## The blinding ladder
+
+Three input conditions, run on the same samples. The differences between rungs decompose the memory
+contribution instead of arguing about it.
+
+1. **Numbers only, blinded.** The eight subfactor inputs, no name, no documents. No model is needed
+   at this rung: the deterministic engine computes the outcome, so it is fully memory-free and tests
+   the scorecard and calibration in isolation.
+2. **Documents, blinded.** Filings with names and identifiers redacted. The de-anonymisation probe
+   decides per sample whether the blinding held; de-anonymised samples are reported separately.
+3. **Documents, named.** The production condition, memory fully available, quantified by the probes.
+
+Rung 3 minus rung 2 is the identity-memory effect. Rung 2 minus rung 1 is what documents add beyond
+the numbers, with memory suppressed.
+
 ## Phase 0: Configuration to freeze
 
 **Verified against Anthropic's API documentation.** These are not preferences; several are hard
@@ -126,12 +190,17 @@ stripping cannot be purely lexical.
 
 ## Phase 2: Contamination measurement
 
-Three probes, each producing a number rather than an assumption.
+Four probes, each producing a number rather than an assumption.
 
 **Memory probe.** For every sample, one additional call with no documents at all, asking for the rating
 from the company name. The gap between this and the document-based run is the contamination estimate.
 This already produced the single most important result so far and should become standard on every run.
 It costs one call per sample.
+
+**De-anonymisation probe.** For every blinded sample, one additional call asking the model to name the
+issuer from the blinded input. If it can, the blinding failed for that sample and it is flagged; the
+headline metrics are reported with and without flagged samples. This turns "blinding probably works
+for smaller companies" from a hope into a per-sample label. It costs one call per blinded sample.
 
 **Cutoff contrast, within model.** An earlier version of this plan proposed comparing accuracy across
 models with different cutoffs and reading degradation as memorisation. That design is confounded:
@@ -182,6 +251,10 @@ strong.
 Memory-only, meaning the model with no documents. Already measured at 0.40 notches on five companies.
 
 Sector prior, meaning the median rating of the sector. Weak, but it bounds the floor.
+
+Which baseline binds depends on the task: for Task B (primary) persistence is in the input, so lift
+over persistence is the entire result, measured on the changed subset. For Task A the sector prior is
+the floor and the memory probe bounds contamination. The blinding ladder applies to both tasks.
 
 **Metrics.** Report all of these, not one:
 

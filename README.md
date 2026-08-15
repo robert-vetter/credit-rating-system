@@ -42,6 +42,10 @@ the plan wanted to add next.
 docs/experiment-plan.md is the current plan: what to freeze, what to measure, and in what order. The
 headline constraint is that ratings are inert, so the baseline to beat is not zero, it is persistence
 (carry the last known rating forward). Anything that does not beat that is not evidence of anything.
+The primary experiment is update prediction: fundamentals plus the issuer's rating path in the input,
+scored as lift over persistence on post-cutoff dates, which also neutralises most of what the model's
+training memory could contribute. A blinding ladder (numbers only, blinded documents, named documents)
+decomposes the rest.
 
 Still waiting on the lab's initial dataset before sample construction and sector scope can be fixed.
 
