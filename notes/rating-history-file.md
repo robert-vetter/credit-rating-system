@@ -80,7 +80,7 @@ restaurants, which have their own methodology; apparel manufacturing 2300-2399; 
 leather; apparel wholesale). The pipeline is `sector_count.py` next to this file; the frame lands in
 `data/retail_frame.json`.
 
-Numbers: of 12,000-odd Corporate entities in the union (8,146 obligor-level plus 4,880 issuer-only),
+Numbers: of 13,026 Corporate entities in the union (8,146 obligor-level plus 4,880 issuer-only),
 4,057 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
 rating as of the file end (August 2025): 31 investment grade, 55 speculative.** The distribution
 spans Aa2 (Walmart) to Caa3 and is thickest in the Ba range, which is where rating changes happen.
