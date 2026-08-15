@@ -70,12 +70,37 @@ in time.
 Walmart and Target deserve a sentence of their own: **neither has had a single rating action in
 thirteen years.** That is Ding's inertia point in its purest form, visible in the raw data.
 
-## What the files do not answer
+## The sector count, done: 164 issuers, 86 actively rated
 
-**The Retail and Apparel issuer count.** The files classify no finer than "Corporate"; the
-methodology sector is not a field. Counting the sector requires joining obligors to an industry
-classification (via LEI or name matching to EDGAR's SIC codes), which is now a concrete, mechanical
-next step rather than an unknown. Register item 10 stays open with that path attached.
+The files classify no finer than "Corporate", so the sector count required a join: union the
+Corporate entities of both sets, match names to EDGAR CIKs (two tiers: listed companies, then all
+SEC filers, with EDGAR's "/NEW/"-style suffixes normalised away), fetch each match's SIC industry
+code from the SEC submissions API, and filter to Retail and Apparel codes (5200-5999 excluding
+restaurants, which have their own methodology; apparel manufacturing 2300-2399; footwear and
+leather; apparel wholesale). The pipeline is `sector_count.py` next to this file; the frame lands in
+`data/retail_frame.json`.
+
+Numbers: of 12,000-odd Corporate entities in the union (8,146 obligor-level plus 4,880 issuer-only),
+4,057 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
+rating as of the file end (August 2025): 31 investment grade, 55 speculative.** The distribution
+spans Aa2 (Walmart) to Caa3 and is thickest in the Ba range, which is where rating changes happen.
+
+Three findings from building it. First, **the union matters**: purely investment-grade issuers such
+as Home Depot, Costco, TJX, Ross and AutoZone have no obligor-set file at all, because they carry no
+entity-level rating; they exist only at instrument level. A frame built on the obligor set alone
+misses most of the investment-grade half. Second, activity has to be judged **per instrument**, not
+per action: individual bonds mature and get withdrawn while the issuer stays rated, and a
+latest-action check misclassifies such issuers as dead (Dollar General was the tell). Third, the
+old 150-250 estimate for the sector was about right for the frame (164) but the usable number is
+the 86 active ones; for Ding's "few hundred samples" this means sampling issuer-dates rather than
+issuers, or adding sectors, both of which the plan already contemplates.
+
+The frame is a starting point, not a verdict: SIC is an imperfect proxy for methodology scope (a
+propane distributor carries a retail SIC; borderline members need a manual pass), and the roughly
+5,000 unmatched corporates include genuinely private retailers that Moody's rates but that file
+nothing with the SEC, which our system could not score anyway.
+
+## What the files do not answer
 
 **Anything after August 2025.** Post-cutoff labels, the entire clean window, and any 2026 rating
 actions are invisible here.
