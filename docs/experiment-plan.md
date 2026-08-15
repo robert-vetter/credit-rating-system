@@ -93,6 +93,15 @@ contribution instead of arguing about it.
 Rung 3 minus rung 2 is the identity-memory effect. Rung 2 minus rung 1 is what documents add beyond
 the numbers, with memory suppressed.
 
+**Measured, see notes/blinding-minitest.md:** on the seven companies studied so far, exact numbers
+identified 7 of 7 (dividends paid acts as a quasi-identifier, being per-share policy times share
+count; debt composition fingerprints the rest), and even revenue coarsened to the scorecard band plus
+three ratios identified 6 of 7. The single blinding success required a crowded revenue band and
+unremarkable ratios at once. Consequence: rung 2 is not viable for large, well-covered issuers, and
+for them contamination control rests entirely on Task B plus the post-cutoff changed subset. Blinding
+remains a candidate for smaller issuers only, verified per sample by the de-anonymisation probe, and
+the probe results should be graded on the top guess with alternates recorded.
+
 ## Phase 0: Configuration to freeze
 
 **Verified against Anthropic's API documentation.** These are not preferences; several are hard

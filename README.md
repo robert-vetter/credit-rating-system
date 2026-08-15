@@ -27,6 +27,11 @@ notes/what-else-feeds-a-rating.md goes through all eight subfactors and asks whi
 actually support. One can. It also covers the leakage problem, which is that companies disclose their
 own credit ratings in the filing, so the label sits inside the input.
 
+notes/blinding-minitest.md answers whether the model can be stopped from recognising the company it
+is rating: mostly no. All seven companies were identified from seven numbers alone (dividends paid is
+effectively a public identifier), and six of seven survived coarsening. Blinding is only a lever for
+smaller issuers, verified per sample.
+
 The files under notes/ were produced by Claude working to questions and test designs set by me, and
 they are labelled as such. They are experiment logs, not hand-written notes.
 
