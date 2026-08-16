@@ -95,6 +95,16 @@ old 150-250 estimate for the sector was about right for the frame (164) but the 
 the 86 active ones; for Ding's "few hundred samples" this means sampling issuer-dates rather than
 issuers, or adding sectors, both of which the plan already contemplates.
 
+**Verification that both sets are required, in numbers.** The two sets join exactly, not by name:
+6,218 entity IDs appear in both, and the names agree in 100.0% of them, so the obligor-to-issuer
+join is keyed and lossless (only the Moody's-to-EDGAR step uses name matching). Dropping the issuer
+set would cost 30 of the 86 active issuers their label: 24 have no obligor-set file at all (the Home
+Depot type) and 6 exist there only with withdrawn entity ratings (the Dollar General type). Dropping
+the obligor set would cost 6 issuers entirely (rated with no rated instruments, for example Gildan
+and Wayfair) and would put the remaining 50 speculative-grade names on the wrong label level, since
+the methodology wants the CFR there and instrument ratings can sit a notch or two away (Kohl's: CFR
+B2, senior unsecured B3).
+
 The frame is a starting point, not a verdict: SIC is an imperfect proxy for methodology scope (a
 propane distributor carries a retail SIC; borderline members need a manual pass), and the roughly
 5,000 unmatched corporates include genuinely private retailers that Moody's rates but that file
