@@ -105,10 +105,36 @@ and Wayfair) and would put the remaining 50 speculative-grade names on the wrong
 the methodology wants the CFR there and instrument ratings can sit a notch or two away (Kohl's: CFR
 B2, senior unsecured B3).
 
-The frame is a starting point, not a verdict: SIC is an imperfect proxy for methodology scope (a
-propane distributor carries a retail SIC; borderline members need a manual pass), and the roughly
-5,000 unmatched corporates include genuinely private retailers that Moody's rates but that file
-nothing with the SEC, which our system could not score anyway.
+**Manual scope pass over all 164, done.** Every member was classified against the methodology's own
+scope section (retailers to end consumers including grocery, drugstores, auto dealers and e-commerce
+are in, as are apparel and footwear designers; restaurants, B2B distribution, propane and fuel
+distribution, pharmacy benefit managers, pure brand licensors and diversified holdings are out).
+Results on the 164 entities: 137 in scope, 24 out, 3 uncertain (CVS, whose drugstore is wrapped in a
+PBM and an insurer; Samsonite, on the accessories-versus-durables boundary; Good Sam). Among the 86
+actively rated entities, 10 leave the frame, including two restaurants (Starbucks and Wendy's carried
+SIC 5810, which the first filter did not exclude; the script now excludes 5810-5819), two propane
+distributors, and four B2B resellers or auction houses whose retail SIC is misleading (CDW, Insight,
+OpenLane, Covetrus).
+
+Deduplicating corporate groups (Amer Sports three times, Macy's, Walgreens, Wayfair, Dillard's and
+others twice; Safeway folded into Albertsons) leaves **65 distinct in-scope groups with an active
+rating**. Verifying each group's actual filing status against EDGAR then caught two systematic
+problems the name match alone missed: companies that went private and re-listed under a new CIK
+(BJ's, Leslie's, National Vision, RH), and bond-issuing subsidiaries whose parent does the filing
+(Signet UK Finance versus Signet Jewelers, Torrid LLC versus Torrid Holdings, Sally Holdings versus
+Sally Beauty Holdings; Gildan additionally files the Canadian 40-F, which the first form filter
+missed). After remapping, the split is:
+
+**56 groups are current annual filers and usable for present-day observation dates: 23 investment
+grade, 33 speculative,** spanning Aa2 to Caa3. Two of the 56 (JD.com, Vipshop) are foreign 20-F
+filers whose document set differs from the 10-K pattern and should be treated as their own stratum.
+A further 9 groups are usable for historical observation dates only, because their filings stop
+(Walgreens through 2024, Michaels through 2021, Whole Foods through 2017, and so on): still valid
+samples for the historical arm inside their filing windows. None of the 65 is entirely unusable.
+
+The remaining imperfection is honest and bounded: the roughly 5,000 unmatched corporates include
+genuinely private retailers that Moody's rates but that file nothing with the SEC, which our system
+could not score anyway, and the three uncertain scope calls need a decision, not more data.
 
 ## What the files do not answer
 

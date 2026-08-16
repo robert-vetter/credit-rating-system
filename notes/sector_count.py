@@ -62,8 +62,8 @@ def sector_bucket(sic):
     if not sic or not sic.isdigit():
         return None
     s = int(sic)
-    if s in (5812, 5813):
-        return None
+    if 5810 <= s <= 5819:
+        return None  # eating and drinking places, own methodology; 5810 itself occurs (Starbucks)
     if 5200 <= s <= 5999:
         return "retail"
     if 2300 <= s <= 2399:
