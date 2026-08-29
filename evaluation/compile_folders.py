@@ -72,9 +72,21 @@ def entity_history(oi):
     return hist
 
 
+def current_titles():
+    """Current listed names by CIK; the cik-lookup list often leads with historical aliases."""
+    t = json.load(open(os.path.join(DATA, "company_tickers.json")))
+    out = {}
+    for v in t.values():
+        out.setdefault(int(v["cik_str"]), v["title"])
+    return out
+
+
 def main():
     items = json.load(open(os.path.join(EVAL, "mapping.json")))
+    titles = current_titles()
+    frame = {e["oi"]: e for e in json.load(open(os.path.join(DATA, "retail_frame.json")))}
     confirmed = [i for i in items if i["kind"] == "moodys" and i["status"] == "confirmed"]
+    n_all = len(confirmed)
     if not confirmed:
         print("no confirmed mappings yet; decide items in the review UI first "
               "(python3 evaluation/review_server.py)")
@@ -82,22 +94,38 @@ def main():
     groups = {}
     for it in confirmed:
         groups.setdefault(it["group"], []).append(it)
+    # Folders exist to be evaluated against a label; groups with no actively rated member have
+    # none. Their mappings stay recorded in mapping.json, they just get no folder.
+    inactive = sorted(g for g, ms in groups.items() if not any(m.get("current") for m in ms))
+    groups = {g: ms for g, ms in groups.items() if any(m.get("current") for m in ms)}
 
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
     for gname, members in sorted(groups.items()):
         ciks = sorted({m["decided_cik"] for m in members})
-        if len(ciks) > 1:
-            print(f"  WARNING {gname}: members map to multiple CIKs {ciks}")
+        # Primary filer for the evaluation: bond-issuing subsidiaries and predecessor entities
+        # keep their own historical CIK in the mapping, but documents come from whichever group
+        # member still files. Pick by (currently filing, latest annual filing date).
+        def filer_rank(m):
+            fr = frame.get(m["oi"], {})
+            return (fr.get("filing_status") == "aktueller Filer", fr.get("last_annual") or "")
+        primary = max(members, key=filer_rank)
+        primary_cik = primary["decided_cik"]
         d = os.path.join(OUT, slug(gname))
         os.makedirs(d, exist_ok=True)
         company = {
             "group": gname,
-            "cik": ciks[0],
-            "edgar_name": members[0]["decided_edgar_name"],
-            "scope": members[0].get("scope"),
-            "current_rating_at_file_date": members[0].get("current"),
+            "cik": primary_cik,
+            "cik_note": (None if len(ciks) == 1 else
+                         "group members map to multiple CIKs; primary is the current filer, "
+                         "see members[].decided_cik for the others"),
+            "all_ciks": ciks,
+            "edgar_name": titles.get(primary_cik, primary["decided_edgar_name"]),
+            "scope": max(members, key=lambda m: bool(m.get("current"))).get("scope"),
+            "current_rating_at_file_date": max(members, key=lambda m: bool(m.get("current"))).get("current"),
+            "filing_status": frame.get(primary["oi"], {}).get("filing_status"),
+            "last_annual": frame.get(primary["oi"], {}).get("last_annual"),
             "rating_file_date": STAMP,
             "members": [{
                 "moodys_name": m["moodys_name"], "oi": m["oi"], "lei": m.get("lei", ""),
@@ -114,8 +142,19 @@ def main():
                   indent=1, ensure_ascii=False)
     n_skipped = len([i for i in items if i["kind"] == "moodys"
                      and i["status"] in ("no_sec_filer",)])
+    import collections
+    sc = collections.Counter()
+    fs = collections.Counter()
+    for x in os.listdir(OUT):
+        cj = os.path.join(OUT, x, "company.json")
+        if os.path.exists(cj):
+            c = json.load(open(cj))
+            sc[c["scope"]] += 1
+            fs["aktuell" if c.get("filing_status") == "aktueller Filer" else "nur historisch"] += 1
     print(f"{len(groups)} company folders written to evaluation/companies/ "
-          f"({len(confirmed)} confirmed entities; {n_skipped} decided as no-SEC-filer, no folder)")
+          f"(from {n_all} confirmed entities; {len(inactive)} groups without an active rating "
+          f"skipped; {n_skipped} decided no-SEC-filer)")
+    print(f"  scope: {dict(sc)}   filings: {dict(fs)}")
 
 
 if __name__ == "__main__":

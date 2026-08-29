@@ -16,12 +16,12 @@
   "sic_desc": "RETAIL-MISCELLANEOUS SHOPPING GOODS STORES",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1817358,
+  "decided_edgar_name": "ACADEMY SPORTS & OUTDOORS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600041661",
@@ -45,12 +45,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": "Ende-zu-Ende-Test der Kette, wird zurueckgenommen"
+  "status": "confirmed",
+  "decided_cik": 1158449,
+  "decided_edgar_name": "ADVANCE AUTO PARTS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600021514",
@@ -74,12 +74,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1077014,
+  "decided_edgar_name": "AHOLD FINANCE USA INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824793590",
@@ -103,12 +103,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1646972,
+  "decided_edgar_name": "ALBERTSONS COMPANIES, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600042665",
@@ -132,12 +132,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1018724,
+  "decided_edgar_name": "AMAZON COM INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-868942632",
@@ -161,12 +161,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1988894,
+  "decided_edgar_name": "AMER SPORTS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867362533",
@@ -190,12 +190,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1988894,
+  "decided_edgar_name": "AMER SPORTS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-868942650",
@@ -219,12 +219,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1988894,
+  "decided_edgar_name": "AMER SPORTS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600016235",
@@ -248,12 +248,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 932628,
+  "decided_edgar_name": "AMERIGAS PARTNERS LP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600038847",
@@ -272,12 +272,12 @@
   "sic_desc": "Retail-Miscellaneous Retail",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1024729,
+  "decided_edgar_name": "AMSCAN HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867868424",
@@ -301,12 +301,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1823794,
+  "decided_edgar_name": "ARKO CORP.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600065108",
@@ -330,12 +330,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1144980,
+  "decided_edgar_name": "ASBURY AUTOMOTIVE GROUP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823146707",
@@ -354,12 +354,12 @@
   "sic_desc": "Retail-Apparel & Accessory Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1498301,
+  "decided_edgar_name": "ASCENA RETAIL GROUP, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-825186749",
@@ -378,12 +378,12 @@
   "sic_desc": "Retail-Home Furniture, Furnishings & Equipment Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1646228,
+  "decided_edgar_name": "AT HOME GROUP INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600048210",
@@ -407,12 +407,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 350698,
+  "decided_edgar_name": "AUTONATION INC /FL",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-822075642",
@@ -431,12 +431,12 @@
   "sic_desc": "Retail-Auto Dealers & Gasoline Stations",
   "current": null,
   "filing_status": "zu pruefen",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1111103,
+  "decided_edgar_name": "AUTOTRADER COM INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600041240",
@@ -460,12 +460,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 866787,
+  "decided_edgar_name": "AUTOZONE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-447500",
@@ -489,12 +489,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 701985,
+  "decided_edgar_name": "BATH & BODY WORKS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-104225",
@@ -518,12 +518,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 764478,
+  "decided_edgar_name": "BEST BUY CO INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-822673864",
@@ -547,12 +547,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1531152,
+  "decided_edgar_name": "BEACON HOLDING INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824173581",
@@ -571,12 +571,12 @@
   "sic_desc": "Retail-Catalog & Mail-Order Houses",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1283384,
+  "decided_edgar_name": "BLUESTEM BRANDS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824827929",
@@ -595,12 +595,12 @@
   "sic_desc": "Retail-Lumber & Other Building Materials Dealers",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1574815,
+  "decided_edgar_name": "BMC STOCK HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-807392172",
@@ -624,12 +624,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1316835,
+  "decided_edgar_name": "BUILDERS FIRSTSOURCE, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600049436",
@@ -648,12 +648,12 @@
   "sic_desc": "Retail-Lumber & Other Building Materials Dealers",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1046356,
+  "decided_edgar_name": "BUILDING MATERIALS HOLDING CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823320783",
@@ -672,12 +672,12 @@
   "sic_desc": "RETAIL-DEPARTMENT STORES",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1579298,
+  "decided_edgar_name": "BURLINGTON HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823607961",
@@ -696,12 +696,12 @@
   "sic_desc": "RETAIL-DEPARTMENT STORES",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1579298,
+  "decided_edgar_name": "BURLINGTON HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-551",
@@ -720,12 +720,12 @@
   "sic_desc": "Footwear, (No Rubber)",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 14707,
+  "decided_edgar_name": "BROWN GROUP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-808757429",
@@ -744,12 +744,12 @@
   "sic_desc": "Apparel & Other Finishd Prods of  Fabrics & Similar Matl",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1060822,
+  "decided_edgar_name": "CARTER HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830411600",
@@ -773,12 +773,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1690820,
+  "decided_edgar_name": "CARVANA CO.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820349673",
@@ -797,12 +797,12 @@
   "sic_desc": "Retail-Catalog & Mail-Order Houses",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1402057,
+  "decided_edgar_name": "CDW CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823428319",
@@ -826,12 +826,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1402057,
+  "decided_edgar_name": "CDW CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-821043797",
@@ -855,12 +855,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2017",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1544856,
+  "decided_edgar_name": "CENCOSUD S.A.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823414136",
@@ -879,12 +879,12 @@
   "sic_desc": "Retail-Women's Clothing Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1092006,
+  "decided_edgar_name": "CHARLOTTE RUSSE HOLDING INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830956792",
@@ -903,12 +903,12 @@
   "sic_desc": "Retail-Apparel & Accessory Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 34115,
+  "decided_edgar_name": "CLAIRES STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820597393",
@@ -932,12 +932,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1345122,
+  "decided_edgar_name": "COMPASS GROUP DIVERSIFIED HOLDINGS LLC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-821979213",
@@ -956,12 +956,12 @@
   "sic_desc": "Retail-Radio, Tv & Consumer Electronics Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1223389,
+  "decided_edgar_name": "CONNS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823659722",
@@ -980,12 +980,12 @@
   "sic_desc": "Retail-Home Furniture, Furnishings & Equipment Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1411688,
+  "decided_edgar_name": "CONTAINER STORE GROUP, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600010673",
@@ -1004,12 +1004,12 @@
   "sic_desc": "Retail-Department Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 882390,
+  "decided_edgar_name": "COMERCIAL MEXICAN HOLDING /ADR",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-807802061",
@@ -1028,12 +1028,12 @@
   "sic_desc": "Retail-Auto Dealers & Gasoline Stations",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1430162,
+  "decided_edgar_name": "COSAN S.A.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600012498",
@@ -1057,12 +1057,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 909832,
+  "decided_edgar_name": "COSTCO COMPANIES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-868201650",
@@ -1086,12 +1086,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1752836,
+  "decided_edgar_name": "COVETRUS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823622163",
@@ -1115,12 +1115,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1334036,
+  "decided_edgar_name": "CROCS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823270042",
@@ -1139,12 +1139,12 @@
   "sic_desc": "Retail-Auto Dealers & Gasoline Stations",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1562039,
+  "decided_edgar_name": "CORNER STORE HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600017017",
@@ -1163,12 +1163,12 @@
   "sic_desc": "Retail-Auto Dealers & Gasoline Stations",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 2123232,
+  "decided_edgar_name": "CUMBERLAND FARMS LTD",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-482600",
@@ -1192,12 +1192,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 64803,
+  "decided_edgar_name": "CVS CAREMARK CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830755145",
@@ -1216,12 +1216,12 @@
   "sic_desc": "Retail-Women's Clothing Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1080187,
+  "decided_edgar_name": "DAVIDS BRIDAL INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-333600",
@@ -1245,12 +1245,12 @@
    "level": "instrument"
   },
   "filing_status": "historischer Filer bis 2007",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 37912,
+  "decided_edgar_name": "DELHAIZE AMERICA INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600061813",
@@ -1269,12 +1269,12 @@
   "sic_desc": "RETAIL-GROCERY STORES",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 930309,
+  "decided_edgar_name": "DELHAIZE BROTHERS & CO THE LION ESTABLISHMENT",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600016729",
@@ -1293,12 +1293,12 @@
   "sic_desc": "Retail-Women's Clothing Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 896985,
+  "decided_edgar_name": "DESTINATION MATERNITY CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-831303734",
@@ -1322,12 +1322,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1089063,
+  "decided_edgar_name": "DICK'S SPORTING GOODS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600044195",
@@ -1351,12 +1351,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1066225,
+  "decided_edgar_name": "DILLARDS CAPITAL TRUST I",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-239280",
@@ -1380,12 +1380,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 28917,
+  "decided_edgar_name": "DILLARD DEPARTMENT STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830121041",
@@ -1404,12 +1404,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1610092,
+  "decided_edgar_name": "DIPLOMAT PHARMACY, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820314227",
@@ -1433,12 +1433,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 29534,
+  "decided_edgar_name": "DOLLAR GENERAL CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823624450",
@@ -1462,12 +1462,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 935703,
+  "decided_edgar_name": "DOLLAR TREE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823043598",
@@ -1486,12 +1486,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1532063,
+  "decided_edgar_name": "ARISTOTLE HOLDING, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600048289",
@@ -1510,12 +1510,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 885721,
+  "decided_edgar_name": "EXPRESS SCRIPTS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-821370324",
@@ -1534,12 +1534,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1555492,
+  "decided_edgar_name": "FAIRWAY GROUP HOLDINGS CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-822205643",
@@ -1558,12 +1558,12 @@
   "sic_desc": "Retail-Variety Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 34408,
+  "decided_edgar_name": "FAMILY DOLLAR STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600019342",
@@ -1582,12 +1582,12 @@
   "sic_desc": "Retail-Miscellaneous Retail",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 922358,
+  "decided_edgar_name": "FERRELLGAS PARTNERS L P",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-457400",
@@ -1611,12 +1611,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 850209,
+  "decided_edgar_name": "FOOT LOCKER INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823628667",
@@ -1635,12 +1635,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1489979,
+  "decided_edgar_name": "FRESH MARKET, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-808528072",
@@ -1659,12 +1659,12 @@
   "sic_desc": "Retail-Computer & Computer Software Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1326380,
+  "decided_edgar_name": "GAMESTOP CORP.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-306425",
@@ -1688,12 +1688,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 39911,
+  "decided_edgar_name": "GAP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820077742",
@@ -1712,12 +1712,12 @@
   "sic_desc": "Retail-Food Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1286045,
+  "decided_edgar_name": "GENERAL NUTRITION CENTERS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823632086",
@@ -1741,12 +1741,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1061894,
+  "decided_edgar_name": "GILDAN ACTIVEWEAR INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600011531",
@@ -1765,12 +1765,12 @@
   "sic_desc": "Retail-Misc General Merchandise Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 910560,
+  "decided_edgar_name": "AFFINITY GROUP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-346500",
@@ -1789,12 +1789,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 43300,
+  "decided_edgar_name": "GREAT ATLANTIC & PACIFIC TEA CO INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600045005",
@@ -1818,12 +1818,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1031203,
+  "decided_edgar_name": "GROUP 1 AUTOMOTIVE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820573669",
@@ -1842,12 +1842,12 @@
   "sic_desc": "Retail-Radio, Tv & Consumer Electronics Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1427553,
+  "decided_edgar_name": "GUITAR CENTER HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600019981",
@@ -1866,12 +1866,12 @@
   "sic_desc": "Retail-Radio, Tv & Consumer Electronics Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1021113,
+  "decided_edgar_name": "GUITAR CENTER INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-822293683",
@@ -1890,12 +1890,12 @@
   "sic_desc": "Apparel & Other Finishd Prods of  Fabrics & Similar Matl",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 786110,
+  "decided_edgar_name": "GYMBOREE CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-809587302",
@@ -1919,12 +1919,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1359841,
+  "decided_edgar_name": "HANESBRANDS INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-373800",
@@ -1948,12 +1948,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 354950,
+  "decided_edgar_name": "HOME DEPOT INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823382645",
@@ -1972,12 +1972,12 @@
   "sic_desc": "Retail-Apparel & Accessory Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1017712,
+  "decided_edgar_name": "HOT TOPIC INC /CA/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830473197",
@@ -1996,12 +1996,12 @@
   "sic_desc": "RETAIL-AUTO DEALERS & GASOLINE STATIONS",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1745041,
+  "decided_edgar_name": "IAA SPINCO INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820086782",
@@ -2020,12 +2020,12 @@
   "sic_desc": "Footwear, (No Rubber)",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 857737,
+  "decided_edgar_name": "CANDIES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-160700",
@@ -2049,12 +2049,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 50493,
+  "decided_edgar_name": "INGLES MARKETS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823637504",
@@ -2078,12 +2078,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 932696,
+  "decided_edgar_name": "INSIGHT ENTERPRISES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-822441140",
@@ -2102,12 +2102,12 @@
   "sic_desc": "Retail-Apparel & Accessory Stores",
   "current": null,
   "filing_status": "zu pruefen",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1051251,
+  "decided_edgar_name": "J CREW GROUP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824625331",
@@ -2131,12 +2131,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1549802,
+  "decided_edgar_name": "JD.COM, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-276225",
@@ -2155,12 +2155,12 @@
   "sic_desc": "Retail-Miscellaneous Shopping Goods Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 34151,
+  "decided_edgar_name": "FABRI CENTERS OF AMERICA INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-869097406",
@@ -2179,12 +2179,12 @@
   "sic_desc": "Retail-Miscellaneous Shopping Goods Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1834585,
+  "decided_edgar_name": "JO-ANN STORES HOLDINGS INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600045042",
@@ -2203,12 +2203,12 @@
   "sic_desc": "Women's, Misses':  and Juniors Outerwear",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 874016,
+  "decided_edgar_name": "JONES APPAREL GROUP INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600051133",
@@ -2227,12 +2227,12 @@
   "sic_desc": "WOMEN'S, MISSES', AND JUNIORS OUTERWEAR",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 352363,
+  "decided_edgar_name": "CLAIBORNE LIZ INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600018243",
@@ -2256,12 +2256,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 885639,
+  "decided_edgar_name": "KOHLS CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-830788359",
@@ -2285,12 +2285,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1760965,
+  "decided_edgar_name": "KONTOOR BRANDS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-441700",
@@ -2314,12 +2314,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 56873,
+  "decided_edgar_name": "KROGER CO",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823791200",
@@ -2338,12 +2338,12 @@
   "sic_desc": "Retail-Family Clothing Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 799288,
+  "decided_edgar_name": "LANDS END INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-825431804",
@@ -2367,12 +2367,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1821806,
+  "decided_edgar_name": "LESLIE'S, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-445750",
@@ -2396,12 +2396,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 94845,
+  "decided_edgar_name": "LEVI STRAUSS & CO",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600049009",
@@ -2425,12 +2425,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1355096,
+  "decided_edgar_name": "LIBERTY INTERACTIVE CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-807545646",
@@ -2454,12 +2454,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1023128,
+  "decided_edgar_name": "LITHIA MOTORS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-454600",
@@ -2483,12 +2483,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 60667,
+  "decided_edgar_name": "LOWES COMPANIES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-808698601",
@@ -2512,12 +2512,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1026179,
+  "decided_edgar_name": "FEDERATED RETAIL HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-277000",
@@ -2541,12 +2541,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 794367,
+  "decided_edgar_name": "FEDERATED DEPARTMENT STORES INC /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-809952889",
@@ -2565,12 +2565,12 @@
   "sic_desc": "Retail-Furniture Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1298169,
+  "decided_edgar_name": "MATTRESS HOLDING CORP.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-614330",
@@ -2589,12 +2589,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1170650,
+  "decided_edgar_name": "MEDCO HEALTH SOLUTIONS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867393764",
@@ -2618,12 +2618,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2020",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 884217,
+  "decided_edgar_name": "MENS WEARHOUSE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867582656",
@@ -2647,12 +2647,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2021",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1593936,
+  "decided_edgar_name": "MICHAELS COMPANIES, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-809824441",
@@ -2671,12 +2671,12 @@
   "sic_desc": "Retail-Hobby, Toy & Game Shops",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 740670,
+  "decided_edgar_name": "MICHAELS STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823828009",
@@ -2700,12 +2700,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1710155,
+  "decided_edgar_name": "NATIONAL VISION HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-40400",
@@ -2729,12 +2729,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 320187,
+  "decided_edgar_name": "NIKE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-551600",
@@ -2758,12 +2758,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 72333,
+  "decided_edgar_name": "NORDSTROM INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600009951",
@@ -2782,12 +2782,12 @@
   "sic_desc": "Retail-Miscellaneous Shopping Goods Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 800240,
+  "decided_edgar_name": "ODP CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-821623802",
@@ -2806,12 +2806,12 @@
   "sic_desc": "Retail-Department Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1166126,
+  "decided_edgar_name": "J C PENNEY CO INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600070008",
@@ -2830,12 +2830,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1218284,
+  "decided_edgar_name": "OMNICARE CAPITAL TRUST I",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600011566",
@@ -2854,12 +2854,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 353230,
+  "decided_edgar_name": "OMNICARE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820127464",
@@ -2883,12 +2883,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1395942,
+  "decided_edgar_name": "KAR AUCTION SERVICES, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-815045307",
@@ -2907,12 +2907,12 @@
   "sic_desc": "Retail-Building Materials, Hardware, Garden Supply",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 856712,
+  "decided_edgar_name": "ORCHARD SUPPLY HARDWARE CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600010074",
@@ -2931,12 +2931,12 @@
   "sic_desc": "Retail-Building Materials, Hardware, Garden Supply",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 896842,
+  "decided_edgar_name": "ORCHARD SUPPLY HARDWARE STORES CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600059536",
@@ -2955,12 +2955,12 @@
   "sic_desc": "Men's & Boys' Furnishgs, Work Clothg, & Allied Garments",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 75288,
+  "decided_edgar_name": "OXFORD INDUSTRIES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823185707",
@@ -2979,12 +2979,12 @@
   "sic_desc": "Retail-Miscellaneous Retail",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1340554,
+  "decided_edgar_name": "AAH HOLDINGS CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823533251",
@@ -3003,12 +3003,12 @@
   "sic_desc": "Retail-Miscellaneous Retail",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1610754,
+  "decided_edgar_name": "PC NEXTCO HOLDINGS, LLC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600036184",
@@ -3032,12 +3032,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1019849,
+  "decided_edgar_name": "PENSKE AUTOMOTIVE GROUP, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600047356",
@@ -3056,12 +3056,12 @@
   "sic_desc": "Men's & Boys' Furnishgs, Work Clothg, & Allied Garments",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 900349,
+  "decided_edgar_name": "PERRY ELLIS INTERNATIONAL INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824864964",
@@ -3080,12 +3080,12 @@
   "sic_desc": "Retail-Retail Stores, NEC",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 888455,
+  "decided_edgar_name": "PETCO ANIMAL SUPPLIES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823229765",
@@ -3104,12 +3104,12 @@
   "sic_desc": "Retail-Retail Stores, NEC",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1582846,
+  "decided_edgar_name": "PETCO HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824319723",
@@ -3133,12 +3133,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2014",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 863157,
+  "decided_edgar_name": "PETSMART INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-608300",
@@ -3162,12 +3162,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 78239,
+  "decided_edgar_name": "PHILLIPS VAN HEUSEN CORP /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600008940",
@@ -3191,12 +3191,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1254699,
+  "decided_edgar_name": "QVC GROUP, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-733250",
@@ -3215,12 +3215,12 @@
   "sic_desc": "Retail-Radio, Tv & Consumer Electronics Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 96289,
+  "decided_edgar_name": "RADIOSHACK CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600050548",
@@ -3244,12 +3244,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1037038,
+  "decided_edgar_name": "POLO RALPH LAUREN CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823640518",
@@ -3273,12 +3273,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1528849,
+  "decided_edgar_name": "RESTORATION HARDWARE HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-647100",
@@ -3297,12 +3297,12 @@
   "sic_desc": "Retail-Drug Stores and Proprietary Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 84129,
+  "decided_edgar_name": "NEW RITE AID, LLC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823602952",
@@ -3326,12 +3326,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 745732,
+  "decided_edgar_name": "ROSS STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823485796",
@@ -3350,12 +3350,12 @@
   "sic_desc": "Retail-Apparel & Accessory Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1471458,
+  "decided_edgar_name": "RUE21, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-654100",
@@ -3379,12 +3379,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 86144,
+  "decided_edgar_name": "SAFEWAY INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-61735",
@@ -3403,12 +3403,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 86144,
+  "decided_edgar_name": "SAFEWAY INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600011838",
@@ -3427,12 +3427,12 @@
   "sic_desc": "Retail-Department Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 812900,
+  "decided_edgar_name": "PROFFITTS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823153335",
@@ -3451,12 +3451,12 @@
   "sic_desc": "Retail-Retail Stores, NEC",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1368458,
+  "decided_edgar_name": "NEW SALLY HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-809796739",
@@ -3480,12 +3480,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1368458,
+  "decided_edgar_name": "NEW SALLY HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823726229",
@@ -3509,12 +3509,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1598775,
+  "decided_edgar_name": "SAMSONITE GROUP S.A.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-808108658",
@@ -3533,12 +3533,12 @@
   "sic_desc": "Retail-Department Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1310067,
+  "decided_edgar_name": "SEARS HOLDINGS CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823938053",
@@ -3562,12 +3562,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 832988,
+  "decided_edgar_name": "SIGNET GROUP PLC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-820171756",
@@ -3586,12 +3586,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1563407,
+  "decided_edgar_name": "SF CC HOLDINGS, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600043467",
@@ -3615,12 +3615,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1043509,
+  "decided_edgar_name": "SONIC AUTOMOTIVE INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-714250",
@@ -3644,12 +3644,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2017",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 791519,
+  "decided_edgar_name": "STAPLES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600051820",
@@ -3668,12 +3668,12 @@
   "sic_desc": "Retail-Retail Stores, NEC",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1002590,
+  "decided_edgar_name": "STAR GAS PARTNERS LP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600012543",
@@ -3692,12 +3692,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 882829,
+  "decided_edgar_name": "STATER BROS HOLDINGS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-804050",
@@ -3721,12 +3721,12 @@
    "level": "obligor"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1005210,
+  "decided_edgar_name": "SUBURBAN PROPANE PARTNERS LP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823720189",
@@ -3745,12 +3745,12 @@
   "sic_desc": "Retail-Women's Clothing Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 912263,
+  "decided_edgar_name": "TALBOTS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823376466",
@@ -3774,12 +3774,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1116132,
+  "decided_edgar_name": "COACH INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-223000",
@@ -3803,12 +3803,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 27419,
+  "decided_edgar_name": "DAYTON HUDSON CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-1926",
@@ -3832,12 +3832,12 @@
    "level": "instrument"
   },
   "filing_status": "historischer Filer bis 2020",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 98246,
+  "decided_edgar_name": "TIFFANY & CO",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-734075",
@@ -3861,12 +3861,12 @@
    "level": "instrument"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 109198,
+  "decided_edgar_name": "TJX COMPANIES INC /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823420802",
@@ -3885,12 +3885,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1584701,
+  "decided_edgar_name": "TOPS HOLDING II CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-821779260",
@@ -3909,12 +3909,12 @@
   "sic_desc": "Retail-Grocery Stores",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1483173,
+  "decided_edgar_name": "TOPS HOLDING CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-825501955",
@@ -3938,12 +3938,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1792781,
+  "decided_edgar_name": "TORRID HOLDINGS INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867219391",
@@ -3967,12 +3967,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 916365,
+  "decided_edgar_name": "TRACTOR SUPPLY CO /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823458717",
@@ -3991,12 +3991,12 @@
   "sic_desc": "Apparel & Other Finishd Prods of  Fabrics & Similar Matl",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1160858,
+  "decided_edgar_name": "GUSANA EXPLORATIONS INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-823645825",
@@ -4020,12 +4020,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1336917,
+  "decided_edgar_name": "UNDER ARMOUR, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-800100",
@@ -4049,12 +4049,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 103379,
+  "decided_edgar_name": "V F CORP",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-867730682",
@@ -4078,12 +4078,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1856437,
+  "decided_edgar_name": "VICTORIA'S SECRET & CO.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824774815",
@@ -4107,12 +4107,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1529192,
+  "decided_edgar_name": "VIPSHOP HOLDINGS LTD",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-806000",
@@ -4136,12 +4136,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 104207,
+  "decided_edgar_name": "WALGREEN CO",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-824205318",
@@ -4165,12 +4165,12 @@
    "level": "obligor"
   },
   "filing_status": "historischer Filer bis 2024",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1618921,
+  "decided_edgar_name": "WALGREENS BOOTS ALLIANCE, INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-806500",
@@ -4194,12 +4194,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 104169,
+  "decided_edgar_name": "WAL MART STORES INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-806626673",
@@ -4218,12 +4218,12 @@
   "sic_desc": "Women's, Misses':  Children's & Infants' Undergarments",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 801351,
+  "decided_edgar_name": "WARNACO GROUP INC /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-806626672",
@@ -4242,12 +4242,12 @@
   "sic_desc": "Apparel & Other Finishd Prods of  Fabrics & Similar Matl",
   "current": null,
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 104628,
+  "decided_edgar_name": "WARNACO INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-869202072",
@@ -4271,12 +4271,12 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1616707,
+  "decided_edgar_name": "WAYFAIR INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-869219266",
@@ -4300,12 +4300,12 @@
    "level": "instrument"
   },
   "filing_status": null,
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 1616707,
+  "decided_edgar_name": "WAYFAIR INC.",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-600041087",
@@ -4329,12 +4329,12 @@
    "level": "instrument"
   },
   "filing_status": "historischer Filer bis 2017",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 865436,
+  "decided_edgar_name": "WHOLE FOODS MARKET INC",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  },
  {
   "key": "oi-831500",
@@ -4358,11 +4358,11 @@
    "level": "obligor"
   },
   "filing_status": "aktueller Filer",
-  "status": "pending",
-  "decided_cik": null,
-  "decided_edgar_name": null,
-  "decided_by": null,
-  "decided_at": null,
-  "note": ""
+  "status": "confirmed",
+  "decided_cik": 110471,
+  "decided_edgar_name": "WOLVERINE WORLD WIDE INC /DE/",
+  "decided_by": "Robert Vetter",
+  "decided_at": "2026-08-29T09:05:54+02:00",
+  "note": "Sammelentscheidung: automatischen Vorschlag pauschal akzeptiert (Robert im Chat, 2026-08-29), nicht einzeln geprueft"
  }
 ]

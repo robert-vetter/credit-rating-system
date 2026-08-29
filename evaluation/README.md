@@ -26,6 +26,15 @@ Item statuses: `pending`, `confirmed` (mapped to a CIK), `no_sec_filer` (Moody's
 SEC counterpart, e.g. private or foreign), `not_rated` (reverse items only). The latest decision
 in the log wins; `mapping.json` always reflects it.
 
+## Status of the decisions
+
+On 2026-08-29 Robert accepted all 164 automatic proposals wholesale (`bulk_accept.py`); each is
+recorded in the log as a bulk decision, explicitly not an individual review. The substantively
+non-trivial pairs, where the Moody's entity maps to a different filer than its own CIK
+(bond-issuing subsidiaries and re-listed successors: BJ's, Leslie's, National Vision, RH, Sally,
+Signet, Torrid), were surfaced and checked in chat before acceptance. Any single pair can be
+revisited in the review UI at any time; a new decision simply appends.
+
 ## Workflow
 
 ```
