@@ -1,0 +1,4 @@
+{"ts": "2026-08-29T08:46:05+02:00", "key": "oi-600041661", "action": "confirm", "by": "claude-smoketest", "note": "Funktionstest, wird zurueckgenommen", "cik": 1158449, "edgar_name": "ADVANCE AUTO PARTS INC"}
+{"ts": "2026-08-29T08:46:05+02:00", "key": "oi-600041661", "action": "pending", "by": "claude-smoketest", "note": ""}
+{"ts": "2026-08-29T08:47:10+02:00", "key": "oi-600041661", "action": "confirm", "by": "claude-smoketest", "note": "Ende-zu-Ende-Test der Kette, wird zurueckgenommen", "cik": 1158449, "edgar_name": "ADVANCE AUTO PARTS INC"}
+{"ts": "2026-08-29T08:47:10+02:00", "key": "oi-600041661", "action": "pending", "by": "claude-smoketest", "note": ""}

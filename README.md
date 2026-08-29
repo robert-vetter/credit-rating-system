@@ -58,6 +58,11 @@ embargo at the full 12 months, and powers the historical arm of the evaluation. 
 window remains uncovered by any public source, which makes the lab's dataset the strictly blocking
 dependency for that arm.
 
+evaluation/ is the hand-verified company mapping behind the evaluation: every Moody's-entity-to-
+SEC-filer pair (OI to CIK) is confirmed manually in a small review UI and recorded in an
+append-only decision log; confirmed pairs compile into one folder per company that the future
+evaluation runner will walk. See evaluation/README.md.
+
 Still waiting on the lab's initial dataset before sample construction and sector scope can be fixed.
 
 ## Layout
