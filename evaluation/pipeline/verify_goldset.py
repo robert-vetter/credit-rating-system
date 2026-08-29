@@ -97,6 +97,9 @@ def scan_disclosure(text, symbol):
 
 def main():
     gold = json.load(open(GOLD))
+    if len(sys.argv) > 1 and sys.argv[1] == "--render-only":
+        render(gold)
+        return
     for it in gold["items"]:
         slug = it["slug"]
         ratings = json.load(open(os.path.join(OUT, slug, "ratings.json")))
@@ -136,10 +139,19 @@ def main():
               f"{'  SELBSTBESTAETIGT' if d.get('verdict') == 'self_disclosed' else ''}", flush=True)
 
     json.dump(gold, open(GOLD, "w"), indent=1, ensure_ascii=False)
+    render(gold)
 
+
+def render(gold):
     n_sd = sum(1 for i in gold["items"] if (i["evidence"].get("disclosure") or {}).get("verdict") == "self_disclosed")
     with open(REVIEW, "w") as f:
         f.write("# Goldset-Review: 50 Beobachtungen zur manuellen Bestätigung\n\n")
+        v = gold.get("validation")
+        if v:
+            f.write(f"## Zweitpruefung vom {v['date']}\n\n*{v['by']}:*\n\n")
+            for c in v["checks"]:
+                f.write(f"- {c}\n")
+            f.write("\n---\n")
         f.write("*Erzeugt von verify_goldset.py (Auswahl: build_goldset.py, Seed 20260829). "
                 "Jedes Item zeigt die komplette Belegkette: der rohe Moody's-Record hinter dem "
                 "Label, der Record hinter dem Vorquartal, die Selbstoffenlegung der Firma im "
@@ -179,6 +191,8 @@ def main():
                 f.write(f"- Input-Dokumente: {docs or 'FEHLEN — pruefen!'}\n")
                 if kind == "unchanged" and it["next_quarter_changes"]:
                     f.write("- Hinweis: hartes Negativ — im Folgequartal aendert sich das Rating\n")
+                if it.get("validation_note"):
+                    f.write(f"- **Anmerkung aus der Zweitpruefung:** {it['validation_note']}\n")
                 f.write(f"- [ ] bestaetigt\n\n")
     print(f"\n{n_sd}/50 selbstbestaetigt. Review-Sheet: evaluation/goldset-review.md")
 

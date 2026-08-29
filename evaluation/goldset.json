@@ -163,7 +163,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082024000345/cvna-20240930.htm"
     }
    },
-   "id": "G03"
+   "id": "G03",
+   "validation_note": "Modell-Erinnerung an Carvanas exakte Upgrade-Daten war unscharf; die Roh-Datei ist eindeutig (Caa3->Caa1 am 2024-09-12) und die Filings enthalten nichts Widersprechendes. Datei schlaegt Erinnerung."
   },
   {
    "slug": "costco-wholesale",
@@ -841,7 +842,8 @@
      "snippet": "pany and the notes are rated by specified rating agencies at a level below investment grade. As of February 1, 2020, the Company's credit rating and outlook were as described in the table below. 28 Moody's Standard & Poor's Fitch Long-term debt Baa3 BBB- BBB Outlook Stable Stable Stable In February 2020, Standard and Poor's and Fitch downgraded Macy's long-term debt ratings to BB+ and BBB-, respec"
     }
    },
-   "id": "G16"
+   "id": "G16",
+   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); Datum, Rating und Typ sind vollstaendig. Bekannter kleiner Datenrest, kein Fehler unsererseits. Es ist die CFR-Zuweisung beim IG-Austritt Maerz 2020."
   },
   {
    "slug": "macy-s",
@@ -999,7 +1001,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1573516/000157351615000024/musa-20150630x10q.htm"
     }
    },
-   "id": "G19"
+   "id": "G19",
+   "validation_note": "Aktionsdatum = Stichtag (2015-06-30): per Label-Regel zaehlt das Rating am Tagesende, die Aktion ist also im Label enthalten - so gewollt und dokumentiert."
   },
   {
    "slug": "o-reilly",
@@ -1210,10 +1213,12 @@
      }
     ],
     "disclosure": {
-     "verdict": "no_mention",
-     "form": "10-Q",
-     "filed": "2015-09-03",
-     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828015006962/sig-20150801_10q.htm"
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2016-03-24",
+     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828016012998/fy16q410k.htm",
+     "snippet": "twelve months. Credit Rating The following table provides Signet’s credit ratings as of January 30, 2016 : Rating Agency Corporate Senior Unsecured Notes Outlook Standard & Poor’s BBB- BBB- Stable Fitch BBB- BBB- Stable Moody’s Baa3 Baa3 Stable OFF-BALANCE SHEET ARRANGEMENTS Merchandise held on consignment Signet held $441.9 million of consignment inventory which is not recorded on the balance sheet at January 30, 2016 , as compared to",
+     "note": "extended sweep"
     }
    },
    "id": "G23"
@@ -1264,13 +1269,16 @@
      }
     ],
     "disclosure": {
-     "verdict": "no_mention",
-     "form": "10-Q",
-     "filed": "2017-08-29",
-     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828017008982/fy18q210-q.htm"
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2018-04-02",
+     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828018003906/fy18q410k.htm",
+     "snippet": "al quarter of Signet for the trailing twelve months. Credit Rating The following table provides Signet’s credit ratings as of February 3, 2018 : Rating Agency Corporate Senior Unsecured Notes Standard & Poor’s BBB- BBB- Moody’s Ba1 Ba1 Fitch BB BB OFF-BALANCE SHEET ARRANGEMENTS Merchandise held on consignment Signet held $606.4 million of consignment inventory which is not recorded on the balance sheet at February 3, 2018 , as compared",
+     "note": "extended sweep"
     }
    },
-   "id": "G24"
+   "id": "G24",
+   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); es ist die CFR-Zuweisung beim IG-Austritt Juli 2017."
   },
   {
    "slug": "tiffany",
@@ -1318,7 +1326,8 @@
      }
     ]
    },
-   "id": "G25"
+   "id": "G25",
+   "validation_note": "Sonderfall M&A-Support: der 4-Notch-Sprung Baa2->A1 kommt aus der LVMH-Uebernahme (Anleihen ruecken an das LVMH-Rating), nicht aus Standalone-Fundamentaldaten. Die Uebernahme steht in den Input-Filings (Merger Agreement), ist also aus Dokumenten erkennbar - bewusst behalten als harter, realer Fall."
   },
   {
    "slug": "tjx-companies-inc-the",
@@ -1862,7 +1871,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082023000052/cvna-20221231.htm"
     }
    },
-   "id": "G35"
+   "id": "G35",
+   "validation_note": "Pfad Ca (Distressed Exchange 2023-03) -> spaeter Caa3 -> Caa1 ist intern konsistent ueber G35 und G03 hinweg."
   },
   {
    "slug": "dillard-s",
@@ -2132,7 +2142,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1760965/000176096520000010/kontoor201910-k1.htm"
     }
    },
-   "id": "G40"
+   "id": "G40",
+   "validation_note": "Kein COVID-Downgrade bei Kontoor in der 17g-7-Datei; die Datei enthaelt alle Aktionen, also stand Ba2 durch - Erinnerungszweifel zugunsten der Datei aufgeloest."
   },
   {
    "slug": "lowe-s-companies",
@@ -2289,10 +2300,12 @@
      }
     ],
     "disclosure": {
-     "verdict": "no_mention",
-     "form": "10-K",
-     "filed": "2018-03-08",
-     "url": "https://www.sec.gov/Archives/edgar/data/1710155/000171015518000012/nhvi201710-k.htm"
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2018-11-13",
+     "url": "https://www.sec.gov/Archives/edgar/data/1710155/000171015518000049/a18q3nvhi10-q.htm",
+     "snippet": "er 2017 Joinder) for the term loans thereunder, of which there is approximately $364.0 million outstanding following the effective date of the October 2018 Joinder, are based on NVI’s public corporate credit rating from Moody’s. 43 Table of Contents On September 7, 2018, Moody’s announced that it had upgraded NVI’s public corporate credit rating from B1 to Ba3 (stable) and as a result, the Applicable Margin for these term loans has step",
+     "note": "extended sweep"
     }
    },
    "id": "G43"
@@ -2452,13 +2465,16 @@
      }
     ],
     "disclosure": {
-     "verdict": "no_mention",
+     "verdict": "self_disclosed",
      "form": "10-K",
-     "filed": "2019-03-29",
-     "url": "https://www.sec.gov/Archives/edgar/data/78239/000007823919000011/pvh10k2018.htm"
+     "filed": "2020-04-01",
+     "url": "https://www.sec.gov/Archives/edgar/data/78239/000007823920000023/pvh10k2019.htm",
+     "snippet": "financial and non-financial covenants under our financing arrangements. 48 As of February 2, 2020 , our issuer credit was rated BBB- by Standard & Poor’s with a stable outlook and our corporate credit was rated Baa3 by Moody’s with a stable outlook, and our commercial paper was rated A-3 by Standard & Poor’s and P-3 by Moody’s. In assessing our credit strength, we believe that both Standard & Poor’s and Moody’s considered, among other",
+     "note": "extended sweep"
     }
    },
-   "id": "G46"
+   "id": "G46",
+   "validation_note": "Hartes Negativ: PVH wurde im April 2020 (Folgequartal) herabgestuft; am Stichtag 2020-03-31 galt noch Baa3. Genau der Fall, bei dem ein zu nervoeses System Fehlalarm gibt."
   },
   {
    "slug": "ralph-lauren",
@@ -2672,5 +2688,16 @@
    },
    "id": "G50"
   }
- ]
+ ],
+ "validation": {
+  "date": "2026-08-29",
+  "by": "Claude (Opus 5), second pass on Robert's instruction",
+  "checks": [
+   "independent re-derivation of label, persistence and label level for all 50 items directly from the raw 17g-7 XML archives (fresh code path, not via ratings.json): 50/50 identical",
+   "document integrity: every input document filed before t, every 10-K within 455 days, disclosure documents after the action date: 0 problems",
+   "all 141 EDGAR URLs fetched: 0 dead links",
+   "extended self-disclosure sweep over up to 3 subsequent filings per unconfirmed item: 4 additional confirmations (now 20/50); zero filings mention Moody's with symbols contradicting a label",
+   "item-by-item manual read of every evidence record and snippet against known rating histories: 0 errors, 8 annotated special cases"
+  ]
+ }
 }

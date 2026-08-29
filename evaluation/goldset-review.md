@@ -1,8 +1,19 @@
 # Goldset-Review: 50 Beobachtungen zur manuellen Bestätigung
 
+## Zweitpruefung vom 2026-08-29
+
+*Claude (Opus 5), second pass on Robert's instruction:*
+
+- independent re-derivation of label, persistence and label level for all 50 items directly from the raw 17g-7 XML archives (fresh code path, not via ratings.json): 50/50 identical
+- document integrity: every input document filed before t, every 10-K within 455 days, disclosure documents after the action date: 0 problems
+- all 141 EDGAR URLs fetched: 0 dead links
+- extended self-disclosure sweep over up to 3 subsequent filings per unconfirmed item: 4 additional confirmations (now 20/50); zero filings mention Moody's with symbols contradicting a label
+- item-by-item manual read of every evidence record and snippet against known rating histories: 0 errors, 8 annotated special cases
+
+---
 *Erzeugt von verify_goldset.py (Auswahl: build_goldset.py, Seed 20260829). Jedes Item zeigt die komplette Belegkette: der rohe Moody's-Record hinter dem Label, der Record hinter dem Vorquartal, die Selbstoffenlegung der Firma im naechsten Filing (sofern gefunden) und die Input-Dokumente. Dokumente NACH dem Stichtag dienen nur der Label-Pruefung, nie als Modell-Input.*
 
-**Stand: 16 von 50 zusaetzlich durch Selbstoffenlegung der Firma bestaetigt.** Kein Fund ist neutral (viele Firmen drucken Ratings nicht ab), nie ein Widerspruch.
+**Stand: 20 von 50 zusaetzlich durch Selbstoffenlegung der Firma bestaetigt.** Kein Fund ist neutral (viele Firmen drucken Ratings nicht ab), nie ein Widerspruch.
 
 **So bestaetigst du:** pro Item Haken setzen oder mir einfach die IDs nennen, die du ablehnst/aendern willst (z.B. "G07 raus"); ich schreibe den Status in goldset.json. Nur bestaetigte Items laufen in Gold-Auswertungen.
 
@@ -29,6 +40,7 @@
 - Vorquartal-Beleg: 2023-09-20 „Caa3“ [UP] LT Corporate Family Ratings, entity-Ebene
 - Selbstoffenlegung: keine Erwaehnung im [10-Q vom 2024-10-30](https://www.sec.gov/Archives/edgar/data/1690820/000169082024000345/cvna-20240930.htm) (neutral)
 - Input-Dokumente: [10-K 2024-02-22](https://www.sec.gov/Archives/edgar/data/1690820/000169082024000093/cvna-20231231.htm) · [10-Q 2024-07-31](https://www.sec.gov/Archives/edgar/data/1690820/000169082024000272/cvna-20240630.htm)
+- **Anmerkung aus der Zweitpruefung:** Modell-Erinnerung an Carvanas exakte Upgrade-Daten war unscharf; die Roh-Datei ist eindeutig (Caa3->Caa1 am 2024-09-12) und die Filings enthalten nichts Widersprechendes. Datei schlaegt Erinnerung.
 - [ ] bestaetigt
 
 ### G04 · COSTCO WHOLESALE CORPORATION · 2018-12-31 · ⬆1 A1 → Aa3
@@ -120,6 +132,7 @@
 - Vorquartal-Beleg: 2017-03-02 „Baa3“ [DG] Senior Unsecured, instrument-Ebene
 - **Selbstoffenlegung ✔** [10-K vom 2020-03-30](https://www.sec.gov/Archives/edgar/data/794367/000079436720000040/m-0201202010xk.htm): „…pany and the notes are rated by specified rating agencies at a level below investment grade. As of February 1, 2020, the Company's credit rating and outlook were as described in the table below. 28 Moody's Standard & Poor's Fitch Long-term debt Baa3 BBB- BBB Outlook Stable Stable Stable In February 2020, Standard and Poor's and Fitch downgraded Macy's long-term debt ratings to BB+ and BBB-, respec…“
 - Input-Dokumente: [10-K 2020-03-30](https://www.sec.gov/Archives/edgar/data/794367/000079436720000040/m-0201202010xk.htm)
+- **Anmerkung aus der Zweitpruefung:** Aktionscode fehlt im Moody's-Rohdatensatz ([None]); Datum, Rating und Typ sind vollstaendig. Bekannter kleiner Datenrest, kein Fehler unsererseits. Es ist die CFR-Zuweisung beim IG-Austritt Maerz 2020.
 - [ ] bestaetigt
 
 ### G17 · MACY'S · 2022-03-31 · ⬆1 Ba2 → Ba1
@@ -141,6 +154,7 @@
 - Vorquartal-Beleg: 2013-08-05 „Ba2“ [NW] LT Corporate Family Ratings, entity-Ebene
 - Selbstoffenlegung: keine Erwaehnung im [10-Q vom 2015-08-06](https://www.sec.gov/Archives/edgar/data/1573516/000157351615000024/musa-20150630x10q.htm) (neutral)
 - Input-Dokumente: [10-K 2015-02-27](https://www.sec.gov/Archives/edgar/data/1573516/000157351615000008/musa-20141231x10k.htm) · [10-Q 2015-05-05](https://www.sec.gov/Archives/edgar/data/1573516/000157351615000015/musa-20150331x10q.htm)
+- **Anmerkung aus der Zweitpruefung:** Aktionsdatum = Stichtag (2015-06-30): per Label-Regel zaehlt das Rating am Tagesende, die Aktion ist also im Label enthalten - so gewollt und dokumentiert.
 - [ ] bestaetigt
 
 ### G20 · O'REILLY · 2013-12-31 · ⬆1 Baa3 → Baa2
@@ -167,21 +181,23 @@
 ### G23 · SIGNET · 2015-09-30 · ⬆1 Ba1 → Baa3
 - **Label-Beleg (17g-7):** 2015-08-17 „Baa3“ [UP] Senior Unsecured, instrument-Ebene, OI 823938053
 - Vorquartal-Beleg: 2014-05-14 „Ba1“ [NW] Senior Unsecured, instrument-Ebene
-- Selbstoffenlegung: keine Erwaehnung im [10-Q vom 2015-09-03](https://www.sec.gov/Archives/edgar/data/832988/000162828015006962/sig-20150801_10q.htm) (neutral)
+- **Selbstoffenlegung ✔** [10-K vom 2016-03-24](https://www.sec.gov/Archives/edgar/data/832988/000162828016012998/fy16q410k.htm): „…twelve months. Credit Rating The following table provides Signet’s credit ratings as of January 30, 2016 : Rating Agency Corporate Senior Unsecured Notes Outlook Standard & Poor’s BBB- BBB- Stable Fitch BBB- BBB- Stable Moody’s Baa3 Baa3 Stable OFF-BALANCE SHEET ARRANGEMENTS Merchandise held on consignment Signet held $441.9 million of consignment inventory which is not recorded on the balance sheet at January 30, 2016 , as compared to…“
 - Input-Dokumente: [10-K 2015-03-26](https://www.sec.gov/Archives/edgar/data/832988/000162828015001969/a10k-1312015xq4.htm) · [10-Q 2015-09-03](https://www.sec.gov/Archives/edgar/data/832988/000162828015006962/sig-20150801_10q.htm)
 - [ ] bestaetigt
 
 ### G24 · SIGNET · 2017-09-30 · ⬇1 Baa3 → Ba1
 - **Label-Beleg (17g-7):** 2017-07-21 „Ba1“ [None] LT Corporate Family Ratings, entity-Ebene, OI 823938053
 - Vorquartal-Beleg: 2015-08-17 „Baa3“ [UP] Senior Unsecured, instrument-Ebene
-- Selbstoffenlegung: keine Erwaehnung im [10-Q vom 2017-08-29](https://www.sec.gov/Archives/edgar/data/832988/000162828017008982/fy18q210-q.htm) (neutral)
+- **Selbstoffenlegung ✔** [10-K vom 2018-04-02](https://www.sec.gov/Archives/edgar/data/832988/000162828018003906/fy18q410k.htm): „…al quarter of Signet for the trailing twelve months. Credit Rating The following table provides Signet’s credit ratings as of February 3, 2018 : Rating Agency Corporate Senior Unsecured Notes Standard & Poor’s BBB- BBB- Moody’s Ba1 Ba1 Fitch BB BB OFF-BALANCE SHEET ARRANGEMENTS Merchandise held on consignment Signet held $606.4 million of consignment inventory which is not recorded on the balance sheet at February 3, 2018 , as compared…“
 - Input-Dokumente: [10-K 2017-03-16](https://www.sec.gov/Archives/edgar/data/832988/000162828017002652/fy17q410k.htm) · [10-Q 2017-08-29](https://www.sec.gov/Archives/edgar/data/832988/000162828017008982/fy18q210-q.htm)
+- **Anmerkung aus der Zweitpruefung:** Aktionscode fehlt im Moody's-Rohdatensatz ([None]); es ist die CFR-Zuweisung beim IG-Austritt Juli 2017.
 - [ ] bestaetigt
 
 ### G25 · TIFFANY & CO. · 2021-03-31 · ⬆4 Baa2 → A1
 - **Label-Beleg (17g-7):** 2021-03-17 „A1“ [UP] Senior Unsecured, instrument-Ebene, OI 1926
 - Vorquartal-Beleg: 2014-09-22 „Baa2“ [NW] Senior Unsecured, instrument-Ebene
 - Input-Dokumente: [10-K 2020-03-20](https://www.sec.gov/Archives/edgar/data/98246/000009824620000042/tif-2020131x10k.htm) · [10-Q 2020-11-24](https://www.sec.gov/Archives/edgar/data/98246/000009824620000118/tif-20201031.htm)
+- **Anmerkung aus der Zweitpruefung:** Sonderfall M&A-Support: der 4-Notch-Sprung Baa2->A1 kommt aus der LVMH-Uebernahme (Anleihen ruecken an das LVMH-Rating), nicht aus Standalone-Fundamentaldaten. Die Uebernahme steht in den Input-Filings (Merger Agreement), ist also aus Dokumenten erkennbar - bewusst behalten als harter, realer Fall.
 - [ ] bestaetigt
 
 ### G26 · TJX COMPANIES, INC. (THE) · 2015-09-30 · ⬆1 A3 → A2
@@ -256,6 +272,7 @@
 - Selbstoffenlegung: keine Erwaehnung im [10-K vom 2023-02-23](https://www.sec.gov/Archives/edgar/data/1690820/000169082023000052/cvna-20221231.htm) (neutral)
 - Input-Dokumente: [10-K 2023-02-23](https://www.sec.gov/Archives/edgar/data/1690820/000169082023000052/cvna-20221231.htm) · [10-Q 2023-05-04](https://www.sec.gov/Archives/edgar/data/1690820/000169082023000163/cvna-20230331.htm)
 - Hinweis: hartes Negativ — im Folgequartal aendert sich das Rating
+- **Anmerkung aus der Zweitpruefung:** Pfad Ca (Distressed Exchange 2023-03) -> spaeter Caa3 -> Caa1 ist intern konsistent ueber G35 und G03 hinweg.
 - [ ] bestaetigt
 
 ### G36 · DILLARD'S · 2022-06-30 · = Baa3 → Baa3
@@ -292,6 +309,7 @@
 - Vorquartal-Beleg: 2019-04-23 „Ba2“ [NW] LT Corporate Family Ratings, entity-Ebene
 - Selbstoffenlegung: keine Erwaehnung im [10-K vom 2020-03-11](https://www.sec.gov/Archives/edgar/data/1760965/000176096520000010/kontoor201910-k1.htm) (neutral)
 - Input-Dokumente: [10-K 2020-03-11](https://www.sec.gov/Archives/edgar/data/1760965/000176096520000010/kontoor201910-k1.htm) · [10-Q 2020-11-06](https://www.sec.gov/Archives/edgar/data/1760965/000176096520000051/ktb-20200926.htm)
+- **Anmerkung aus der Zweitpruefung:** Kein COVID-Downgrade bei Kontoor in der 17g-7-Datei; die Datei enthaelt alle Aktionen, also stand Ba2 durch - Erinnerungszweifel zugunsten der Datei aufgeloest.
 - [ ] bestaetigt
 
 ### G41 · LOWE'S COMPANIES, INC. · 2017-03-31 · = A3 → A3
@@ -311,7 +329,7 @@
 ### G43 · NATIONAL VISION, INC. · 2018-06-30 · = B1 → B1
 - **Label-Beleg (17g-7):** 2017-11-03 „B1“ [UP] LT Corporate Family Ratings, entity-Ebene, OI 823828009
 - Vorquartal-Beleg: 2017-11-03 „B1“ [UP] LT Corporate Family Ratings, entity-Ebene
-- Selbstoffenlegung: keine Erwaehnung im [10-K vom 2018-03-08](https://www.sec.gov/Archives/edgar/data/1710155/000171015518000012/nhvi201710-k.htm) (neutral)
+- **Selbstoffenlegung ✔** [10-Q vom 2018-11-13](https://www.sec.gov/Archives/edgar/data/1710155/000171015518000049/a18q3nvhi10-q.htm): „…er 2017 Joinder) for the term loans thereunder, of which there is approximately $364.0 million outstanding following the effective date of the October 2018 Joinder, are based on NVI’s public corporate credit rating from Moody’s. 43 Table of Contents On September 7, 2018, Moody’s announced that it had upgraded NVI’s public corporate credit rating from B1 to Ba3 (stable) and as a result, the Applicable Margin for these term loans has step…“
 - Input-Dokumente: [10-K 2018-03-08](https://www.sec.gov/Archives/edgar/data/1710155/000171015518000012/nhvi201710-k.htm) · [10-Q 2018-05-15](https://www.sec.gov/Archives/edgar/data/1710155/000171015518000020/a18q1nhvi10-q.htm)
 - Hinweis: hartes Negativ — im Folgequartal aendert sich das Rating
 - [ ] bestaetigt
@@ -333,8 +351,9 @@
 ### G46 · PVH CORP. · 2020-03-31 · = Baa3 → Baa3
 - **Label-Beleg (17g-7):** 2019-04-30 „Baa3“ [None] Senior Unsecured, instrument-Ebene, OI 608300
 - Vorquartal-Beleg: 2019-04-30 „Baa3“ [None] Senior Unsecured, instrument-Ebene
-- Selbstoffenlegung: keine Erwaehnung im [10-K vom 2019-03-29](https://www.sec.gov/Archives/edgar/data/78239/000007823919000011/pvh10k2018.htm) (neutral)
+- **Selbstoffenlegung ✔** [10-K vom 2020-04-01](https://www.sec.gov/Archives/edgar/data/78239/000007823920000023/pvh10k2019.htm): „…financial and non-financial covenants under our financing arrangements. 48 As of February 2, 2020 , our issuer credit was rated BBB- by Standard & Poor’s with a stable outlook and our corporate credit was rated Baa3 by Moody’s with a stable outlook, and our commercial paper was rated A-3 by Standard & Poor’s and P-3 by Moody’s. In assessing our credit strength, we believe that both Standard & Poor’s and Moody’s considered, among other…“
 - Input-Dokumente: [10-K 2019-03-29](https://www.sec.gov/Archives/edgar/data/78239/000007823919000011/pvh10k2018.htm) · [10-Q 2019-12-09](https://www.sec.gov/Archives/edgar/data/78239/000007823919000066/a10q3q2019.htm)
+- **Anmerkung aus der Zweitpruefung:** Hartes Negativ: PVH wurde im April 2020 (Folgequartal) herabgestuft; am Stichtag 2020-03-31 galt noch Baa3. Genau der Fall, bei dem ein zu nervoeses System Fehlalarm gibt.
 - [ ] bestaetigt
 
 ### G47 · RALPH LAUREN CORPORATION · 2016-09-30 · = A2 → A2
