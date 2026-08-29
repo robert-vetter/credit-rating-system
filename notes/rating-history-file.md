@@ -12,7 +12,7 @@ Two sets, both in the SEC's ROCR XBRL format, one small XML per entity:
 | Set | Files | Content |
 |---|---|---|
 | Obligor | 21,383 | Entity-level ratings: corporate family ratings, issuer ratings, probability of default. One file per obligor with its full action history since June 2012 |
-| Issuer | 65,535 | Instrument-level ratings: one record per security with CUSIP, coupon, maturity, par value, and that instrument's own action history |
+| Issuer | 73,687 | Instrument-level ratings: one record per security with CUSIP, coupon, maturity, par value, and that instrument's own action history |
 
 Parsed totals from the obligor set: 106,590 rating actions across 21,383 obligors. By class: 8,589 US
 Public, **8,146 Corporate**, 2,774 Financial, 1,189 Insurance, 512 international public, 171
@@ -80,10 +80,18 @@ restaurants, which have their own methodology; apparel manufacturing 2300-2399; 
 leather; apparel wholesale). The pipeline is `sector_count.py` next to this file; the frame lands in
 `data/retail_frame.json`.
 
-Numbers: of 13,026 Corporate entities in the union (8,146 obligor-level plus 4,880 issuer-only),
-4,057 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
+Numbers: of 12,926 Corporate entities in the union (8,146 obligor-level plus 4,780 issuer-only),
+3,890 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
 rating as of the file end (August 2025): 31 investment grade, 55 speculative.** The distribution
 spans Aa2 (Walmart) to Caa3 and is thickest in the Ba range, which is where rating changes happen.
+
+**Correction to an earlier version of this note.** It reported 13,026 union entities, 4,880 of them
+issuer-only, and 4,057 EDGAR matches. Those three figures were wrong. A second, independent script
+that reads the archives and counts headers with no shared code confirms 12,926 and 4,780, and the
+match count fell out of the name-matching fix described two paragraphs below. The frame totals (164
+and 86) were unaffected, for a reason worth stating so it is not mistaken for nothing having changed:
+the restaurant-exclusion fix removed several entities from the frame and the name-matching fix added
+five, and the two happened to cancel. The membership differs even though the count does not.
 
 Three findings from building it. First, **the union matters**: purely investment-grade issuers such
 as Home Depot, Costco, TJX, Ross and AutoZone have no obligor-set file at all, because they carry no
@@ -109,15 +117,37 @@ B2, senior unsecured B3).
 scope section (retailers to end consumers including grocery, drugstores, auto dealers and e-commerce
 are in, as are apparel and footwear designers; restaurants, B2B distribution, propane and fuel
 distribution, pharmacy benefit managers, pure brand licensors and diversified holdings are out).
-Results on the 164 entities: 137 in scope, 24 out, 3 uncertain (CVS, whose drugstore is wrapped in a
-PBM and an insurer; Samsonite, on the accessories-versus-durables boundary; Good Sam). Among the 86
-actively rated entities, 10 leave the frame, including two restaurants (Starbucks and Wendy's carried
-SIC 5810, which the first filter did not exclude; the script now excludes 5810-5819), two propane
-distributors, and four B2B resellers or auction houses whose retail SIC is misleading (CDW, Insight,
-OpenLane, Covetrus).
+Results on the 164 entities: 137 in scope, 23 out, 4 uncertain (CVS, whose drugstore is wrapped in a
+PBM and an insurer; Samsonite, on the accessories-versus-durables boundary; Good Sam; and Amazon,
+whose retailing is in scope on the methodology's own wording but which is a cloud company wearing a
+retailer's SIC code, so which Moody's methodology actually governs it is not ours to assume). Among
+the 86 actively rated entities, 8 leave as out of scope: two propane distributors (AmeriGas, Suburban
+Propane), four B2B resellers or auction houses whose retail SIC is misleading (CDW, Insight,
+OpenLane, Covetrus), one building-materials distributor selling to contractors rather than consumers
+(Builders FirstSource), and one diversified holding company (Compass Diversified).
+Restaurants no longer appear at all: Starbucks and Wendy's carry SIC 5810, which the first filter did
+not exclude and the script now does (5810-5819).
+
+**A name-matching fix, and what it cost before it was found.** The normalisation deleted periods
+outright, so Moody's `AMAZON.COM, INC.` became `AMAZONCOM` while EDGAR's `AMAZON COM INC` became
+`AMAZON COM`, and the two never met. The bug surfaced when Amazon was used as an offhand example and
+turned out to be missing from the frame despite an obvious retail SIC code. The matcher now indexes
+both readings of a period separately and tries the strict one first, which is verified to be strictly
+additive: on identical inputs it keeps all 3,847 matches the old rule found and adds 43. Five of the
+43 are Retail and Apparel: Amazon.com, V.F. Corporation, J.Crew, AutoTrader.com and Cencosud. Of
+those, V.F. Corporation is a genuine addition to the usable set (Ba2, entity-level, current 10-K
+filer); Amazon is rated A1 but parked as uncertain above; J.Crew and AutoTrader have no active rating;
+Cencosud is rated Baa3 but stopped filing with the SEC in 2017.
+
+A second bug travelled with it. Instrument-level lookups addressed the issuer archive through a
+directory prefix that does not exist inside it, so every such read raised `KeyError` and was caught as
+"no rating". It was invisible while the frame was built from a path that happened not to use it, and
+would have silently emptied the investment-grade half of any rebuild. Both fixes are in
+`sector_count.py`; recomputing the 86 active ratings with the corrected path reproduces all previously
+recorded values exactly, so the published label table is unaffected.
 
 Deduplicating corporate groups (Amer Sports three times, Macy's, Walgreens, Wayfair, Dillard's and
-others twice; Safeway folded into Albertsons) leaves **65 distinct in-scope groups with an active
+others twice; Safeway folded into Albertsons) leaves **66 distinct in-scope groups with an active
 rating**. Verifying each group's actual filing status against EDGAR then caught two systematic
 problems the name match alone missed: companies that went private and re-listed under a new CIK
 (BJ's, Leslie's, National Vision, RH), and bond-issuing subsidiaries whose parent does the filing
@@ -125,12 +155,12 @@ problems the name match alone missed: companies that went private and re-listed 
 Sally Beauty Holdings; Gildan additionally files the Canadian 40-F, which the first form filter
 missed). After remapping, the split is:
 
-**56 groups are current annual filers and usable for present-day observation dates: 23 investment
-grade, 33 speculative,** spanning Aa2 to Caa3. Two of the 56 (JD.com, Vipshop) are foreign 20-F
+**57 groups are current annual filers and usable for present-day observation dates: 23 investment
+grade, 34 speculative,** spanning Aa2 to Caa3. Two of the 57 (JD.com, Vipshop) are foreign 20-F
 filers whose document set differs from the 10-K pattern and should be treated as their own stratum.
 A further 9 groups are usable for historical observation dates only, because their filings stop
 (Walgreens through 2024, Michaels through 2021, Whole Foods through 2017, and so on): still valid
-samples for the historical arm inside their filing windows. None of the 65 is entirely unusable.
+samples for the historical arm inside their filing windows. None of the 66 is entirely unusable.
 
 The remaining imperfection is honest and bounded: the roughly 5,000 unmatched corporates include
 genuinely private retailers that Moody's rates but that file nothing with the SEC, which our system

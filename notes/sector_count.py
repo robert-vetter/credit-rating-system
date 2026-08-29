@@ -11,7 +11,7 @@ codes, and determine each issuer's current rating using the methodology's label 
 rating where an active one exists, otherwise the most senior active instrument-level rating.
 
 Sector definition, deliberately transparent so it can be argued with: retail is SIC 5200-5999
-excluding 5812/5813 (restaurants have their own methodology); apparel manufacturing 2300-2399;
+excluding 5810-5819 (eating and drinking places have their own methodology); apparel manufacturing 2300-2399;
 footwear and leather 3021 and 3100-3199; apparel wholesale 5136-5137.
 
 Requires network for the EDGAR lists and any uncached SIC lookups. SEC fair-use: identify yourself
@@ -43,19 +43,45 @@ FLD = re.compile(r"<(R|RAD|RAC|RT)\b[^>]*>([^<]*)</\1>")
 SUFFIX = re.compile(r"\b(INCORPORATED|INC|CORPORATION|CORP|COMPANY|CO|LIMITED|LTD|LLC|L L C|LP|L P|PLC|SA|NV|AG|SE)\b\.?$")
 
 
-def norm(name):
+def _base(name):
     n = name.upper().replace("&AMP;", "&")
     n = re.sub(r"/[A-Z ]{0,6}/?\s*$", "", n)  # EDGAR suffixes like /NEW/ /DE/
     n = re.sub(r"\(THE\)\s*$", "", n)
     n = re.sub(r"^THE\s+", "", n)
-    n = re.sub(r"[.,'’`\"]", "", n)
-    n = re.sub(r"[/\\]", " ", n)
+    return n
+
+
+def _tidy(n):
     n = re.sub(r"\s+", " ", n).strip()
     prev = None
     while prev != n:
         prev = n
         n = SUFFIX.sub("", n).strip()
     return n
+
+
+def variants(name):
+    """Two normalisations, because a period means different things in the two sources.
+
+    Moody's writes AMAZON.COM and V.F. CORPORATION; EDGAR writes AMAZON COM and V F CORP.
+    Deleting periods gives AMAZONCOM and never matches; turning them into spaces gives
+    AMAZON COM and does. But deleting is right for CO., INC. style abbreviations.
+
+    Returns [delete-periods, periods-to-spaces] in that fixed order. The two forms index
+    separately and are never pooled: pooling them into one index turns names that were
+    previously unique into collisions and loses more matches than it gains.
+    """
+    n = _base(name)
+    a = re.sub(r"[.,\'’`\"]", "", n)
+    a = re.sub(r"[/\\]", " ", a)
+    b = re.sub(r"[\'’`\"]", "", n)
+    b = re.sub(r"[.,/\\]", " ", b)
+    return [_tidy(a), _tidy(b)]  # ordered, never a set: set order varies per run
+
+
+def norm(name):
+    """Single canonical form, for index keys where one string is needed."""
+    return _tidy(re.sub(r"[/\\]", " ", re.sub(r"[.,\'’`\"]", "", _base(name))))
 
 
 def sector_bucket(sic):
@@ -109,12 +135,21 @@ def load_corporates():
 
 
 def match_to_edgar(entities):
+    """Match Moody's entity names to EDGAR CIKs.
+
+    Two index tiers (listed companies, then all SEC filers) crossed with two name
+    normalisations, tried in a fixed order: the strict form against both tiers first, then
+    the period-splitting form. A name is only accepted when the index it hits holds exactly
+    one CIK, so an ambiguous fallback never overrides a clean strict match.
+    """
     tickers = json.load(urllib.request.urlopen(urllib.request.Request(
         "https://www.sec.gov/files/company_tickers.json", headers=UA)))
-    tier1 = {}
+    tier1 = [collections.defaultdict(set), collections.defaultdict(set)]
     for v in tickers.values():
-        tier1.setdefault(norm(v["title"]), set()).add(int(v["cik_str"]))
-    tier2 = collections.defaultdict(set)
+        for i, key in enumerate(variants(v["title"])):
+            if key:
+                tier1[i][key].add(int(v["cik_str"]))
+    tier2 = [collections.defaultdict(set), collections.defaultdict(set)]
     lookup = urllib.request.urlopen(urllib.request.Request(
         "https://www.sec.gov/Archives/edgar/cik-lookup-data.txt", headers=UA)).read().decode("latin-1")
     for line in lookup.split("\n"):
@@ -122,16 +157,20 @@ def match_to_edgar(entities):
             continue
         name, cik = line.rsplit(":", 2)[0], line.rsplit(":", 2)[1]
         if cik.isdigit():
-            tier2[norm(name)].add(int(cik))
+            for i, key in enumerate(variants(name)):
+                if key:
+                    tier2[i][key].add(int(cik))
     matched = []
     for e in entities.values():
-        n = norm(e["name"])
-        if not n:
-            continue
-        ciks = tier1.get(n) or tier2.get(n) or set()
-        if len(ciks) == 1:
-            e["cik"] = ciks.pop()
-            matched.append(e)
+        keys = variants(e["name"])
+        for idx in (tier1[0], tier2[0], tier1[1], tier2[1]):
+            key = keys[0] if idx in (tier1[0], tier2[0]) else keys[1]
+            ciks = idx.get(key) if key else None
+            if ciks and len(ciks) == 1:
+                e["cik"] = next(iter(ciks))
+                e["match_form"] = "strict" if idx in (tier1[0], tier2[0]) else "period-split"
+                matched.append(e)
+                break
     return matched
 
 
@@ -179,7 +218,8 @@ def current_rating(entity, issuer_zip):
     last = max(recs, key=lambda r: r.get("RAD", ""), default=None)
     if last and last.get("R") != "WR":
         return {"rating": last["R"], "date": last["RAD"], "type": last["RT"], "level": "obligor"}
-    zn = f"xbrl100-issuer-2026-08-11/Moodys-NRSRO-{entity['oi']}-Issuer-2026-08-11.xml"
+    # No directory prefix inside the archive: the XML files sit at the root.
+    zn = f"Moodys-NRSRO-{entity['oi']}-Issuer-2026-08-11.xml"
     try:
         d = issuer_zip.read(zn).decode("utf-8", "ignore")
     except KeyError:
