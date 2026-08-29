@@ -153,7 +153,9 @@ def run_one(slug, cik, obs, args, run_dir):
                              "file": "generated", "chars": len(sheet), "redacted_lines": 0})
         else:
             result_note = "peer table skipped: too little XBRL coverage at this date"
-    est_tokens = sum(len(t) for _, t in documents) // 4
+    # 2.8 chars/token, calibrated against count_tokens on real smoke-test payloads
+    # (chars/4 underestimated by ~45% on filing text)
+    est_tokens = int(sum(len(t) for _, t in documents) / 2.8)
 
     result = {"slug": slug, "date": obs["date"], "label": obs["label"],
               "persistence": obs["persistence"], "changed": obs["changed"],

@@ -15,5 +15,7 @@ attribution header saying what was verified against source documents and what wa
   support, and records the leakage problem: companies disclose their own credit ratings in the filing.
 - the scoring arithmetic for the runs lives in `system/scorecard.py` (the deterministic engine, moved
   out of notes/ in the 2026-08-29 reorganisation).
+- `smoke-test.md` is the first live end-to-end run of the evaluation pipeline (n=2, ~$1.60):
+  plumbing proven, extraction verified 14/14 against XBRL, caveats recorded.
 - `scripts/` holds the small pieces of code these experiments used; everything pipeline-grade lives
   in `evaluation/pipeline/`.
