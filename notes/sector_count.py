@@ -67,16 +67,22 @@ def variants(name):
     Deleting periods gives AMAZONCOM and never matches; turning them into spaces gives
     AMAZON COM and does. But deleting is right for CO., INC. style abbreviations.
 
-    Returns [delete-periods, periods-to-spaces] in that fixed order. The two forms index
-    separately and are never pooled: pooling them into one index turns names that were
+    Same story for apostrophes and hyphens (O'REILLY vs O REILLY, G-III vs G III) and for
+    "AND" versus "&" (PETCO HEALTH AND WELLNESS): each class found as a real miss by the
+    reverse completeness check.
+
+    Returns [delete-periods, periods-to-spaces, all-to-spaces] in that fixed order. The forms
+    index separately and are never pooled: pooling them into one index turns names that were
     previously unique into collisions and loses more matches than it gains.
     """
     n = _base(name)
+    n = re.sub(r"\bAND\b", "&", n)  # PETCO HEALTH AND WELLNESS vs ... & WELLNESS
     a = re.sub(r"[.,\'’`\"]", "", n)
     a = re.sub(r"[/\\]", " ", a)
     b = re.sub(r"[\'’`\"]", "", n)
     b = re.sub(r"[.,/\\]", " ", b)
-    return [_tidy(a), _tidy(b)]  # ordered, never a set: set order varies per run
+    c = re.sub(r"[.,\'’`\"\-]", " ", n)  # O'REILLY vs O REILLY, G-III vs G III
+    return [_tidy(a), _tidy(b), _tidy(c)]  # ordered, never a set: set order varies per run
 
 
 def norm(name):
@@ -158,12 +164,12 @@ def match_to_edgar(entities):
     """
     tickers = json.load(urllib.request.urlopen(urllib.request.Request(
         "https://www.sec.gov/files/company_tickers.json", headers=UA)))
-    tier1 = [collections.defaultdict(set), collections.defaultdict(set)]
+    tier1 = [collections.defaultdict(set), collections.defaultdict(set), collections.defaultdict(set)]
     for v in tickers.values():
         for i, key in enumerate(variants(v["title"])):
             if key:
                 tier1[i][key].add(int(v["cik_str"]))
-    tier2 = [collections.defaultdict(set), collections.defaultdict(set)]
+    tier2 = [collections.defaultdict(set), collections.defaultdict(set), collections.defaultdict(set)]
     lookup = urllib.request.urlopen(urllib.request.Request(
         "https://www.sec.gov/Archives/edgar/cik-lookup-data.txt", headers=UA)).read().decode("latin-1")
     for line in lookup.split("\n"):
@@ -177,12 +183,17 @@ def match_to_edgar(entities):
     matched = []
     for e in entities.values():
         keys = variants(e["name"])
-        for idx in (tier1[0], tier2[0], tier1[1], tier2[1]):
-            key = keys[0] if idx in (tier1[0], tier2[0]) else keys[1]
-            ciks = idx.get(key) if key else None
-            if ciks and len(ciks) == 1:
-                e["cik"] = next(iter(ciks))
-                e["match_form"] = "strict" if idx in (tier1[0], tier2[0]) else "period-split"
+        forms = ["strict", "period-split", "all-split"]
+        for fi in (0, 1, 2):
+            hit = None
+            for tier in (tier1, tier2):
+                ciks = tier[fi].get(keys[fi]) if keys[fi] else None
+                if ciks and len(ciks) == 1:
+                    hit = next(iter(ciks))
+                    break
+            if hit is not None:
+                e["cik"] = hit
+                e["match_form"] = forms[fi]
                 matched.append(e)
                 break
     return matched

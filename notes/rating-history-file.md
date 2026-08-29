@@ -162,12 +162,34 @@ problems the name match alone missed: companies that went private and re-listed 
 Sally Beauty Holdings; Gildan additionally files the Canadian 40-F, which the first form filter
 missed). After remapping, the split is:
 
-**57 groups are current annual filers and usable for present-day observation dates: 23 investment
-grade, 34 speculative,** spanning Aa2 to Caa3. Two of the 57 (JD.com, Vipshop) are foreign 20-F
-filers whose document set differs from the 10-K pattern and should be treated as their own stratum.
-A further 9 groups are usable for historical observation dates only, because their filings stop
-(Walgreens through 2024, Michaels through 2021, Whole Foods through 2017, and so on): still valid
-samples for the historical arm inside their filing windows. None of the 66 is entirely unusable.
+**63 groups are current annual filers and usable for present-day observation dates: 23 investment
+grade, 40 speculative,** spanning Aa2 to Caa3. Three are foreign filers (JD.com, Vipshop on 20-F,
+Canada Goose on 40-F) whose document set differs from the 10-K pattern and should be treated as
+their own stratum. A further 10 in-scope groups are usable for historical observation dates only,
+because their filings stop (Walgreens through 2024, Michaels through 2021, Whole Foods through
+2017, and so on): still valid samples for the historical arm inside their filing windows.
+
+**The reverse completeness pass, and what it recovered.** Checking the join from the other side
+(SIC codes fetched for all ~8,000 currently listed SEC companies, then every listed retailer not
+covered by a confirmed mapping treated as a question) found that the forward name match had missed
+real issuers through three further normalisation classes, each now fixed in `variants()` and
+verified strictly additive: apostrophes (O'REILLY vs O REILLY), hyphens (G-III vs G III), and
+"AND" versus "&" (PETCO HEALTH AND WELLNESS). It also surfaced the class no normalisation can fix,
+rated subsidiaries named nothing like their listed parent (JILL ACQUISITION LLC under J.Jill,
+SPROUTS FARMERS MARKETS HOLDINGS under Sprouts, CANADA GOOSE INC. under Canada Goose Holdings),
+and a subtler trap: strict name matches that land on a dormant co-registrant CIK instead of the
+filing company (G-III, Murphy Oil USA, Floor & Decor), which look correct and would silently
+yield an empty document set. The harvest, all confirmed against the rating files and EDGAR:
+seven active additions usable today (O'Reilly Baa1, Murphy USA Ba1, Floor & Decor Ba3, Canada
+Goose Ba3, J.Jill B1, plus Petco's rating reattached to its actual post-2021 listed filer, plus
+Sherwin-Williams Baa2 as a scope question), 7-Eleven Baa2 with pre-2005 filings, seven
+withdrawn-rating retailers for the historical arm (Abercrombie & Fitch, Birkenstock, Sportsman's
+Warehouse, Sprouts, Vince, Pep Boys, Bon-Ton) plus Sears and Toys 'R' Us, and Cintas and Playboy
+as mapped but out of scope. Good Sam's filings were traced to Camping World Holdings. The frame is
+now 186 entities, 95 actively rated; the uncertain scope calls stand at five (CVS, Samsonite,
+Good Sam, Amazon, Sherwin-Williams). Residual, stated plainly: a rated subsidiary with a name
+unlike its parent AND no listed parent match survives both directions; nothing catches it except
+sector-by-sector eyeballing of the unmatched Moody's names.
 
 The remaining imperfection is honest and bounded: the roughly 5,000 unmatched corporates include
 genuinely private retailers that Moody's rates but that file nothing with the SEC, which our system

@@ -28,8 +28,11 @@ in the log wins; `mapping.json` always reflects it.
 
 ## Status of the decisions
 
-On 2026-08-29 Robert accepted all 164 automatic proposals wholesale (`bulk_accept.py`); each is
-recorded in the log as a bulk decision, explicitly not an individual review. The substantively
+On 2026-08-29 Robert accepted all automatic proposals wholesale (`bulk_accept.py`, then a second
+bulk for the reverse-pass additions); each is recorded in the log as a bulk decision, explicitly
+not an individual review. The 180 reverse items left over after the harvest were bulk-marked
+not_rated on the strength of the candidate scan (token Jaccard >= 0.5 against all 13,025 Moody's
+corporate names, zero hits); the method and its residual risk are in the log notes and below. The substantively
 non-trivial pairs, where the Moody's entity maps to a different filer than its own CIK
 (bond-issuing subsidiaries and re-listed successors: BJ's, Leslie's, National Vision, RH, Sally,
 Signet, Torrid), were surfaced and checked in chat before acceptance. Any single pair can be

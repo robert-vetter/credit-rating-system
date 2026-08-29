@@ -119,8 +119,17 @@ def main():
                     "decided_by": None, "decided_at": None, "note": "",
                 })
 
-    # carry over anything decided that no longer regenerates (should not happen, but never drop)
-    items.extend(existing.values())
+    # carry over decided items that no longer regenerate; drop only still-pending reverse
+    # items whose CIK a confirmed mapping now covers (their question got answered elsewhere)
+    covered_now = set()
+    for it in items:
+        for c in (it.get("proposed_cik"), it.get("own_cik"), it.get("decided_cik")):
+            if c:
+                covered_now.add(c)
+    for it in existing.values():
+        if it["kind"] == "edgar" and it["status"] == "pending" and it["cik"] in covered_now:
+            continue
+        items.append(it)
 
     tmp = MAPPING + ".tmp"
     json.dump(items, open(tmp, "w"), indent=1, ensure_ascii=False)
