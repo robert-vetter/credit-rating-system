@@ -5,10 +5,15 @@ Written by Claude (Opus 5), directed by Robert Vetter. Step 9 of the pipeline
 (evaluation/README.md).
 
 For each selected observation (company, quarter end t):
-  1. assemble the input documents from the folder: the latest annual report before t plus the
-     latest quarterly report between it and t, downloading from EDGAR via the manifest URLs
-     if not on disk yet (8-Ks are deliberately excluded in v1: they are where downgrade
-     announcements live)
+  1. assemble the input documents per the named --docs configuration, downloading from EDGAR
+     via the manifest URLs if not on disk yet (8-Ks are deliberately excluded everywhere:
+     they are where downgrade announcements live):
+       annual+q     latest annual report before t + latest 10-Q after it (default)
+       annual       latest annual report only (minimal ablation)
+       3annuals+q   last three annual reports + latest 10-Q - gives the Revenue and Earnings
+                    Stability subfactor an actual time series
+     --peers additionally appends a generated peer key-figure table (peer_table.py, XBRL,
+     point-in-time filtered, no ratings) for the Market Position subfactor
   2. HTML -> line-preserving text, then redact rating disclosures (system/redact.py); the
      removed lines are stored with the run so redaction is auditable
   3. one raw API call (system/analyst.py, no tools array). Task B (default) includes the
@@ -84,15 +89,20 @@ def ensure_doc(slug, cik, filing):
     return path, fn
 
 
-def pick_documents(obs, manifest):
-    """Latest annual before t, plus the latest 10-Q filed after it and before t."""
+def pick_documents(obs, manifest, config):
+    """Filings for the named input configuration, oldest first. None if no annual exists."""
     docs = [f for f in manifest if f["filingDate"] <= obs["date"]]
-    annual = next((f for f in docs if f["form"] in ANNUAL), None)
-    if not annual:
-        return None, None
-    quarterly = next((f for f in docs
-                      if f["form"] in QUARTERLY and f["filingDate"] > annual["filingDate"]), None)
-    return annual, quarterly
+    annuals = [f for f in docs if f["form"] in ANNUAL]
+    if not annuals:
+        return None
+    n_annuals = 3 if config == "3annuals+q" else 1
+    chosen = list(reversed(annuals[:n_annuals]))
+    if config != "annual":
+        quarterly = next((f for f in docs if f["form"] in QUARTERLY
+                          and f["filingDate"] > annuals[0]["filingDate"]), None)
+        if quarterly:
+            chosen.append(quarterly)
+    return chosen
 
 
 def select_observations(args):
@@ -121,11 +131,11 @@ def select_observations(args):
 
 def run_one(slug, cik, obs, args, run_dir):
     manifest = json.load(open(os.path.join(COMPANIES, slug, "filings", "manifest.json")))["filings"]
-    annual, quarterly = pick_documents(obs, manifest)
-    if not annual:
+    chosen = pick_documents(obs, manifest, args.docs)
+    if not chosen:
         return {"slug": slug, "date": obs["date"], "skipped": "no annual report before t"}
     documents, doc_meta, removed_all = [], [], {}
-    for f in [annual] + ([quarterly] if quarterly else []):
+    for f in chosen:
         path, fn = ensure_doc(slug, cik, f)
         text = to_text(open(path, "rb").read().decode("utf-8", "ignore"))
         clean, removed = redact.redact(text)
@@ -133,11 +143,22 @@ def run_one(slug, cik, obs, args, run_dir):
         doc_meta.append({"form": f["form"], "filingDate": f["filingDate"], "file": fn,
                          "chars": len(clean), "redacted_lines": len(removed)})
         removed_all[fn] = removed
+    if args.peers:
+        import peer_table
+        sheet = peer_table.build(obs["date"], exclude_slug=slug)
+        if sheet:
+            documents.append((f"peer key figures as of {obs['date']} (generated from XBRL, "
+                              "figures as tagged, no ratings)", sheet))
+            doc_meta.append({"form": "peer-table", "filingDate": obs["date"],
+                             "file": "generated", "chars": len(sheet), "redacted_lines": 0})
+        else:
+            result_note = "peer table skipped: too little XBRL coverage at this date"
     est_tokens = sum(len(t) for _, t in documents) // 4
 
     result = {"slug": slug, "date": obs["date"], "label": obs["label"],
               "persistence": obs["persistence"], "changed": obs["changed"],
-              "task": args.task, "documents": doc_meta, "est_input_tokens": est_tokens}
+              "task": args.task, "docs_config": args.docs + ("+peers" if args.peers else ""),
+              "documents": doc_meta, "est_input_tokens": est_tokens}
     if args.dry_run:
         return result
 
@@ -190,6 +211,9 @@ def main():
     ap.add_argument("--changed-only", action="store_true")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--task", choices=["A", "B"], default="B")
+    ap.add_argument("--docs", choices=["annual+q", "annual", "3annuals+q"], default="annual+q")
+    ap.add_argument("--peers", action="store_true",
+                    help="append the XBRL peer key-figure table as an input document")
     ap.add_argument("--model", default="claude-opus-5")
     ap.add_argument("--effort", choices=["low", "medium", "high", "xhigh", "max"])
     ap.add_argument("--tag", default=None)
@@ -202,7 +226,8 @@ def main():
     tag = args.tag or ("dryrun" if args.dry_run else "run")
     run_dir = os.path.join(RUNS, f"{tag}")
     os.makedirs(run_dir, exist_ok=True)
-    json.dump({"task": args.task, "model": args.model, "effort": args.effort,
+    json.dump({"task": args.task, "docs": args.docs, "peers": args.peers,
+               "model": args.model, "effort": args.effort,
                "dry_run": args.dry_run, "n_selected": len(picked),
                "selection": {"company": args.company, "date": args.date,
                              "changed_only": args.changed_only, "limit": args.limit},

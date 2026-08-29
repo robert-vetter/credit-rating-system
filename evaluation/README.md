@@ -45,7 +45,12 @@ Per company folder:
 | 6 | `pipeline/fetch_filings.py` | SEC filing manifest + latest annual report into each folder |
 | 7 | `pipeline/verify_mapping.py` | the independent check: compares ratings the filer discloses in its own annual report against the mapped Moody's entity's ratings in effect at the filing date → `mapping-verification.md` |
 | 8 | `pipeline/build_observations.py` | the observation builder ("Tripel-Builder"): per company a quarterly grid of observation dates, each with label-at-t, documents-before-t, rating-path-to-t, changed flag and persistence baseline → `observations.json` per folder + `observations-summary.md` |
-| 9 | `pipeline/run_eval.py` | the runner: selects observations, assembles and redacts the documents (downloading from EDGAR as needed), one raw API call per observation (system/analyst.py, no tools), deterministic scorecard (system/scorecard.py), scores against label and persistence → `runs/<tag>/` (gitignored) with full audit trail. `--dry-run` costs nothing |
+| 9 | `pipeline/run_eval.py` | the runner: selects observations, assembles and redacts the documents per the named `--docs` configuration (`annual+q` default, `annual`, `3annuals+q`; `--peers` appends the XBRL peer table), one raw API call per observation (system/analyst.py, no tools), deterministic scorecard (system/scorecard.py) → `runs/<tag>/` (gitignored) with full audit trail. `--dry-run` costs nothing |
+| 10 | `pipeline/fetch_xbrl.py` | structured financials per company from SEC's companyfacts API, merged across tag variants, annual values with filed dates → `companies/<slug>/xbrl.json`. Foreign IFRS filers (Gildan, JD.com, ...) have no us-gaap tags and come back empty - known gap |
+| 11 | `pipeline/score_run.py` | scores a run directory the way the experiment plan demands: per-subset metrics (changed-subset lift over persistence, direction accuracy, false-alarm rate on unchanged, change-detection recall), Spearman, paired bootstrap CI on system-minus-persistence → `scores.json`. Verified against a hand-computed fixture |
+| 12 | `pipeline/check_extraction.py` | scores the extraction step against XBRL without any model cost: seven one-to-one figures compared per observation (`--run <dir>`) or for the two hand-extracted baselines (`--manual`); interest flagged (gross/net ambiguity), debt compared against summed components, wc_swing not comparable - all stated in the output |
+
+`pipeline/peer_table.py` is the library behind `--peers`: a point-in-time filtered (both period end and filed date before t), ratings-free key-figure table of the in-scope peers, generated from XBRL for the Market Position subfactor.
 
 Every step is re-runnable and deterministic given `data/` (see `data/README.md` for where each
 input comes from). Decisions are the only human input and survive every re-run.
@@ -53,11 +58,19 @@ input comes from). Decisions are the only human input and survive every re-run.
 ## Running the evaluation
 
 `run_eval.py` needs an Anthropic API key (`export ANTHROPIC_API_KEY=...`). One observation is
-one model call with roughly 100-250k input tokens; check the cost of a selection with
-`--dry-run` first. Task B (default) gives the model the rating path up to the previous quarter
-end - the persistence baseline's exact information set; Task A withholds it. The model never
-gets tools, documents are redacted, and every run directory contains the frozen config, the
-redacted lines, the full extraction, the scorecard arithmetic and token usage per observation.
+one model call with roughly 50-250k input tokens depending on `--docs`; check the cost of a
+selection with `--dry-run` first. Task B (default) gives the model the rating path up to the
+previous quarter end - the persistence baseline's exact information set; Task A withholds it.
+The model never gets tools, documents are redacted, and every run directory contains the
+frozen config, the redacted lines, the full extraction, the scorecard arithmetic and token
+usage per observation. After a run: `score_run.py <dir>` for the metrics,
+`check_extraction.py --run <dir>` for extraction accuracy against XBRL.
+
+The input configuration is deliberately a per-run parameter, not a fixed property of the
+evaluation: which documents best cover the methodology's subfactors (single filing, multi-year
+filings for the stability factor, peer tables for market position) is itself one of the
+planned experiments. The evaluation fixes only the information constraint - public before t,
+own rating disclosures redacted - and the measurement.
 
 ## Status of the decisions
 
