@@ -3,7 +3,7 @@ Builds and updates evaluation/mapping.json, the registry behind the manual mappi
 
 Written by Claude (Opus 5), directed by Robert Vetter. See evaluation/README.md for the design.
 
-One item per Moody's Retail/Apparel entity (from data/retail_frame.json), keyed by the Moody's
+One item per Moody's Retail/Apparel entity (from data/frame/retail_frame.json), keyed by the Moody's
 entity id (OI), carrying the automatic EDGAR proposal (CIK) for Robert to confirm, correct or
 reject in the review UI. Once the listed-universe SIC sweep has finished
 (data/sic_sweep_listed.done exists), a second item kind is added: listed SEC companies with a
@@ -12,33 +12,33 @@ from both directions.
 
 Decided items are never modified here; re-running only adds missing items and refreshes
 informational fields on still-pending ones. Also writes:
-  data/moodys_corporates.json  - all Corporate entities of both 17g-7 sets, for the UI's
-                                 Moody's-side search (gitignored, derived from the zips)
+  data/moodys/derived/moodys_corporates.json  - all Corporate entities of both 17g-7 sets
+                                 (gitignored, derived from the zips)
   evaluation/lists.md          - the two alphabetical name lists, for reading outside the UI
 
-Run: python3 evaluation/build_queue.py
+Run: python3 evaluation/pipeline/build_queue.py
 """
 import html
 import json
 import os
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "notes"))
-import sector_count as sc  # noqa: E402  (variants/norm, zip parsing, sector_bucket)
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build_frame as sc  # noqa: E402  (variants/norm, zip parsing, sector_bucket)
 
 DATA = os.path.join(ROOT, "data")
 EVAL = os.path.join(ROOT, "evaluation")
 MAPPING = os.path.join(EVAL, "mapping.json")
-FRAME = os.path.join(DATA, "retail_frame.json")
-MOODYS_OUT = os.path.join(DATA, "moodys_corporates.json")
-SWEEP_DONE = os.path.join(DATA, "sic_sweep_listed.done")
+FRAME = os.path.join(DATA, "frame", "retail_frame.json")
+MOODYS_OUT = os.path.join(DATA, "moodys", "derived", "moodys_corporates.json")
+SWEEP_DONE = os.path.join(DATA, "edgar", "sic_sweep_listed.done")
 
 
 def cik_names(needed):
     """Official EDGAR names for a set of CIKs, from the cached cik-lookup file."""
     out = {}
-    for line in open(os.path.join(DATA, "cik-lookup-data.txt"), encoding="latin-1"):
+    for line in open(os.path.join(DATA, "edgar", "cik-lookup-data.txt"), encoding="latin-1"):
         if line.count(":") < 2:
             continue
         name, cik = line.rsplit(":", 2)[0], line.rsplit(":", 2)[1]
@@ -94,8 +94,8 @@ def main():
 
     # Reverse direction, once the sweep is complete
     if os.path.exists(SWEEP_DONE):
-        cache = json.load(open(os.path.join(DATA, "sic_cache.json")))
-        tickers = json.load(open(os.path.join(DATA, "company_tickers.json")))
+        cache = json.load(open(os.path.join(DATA, "edgar", "sic_cache.json")))
+        tickers = json.load(open(os.path.join(DATA, "edgar", "company_tickers.json")))
         listed = {}
         for v in tickers.values():
             listed.setdefault(int(v["cik_str"]), v["title"])

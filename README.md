@@ -67,10 +67,14 @@ Still waiting on the lab's initial dataset before sample construction and sector
 
 ## Layout
 
-    methodologies/   Moody's rating methodologies, for reference
-    notes/           experiment logs and reading notes
-    docs/            design and architecture notes
-    data/            filings and datasets, not tracked in git
+    methodologies/   Moody's rating methodologies, for reference (PDF)
+    system/          the rating system itself; scorecard.py is the deterministic scoring engine
+    evaluation/      the evaluation system: mapping records, pipeline/ scripts, one folder per
+                     company with ratings, filings and observations (see evaluation/README.md)
+    notes/           experiment logs (markdown; small experiment code under notes/scripts/)
+    docs/            design docs: experiment plan, leakage audit, assumptions review
+    data/            raw and derived data, gitignored; data/README.md documents every file,
+                     its source URL and download date
 
 ## Open questions
 

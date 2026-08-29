@@ -6,7 +6,7 @@ Written by Claude (Opus 5) as part of the rating-history work described in ratin
 Pipeline: read both 17g-7 zip archives from data/, take the union of Corporate entities from the
 obligor set (entity-level ratings) and the issuer set (instrument-level ratings), match names to
 EDGAR CIKs in two tiers (listed companies, then all SEC filers), fetch each match's SIC industry
-code from the SEC submissions API (cached in data/sic_cache.json), filter to Retail and Apparel
+code from the SEC submissions API (cached in data/edgar/sic_cache.json), filter to Retail and Apparel
 codes, and determine each issuer's current rating using the methodology's label rule: entity-level
 rating where an active one exists, otherwise the most senior active instrument-level rating.
 
@@ -17,7 +17,7 @@ footwear and leather 3021 and 3100-3199; apparel wholesale 5136-5137.
 Requires network for the EDGAR lists and any uncached SIC lookups. SEC fair-use: identify yourself
 via the UA constant and stay under 10 requests per second.
 
-Run: python3 notes/sector_count.py
+Run: python3 evaluation/pipeline/build_frame.py
 """
 
 import collections
@@ -30,12 +30,13 @@ import time
 import urllib.request
 import zipfile
 
-DATA = os.path.join(os.path.dirname(__file__), "..", "data")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+DATA = os.path.join(ROOT, "data")
 UA = {"User-Agent": "Robert Vetter robert@certus-ai.com"}
-OBLIGOR_ZIP = os.path.join(DATA, "xbrl100-obligor-2026-08-11.zip")
-ISSUER_ZIP = os.path.join(DATA, "xbrl100-issuer-2026-08-11.zip")
-SIC_CACHE = os.path.join(DATA, "sic_cache.json")
-FRAME_OUT = os.path.join(DATA, "retail_frame.json")
+OBLIGOR_ZIP = os.path.join(DATA, "moodys", "xbrl100-obligor-2026-08-11.zip")
+ISSUER_ZIP = os.path.join(DATA, "moodys", "xbrl100-issuer-2026-08-11.zip")
+SIC_CACHE = os.path.join(DATA, "edgar", "sic_cache.json")
+FRAME_OUT = os.path.join(DATA, "frame", "retail_frame.json")
 
 LT_TYPES = ("LT CORPORATE FAMILY RATINGS", "LT ISSUER RATING", "ISSUER RATING", "ISSUER LT RATING")
 HDR = re.compile(r"<(OSC|OBNAME|SSC|ISSNAME|LEI|OI|ISI)\b[^>]*>([^<]*)</\1>")

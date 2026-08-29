@@ -17,14 +17,14 @@ For every folder under evaluation/companies/ this writes:
 
 Throttled well under the SEC's 10 requests/second. Re-runnable; existing downloads are kept.
 
-Run: python3 evaluation/fetch_filings.py
+Run: python3 evaluation/pipeline/fetch_filings.py
 """
 import json
 import os
 import time
 import urllib.request
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "evaluation", "companies")
 UA = {"User-Agent": "Robert Vetter robert@certus-ai.com"}
 FORMS = {"10-K", "10-K/A", "10-Q", "10-Q/A", "8-K", "8-K/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K"}

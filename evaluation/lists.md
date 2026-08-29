@@ -378,4 +378,4 @@
 | ZKH Group Ltd | 1862044 | 5200 Retail-Building Materials, Hardware, Garden Supply |
 | Zumiez Inc | 1318008 | 5600 Retail-Apparel & Accessory Stores |
 
-Moody's Corporate universe for the search box: 13025 entities in data/moodys_corporates.json.
+Moody's Corporate universe for the search box: 13025 entities in data/moodys/derived/moodys_corporates.json.

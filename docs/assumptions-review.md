@@ -114,7 +114,7 @@ property, as already noted; the decomposition would tell us how much.
 
 | # | Claim | Status | If wrong |
 |---|---|---|---|
-| 1 | Scorecard mechanics (weights, bands, endpoints, mapping) as coded in scorecard.py | verified against the methodology PDF | Engine wrong, everything wrong. Re-checked line by line; arithmetic re-added by hand for both companies |
+| 1 | Scorecard mechanics (weights, bands, endpoints, mapping) as coded in system/scorecard.py | verified against the methodology PDF | Engine wrong, everything wrong. Re-checked line by line; arithmetic re-added by hand for both companies |
 | 2 | Retrieval is impossible when no tools are declared on the API request | verified, API docs | Blind runs contaminated by search. Next runs use the raw API, not agent sessions |
 | 3 | Sampling params removed on Opus 5/4.8/4.7, present on 4.5 and older | verified, API docs | Replicate design unnecessary or model choice changes |
 | 4 | Model cutoffs (Opus 5: May 2026; Opus 4.8/Sonnet 5: Jan 2026; Opus 4.5/4.6: Aug 2025; Sonnet 4.5: Jul 2025) | verified, models overview page | Clean-window arithmetic shifts |

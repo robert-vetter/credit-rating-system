@@ -7,19 +7,19 @@ Written by Claude (Opus 5), directed by Robert Vetter.
 The forward direction (Moody's name -> EDGAR name) can silently miss companies whose names
 differ too much between the two sources. The reverse check needs the SIC industry code of
 every listed SEC company, so that "listed retailer with no confirmed Moody's mapping" becomes
-a computable list instead of a hope. This script fills data/sic_cache.json for all CIKs in
+a computable list instead of a hope. This script fills data/edgar/sic_cache.json for all CIKs in
 company_tickers.json, throttled well under the SEC's 10 requests/second fair-use limit,
-and writes data/sic_sweep_listed.done when finished.
+and writes data/edgar/sic_sweep_listed.done when finished.
 
-Run: python3 evaluation/sic_sweep_listed.py
+Run: python3 evaluation/pipeline/sic_sweep_listed.py
 """
 import json, os, queue, re, threading, time, urllib.request
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DATA = os.path.join(ROOT, "data")
 UA = {"User-Agent": "Robert Vetter robert@certus-ai.com"}
-CACHE = os.path.join(DATA, "sic_cache.json")
-DONE = os.path.join(DATA, "sic_sweep_listed.done")
+CACHE = os.path.join(DATA, "edgar", "sic_cache.json")
+DONE = os.path.join(DATA, "edgar", "sic_sweep_listed.done")
 SIC_RE = re.compile(r'"sic":"(\d*)","sicDescription":"([^"]*)"')
 
 def save(cache):
@@ -28,7 +28,7 @@ def save(cache):
     os.replace(tmp, CACHE)
 
 def main():
-    tickers = json.load(open(os.path.join(DATA, "company_tickers.json")))
+    tickers = json.load(open(os.path.join(DATA, "edgar", "company_tickers.json")))
     ciks = sorted({int(v["cik_str"]) for v in tickers.values()})
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     todo = [c for c in ciks if str(c) not in cache]

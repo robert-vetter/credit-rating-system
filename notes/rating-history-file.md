@@ -80,8 +80,8 @@ Corporate entities of both sets, match names to EDGAR CIKs (two tiers: listed co
 SEC filers, with EDGAR's "/NEW/"-style suffixes normalised away), fetch each match's SIC industry
 code from the SEC submissions API, and filter to Retail and Apparel codes (5200-5999 excluding
 restaurants, which have their own methodology; apparel manufacturing 2300-2399; footwear and
-leather; apparel wholesale). The pipeline is `sector_count.py` next to this file; the frame lands in
-`data/retail_frame.json`.
+leather; apparel wholesale). The pipeline is `evaluation/pipeline/build_frame.py` (named `sector_count.py` next to this file
+until the 2026-08-29 reorganisation); the frame lands in `data/frame/retail_frame.json`.
 
 Numbers: of 13,025 Corporate entities in the union (8,146 obligor-level plus 4,879 issuer-only),
 3,920 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
@@ -153,7 +153,7 @@ A second bug travelled with it. Instrument-level lookups addressed the issuer ar
 directory prefix that does not exist inside it, so every such read raised `KeyError` and was caught as
 "no rating". It was invisible while the frame was built from a path that happened not to use it, and
 would have silently emptied the investment-grade half of any rebuild. Both fixes are in
-`sector_count.py`; recomputing the 86 active ratings with the corrected path reproduces all previously
+the frame builder (`evaluation/pipeline/build_frame.py`); recomputing the 86 active ratings with the corrected path reproduces all previously
 recorded values exactly, so the published label table is unaffected.
 
 Deduplicating corporate groups (Amer Sports three times, Macy's, Walgreens, Wayfair, Dillard's and

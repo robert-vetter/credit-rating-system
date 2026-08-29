@@ -3,7 +3,7 @@
 *Analysis and write-up by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert set the
 question and chose the test case; the model did the extraction, the scoring and this write-up. Inputs
 were the Moody's Retail and Apparel methodology of 12 September 2025, Kohl's FY2025 10-K, and Kohl's
-Q3 10-Q, all from SEC EDGAR. Arithmetic is reproducible with `scorecard.py`.*
+Q3 10-Q, all from SEC EDGAR. Arithmetic is reproducible with `system/scorecard.py` (moved there from this directory in the 2026-08-29 reorganisation).*
 
 *Same caveat as run 1: the model was both the system under test and the author of the assessment.*
 

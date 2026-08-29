@@ -3,7 +3,7 @@
 *Analysis and write-up by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert set the
 question and the test design; the model did the extraction, the scoring and this write-up. Inputs were
 the Moody's Retail and Apparel methodology of 12 September 2025 and Walmart's FY2026 10-K from SEC
-EDGAR. All arithmetic is reproducible with `scorecard.py` in this directory.*
+EDGAR. All arithmetic is reproducible with `system/scorecard.py` (moved there from this directory in the 2026-08-29 reorganisation).*
 
 *Caveat on the setup: the model was both the system under test and the author of the assessment. Where
 this write-up judges the quality of the run, that judgement is self-reported and should be treated

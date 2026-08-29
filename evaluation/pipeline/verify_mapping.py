@@ -24,14 +24,14 @@ For each company folder with a downloaded annual report, this script:
 
 Writes verification.json into each folder and a summary to evaluation/mapping-verification.md.
 
-Run after fetch_filings.py: python3 evaluation/verify_mapping.py
+Run after fetch_filings.py: python3 evaluation/pipeline/verify_mapping.py
 """
 import html
 import json
 import os
 import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "evaluation", "companies")
 LT = ("LT CORPORATE FAMILY RATINGS", "LT ISSUER RATING", "ISSUER RATING", "ISSUER LT RATING")
 SYM = re.compile(r"\(?P?\)?\b(Aaa|Aa[1-3]|A[1-3]|Baa[1-3]|Ba[1-3]|B[1-3]|Caa[1-3])\b")

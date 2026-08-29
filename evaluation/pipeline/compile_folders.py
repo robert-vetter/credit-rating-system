@@ -21,7 +21,7 @@ re-run at will, decisions are never stored here. The companies/ tree is gitignor
 contains bulk Moody's rating data (terms-of-use question still open); mapping.json and
 decisions.jsonl are the durable, committed record.
 
-Run: python3 evaluation/compile_folders.py
+Run after the mapping decisions: python3 evaluation/pipeline/compile_folders.py
 """
 import html
 import json
@@ -30,12 +30,12 @@ import re
 import shutil
 import zipfile
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DATA = os.path.join(ROOT, "data")
 EVAL = os.path.join(ROOT, "evaluation")
 OUT = os.path.join(EVAL, "companies")
-OB_ZIP = os.path.join(DATA, "xbrl100-obligor-2026-08-11.zip")
-IS_ZIP = os.path.join(DATA, "xbrl100-issuer-2026-08-11.zip")
+OB_ZIP = os.path.join(DATA, "moodys", "xbrl100-obligor-2026-08-11.zip")
+IS_ZIP = os.path.join(DATA, "moodys", "xbrl100-issuer-2026-08-11.zip")
 STAMP = "2026-08-11"
 
 ORD_FLD = re.compile(r"<(R|RAD|RAC|RT|RST|RTM)\b[^>]*>([^<]*)</\1>")
@@ -74,7 +74,7 @@ def entity_history(oi):
 
 def current_titles():
     """Current listed names by CIK; the cik-lookup list often leads with historical aliases."""
-    t = json.load(open(os.path.join(DATA, "company_tickers.json")))
+    t = json.load(open(os.path.join(DATA, "edgar", "company_tickers.json")))
     out = {}
     for v in t.values():
         out.setdefault(int(v["cik_str"]), v["title"])
@@ -84,7 +84,7 @@ def current_titles():
 def main():
     items = json.load(open(os.path.join(EVAL, "mapping.json")))
     titles = current_titles()
-    frame = {e["oi"]: e for e in json.load(open(os.path.join(DATA, "retail_frame.json")))}
+    frame = {e["oi"]: e for e in json.load(open(os.path.join(DATA, "frame", "retail_frame.json")))}
     confirmed = [i for i in items if i["kind"] == "moodys" and i["status"] == "confirmed"]
     n_all = len(confirmed)
     if not confirmed:
@@ -99,9 +99,15 @@ def main():
     inactive = sorted(g for g, ms in groups.items() if not any(m.get("current") for m in ms))
     groups = {g: ms for g, ms in groups.items() if any(m.get("current") for m in ms)}
 
-    if os.path.exists(OUT):
-        shutil.rmtree(OUT)
-    os.makedirs(OUT)
+    # Never wipe the tree: folders accumulate fetched filings and verification results.
+    # Only company.json and ratings.json are (re)written; stale folders are reported, not deleted.
+    os.makedirs(OUT, exist_ok=True)
+    expected = {slug(g) for g in groups}
+    stale = [x for x in sorted(os.listdir(OUT))
+             if os.path.isdir(os.path.join(OUT, x)) and x not in expected]
+    if stale:
+        print(f"  note: {len(stale)} folders no longer in the confirmed active set "
+              f"(kept, delete by hand if wanted): {', '.join(stale[:8])}{' ...' if len(stale) > 8 else ''}")
     for gname, members in sorted(groups.items()):
         ciks = sorted({m["decided_cik"] for m in members})
         # Primary filer for the evaluation: bond-issuing subsidiaries and predecessor entities
