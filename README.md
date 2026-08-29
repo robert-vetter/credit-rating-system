@@ -58,7 +58,10 @@ embargo at the full 12 months, and powers the historical arm of the evaluation. 
 window remains uncovered by any public source, which makes the lab's dataset the strictly blocking
 dependency for that arm.
 
-evaluation/ is the hand-verified company mapping behind the evaluation: every Moody's-entity-to-
+evaluation/ is the evaluation system. The observation builder turns each mapped company into
+quarterly evaluation samples: 3,646 observations across 86 companies (2012-2025), 218 of them
+with a rating change against the prior quarter, which is the primary experiment's sample and
+shows the persistence baseline getting 94% for free. Underneath it is the company mapping: every Moody's-entity-to-
 SEC-filer pair (OI to CIK) is confirmed manually in a small review UI and recorded in an
 append-only decision log; confirmed pairs compile into one folder per company that the future
 evaluation runner will walk. See evaluation/README.md.
