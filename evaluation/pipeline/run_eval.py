@@ -106,6 +106,15 @@ def pick_documents(obs, manifest, config):
 
 
 def select_observations(args):
+    gold = None
+    if args.goldset:
+        g = json.load(open(os.path.join(ROOT, "evaluation", "goldset.json")))
+        keep = {(i["slug"], i["date"]) for i in g["items"]
+                if i["status"] in ("confirmed", "proposed")}
+        n_prop = sum(1 for i in g["items"] if i["status"] == "proposed")
+        if n_prop:
+            print(f"  Hinweis: {n_prop} Gold-Items noch 'proposed', nicht manuell bestaetigt")
+        gold = keep
     picked = []
     for slug in sorted(os.listdir(COMPANIES)):
         if args.company and slug not in args.company:
@@ -114,9 +123,11 @@ def select_observations(args):
         if not os.path.exists(p):
             continue
         blob = json.load(open(p))
-        if blob.get("scope") != "in" and not args.company:
+        if blob.get("scope") != "in" and not args.company and gold is None:
             continue
         for o in blob["observations"]:
+            if gold is not None and (slug, o["date"]) not in gold:
+                continue
             if args.date and o["date"] != args.date:
                 continue
             if args.changed_only and not o["changed"]:
@@ -219,6 +230,9 @@ def main():
     ap.add_argument("--model", default="claude-opus-5")
     ap.add_argument("--effort", choices=["low", "medium", "high", "xhigh", "max"])
     ap.add_argument("--tag", default=None)
+    ap.add_argument("--goldset", action="store_true",
+                    help="run exactly the gold-set observations (confirmed ones; proposed "
+                         "count too until validation is done, with a warning)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 

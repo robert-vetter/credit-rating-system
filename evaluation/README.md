@@ -72,6 +72,18 @@ filings for the stability factor, peer tables for market position) is itself one
 planned experiments. The evaluation fixes only the information constraint - public before t,
 own rating disclosures redacted - and the measurement.
 
+## The gold set
+
+`goldset.json` is the fixed evaluation set everything gets measured on: 50 observations
+(30 changed / 20 unchanged), deterministically selected (`pipeline/build_goldset.py`, seed
+20260829) from clean material only, stratified over direction, magnitude, IG-boundary
+crossings, eras, rating buckets and companies. `pipeline/verify_goldset.py` attaches the
+evidence chain per item (raw 17g-7 records, company self-disclosure scan, EDGAR links) and
+renders `goldset-review.md` for Robert's manual validation; items move proposed -> confirmed /
+rejected there. The gold set is a holdout: day-to-day iteration uses non-gold observations,
+gold runs (`run_eval.py --goldset`) are for milestone claims. Post-observation-date documents
+appear in the evidence chain for label verification only, never as model input.
+
 ## Status of the decisions
 
 All mappings are decided. On 2026-08-29 Robert accepted the automatic proposals wholesale

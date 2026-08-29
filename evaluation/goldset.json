@@ -1,0 +1,2676 @@
+{
+ "seed": 20260829,
+ "design": "see evaluation/pipeline/build_goldset.py",
+ "items": [
+  {
+   "slug": "advance-auto-parts",
+   "group": "ADVANCE AUTO PARTS, INC.",
+   "cik": 1158449,
+   "date": "2024-12-31",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "600041661",
+   "persistence": "Baa3",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": true,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2024-11-27",
+     "rating": "Ba1",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600041661"
+    },
+    "persistence_record": {
+     "date": "2024-02-20",
+     "rating": "Baa3",
+     "action": "DG",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600041661"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2024-03-12",
+      "url": "https://www.sec.gov/Archives/edgar/data/1158449/000115844924000048/aap-20231230.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-11-14",
+      "url": "https://www.sec.gov/Archives/edgar/data/1158449/000115844924000238/aap-20241005.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2025-02-26",
+     "url": "https://www.sec.gov/Archives/edgar/data/1158449/000115844925000064/aap-20241228.htm",
+     "snippet": "f Financial Instruments of the Notes to the Consolidated Financial Statements included herein. 28 Table of Contents As of February 26, 2025, the Company had a credit rating from S&P of BB+ and from Moody’s Investor Service of Ba1. The current outlooks by S&P and Moody’s were negative and stable, respectively. The current pricing grid used to determine the Company’s borrowing rate under the Company"
+    }
+   },
+   "id": "G01"
+  },
+  {
+   "slug": "albertsons",
+   "group": "ALBERTSONS",
+   "cik": 1646972,
+   "date": "2024-09-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "824793590",
+   "persistence": "Ba2",
+   "delta": -1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2024-08-16",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824793590"
+    },
+    "persistence_record": {
+     "date": "2021-06-24",
+     "rating": "Ba2",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824793590"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2024-04-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/1646972/000164697224000060/aci-20240224.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-07-23",
+      "url": "https://www.sec.gov/Archives/edgar/data/1646972/000164697224000165/aci-20240615.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2024-10-15",
+     "url": "https://www.sec.gov/Archives/edgar/data/1646972/000164697224000225/aci-20240907.htm"
+    }
+   },
+   "id": "G02"
+  },
+  {
+   "slug": "carvana",
+   "group": "CARVANA CO.",
+   "cik": 1690820,
+   "date": "2024-09-30",
+   "label": "Caa1",
+   "label_level": "entity",
+   "label_oi": "830411600",
+   "persistence": "Caa3",
+   "delta": -2,
+   "era": "2022-2025",
+   "bucket": "Caa+",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2024-09-12",
+     "rating": "Caa1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830411600"
+    },
+    "persistence_record": {
+     "date": "2023-09-20",
+     "rating": "Caa3",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830411600"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2024-02-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082024000093/cvna-20231231.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-07-31",
+      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082024000272/cvna-20240630.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2024-10-30",
+     "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082024000345/cvna-20240930.htm"
+    }
+   },
+   "id": "G03"
+  },
+  {
+   "slug": "costco-wholesale",
+   "group": "COSTCO WHOLESALE CORPORATION",
+   "cik": 909832,
+   "date": "2018-12-31",
+   "label": "Aa3",
+   "label_level": "instrument",
+   "label_oi": "600012498",
+   "persistence": "A1",
+   "delta": -1,
+   "era": "2017-2019",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2018-10-04",
+     "rating": "Aa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600012498"
+    },
+    "persistence_record": {
+     "date": "2017-05-15",
+     "rating": "A1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600012498"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2018-10-26",
+      "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983218000013/cost10k9218.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2018-12-20",
+      "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983218000022/cost10q112518.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2018-10-26",
+     "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983218000013/cost10k9218.htm"
+    }
+   },
+   "id": "G04"
+  },
+  {
+   "slug": "dollar-general",
+   "group": "DOLLAR GENERAL CORPORATION",
+   "cik": 29534,
+   "date": "2013-03-31",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "820314227",
+   "persistence": "Ba1",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Baa",
+   "boundary_cross": true,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2013-03-26",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "820314227"
+    },
+    "persistence_record": {
+     "date": "2012-06-15",
+     "rating": "Ba1",
+     "action": "HS",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "820314227"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2013-03-25",
+      "url": "https://www.sec.gov/Archives/edgar/data/29534/000104746913003283/a2213303z10-k.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2013-06-04",
+     "url": "https://www.sec.gov/Archives/edgar/data/29534/000110465913046606/a13-9448_110q.htm",
+     "snippet": "counting Policies and Estimates” and in Note 3 to the condensed consolidated financial statements. Future negative developments could have a material adverse effect on our liquidity. In March 2013, Moody’s upgraded our senior unsecured debt rating to Baa3 from Ba2 with a stable outlook. In April 2013, Standard & Poor’s upgraded our senior unsecured debt rating to BBB- from BB+ and reaffirmed our c"
+    }
+   },
+   "id": "G05"
+  },
+  {
+   "slug": "dollar-general",
+   "group": "DOLLAR GENERAL CORPORATION",
+   "cik": 29534,
+   "date": "2025-03-31",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "820314227",
+   "persistence": "Baa2",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2025-03-28",
+     "rating": "Baa3",
+     "action": "DG",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "820314227"
+    },
+    "persistence_record": {
+     "date": "2023-06-05",
+     "rating": "Baa2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "820314227"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2025-03-21",
+      "url": "https://www.sec.gov/Archives/edgar/data/29534/000155837025003413/dg-20250131x10k.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2025-06-03",
+     "url": "https://www.sec.gov/Archives/edgar/data/29534/000155837025008354/dg-20250502x10q.htm",
+     "snippet": "time frames deemed acceptable to the rating agencies. The credit ratings for our borrowings are as follows: ​ ​ ​ ​ Rating Agency ​ Senior unsecured debt rating ​ Commercial paper rating ​ Outlook Moody’s ​ Baa3 ​ P-3 ​ Stable outlook Standard & Poor’s ​ BBB ​ A-2 ​ Negative outlook ​ Changes in Cash Flows ​ Unless otherwise noted, all references to the 2025 and 2024 periods in the discussion of"
+    }
+   },
+   "id": "G06"
+  },
+  {
+   "slug": "dollar-tree",
+   "group": "DOLLAR TREE, INC.",
+   "cik": 935703,
+   "date": "2018-03-31",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "823624450",
+   "persistence": "Ba1",
+   "delta": -1,
+   "era": "2017-2019",
+   "bucket": "Baa",
+   "boundary_cross": true,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2018-03-02",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823624450"
+    },
+    "persistence_record": {
+     "date": "2017-03-09",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823624450"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2018-03-16",
+      "url": "https://www.sec.gov/Archives/edgar/data/935703/000093570318000013/dltr-2018x02x03x10k.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2018-03-16",
+     "url": "https://www.sec.gov/Archives/edgar/data/935703/000093570318000013/dltr-2018x02x03x10k.htm"
+    }
+   },
+   "id": "G07"
+  },
+  {
+   "slug": "gap-inc-the",
+   "group": "GAP, INC. (THE)",
+   "cik": 39911,
+   "date": "2023-03-31",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "306425",
+   "persistence": "Ba2",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2023-03-27",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "306425"
+    },
+    "persistence_record": {
+     "date": "2020-04-23",
+     "rating": "Ba2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "306425"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2023-03-14",
+      "url": "https://www.sec.gov/Archives/edgar/data/39911/000003991123000015/gps-20230128.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2023-05-26",
+     "url": "https://www.sec.gov/Archives/edgar/data/39911/000003991123000043/gps-20230429.htm",
+     "snippet": "solidated Financial Statements included in Part I, Item 1 of this Form 10-Q, for disclosures on our debt and credit facilities, investments, and derivative financial instruments. On March 27, 2023, Moody's downgraded our corporate credit rating from Ba2 to Ba3 with a negative outlook and downgraded the rating of our Senior Notes from Ba3 to B1 with a negative outlook. These reductions and any futu"
+    }
+   },
+   "id": "G08"
+  },
+  {
+   "slug": "hanesbrands",
+   "group": "HANESBRANDS, INC.",
+   "cik": 1359841,
+   "date": "2020-06-30",
+   "label": "Ba2",
+   "label_level": "entity",
+   "label_oi": "809587302",
+   "persistence": "Ba1",
+   "delta": 1,
+   "era": "2020-2021",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-04-30",
+     "rating": "Ba2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "809587302"
+    },
+    "persistence_record": {
+     "date": "2014-05-20",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "809587302"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-02-11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1359841/000135984120000027/hbi-20191228x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-04-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/1359841/000135984120000050/hbi-20200328x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2020-07-31",
+     "url": "https://www.sec.gov/Archives/edgar/data/1359841/000135984120000072/hbi-20200627x10q.htm"
+    }
+   },
+   "id": "G09"
+  },
+  {
+   "slug": "home-depot-inc-the",
+   "group": "HOME DEPOT, INC. (THE)",
+   "cik": 354950,
+   "date": "2013-12-31",
+   "label": "A2",
+   "label_level": "instrument",
+   "label_oi": "373800",
+   "persistence": "A3",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2013-11-19",
+     "rating": "A2",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "373800"
+    },
+    "persistence_record": {
+     "date": "2013-09-03",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "373800"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2013-03-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495013000008/hd-232013x10xk.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2013-11-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495013000047/hd_10qx11032013.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2013-11-27",
+     "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495013000047/hd_10qx11032013.htm"
+    }
+   },
+   "id": "G10"
+  },
+  {
+   "slug": "j-jill",
+   "group": "J.JILL",
+   "cik": 1687932,
+   "date": "2019-12-31",
+   "label": "B2",
+   "label_level": "entity",
+   "label_oi": "824435767",
+   "persistence": "B1",
+   "delta": 1,
+   "era": "2017-2019",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": true,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2019-12-12",
+     "rating": "B2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824435767"
+    },
+    "persistence_record": {
+     "date": "2018-10-05",
+     "rating": "B1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824435767"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2019-04-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459019011027/jill-10k_20190202.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2019-12-12",
+      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459019045849/jill-10q_20191102.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2020-06-15",
+     "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459020029393/jill-10k_20200201.htm"
+    }
+   },
+   "id": "G11"
+  },
+  {
+   "slug": "kohl-s",
+   "group": "KOHL'S CORPORATION",
+   "cik": 885639,
+   "date": "2025-03-31",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "600018243",
+   "persistence": "Ba2",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": true,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2025-01-15",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600018243"
+    },
+    "persistence_record": {
+     "date": "2023-04-19",
+     "rating": "Ba2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600018243"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2025-03-20",
+      "url": "https://www.sec.gov/Archives/edgar/data/885639/000095017025042662/kss-20250201.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2025-03-20",
+     "url": "https://www.sec.gov/Archives/edgar/data/885639/000095017025042662/kss-20250201.htm",
+     "snippet": "idity sources on favorable terms depends on multiple factors, including our operating performance and debt ratings. During 2024, S&P downgraded our senior unsecured credit rating from BB to BB- and Moody's downgraded our rating from Ba3 to B1. These downgrades have caused our cost of borrowing to increase, and further downgrades would cause our cost of borrowing to further increase. Declines in ou"
+    }
+   },
+   "id": "G12"
+  },
+  {
+   "slug": "kohl-s",
+   "group": "KOHL'S CORPORATION",
+   "cik": 885639,
+   "date": "2025-06-30",
+   "label": "B2",
+   "label_level": "entity",
+   "label_oi": "600018243",
+   "persistence": "Ba3",
+   "delta": 2,
+   "era": "2022-2025",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": null,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2025-05-13",
+     "rating": "B2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600018243"
+    },
+    "persistence_record": {
+     "date": "2025-01-15",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600018243"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2025-03-20",
+      "url": "https://www.sec.gov/Archives/edgar/data/885639/000095017025042662/kss-20250201.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2025-06-06",
+      "url": "https://www.sec.gov/Archives/edgar/data/885639/000095017025083079/kss-20250503.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2025-06-06",
+     "url": "https://www.sec.gov/Archives/edgar/data/885639/000095017025083079/kss-20250503.htm",
+     "snippet": "25 due to the coupon adjustment provision within the notes. In total, the interest rate on the notes due May 2031 have increased 175 basis points since their issuance. Additionally on May 13, 2025, Moody's downgraded our corporate credit rating from Ba3 to B2, and revised their outlook to stable. The majority of our financing activities generally include proceeds and/or repayments of borrowings un"
+    }
+   },
+   "id": "G13"
+  },
+  {
+   "slug": "leslie-s-poolmart",
+   "group": "LESLIE'S POOLMART, INC.",
+   "cik": 1821806,
+   "date": "2024-09-30",
+   "label": "B2",
+   "label_level": "entity",
+   "label_oi": "825431804",
+   "persistence": "B1",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2024-07-31",
+     "rating": "B2",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "825431804"
+    },
+    "persistence_record": {
+     "date": "2023-08-04",
+     "rating": "B1",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "825431804"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2023-11-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/1821806/000095017023066773/lesl-20230930.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-08-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/1821806/000095017024093092/lesl-20240629.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2024-08-08",
+     "url": "https://www.sec.gov/Archives/edgar/data/1821806/000095017024093092/lesl-20240629.htm"
+    }
+   },
+   "id": "G14"
+  },
+  {
+   "slug": "levi-strauss",
+   "group": "LEVI STRAUSS & CO.",
+   "cik": 94845,
+   "date": "2015-06-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "445750",
+   "persistence": "Ba2",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-04-16",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "445750"
+    },
+    "persistence_record": {
+     "date": "2014-04-28",
+     "rating": "Ba2",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "445750"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2015-02-12",
+      "url": "https://www.sec.gov/Archives/edgar/data/94845/000009484515000008/a2014yeform10-k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2015-04-14",
+      "url": "https://www.sec.gov/Archives/edgar/data/94845/000009484515000017/a1q2015form10-q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2015-07-10",
+     "url": "https://www.sec.gov/Archives/edgar/data/94845/000009484515000029/a2q2015form10-q.htm"
+    }
+   },
+   "id": "G15"
+  },
+  {
+   "slug": "macy-s",
+   "group": "MACY'S",
+   "cik": 794367,
+   "date": "2020-03-31",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "277000",
+   "persistence": "Baa3",
+   "delta": 1,
+   "era": "2020-2021",
+   "bucket": "Ba",
+   "boundary_cross": true,
+   "next_quarter_changes": true,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-03-26",
+     "rating": "Ba1",
+     "action": null,
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "277000"
+    },
+    "persistence_record": {
+     "date": "2017-03-02",
+     "rating": "Baa3",
+     "action": "DG",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "277000"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-03-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/794367/000079436720000040/m-0201202010xk.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2020-03-30",
+     "url": "https://www.sec.gov/Archives/edgar/data/794367/000079436720000040/m-0201202010xk.htm",
+     "snippet": "pany and the notes are rated by specified rating agencies at a level below investment grade. As of February 1, 2020, the Company's credit rating and outlook were as described in the table below. 28 Moody's Standard & Poor's Fitch Long-term debt Baa3 BBB- BBB Outlook Stable Stable Stable In February 2020, Standard and Poor's and Fitch downgraded Macy's long-term debt ratings to BB+ and BBB-, respec"
+    }
+   },
+   "id": "G16"
+  },
+  {
+   "slug": "macy-s",
+   "group": "MACY'S",
+   "cik": 794367,
+   "date": "2022-03-31",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "277000",
+   "persistence": "Ba2",
+   "delta": -1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2022-02-23",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "277000"
+    },
+    "persistence_record": {
+     "date": "2021-08-26",
+     "rating": "Ba2",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "277000"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2022-03-25",
+      "url": "https://www.sec.gov/Archives/edgar/data/794367/000156459022011726/m-10k_20220129.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2022-03-25",
+     "url": "https://www.sec.gov/Archives/edgar/data/794367/000156459022011726/m-10k_20220129.htm",
+     "snippet": "g activities noted above, interest obligations were increased to $1.9 billion. 32 As of January 29 , 202 2 , the Company's credit rating and outlook were as described in the table below. Standard & Moody's Poor's Fitch Long-term debt Ba2 BB- BB+ Outlook Stable Positive Stable Subsequent to January 29, 2022, Moody’s upgraded the Company’s long-term debt rating to Ba1, Standard & Poor’s upgraded the"
+    }
+   },
+   "id": "G17"
+  },
+  {
+   "slug": "michaels",
+   "group": "MICHAELS",
+   "cik": 1593936,
+   "date": "2020-06-30",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "809824441",
+   "persistence": "Ba2",
+   "delta": 1,
+   "era": "2020-2021",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-05-13",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "809824441"
+    },
+    "persistence_record": {
+     "date": "2017-07-18",
+     "rating": "Ba2",
+     "action": null,
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "809824441"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-03-17",
+      "url": "https://www.sec.gov/Archives/edgar/data/1593936/000155837020002829/mik-20200201x10k99adc6.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-06-05",
+      "url": "https://www.sec.gov/Archives/edgar/data/1593936/000155837020007300/mik-20200605x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2020-06-05",
+     "url": "https://www.sec.gov/Archives/edgar/data/1593936/000155837020007300/mik-20200605x10q.htm"
+    }
+   },
+   "id": "G18"
+  },
+  {
+   "slug": "murphy-usa",
+   "group": "MURPHY USA",
+   "cik": 1573516,
+   "date": "2015-06-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "522000",
+   "persistence": "Ba2",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-06-30",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "522000"
+    },
+    "persistence_record": {
+     "date": "2013-08-05",
+     "rating": "Ba2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "522000"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2015-02-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/1573516/000157351615000008/musa-20141231x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2015-05-05",
+      "url": "https://www.sec.gov/Archives/edgar/data/1573516/000157351615000015/musa-20150331x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2015-08-06",
+     "url": "https://www.sec.gov/Archives/edgar/data/1573516/000157351615000024/musa-20150630x10q.htm"
+    }
+   },
+   "id": "G19"
+  },
+  {
+   "slug": "o-reilly",
+   "group": "O'REILLY",
+   "cik": 898173,
+   "date": "2013-12-31",
+   "label": "Baa2",
+   "label_level": "instrument",
+   "label_oi": "822312216",
+   "persistence": "Baa3",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2013-12-16",
+     "rating": "Baa2",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "822312216"
+    },
+    "persistence_record": {
+     "date": "2013-06-17",
+     "rating": "Baa3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "822312216"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2013-02-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/898173/000089817313000006/orly-20121231x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2013-11-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/898173/000089817313000049/orly-20130930x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2014-02-28",
+     "url": "https://www.sec.gov/Archives/edgar/data/898173/000089817314000064/orly-20131231x10k.htm"
+    }
+   },
+   "id": "G20"
+  },
+  {
+   "slug": "restoration-hardware",
+   "group": "RESTORATION HARDWARE, INC.",
+   "cik": 1528849,
+   "date": "2022-06-30",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "823640518",
+   "persistence": "Ba2",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2022-04-27",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823640518"
+    },
+    "persistence_record": {
+     "date": "2021-09-29",
+     "rating": "Ba2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823640518"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2022-03-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/1528849/000155837022004753/rh-20220129x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2022-06-03",
+      "url": "https://www.sec.gov/Archives/edgar/data/1528849/000155837022009696/rh-20220430x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2022-06-03",
+     "url": "https://www.sec.gov/Archives/edgar/data/1528849/000155837022009696/rh-20220430x10q.htm",
+     "snippet": "nded our asset based credit facility, and issued the Term Loan in the amount of $2.0 billion pursuant to the Term Loan Credit Agreement. The issuance of the Term Loan was assigned a Ba2 rating from Moody’s Investors Service and BB rating from S&P Global. Additionally, in May 2022, we entered into the 2022 Incremental Amendment, which amended the Term Loan Credit Agreement and raised an incremental"
+    }
+   },
+   "id": "G21"
+  },
+  {
+   "slug": "ross-stores",
+   "group": "ROSS STORES, INC.",
+   "cik": 745732,
+   "date": "2019-09-30",
+   "label": "A2",
+   "label_level": "instrument",
+   "label_oi": "823602952",
+   "persistence": "A3",
+   "delta": -1,
+   "era": "2017-2019",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2019-07-11",
+     "rating": "A2",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823602952"
+    },
+    "persistence_record": {
+     "date": "2014-09-15",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823602952"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2019-04-02",
+      "url": "https://www.sec.gov/Archives/edgar/data/745732/000074573219000009/rost-20190202x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2019-09-11",
+      "url": "https://www.sec.gov/Archives/edgar/data/745732/000074573219000037/rost-2019803x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2019-09-11",
+     "url": "https://www.sec.gov/Archives/edgar/data/745732/000074573219000037/rost-2019803x10q.htm"
+    }
+   },
+   "id": "G22"
+  },
+  {
+   "slug": "signet",
+   "group": "SIGNET",
+   "cik": 832988,
+   "date": "2015-09-30",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "823938053",
+   "persistence": "Ba1",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Baa",
+   "boundary_cross": true,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-08-17",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823938053"
+    },
+    "persistence_record": {
+     "date": "2014-05-14",
+     "rating": "Ba1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823938053"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2015-03-26",
+      "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828015001969/a10k-1312015xq4.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2015-09-03",
+      "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828015006962/sig-20150801_10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2015-09-03",
+     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828015006962/sig-20150801_10q.htm"
+    }
+   },
+   "id": "G23"
+  },
+  {
+   "slug": "signet",
+   "group": "SIGNET",
+   "cik": 832988,
+   "date": "2017-09-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "823938053",
+   "persistence": "Baa3",
+   "delta": 1,
+   "era": "2017-2019",
+   "bucket": "Ba",
+   "boundary_cross": true,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2017-07-21",
+     "rating": "Ba1",
+     "action": null,
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823938053"
+    },
+    "persistence_record": {
+     "date": "2015-08-17",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823938053"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2017-03-16",
+      "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828017002652/fy17q410k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2017-08-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828017008982/fy18q210-q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2017-08-29",
+     "url": "https://www.sec.gov/Archives/edgar/data/832988/000162828017008982/fy18q210-q.htm"
+    }
+   },
+   "id": "G24"
+  },
+  {
+   "slug": "tiffany",
+   "group": "TIFFANY & CO.",
+   "cik": 98246,
+   "date": "2021-03-31",
+   "label": "A1",
+   "label_level": "instrument",
+   "label_oi": "1926",
+   "persistence": "Baa2",
+   "delta": -4,
+   "era": "2020-2021",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-03-17",
+     "rating": "A1",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "1926"
+    },
+    "persistence_record": {
+     "date": "2014-09-22",
+     "rating": "Baa2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "1926"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-03-20",
+      "url": "https://www.sec.gov/Archives/edgar/data/98246/000009824620000042/tif-2020131x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-11-24",
+      "url": "https://www.sec.gov/Archives/edgar/data/98246/000009824620000118/tif-20201031.htm"
+     }
+    ]
+   },
+   "id": "G25"
+  },
+  {
+   "slug": "tjx-companies-inc-the",
+   "group": "TJX COMPANIES, INC. (THE)",
+   "cik": 109198,
+   "date": "2015-09-30",
+   "label": "A2",
+   "label_level": "instrument",
+   "label_oi": "734075",
+   "persistence": "A3",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-08-19",
+     "rating": "A2",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "734075"
+    },
+    "persistence_record": {
+     "date": "2014-06-02",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "734075"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2015-03-31",
+      "url": "https://www.sec.gov/Archives/edgar/data/109198/000119312515114276/d855793d10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2015-08-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/109198/000119312515306470/d39475d10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2015-08-28",
+     "url": "https://www.sec.gov/Archives/edgar/data/109198/000119312515306470/d39475d10q.htm"
+    }
+   },
+   "id": "G26"
+  },
+  {
+   "slug": "under-armour",
+   "group": "UNDER ARMOUR, INC.",
+   "cik": 1336917,
+   "date": "2020-06-30",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "823645825",
+   "persistence": "Ba1",
+   "delta": 2,
+   "era": "2020-2021",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-05-21",
+     "rating": "Ba3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823645825"
+    },
+    "persistence_record": {
+     "date": "2020-02-12",
+     "rating": "Ba1",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823645825"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-02-26",
+      "url": "https://www.sec.gov/Archives/edgar/data/1336917/000133691720000010/ua-20191231.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-05-11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1336917/000133691720000033/ua-20200331.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-Q",
+     "filed": "2020-08-06",
+     "url": "https://www.sec.gov/Archives/edgar/data/1336917/000133691720000056/ua-20200630.htm"
+    }
+   },
+   "id": "G27"
+  },
+  {
+   "slug": "v-f",
+   "group": "V.F. CORPORATION",
+   "cik": 103379,
+   "date": "2021-03-31",
+   "label": "Baa1",
+   "label_level": "instrument",
+   "label_oi": "800100",
+   "persistence": "A3",
+   "delta": 1,
+   "era": "2020-2021",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-02-10",
+     "rating": "Baa1",
+     "action": "DG",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "800100"
+    },
+    "persistence_record": {
+     "date": "2020-04-21",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "800100"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-05-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/103379/000010337920000006/vfc328202010-k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2021-02-02",
+      "url": "https://www.sec.gov/Archives/edgar/data/103379/000010337921000003/vfc-20201226.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2021-05-27",
+     "url": "https://www.sec.gov/Archives/edgar/data/103379/000010337921000006/vfc-20210403.htm",
+     "snippet": "ency ratings allow for access to additional liquidity at competitive rates. At the end of March 2021, VF’s long-term debt ratings were ‘A-’ by Standard & Poor’s (\"S&P\") Global Ratings and ‘Baa1’ by Moody’s Investors Service, both with 'stable' outlooks, and commercial paper ratings by those rating agencies were ‘A-2’ and ‘P-2’, respectively. None of VF’s long-term debt agreements contain accelerat"
+    }
+   },
+   "id": "G28"
+  },
+  {
+   "slug": "walgreens",
+   "group": "WALGREENS",
+   "cik": 1618921,
+   "date": "2023-03-31",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "806000",
+   "persistence": "Baa2",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2023-01-20",
+     "rating": "Baa3",
+     "action": "DG",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "824205318"
+    },
+    "persistence_record": {
+     "date": "2021-11-02",
+     "rating": "Baa2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "824205318"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2022-10-13",
+      "url": "https://www.sec.gov/Archives/edgar/data/1618921/000161892122000064/wba-20220831.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2023-03-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/1618921/000161892123000019/wba-20230228.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-Q",
+     "filed": "2023-03-28",
+     "url": "https://www.sec.gov/Archives/edgar/data/1618921/000161892123000019/wba-20230228.htm",
+     "snippet": "th all such applicable covenants. Credit ratings As of March 27, 2023, the credit ratings of Walgreens Boots Alliance were: Rating agency Long-term debt rating Commercial paper rating Outlook Moody’s Baa3 P-3 Negative Standard & Poor’s BBB A-2 Stable In assessing the Company’s credit strength, each rating agency considers various factors including the Company’s business model, ca"
+    }
+   },
+   "id": "G29"
+  },
+  {
+   "slug": "wolverine-world-wide",
+   "group": "WOLVERINE WORLD WIDE, INC.",
+   "cik": 110471,
+   "date": "2023-12-31",
+   "label": "B3",
+   "label_level": "entity",
+   "label_oi": "831500",
+   "persistence": "B1",
+   "delta": 2,
+   "era": "2022-2025",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "changed",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2023-11-21",
+     "rating": "B3",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "831500"
+    },
+    "persistence_record": {
+     "date": "2023-08-25",
+     "rating": "B1",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "831500"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2023-02-23",
+      "url": "https://www.sec.gov/Archives/edgar/data/110471/000011047123000021/www-20221231.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2023-11-09",
+      "url": "https://www.sec.gov/Archives/edgar/data/110471/000011047123000147/www-20230930.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2024-02-22",
+     "url": "https://www.sec.gov/Archives/edgar/data/110471/000011047124000057/www-20231230.htm"
+    }
+   },
+   "id": "G30"
+  },
+  {
+   "slug": "asbury-automotive-group",
+   "group": "ASBURY AUTOMOTIVE GROUP, INC.",
+   "cik": 1144980,
+   "date": "2012-12-31",
+   "label": "B1",
+   "label_level": "entity",
+   "label_oi": "600065108",
+   "persistence": "B1",
+   "delta": 0,
+   "era": "2012-2016",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2012-08-21",
+     "rating": "B1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600065108"
+    },
+    "persistence_record": {
+     "date": "2012-08-21",
+     "rating": "B1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600065108"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2012-02-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/1144980/000114498012000031/abg12311110k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2012-10-24",
+      "url": "https://www.sec.gov/Archives/edgar/data/1144980/000114498012000100/abg09301210q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2012-02-22",
+     "url": "https://www.sec.gov/Archives/edgar/data/1144980/000114498012000031/abg12311110k.htm"
+    }
+   },
+   "id": "G31"
+  },
+  {
+   "slug": "autozone",
+   "group": "AUTOZONE, INC.",
+   "cik": 866787,
+   "date": "2016-03-31",
+   "label": "Baa1",
+   "label_level": "instrument",
+   "label_oi": "600041240",
+   "persistence": "Baa1",
+   "delta": 0,
+   "era": "2012-2016",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-04-20",
+     "rating": "Baa1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600041240"
+    },
+    "persistence_record": {
+     "date": "2015-04-20",
+     "rating": "Baa1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600041240"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2015-10-26",
+      "url": "https://www.sec.gov/Archives/edgar/data/866787/000119312515353476/d73676d10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2016-03-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/866787/000119312516513530/d106047d10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2015-10-26",
+     "url": "https://www.sec.gov/Archives/edgar/data/866787/000119312515353476/d73676d10k.htm"
+    }
+   },
+   "id": "G32"
+  },
+  {
+   "slug": "bath-body-works",
+   "group": "BATH & BODY WORKS, INC.",
+   "cik": 701985,
+   "date": "2013-06-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "447500",
+   "persistence": "Ba1",
+   "delta": 0,
+   "era": "2012-2016",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2012-06-15",
+     "rating": "Ba1",
+     "action": "HS",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "447500"
+    },
+    "persistence_record": {
+     "date": "2012-06-15",
+     "rating": "Ba1",
+     "action": "HS",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "447500"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2013-03-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/701985/000070198513000012/ltd22201310k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2013-06-07",
+      "url": "https://www.sec.gov/Archives/edgar/data/701985/000070198513000023/ltd-201354_10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2013-03-22",
+     "url": "https://www.sec.gov/Archives/edgar/data/701985/000070198513000012/ltd22201310k.htm",
+     "snippet": "talization (b) Net cash provided by operating activities divided by capital expenditures 41 Table of Contents Credit Ratings The following table provides our credit ratings as of February 2, 2013 : Moody’s S&P Fitch Corporate Ba1 BB+ BB+ Senior Unsecured Debt with Subsidiary Guarantee Ba1 BB+ BB+ Senior Unsecured Debt Ba2 BB- BB Outlook Stable Stable Stable Our borrowing costs under our Revolving"
+    }
+   },
+   "id": "G33"
+  },
+  {
+   "slug": "best-buy-co",
+   "group": "BEST BUY CO., INC.",
+   "cik": 764478,
+   "date": "2024-06-30",
+   "label": "A3",
+   "label_level": "entity",
+   "label_oi": "104225",
+   "persistence": "A3",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-02-26",
+     "rating": "A3",
+     "action": "UP",
+     "type": "LT Issuer Rating",
+     "level": "entity",
+     "oi": "104225"
+    },
+    "persistence_record": {
+     "date": "2021-02-26",
+     "rating": "A3",
+     "action": "UP",
+     "type": "LT Issuer Rating",
+     "level": "entity",
+     "oi": "104225"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2024-03-15",
+      "url": "https://www.sec.gov/Archives/edgar/data/764478/000076447824000010/bby-20240203x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-06-07",
+      "url": "https://www.sec.gov/Archives/edgar/data/764478/000076447824000022/bby-20240504x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2024-03-15",
+     "url": "https://www.sec.gov/Archives/edgar/data/764478/000076447824000010/bby-20240203x10k.htm",
+     "snippet": "ned unchanged from those disclosed in our Annual Report on Form 10-K for the fiscal year ended January 28, 2023, and are summarized below. Rating Agency Rating Outlook Standard & Poor's BBB+ Stable Moody's A3 Stable Credit rating agencies review their ratings periodically, and, therefore, the credit rating assigned to us by each agency may be subject to revision at any time. Factors that can affec"
+    }
+   },
+   "id": "G34"
+  },
+  {
+   "slug": "carvana",
+   "group": "CARVANA CO.",
+   "cik": 1690820,
+   "date": "2023-06-30",
+   "label": "Ca",
+   "label_level": "entity",
+   "label_oi": "830411600",
+   "persistence": "Ca",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Caa+",
+   "boundary_cross": false,
+   "next_quarter_changes": true,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2023-03-28",
+     "rating": "Ca",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830411600"
+    },
+    "persistence_record": {
+     "date": "2023-03-28",
+     "rating": "Ca",
+     "action": "DG",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830411600"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2023-02-23",
+      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082023000052/cvna-20221231.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2023-05-04",
+      "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082023000163/cvna-20230331.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2023-02-23",
+     "url": "https://www.sec.gov/Archives/edgar/data/1690820/000169082023000052/cvna-20221231.htm"
+    }
+   },
+   "id": "G35"
+  },
+  {
+   "slug": "dillard-s",
+   "group": "DILLARD'S",
+   "cik": 28917,
+   "date": "2022-06-30",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "239280",
+   "persistence": "Baa3",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-05-27",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "239280"
+    },
+    "persistence_record": {
+     "date": "2015-05-27",
+     "rating": "Baa3",
+     "action": "UP",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "239280"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2022-03-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/28917/000002891722000009/dds-20220129.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2022-06-03",
+      "url": "https://www.sec.gov/Archives/edgar/data/28917/000155837022009716/dds-20220430x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2022-03-29",
+     "url": "https://www.sec.gov/Archives/edgar/data/28917/000002891722000009/dds-20220129.htm"
+    }
+   },
+   "id": "G36"
+  },
+  {
+   "slug": "group-1-automotive",
+   "group": "GROUP 1 AUTOMOTIVE, INC.",
+   "cik": 1031203,
+   "date": "2023-09-30",
+   "label": "Ba1",
+   "label_level": "entity",
+   "label_oi": "600045005",
+   "persistence": "Ba1",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-07-23",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600045005"
+    },
+    "persistence_record": {
+     "date": "2015-07-23",
+     "rating": "Ba1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "600045005"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2023-02-16",
+      "url": "https://www.sec.gov/Archives/edgar/data/1031203/000103120323000007/gpi-20221231.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2023-07-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/1031203/000103120323000032/gpi-20230630.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2023-02-16",
+     "url": "https://www.sec.gov/Archives/edgar/data/1031203/000103120323000007/gpi-20221231.htm"
+    }
+   },
+   "id": "G37"
+  },
+  {
+   "slug": "ingles-markets-incorporated",
+   "group": "INGLES MARKETS, INCORPORATED",
+   "cik": 50493,
+   "date": "2017-06-30",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "160700",
+   "persistence": "Ba3",
+   "delta": 0,
+   "era": "2017-2019",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2012-06-15",
+     "rating": "Ba3",
+     "action": "HS",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "160700"
+    },
+    "persistence_record": {
+     "date": "2012-06-15",
+     "rating": "Ba3",
+     "action": "HS",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "160700"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2016-12-16",
+      "url": "https://www.sec.gov/Archives/edgar/data/50493/000005049316000044/imkt-20160924x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2017-05-03",
+      "url": "https://www.sec.gov/Archives/edgar/data/50493/000005049317000010/imkt-20170325x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2016-12-16",
+     "url": "https://www.sec.gov/Archives/edgar/data/50493/000005049316000044/imkt-20160924x10k.htm"
+    }
+   },
+   "id": "G38"
+  },
+  {
+   "slug": "j-jill",
+   "group": "J.JILL",
+   "cik": 1687932,
+   "date": "2022-03-31",
+   "label": "Caa1",
+   "label_level": "entity",
+   "label_oi": "824435767",
+   "persistence": "Caa1",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Caa+",
+   "boundary_cross": false,
+   "next_quarter_changes": true,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-10-19",
+     "rating": "Caa1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824435767"
+    },
+    "persistence_record": {
+     "date": "2021-10-19",
+     "rating": "Caa1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "824435767"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2021-04-12",
+      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459021018528/jill-10k_20210130.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2021-12-14",
+      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459021060218/jill-10q_20211030.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2021-04-12",
+     "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459021018528/jill-10k_20210130.htm"
+    }
+   },
+   "id": "G39"
+  },
+  {
+   "slug": "kontoor-brands",
+   "group": "KONTOOR BRANDS, INC.",
+   "cik": 1760965,
+   "date": "2020-12-31",
+   "label": "Ba2",
+   "label_level": "entity",
+   "label_oi": "830788359",
+   "persistence": "Ba2",
+   "delta": 0,
+   "era": "2020-2021",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2019-04-23",
+     "rating": "Ba2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830788359"
+    },
+    "persistence_record": {
+     "date": "2019-04-23",
+     "rating": "Ba2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "830788359"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-03-11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1760965/000176096520000010/kontoor201910-k1.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-11-06",
+      "url": "https://www.sec.gov/Archives/edgar/data/1760965/000176096520000051/ktb-20200926.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2020-03-11",
+     "url": "https://www.sec.gov/Archives/edgar/data/1760965/000176096520000010/kontoor201910-k1.htm"
+    }
+   },
+   "id": "G40"
+  },
+  {
+   "slug": "lowe-s-companies",
+   "group": "LOWE'S COMPANIES, INC.",
+   "cik": 60667,
+   "date": "2017-03-31",
+   "label": "A3",
+   "label_level": "instrument",
+   "label_oi": "454600",
+   "persistence": "A3",
+   "delta": 0,
+   "era": "2017-2019",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2016-04-11",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "454600"
+    },
+    "persistence_record": {
+     "date": "2016-04-11",
+     "rating": "A3",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "454600"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2016-03-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/60667/000006066716000276/lowesform10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2016-11-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/60667/000006066716000407/form10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2016-03-29",
+     "url": "https://www.sec.gov/Archives/edgar/data/60667/000006066716000276/lowesform10k.htm",
+     "snippet": "enior debt ratings may be subject to revision or withdrawal at any time by the assigning rating organization, and each rating should be evaluated independently of any other rating. Debt Ratings S&P Moody’s Commercial Paper A-2 P-2 Senior Debt A- A3 Outlook Stable Stable We believe that net cash provided by operating and financing activities will be adequate not only for our operating requirements,"
+    }
+   },
+   "id": "G41"
+  },
+  {
+   "slug": "men-s-wearhouse-llc-the",
+   "group": "MEN'S WEARHOUSE, LLC (THE)",
+   "cik": 884217,
+   "date": "2021-03-31",
+   "label": "Caa1",
+   "label_level": "entity",
+   "label_oi": "867393764",
+   "persistence": "Caa1",
+   "delta": 0,
+   "era": "2020-2021",
+   "bucket": "Caa+",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-12-22",
+     "rating": "Caa1",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867393764"
+    },
+    "persistence_record": {
+     "date": "2020-12-22",
+     "rating": "Caa1",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867393764"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-04-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/884217/000155837020003700/tlrd-20200201x10k72fd37.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2020-07-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/884217/000155837020008431/tlrd-20200502x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2020-04-08",
+     "url": "https://www.sec.gov/Archives/edgar/data/884217/000155837020003700/tlrd-20200201x10k72fd37.htm"
+    }
+   },
+   "id": "G42"
+  },
+  {
+   "slug": "national-vision",
+   "group": "NATIONAL VISION, INC.",
+   "cik": 1710155,
+   "date": "2018-06-30",
+   "label": "B1",
+   "label_level": "entity",
+   "label_oi": "823828009",
+   "persistence": "B1",
+   "delta": 0,
+   "era": "2017-2019",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": true,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2017-11-03",
+     "rating": "B1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823828009"
+    },
+    "persistence_record": {
+     "date": "2017-11-03",
+     "rating": "B1",
+     "action": "UP",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "823828009"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2018-03-08",
+      "url": "https://www.sec.gov/Archives/edgar/data/1710155/000171015518000012/nhvi201710-k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2018-05-15",
+      "url": "https://www.sec.gov/Archives/edgar/data/1710155/000171015518000020/a18q1nhvi10-q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2018-03-08",
+     "url": "https://www.sec.gov/Archives/edgar/data/1710155/000171015518000012/nhvi201710-k.htm"
+    }
+   },
+   "id": "G43"
+  },
+  {
+   "slug": "nike",
+   "group": "NIKE, INC.",
+   "cik": 320187,
+   "date": "2021-03-31",
+   "label": "A1",
+   "label_level": "instrument",
+   "label_oi": "40400",
+   "persistence": "A1",
+   "delta": 0,
+   "era": "2020-2021",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2020-03-25",
+     "rating": "A1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "40400"
+    },
+    "persistence_record": {
+     "date": "2020-03-25",
+     "rating": "A1",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "40400"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2020-07-24",
+      "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018720000047/nke-531202010k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2021-01-05",
+      "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018721000003/nke-20201130.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2020-07-24",
+     "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018720000047/nke-531202010k.htm",
+     "snippet": "021. As of May 31, 2020 and 2019 , no amounts were outstanding under our committed credit facilities. We currently have long-term debt ratings of AA- and A1 from Standard and Poor's Corporation and Moody's Investor Services, respectively. As it relates to our committed credit facility entered into on August 16, 2019, if our long-term debt ratings were to decline, the facility fee and interest rate"
+    }
+   },
+   "id": "G44"
+  },
+  {
+   "slug": "petco",
+   "group": "PETCO",
+   "cik": 1826470,
+   "date": "2021-06-30",
+   "label": "B2",
+   "label_level": "entity",
+   "label_oi": "867510475",
+   "persistence": "B2",
+   "delta": 0,
+   "era": "2020-2021",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-02-18",
+     "rating": "B2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867510475"
+    },
+    "persistence_record": {
+     "date": "2021-02-18",
+     "rating": "B2",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867510475"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2021-04-05",
+      "url": "https://www.sec.gov/Archives/edgar/data/1826470/000156459021017616/woof-10k_20210130.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2021-06-10",
+      "url": "https://www.sec.gov/Archives/edgar/data/1826470/000156459021032462/woof-10q_20210501.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2021-04-05",
+     "url": "https://www.sec.gov/Archives/edgar/data/1826470/000156459021017616/woof-10k_20210130.htm"
+    }
+   },
+   "id": "G45"
+  },
+  {
+   "slug": "pvh",
+   "group": "PVH CORP.",
+   "cik": 78239,
+   "date": "2020-03-31",
+   "label": "Baa3",
+   "label_level": "instrument",
+   "label_oi": "608300",
+   "persistence": "Baa3",
+   "delta": 0,
+   "era": "2020-2021",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2019-04-30",
+     "rating": "Baa3",
+     "action": null,
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "608300"
+    },
+    "persistence_record": {
+     "date": "2019-04-30",
+     "rating": "Baa3",
+     "action": null,
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "608300"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2019-03-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/78239/000007823919000011/pvh10k2018.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2019-12-09",
+      "url": "https://www.sec.gov/Archives/edgar/data/78239/000007823919000066/a10q3q2019.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2019-03-29",
+     "url": "https://www.sec.gov/Archives/edgar/data/78239/000007823919000011/pvh10k2018.htm"
+    }
+   },
+   "id": "G46"
+  },
+  {
+   "slug": "ralph-lauren",
+   "group": "RALPH LAUREN CORPORATION",
+   "cik": 1037038,
+   "date": "2016-09-30",
+   "label": "A2",
+   "label_level": "instrument",
+   "label_oi": "600050548",
+   "persistence": "A2",
+   "delta": 0,
+   "era": "2012-2016",
+   "bucket": "Aa/A",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2015-08-13",
+     "rating": "A2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600050548"
+    },
+    "persistence_record": {
+     "date": "2015-08-13",
+     "rating": "A2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "600050548"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2016-05-19",
+      "url": "https://www.sec.gov/Archives/edgar/data/1037038/000103703816000019/rl-20160402x10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2016-08-11",
+      "url": "https://www.sec.gov/Archives/edgar/data/1037038/000103703816000022/rl-20160702x10q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2016-05-19",
+     "url": "https://www.sec.gov/Archives/edgar/data/1037038/000103703816000019/rl-20160402x10k.htm"
+    }
+   },
+   "id": "G47"
+  },
+  {
+   "slug": "tapestry",
+   "group": "TAPESTRY, INC.",
+   "cik": 1116132,
+   "date": "2019-03-31",
+   "label": "Baa2",
+   "label_level": "instrument",
+   "label_oi": "823376466",
+   "persistence": "Baa2",
+   "delta": 0,
+   "era": "2017-2019",
+   "bucket": "Baa",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2017-06-06",
+     "rating": "Baa2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823376466"
+    },
+    "persistence_record": {
+     "date": "2017-06-06",
+     "rating": "Baa2",
+     "action": "NW",
+     "type": "Senior Unsecured",
+     "level": "instrument",
+     "oi": "823376466"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2018-08-16",
+      "url": "https://www.sec.gov/Archives/edgar/data/1116132/000111613218000021/tpr6302018-10k.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2019-02-07",
+      "url": "https://www.sec.gov/Archives/edgar/data/1116132/000111613219000007/tpr1229201810q.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2018-08-16",
+     "url": "https://www.sec.gov/Archives/edgar/data/1116132/000111613218000021/tpr6302018-10k.htm"
+    }
+   },
+   "id": "G48"
+  },
+  {
+   "slug": "victoria-s-secret",
+   "group": "VICTORIA'S SECRET & CO.",
+   "cik": 1856437,
+   "date": "2024-12-31",
+   "label": "Ba3",
+   "label_level": "entity",
+   "label_oi": "867730682",
+   "persistence": "Ba3",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Ba",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2021-06-21",
+     "rating": "Ba3",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867730682"
+    },
+    "persistence_record": {
+     "date": "2021-06-21",
+     "rating": "Ba3",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "867730682"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2024-03-22",
+      "url": "https://www.sec.gov/Archives/edgar/data/1856437/000185643724000005/vsco-20240203.htm"
+     },
+     {
+      "form": "10-Q",
+      "filed": "2024-12-09",
+      "url": "https://www.sec.gov/Archives/edgar/data/1856437/000185643724000033/vsco-20241102.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "self_disclosed",
+     "form": "10-K",
+     "filed": "2024-03-22",
+     "url": "https://www.sec.gov/Archives/edgar/data/1856437/000185643724000005/vsco-20240203.htm",
+     "snippet": "of the existing contract without having to perform an assessment that would otherwise be required under GAAP. Credit Ratings The following table provides our credit ratings as of February 3, 2024: Moody’s S&P Corporate Ba3 BB- Senior Secured Debt with Subsidiary Guarantee Ba2 BB+ Senior Unsecured Debt with Subsidiary Guarantee B1 BB- Outlook Stable Stable 46 Table of Conten"
+    }
+   },
+   "id": "G49"
+  },
+  {
+   "slug": "wayfair",
+   "group": "WAYFAIR",
+   "cik": 1616707,
+   "date": "2025-03-31",
+   "label": "B3",
+   "label_level": "entity",
+   "label_oi": "869202072",
+   "persistence": "B3",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "B",
+   "boundary_cross": false,
+   "next_quarter_changes": false,
+   "kind": "unchanged",
+   "status": "proposed",
+   "evidence": {
+    "label_record": {
+     "date": "2024-09-24",
+     "rating": "B3",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "869202072"
+    },
+    "persistence_record": {
+     "date": "2024-09-24",
+     "rating": "B3",
+     "action": "NW",
+     "type": "LT Corporate Family Ratings",
+     "level": "entity",
+     "oi": "869202072"
+    },
+    "input_docs": [
+     {
+      "form": "10-K",
+      "filed": "2025-02-20",
+      "url": "https://www.sec.gov/Archives/edgar/data/1616707/000161670725000022/w-20241231.htm"
+     }
+    ],
+    "disclosure": {
+     "verdict": "no_mention",
+     "form": "10-K",
+     "filed": "2025-02-20",
+     "url": "https://www.sec.gov/Archives/edgar/data/1616707/000161670725000022/w-20241231.htm"
+    }
+   },
+   "id": "G50"
+  }
+ ]
+}
