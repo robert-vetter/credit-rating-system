@@ -45,9 +45,19 @@ Per company folder:
 | 6 | `pipeline/fetch_filings.py` | SEC filing manifest + latest annual report into each folder |
 | 7 | `pipeline/verify_mapping.py` | the independent check: compares ratings the filer discloses in its own annual report against the mapped Moody's entity's ratings in effect at the filing date → `mapping-verification.md` |
 | 8 | `pipeline/build_observations.py` | the observation builder ("Tripel-Builder"): per company a quarterly grid of observation dates, each with label-at-t, documents-before-t, rating-path-to-t, changed flag and persistence baseline → `observations.json` per folder + `observations-summary.md` |
+| 9 | `pipeline/run_eval.py` | the runner: selects observations, assembles and redacts the documents (downloading from EDGAR as needed), one raw API call per observation (system/analyst.py, no tools), deterministic scorecard (system/scorecard.py), scores against label and persistence → `runs/<tag>/` (gitignored) with full audit trail. `--dry-run` costs nothing |
 
 Every step is re-runnable and deterministic given `data/` (see `data/README.md` for where each
 input comes from). Decisions are the only human input and survive every re-run.
+
+## Running the evaluation
+
+`run_eval.py` needs an Anthropic API key (`export ANTHROPIC_API_KEY=...`). One observation is
+one model call with roughly 100-250k input tokens; check the cost of a selection with
+`--dry-run` first. Task B (default) gives the model the rating path up to the previous quarter
+end - the persistence baseline's exact information set; Task A withholds it. The model never
+gets tools, documents are redacted, and every run directory contains the frozen config, the
+redacted lines, the full extraction, the scorecard arithmetic and token usage per observation.
 
 ## Status of the decisions
 

@@ -20,3 +20,4 @@ venv/
 .idea/
 *.swp
 evaluation/companies/
+evaluation/runs/
