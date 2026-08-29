@@ -80,18 +80,25 @@ restaurants, which have their own methodology; apparel manufacturing 2300-2399; 
 leather; apparel wholesale). The pipeline is `sector_count.py` next to this file; the frame lands in
 `data/retail_frame.json`.
 
-Numbers: of 12,926 Corporate entities in the union (8,146 obligor-level plus 4,780 issuer-only),
-3,890 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
+Numbers: of 13,025 Corporate entities in the union (8,146 obligor-level plus 4,879 issuer-only),
+3,920 matched uniquely to an EDGAR CIK. **164 are Retail and Apparel; 86 of those carry an active
 rating as of the file end (August 2025): 31 investment grade, 55 speculative.** The distribution
 spans Aa2 (Walmart) to Caa3 and is thickest in the Ba range, which is where rating changes happen.
 
-**Correction to an earlier version of this note.** It reported 13,026 union entities, 4,880 of them
-issuer-only, and 4,057 EDGAR matches. Those three figures were wrong. A second, independent script
-that reads the archives and counts headers with no shared code confirms 12,926 and 4,780, and the
-match count fell out of the name-matching fix described two paragraphs below. The frame totals (164
-and 86) were unaffected, for a reason worth stating so it is not mistaken for nothing having changed:
-the restaurant-exclusion fix removed several entities from the frame and the name-matching fix added
-five, and the two happened to cancel. The membership differs even though the count does not.
+**Correction history on the entity counts, kept in full because the second correction refutes the
+first.** The original note said 13,026 union entities, 4,880 issuer-only, 4,057 matches. A revision
+"corrected" this to 12,926 / 4,780 / 3,890, citing a second script with no shared code that
+confirmed the smaller numbers. That confirmation was worthless: both scripts parsed entity headers
+through the same fixed 1,600-byte window, and 101 issuer-set Corporate files carry a namespace
+preamble long enough to push the entity id past it (Apple, PepsiCo, McDonald's, AT&T, UPS and
+Heineken were among the silently dropped). Independent code is not an independent check when it
+shares the assumption under test. With window-free parsing the verified figures are **13,025 union
+entities, 4,879 issuer-only, 3,920 unique EDGAR matches**, so the original numbers were nearly right
+(their small residue is consistent with an empty-id phantom entry) and the first "correction" made
+them worse. All 31 newly recovered EDGAR matches are non-retail (closest: McDonald's, SIC 5812,
+restaurants, excluded by design), so the frame below is unaffected. The frame totals also survived
+the earlier fixes by coincidence: the restaurant exclusion removed entities, the name-matching fix
+added five, and the two cancelled; the membership changed even though 164 did not.
 
 Three findings from building it. First, **the union matters**: purely investment-grade issuers such
 as Home Depot, Costco, TJX, Ross and AutoZone have no obligor-set file at all, because they carry no

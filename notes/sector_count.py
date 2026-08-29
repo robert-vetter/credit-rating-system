@@ -101,6 +101,16 @@ def sector_bucket(sic):
     return None
 
 
+def header_meta(text):
+    """First occurrence of each header tag. Some files carry a long namespace preamble, so a
+    fixed byte window silently misses the entity id (101 issuer-set Corporates, e.g. Heineken,
+    plus 295 files whose class tag sat outside the window too); parse the full text instead."""
+    meta = {}
+    for m in HDR.finditer(text):
+        meta.setdefault(m.group(1), m.group(2))
+    return meta
+
+
 def load_corporates():
     """Union of Corporate entities from both zips, keyed by Moody's entity id."""
     entities = {}
@@ -109,7 +119,7 @@ def load_corporates():
             if not zn.endswith(".xml"):
                 continue
             d = z.read(zn).decode("utf-8", "ignore")
-            meta = dict((m.group(1), m.group(2)) for m in HDR.finditer(d[:1600]))
+            meta = header_meta(d)
             if meta.get("OSC") != "Corporate":
                 continue
             recs = []
@@ -124,10 +134,14 @@ def load_corporates():
             if not zn.endswith(".xml"):
                 continue
             head = z.read(zn)[:1600].decode("utf-8", "ignore")
-            meta = dict((m.group(1), m.group(2)) for m in HDR.finditer(head))
+            meta = header_meta(head)
+            if meta.get("SSC") != "Corporate" or not meta.get("ISI"):
+                meta = header_meta(z.read(zn).decode("utf-8", "ignore"))
             if meta.get("SSC") != "Corporate":
                 continue
             oi = meta.get("ISI", "")
+            if not oi:
+                raise ValueError(f"{zn}: Corporate issuer file with no ISI anywhere")
             if oi not in entities:
                 entities[oi] = {"name": meta.get("ISSNAME", ""), "lei": meta.get("LEI", ""),
                                 "oi": oi, "obligor_records": []}

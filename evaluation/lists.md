@@ -175,4 +175,4 @@
 
 *Not generated yet: appears after the listed-universe SIC sweep (evaluation/sic_sweep_listed.py) has finished and build_queue.py is re-run.*
 
-Moody's Corporate universe for the search box: 12926 entities in data/moodys_corporates.json.
+Moody's Corporate universe for the search box: 13025 entities in data/moodys_corporates.json.
