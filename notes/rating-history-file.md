@@ -23,7 +23,10 @@ second look.
 ## Finding 1: the 12-month embargo is real and fully used
 
 The file set is dated 11 August 2026. The most recent rating action in it is from **August 2025**.
-Moody's uses the entire delay the rule permits, to the month.
+Moody's uses the entire delay the rule permits, to the month. A live consequence surfaced during
+mapping verification: Nike's 10-K of July 2026 discloses a Moody's senior unsecured rating of A2
+while the file still carries A1, so a downgrade happened inside the embargo window and the public
+file does not know it (evaluation/mapping-verification.md).
 
 Consequences, now measured rather than feared. The public file provides complete rating paths and
 persistence baselines **up to twelve months ago**, which fully powers the historical arm of the

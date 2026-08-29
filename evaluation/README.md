@@ -21,6 +21,10 @@ Moody's entity id (**OI**) to SEC **CIK**. Names are display only.
 | `lists.md` | the two alphabetical name lists, generated | yes |
 | `companies/<slug>/company.json` | per company group: identity, confirmed CIK, decision provenance | no (generated) |
 | `companies/<slug>/ratings.json` | raw Moody's rating history of the group's entities (17g-7) | no (bulk Moody's data, ToU open) |
+| `companies/<slug>/filings/manifest.json` | complete SEC filing metadata (all pages of the submissions API), the basis for "documents filed before t" | no (generated) |
+| `companies/<slug>/filings/*.htm` | downloaded filing documents (latest annual report for current filers; more on demand) | no (bulk, refetchable) |
+| `companies/<slug>/verification.json` | self-disclosure check result with evidence snippets | no (generated) |
+| `mapping-verification.md` | summary of the self-disclosure verification across all companies | yes |
 
 Item statuses: `pending`, `confirmed` (mapped to a CIK), `no_sec_filer` (Moody's-rated but no
 SEC counterpart, e.g. private or foreign), `not_rated` (reverse items only). The latest decision
@@ -44,7 +48,14 @@ revisited in the review UI at any time; a new decision simply appends.
 python3 evaluation/build_queue.py       # build/refresh the item list (server must not be running)
 python3 evaluation/review_server.py     # review UI on http://localhost:8531
 python3 evaluation/compile_folders.py   # confirmed decisions -> companies/ folders
+python3 evaluation/fetch_filings.py     # SEC filing manifests + latest annual report per folder
+python3 evaluation/verify_mapping.py    # self-disclosure check -> mapping-verification.md
 ```
+
+`verify_mapping.py` is the independent check on the whole join: companies print their own
+ratings in their filings, so a MATCH means the mapped SEC filer itself names the rating that
+the mapped Moody's entity carries. It checks values across the join rather than names, which
+makes it immune to every name-matching failure class.
 
 The UI shows every item alphabetically with the automatic proposal prefilled: confirm it,
 search the full EDGAR list (~900k names) for a different filer, or mark "no SEC filer". Each
