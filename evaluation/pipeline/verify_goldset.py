@@ -159,9 +159,9 @@ def render(gold):
                 "Stichtag dienen nur der Label-Pruefung, nie als Modell-Input.*\n\n")
         f.write(f"**Stand: {n_sd} von 50 zusaetzlich durch Selbstoffenlegung der Firma bestaetigt.** "
                 "Kein Fund ist neutral (viele Firmen drucken Ratings nicht ab), nie ein Widerspruch.\n\n"
-                "**So bestaetigst du:** pro Item Haken setzen oder mir einfach die IDs nennen, die "
-                "du ablehnst/aendern willst (z.B. \"G07 raus\"); ich schreibe den Status in "
-                "goldset.json. Nur bestaetigte Items laufen in Gold-Auswertungen.\n\n---\n")
+                "**Status: eingefroren am 2026-08-29 — alle 50 von Robert bestaetigt** (pauschal, nach der "
+                "dokumentierten Zweitpruefung unten). Aenderungen ab jetzt nur als sichtbare, begruendete "
+                "Einzelfall-Entscheidung.\n\n---\n")
         for kind, title in (("changed", "Changed (30) - das Primaermaterial"),
                             ("unchanged", "Unchanged (20) - die Fehlalarm-Kontrolle")):
             f.write(f"\n## {title}\n\n")
@@ -193,7 +193,10 @@ def render(gold):
                     f.write("- Hinweis: hartes Negativ — im Folgequartal aendert sich das Rating\n")
                 if it.get("validation_note"):
                     f.write(f"- **Anmerkung aus der Zweitpruefung:** {it['validation_note']}\n")
-                f.write(f"- [ ] bestaetigt\n\n")
+                if it["status"] == "confirmed":
+                    f.write(f"- [x] **bestaetigt** ({it.get('confirmed_by','')})\n\n")
+                else:
+                    f.write(f"- [ ] bestaetigt\n\n")
     print(f"\n{n_sd}/50 selbstbestaetigt. Review-Sheet: evaluation/goldset-review.md")
 
 

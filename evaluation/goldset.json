@@ -17,7 +17,7 @@
    "boundary_cross": true,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2024-11-27",
@@ -55,7 +55,8 @@
      "snippet": "f Financial Instruments of the Notes to the Consolidated Financial Statements included herein. 28 Table of Contents As of February 26, 2025, the Company had a credit rating from S&P of BB+ and from Moody’s Investor Service of Ba1. The current outlooks by S&P and Moody’s were negative and stable, respectively. The current pricing grid used to determine the Company’s borrowing rate under the Company"
     }
    },
-   "id": "G01"
+   "id": "G01",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "albertsons",
@@ -72,7 +73,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2024-08-16",
@@ -109,7 +110,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1646972/000164697224000225/aci-20240907.htm"
     }
    },
-   "id": "G02"
+   "id": "G02",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "carvana",
@@ -126,7 +128,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2024-09-12",
@@ -164,7 +166,8 @@
     }
    },
    "id": "G03",
-   "validation_note": "Modell-Erinnerung an Carvanas exakte Upgrade-Daten war unscharf; die Roh-Datei ist eindeutig (Caa3->Caa1 am 2024-09-12) und die Filings enthalten nichts Widersprechendes. Datei schlaegt Erinnerung."
+   "validation_note": "Modell-Erinnerung an Carvanas exakte Upgrade-Daten war unscharf; die Roh-Datei ist eindeutig (Caa3->Caa1 am 2024-09-12) und die Filings enthalten nichts Widersprechendes. Datei schlaegt Erinnerung.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "costco-wholesale",
@@ -181,7 +184,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2018-10-04",
@@ -218,7 +221,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983218000013/cost10k9218.htm"
     }
    },
-   "id": "G04"
+   "id": "G04",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "dollar-general",
@@ -235,7 +239,7 @@
    "boundary_cross": true,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2013-03-26",
@@ -268,7 +272,8 @@
      "snippet": "counting Policies and Estimates” and in Note 3 to the condensed consolidated financial statements. Future negative developments could have a material adverse effect on our liquidity. In March 2013, Moody’s upgraded our senior unsecured debt rating to Baa3 from Ba2 with a stable outlook. In April 2013, Standard & Poor’s upgraded our senior unsecured debt rating to BBB- from BB+ and reaffirmed our c"
     }
    },
-   "id": "G05"
+   "id": "G05",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "dollar-general",
@@ -285,7 +290,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2025-03-28",
@@ -318,7 +323,8 @@
      "snippet": "time frames deemed acceptable to the rating agencies. The credit ratings for our borrowings are as follows: ​ ​ ​ ​ Rating Agency ​ Senior unsecured debt rating ​ Commercial paper rating ​ Outlook Moody’s ​ Baa3 ​ P-3 ​ Stable outlook Standard & Poor’s ​ BBB ​ A-2 ​ Negative outlook ​ Changes in Cash Flows ​ Unless otherwise noted, all references to the 2025 and 2024 periods in the discussion of"
     }
    },
-   "id": "G06"
+   "id": "G06",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "dollar-tree",
@@ -335,7 +341,7 @@
    "boundary_cross": true,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2018-03-02",
@@ -367,7 +373,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/935703/000093570318000013/dltr-2018x02x03x10k.htm"
     }
    },
-   "id": "G07"
+   "id": "G07",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "gap-inc-the",
@@ -384,7 +391,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2023-03-27",
@@ -417,7 +424,8 @@
      "snippet": "solidated Financial Statements included in Part I, Item 1 of this Form 10-Q, for disclosures on our debt and credit facilities, investments, and derivative financial instruments. On March 27, 2023, Moody's downgraded our corporate credit rating from Ba2 to Ba3 with a negative outlook and downgraded the rating of our Senior Notes from Ba3 to B1 with a negative outlook. These reductions and any futu"
     }
    },
-   "id": "G08"
+   "id": "G08",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "hanesbrands",
@@ -434,7 +442,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-04-30",
@@ -471,7 +479,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1359841/000135984120000072/hbi-20200627x10q.htm"
     }
    },
-   "id": "G09"
+   "id": "G09",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "home-depot-inc-the",
@@ -488,7 +497,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2013-11-19",
@@ -525,7 +534,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/354950/000035495013000047/hd_10qx11032013.htm"
     }
    },
-   "id": "G10"
+   "id": "G10",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "j-jill",
@@ -542,7 +552,7 @@
    "boundary_cross": false,
    "next_quarter_changes": true,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2019-12-12",
@@ -579,7 +589,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459020029393/jill-10k_20200201.htm"
     }
    },
-   "id": "G11"
+   "id": "G11",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "kohl-s",
@@ -596,7 +607,7 @@
    "boundary_cross": false,
    "next_quarter_changes": true,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2025-01-15",
@@ -629,7 +640,8 @@
      "snippet": "idity sources on favorable terms depends on multiple factors, including our operating performance and debt ratings. During 2024, S&P downgraded our senior unsecured credit rating from BB to BB- and Moody's downgraded our rating from Ba3 to B1. These downgrades have caused our cost of borrowing to increase, and further downgrades would cause our cost of borrowing to further increase. Declines in ou"
     }
    },
-   "id": "G12"
+   "id": "G12",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "kohl-s",
@@ -646,7 +658,7 @@
    "boundary_cross": false,
    "next_quarter_changes": null,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2025-05-13",
@@ -684,7 +696,8 @@
      "snippet": "25 due to the coupon adjustment provision within the notes. In total, the interest rate on the notes due May 2031 have increased 175 basis points since their issuance. Additionally on May 13, 2025, Moody's downgraded our corporate credit rating from Ba3 to B2, and revised their outlook to stable. The majority of our financing activities generally include proceeds and/or repayments of borrowings un"
     }
    },
-   "id": "G13"
+   "id": "G13",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "leslie-s-poolmart",
@@ -701,7 +714,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2024-07-31",
@@ -738,7 +751,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1821806/000095017024093092/lesl-20240629.htm"
     }
    },
-   "id": "G14"
+   "id": "G14",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "levi-strauss",
@@ -755,7 +769,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-04-16",
@@ -792,7 +806,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/94845/000009484515000029/a2q2015form10-q.htm"
     }
    },
-   "id": "G15"
+   "id": "G15",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "macy-s",
@@ -809,7 +824,7 @@
    "boundary_cross": true,
    "next_quarter_changes": true,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-03-26",
@@ -843,7 +858,8 @@
     }
    },
    "id": "G16",
-   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); Datum, Rating und Typ sind vollstaendig. Bekannter kleiner Datenrest, kein Fehler unsererseits. Es ist die CFR-Zuweisung beim IG-Austritt Maerz 2020."
+   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); Datum, Rating und Typ sind vollstaendig. Bekannter kleiner Datenrest, kein Fehler unsererseits. Es ist die CFR-Zuweisung beim IG-Austritt Maerz 2020.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "macy-s",
@@ -860,7 +876,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2022-02-23",
@@ -893,7 +909,8 @@
      "snippet": "g activities noted above, interest obligations were increased to $1.9 billion. 32 As of January 29 , 202 2 , the Company's credit rating and outlook were as described in the table below. Standard & Moody's Poor's Fitch Long-term debt Ba2 BB- BB+ Outlook Stable Positive Stable Subsequent to January 29, 2022, Moody’s upgraded the Company’s long-term debt rating to Ba1, Standard & Poor’s upgraded the"
     }
    },
-   "id": "G17"
+   "id": "G17",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "michaels",
@@ -910,7 +927,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-05-13",
@@ -947,7 +964,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1593936/000155837020007300/mik-20200605x10q.htm"
     }
    },
-   "id": "G18"
+   "id": "G18",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "murphy-usa",
@@ -964,7 +982,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-06-30",
@@ -1002,7 +1020,8 @@
     }
    },
    "id": "G19",
-   "validation_note": "Aktionsdatum = Stichtag (2015-06-30): per Label-Regel zaehlt das Rating am Tagesende, die Aktion ist also im Label enthalten - so gewollt und dokumentiert."
+   "validation_note": "Aktionsdatum = Stichtag (2015-06-30): per Label-Regel zaehlt das Rating am Tagesende, die Aktion ist also im Label enthalten - so gewollt und dokumentiert.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "o-reilly",
@@ -1019,7 +1038,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2013-12-16",
@@ -1056,7 +1075,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/898173/000089817314000064/orly-20131231x10k.htm"
     }
    },
-   "id": "G20"
+   "id": "G20",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "restoration-hardware",
@@ -1073,7 +1093,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2022-04-27",
@@ -1111,7 +1131,8 @@
      "snippet": "nded our asset based credit facility, and issued the Term Loan in the amount of $2.0 billion pursuant to the Term Loan Credit Agreement. The issuance of the Term Loan was assigned a Ba2 rating from Moody’s Investors Service and BB rating from S&P Global. Additionally, in May 2022, we entered into the 2022 Incremental Amendment, which amended the Term Loan Credit Agreement and raised an incremental"
     }
    },
-   "id": "G21"
+   "id": "G21",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "ross-stores",
@@ -1128,7 +1149,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2019-07-11",
@@ -1165,7 +1186,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/745732/000074573219000037/rost-2019803x10q.htm"
     }
    },
-   "id": "G22"
+   "id": "G22",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "signet",
@@ -1182,7 +1204,7 @@
    "boundary_cross": true,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-08-17",
@@ -1221,7 +1243,8 @@
      "note": "extended sweep"
     }
    },
-   "id": "G23"
+   "id": "G23",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "signet",
@@ -1238,7 +1261,7 @@
    "boundary_cross": true,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2017-07-21",
@@ -1278,7 +1301,8 @@
     }
    },
    "id": "G24",
-   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); es ist die CFR-Zuweisung beim IG-Austritt Juli 2017."
+   "validation_note": "Aktionscode fehlt im Moody's-Rohdatensatz ([None]); es ist die CFR-Zuweisung beim IG-Austritt Juli 2017.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "tiffany",
@@ -1295,7 +1319,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-03-17",
@@ -1327,7 +1351,8 @@
     ]
    },
    "id": "G25",
-   "validation_note": "Sonderfall M&A-Support: der 4-Notch-Sprung Baa2->A1 kommt aus der LVMH-Uebernahme (Anleihen ruecken an das LVMH-Rating), nicht aus Standalone-Fundamentaldaten. Die Uebernahme steht in den Input-Filings (Merger Agreement), ist also aus Dokumenten erkennbar - bewusst behalten als harter, realer Fall."
+   "validation_note": "Sonderfall M&A-Support: der 4-Notch-Sprung Baa2->A1 kommt aus der LVMH-Uebernahme (Anleihen ruecken an das LVMH-Rating), nicht aus Standalone-Fundamentaldaten. Die Uebernahme steht in den Input-Filings (Merger Agreement), ist also aus Dokumenten erkennbar - bewusst behalten als harter, realer Fall.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "tjx-companies-inc-the",
@@ -1344,7 +1369,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-08-19",
@@ -1381,7 +1406,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/109198/000119312515306470/d39475d10q.htm"
     }
    },
-   "id": "G26"
+   "id": "G26",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "under-armour",
@@ -1398,7 +1424,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-05-21",
@@ -1435,7 +1461,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1336917/000133691720000056/ua-20200630.htm"
     }
    },
-   "id": "G27"
+   "id": "G27",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "v-f",
@@ -1452,7 +1479,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-02-10",
@@ -1490,7 +1517,8 @@
      "snippet": "ency ratings allow for access to additional liquidity at competitive rates. At the end of March 2021, VF’s long-term debt ratings were ‘A-’ by Standard & Poor’s (\"S&P\") Global Ratings and ‘Baa1’ by Moody’s Investors Service, both with 'stable' outlooks, and commercial paper ratings by those rating agencies were ‘A-2’ and ‘P-2’, respectively. None of VF’s long-term debt agreements contain accelerat"
     }
    },
-   "id": "G28"
+   "id": "G28",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "walgreens",
@@ -1507,7 +1535,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2023-01-20",
@@ -1545,7 +1573,8 @@
      "snippet": "th all such applicable covenants. Credit ratings As of March 27, 2023, the credit ratings of Walgreens Boots Alliance were: Rating agency Long-term debt rating Commercial paper rating Outlook Moody’s Baa3 P-3 Negative Standard & Poor’s BBB A-2 Stable In assessing the Company’s credit strength, each rating agency considers various factors including the Company’s business model, ca"
     }
    },
-   "id": "G29"
+   "id": "G29",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "wolverine-world-wide",
@@ -1562,7 +1591,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "changed",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2023-11-21",
@@ -1599,7 +1628,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/110471/000011047124000057/www-20231230.htm"
     }
    },
-   "id": "G30"
+   "id": "G30",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "asbury-automotive-group",
@@ -1616,7 +1646,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2012-08-21",
@@ -1653,7 +1683,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1144980/000114498012000031/abg12311110k.htm"
     }
    },
-   "id": "G31"
+   "id": "G31",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "autozone",
@@ -1670,7 +1701,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-04-20",
@@ -1707,7 +1738,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/866787/000119312515353476/d73676d10k.htm"
     }
    },
-   "id": "G32"
+   "id": "G32",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "bath-body-works",
@@ -1724,7 +1756,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2012-06-15",
@@ -1762,7 +1794,8 @@
      "snippet": "talization (b) Net cash provided by operating activities divided by capital expenditures 41 Table of Contents Credit Ratings The following table provides our credit ratings as of February 2, 2013 : Moody’s S&P Fitch Corporate Ba1 BB+ BB+ Senior Unsecured Debt with Subsidiary Guarantee Ba1 BB+ BB+ Senior Unsecured Debt Ba2 BB- BB Outlook Stable Stable Stable Our borrowing costs under our Revolving"
     }
    },
-   "id": "G33"
+   "id": "G33",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "best-buy-co",
@@ -1779,7 +1812,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-02-26",
@@ -1817,7 +1850,8 @@
      "snippet": "ned unchanged from those disclosed in our Annual Report on Form 10-K for the fiscal year ended January 28, 2023, and are summarized below. Rating Agency Rating Outlook Standard & Poor's BBB+ Stable Moody's A3 Stable Credit rating agencies review their ratings periodically, and, therefore, the credit rating assigned to us by each agency may be subject to revision at any time. Factors that can affec"
     }
    },
-   "id": "G34"
+   "id": "G34",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "carvana",
@@ -1834,7 +1868,7 @@
    "boundary_cross": false,
    "next_quarter_changes": true,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2023-03-28",
@@ -1872,7 +1906,8 @@
     }
    },
    "id": "G35",
-   "validation_note": "Pfad Ca (Distressed Exchange 2023-03) -> spaeter Caa3 -> Caa1 ist intern konsistent ueber G35 und G03 hinweg."
+   "validation_note": "Pfad Ca (Distressed Exchange 2023-03) -> spaeter Caa3 -> Caa1 ist intern konsistent ueber G35 und G03 hinweg.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "dillard-s",
@@ -1889,7 +1924,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-05-27",
@@ -1926,7 +1961,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/28917/000002891722000009/dds-20220129.htm"
     }
    },
-   "id": "G36"
+   "id": "G36",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "group-1-automotive",
@@ -1943,7 +1979,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-07-23",
@@ -1980,7 +2016,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1031203/000103120323000007/gpi-20221231.htm"
     }
    },
-   "id": "G37"
+   "id": "G37",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "ingles-markets-incorporated",
@@ -1997,7 +2034,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2012-06-15",
@@ -2034,7 +2071,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/50493/000005049316000044/imkt-20160924x10k.htm"
     }
    },
-   "id": "G38"
+   "id": "G38",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "j-jill",
@@ -2051,7 +2089,7 @@
    "boundary_cross": false,
    "next_quarter_changes": true,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-10-19",
@@ -2088,7 +2126,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1687932/000156459021018528/jill-10k_20210130.htm"
     }
    },
-   "id": "G39"
+   "id": "G39",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "kontoor-brands",
@@ -2105,7 +2144,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2019-04-23",
@@ -2143,7 +2182,8 @@
     }
    },
    "id": "G40",
-   "validation_note": "Kein COVID-Downgrade bei Kontoor in der 17g-7-Datei; die Datei enthaelt alle Aktionen, also stand Ba2 durch - Erinnerungszweifel zugunsten der Datei aufgeloest."
+   "validation_note": "Kein COVID-Downgrade bei Kontoor in der 17g-7-Datei; die Datei enthaelt alle Aktionen, also stand Ba2 durch - Erinnerungszweifel zugunsten der Datei aufgeloest.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "lowe-s-companies",
@@ -2160,7 +2200,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2016-04-11",
@@ -2198,7 +2238,8 @@
      "snippet": "enior debt ratings may be subject to revision or withdrawal at any time by the assigning rating organization, and each rating should be evaluated independently of any other rating. Debt Ratings S&P Moody’s Commercial Paper A-2 P-2 Senior Debt A- A3 Outlook Stable Stable We believe that net cash provided by operating and financing activities will be adequate not only for our operating requirements,"
     }
    },
-   "id": "G41"
+   "id": "G41",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "men-s-wearhouse-llc-the",
@@ -2215,7 +2256,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-12-22",
@@ -2252,7 +2293,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/884217/000155837020003700/tlrd-20200201x10k72fd37.htm"
     }
    },
-   "id": "G42"
+   "id": "G42",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "national-vision",
@@ -2269,7 +2311,7 @@
    "boundary_cross": false,
    "next_quarter_changes": true,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2017-11-03",
@@ -2308,7 +2350,8 @@
      "note": "extended sweep"
     }
    },
-   "id": "G43"
+   "id": "G43",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "nike",
@@ -2325,7 +2368,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2020-03-25",
@@ -2363,7 +2406,8 @@
      "snippet": "021. As of May 31, 2020 and 2019 , no amounts were outstanding under our committed credit facilities. We currently have long-term debt ratings of AA- and A1 from Standard and Poor's Corporation and Moody's Investor Services, respectively. As it relates to our committed credit facility entered into on August 16, 2019, if our long-term debt ratings were to decline, the facility fee and interest rate"
     }
    },
-   "id": "G44"
+   "id": "G44",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "petco",
@@ -2380,7 +2424,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-02-18",
@@ -2417,7 +2461,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1826470/000156459021017616/woof-10k_20210130.htm"
     }
    },
-   "id": "G45"
+   "id": "G45",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "pvh",
@@ -2434,7 +2479,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2019-04-30",
@@ -2474,7 +2519,8 @@
     }
    },
    "id": "G46",
-   "validation_note": "Hartes Negativ: PVH wurde im April 2020 (Folgequartal) herabgestuft; am Stichtag 2020-03-31 galt noch Baa3. Genau der Fall, bei dem ein zu nervoeses System Fehlalarm gibt."
+   "validation_note": "Hartes Negativ: PVH wurde im April 2020 (Folgequartal) herabgestuft; am Stichtag 2020-03-31 galt noch Baa3. Genau der Fall, bei dem ein zu nervoeses System Fehlalarm gibt.",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "ralph-lauren",
@@ -2491,7 +2537,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2015-08-13",
@@ -2528,7 +2574,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1037038/000103703816000019/rl-20160402x10k.htm"
     }
    },
-   "id": "G47"
+   "id": "G47",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "tapestry",
@@ -2545,7 +2592,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2017-06-06",
@@ -2582,7 +2629,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1116132/000111613218000021/tpr6302018-10k.htm"
     }
    },
-   "id": "G48"
+   "id": "G48",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "victoria-s-secret",
@@ -2599,7 +2647,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2021-06-21",
@@ -2637,7 +2685,8 @@
      "snippet": "of the existing contract without having to perform an assessment that would otherwise be required under GAAP. Credit Ratings The following table provides our credit ratings as of February 3, 2024: Moody’s S&P Corporate Ba3 BB- Senior Secured Debt with Subsidiary Guarantee Ba2 BB+ Senior Unsecured Debt with Subsidiary Guarantee B1 BB- Outlook Stable Stable 46 Table of Conten"
     }
    },
-   "id": "G49"
+   "id": "G49",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   },
   {
    "slug": "wayfair",
@@ -2654,7 +2703,7 @@
    "boundary_cross": false,
    "next_quarter_changes": false,
    "kind": "unchanged",
-   "status": "proposed",
+   "status": "confirmed",
    "evidence": {
     "label_record": {
      "date": "2024-09-24",
@@ -2686,7 +2735,8 @@
      "url": "https://www.sec.gov/Archives/edgar/data/1616707/000161670725000022/w-20241231.htm"
     }
    },
-   "id": "G50"
+   "id": "G50",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-29, pauschal nach dokumentierter Zweitpruefung)"
   }
  ],
  "validation": {
@@ -2699,5 +2749,6 @@
    "extended self-disclosure sweep over up to 3 subsequent filings per unconfirmed item: 4 additional confirmations (now 20/50); zero filings mention Moody's with symbols contradicting a label",
    "item-by-item manual read of every evidence record and snippet against known rating histories: 0 errors, 8 annotated special cases"
   ]
- }
+ },
+ "frozen": "2026-08-29"
 }
