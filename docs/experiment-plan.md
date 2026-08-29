@@ -1,3 +1,10 @@
+> **Status, 29 August 2026** — this plan predates the build; it remains the design rationale.
+> What stands today: Phase 1 (leakage audit) done; the harness, sample frame, observations,
+> gold set (50, frozen), runner, metrics and XBRL extraction-check are built and live-tested
+> (see evaluation/README.md). Phase 0 config freezing now happens per run (run_meta.json).
+> Phase 2 contamination probes: designed, not yet run. Phase 3/4 (baselines, ablations): next,
+> against the frozen gold set. The post-cutoff clean window still waits on the lab's labels.
+
 # Experiment plan
 
 *Written by Claude (Opus 5), directed by Robert Vetter, August 2026. Robert set the objective and the

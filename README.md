@@ -1,100 +1,86 @@
 # credit-rating-system
 
-Research project with Prof. Kay Giesecke (HPI / Stanford) and Xiaowei Ding, building a system that
-reproduces what a credit rating analyst does: read a company's recent SEC filings, apply a
-published rating methodology, and produce a credit rating with an evaluation harness that says how
-well it did.
+Research project with Prof. Kay Giesecke (HPI / Stanford) and Xiaowei Ding: build a system that
+reproduces what a Moody's credit rating analyst does — read a company's SEC filings, apply a
+published rating methodology, produce a rating — plus an evaluation harness that measures how
+well it does. First sector: Moody's Retail and Apparel methodology (September 2025).
 
-The first sector methodology in scope is Moody's Retail and Apparel.
+Working mode, stated openly: analysis, code and write-ups are produced by Claude (Opus 5)
+working to questions, decisions and validations set by Robert Vetter. Notes carry attribution
+headers saying what was verified against which source.
 
-## Status
+## Where things stand (29 August 2026)
 
-Early. Reading the methodology and background material. Nothing built yet.
+**The evaluation harness is built, live-tested and frozen.** The chain: Moody's official 17g-7
+rating histories parsed → 186 Retail/Apparel entities mapped to SEC filers by stable IDs (every
+pair decided and logged, verified from both directions and via companies' own rating
+disclosures) → 86 company folders with rating histories and complete SEC filing inventories →
+3,646 quarterly observations 2012–2025, 218 of them with a rating change → a **gold set of 50
+hand-validated observations** (frozen 2026-08-29, evidence chain per item) as the fixed
+measuring stick → a runner that feeds redacted filings to the model and scores predictions
+against label and persistence baseline → metrics, plus extraction scoring against XBRL at zero
+model cost.
 
-Seven companies run through the scorecard so far. The first two, Walmart and Kohl's, were done inside a
-session that already knew the answers. The other five were run blind: separate sessions with no
-conversation history, no web access, and filings with the credit-ratings disclosure stripped out, plus
-a control session that was asked for the same ratings from memory with no documents at all.
+**System v0 exists and passed its smoke test** (two observations, ~$1.60): a single structured
+API call proposes the scorecard inputs, the deterministic engine turns them into a rating.
+Extraction accuracy in the smoke test: 14 of 14 comparable figures exact to the million against
+XBRL. v0 is deliberately the naivest possible system; designing the real analyst architecture
+is the next piece of work.
 
-The headline result is in notes/blind-test.md. The memory-only control scores 0.40 notches mean
-absolute error. The full document-based analysis scores 1.40. Guessing from a company name beats
-working through the methodology and the filing, so on companies of this profile an accuracy number
-from a pipeline like this cannot be interpreted. Ranking is a different story: Spearman correlation
-against the actual ratings is 0.937, and the errors are compression rather than noise, with the
-predictions squeezing a 12-notch spread into 8.
-
-notes/what-else-feeds-a-rating.md goes through all eight subfactors and asks which of them a 10-K can
-actually support. One can. It also covers the leakage problem, which is that companies disclose their
-own credit ratings in the filing, so the label sits inside the input.
-
-notes/blinding-minitest.md answers whether the model can be stopped from recognising the company it
-is rating: mostly no. All seven companies were identified from seven numbers alone (dividends paid is
-effectively a public identifier), and six of seven survived coarsening. Blinding is only a lever for
-smaller issuers, verified per sample.
-
-The files under notes/ were produced by Claude working to questions and test designs set by me, and
-they are labelled as such. They are experiment logs, not hand-written notes.
-
-docs/assumptions-review.md is the audit of every assumption behind all of the above: what is verified,
-what was wrong and has been corrected (two claims), and what must be resolved before the main
-experiment. Read it before citing numbers from the notes.
-
-docs/leakage-audit.md is the first piece of that plan, done: five channels through which a rating can
-reach the model, tested against real filings. The one that matters is that credit agreements map
-Moody's symbols straight to interest margins and are attached to 10-Q exhibits, which is the document
-the plan wanted to add next.
-
-docs/experiment-plan.md is the current plan: what to freeze, what to measure, and in what order. The
-headline constraint is that ratings are inert, so the baseline to beat is not zero, it is persistence
-(carry the last known rating forward). Anything that does not beat that is not evidence of anything.
-The primary experiment is update prediction: fundamentals plus the issuer's rating path in the input,
-scored as lift over persistence on post-cutoff dates, which also neutralises most of what the model's
-training memory could contribute. A blinding ladder (numbers only, blinded documents, named documents)
-decomposes the rest.
-
-notes/rating-history-file.md: the official Moody's rating history (SEC 17g-7 disclosure) is downloaded
-and parsed. It verifies all seven study labels with exact action dates, measures the publication
-embargo at the full 12 months, and powers the historical arm of the evaluation. The post-cutoff clean
-window remains uncovered by any public source, which makes the lab's dataset the strictly blocking
-dependency for that arm.
-
-evaluation/ is the evaluation system. The observation builder turns each mapped company into
-quarterly evaluation samples: 3,646 observations across 86 companies (2012-2025), 218 of them
-with a rating change against the prior quarter, which is the primary experiment's sample and
-shows the persistence baseline getting 94% for free. Underneath it is the company mapping: every Moody's-entity-to-
-SEC-filer pair (OI to CIK) is confirmed manually in a small review UI and recorded in an
-append-only decision log; confirmed pairs compile into one folder per company that the future
-evaluation runner will walk. See evaluation/README.md.
-
-Still waiting on the lab's initial dataset before sample construction and sector scope can be fixed.
+**Headline findings so far, each with a note behind it:**
+- Ratings are inert: 94% of quarters are unchanged, so the baseline to beat is persistence
+  (carry the last rating forward), never zero (docs/experiment-plan.md).
+- Model memory beats naive document analysis on famous issuers (0.40 vs 1.40 notches MAE,
+  notes/blind-test.md), so raw accuracy is uninterpretable; the primary experiment is update
+  prediction as lift over persistence on changed quarters.
+- Blinding does not work for covered issuers — identified from seven numbers alone
+  (notes/blinding-minitest.md).
+- Filings disclose their own ratings (docs/leakage-audit.md); inputs are redacted, and the same
+  disclosure channel is reused productively to verify the mapping and the gold labels.
+- The public rating file is embargoed 12 months, fully used — proven live by Nike's July 2026
+  10-K disclosing a downgrade the file cannot see (notes/rating-history-file.md).
 
 ## Layout
 
-    methodologies/   Moody's rating methodologies, for reference (PDF)
-    system/          the rating system itself; scorecard.py is the deterministic scoring engine
-    evaluation/      the evaluation system: mapping records, pipeline/ scripts, one folder per
-                     company with ratings, filings and observations (see evaluation/README.md)
-    notes/           experiment logs (markdown; small experiment code under notes/scripts/)
-    docs/            design docs: experiment plan, leakage audit, assumptions review
-    data/            raw and derived data, gitignored; data/README.md documents every file,
-                     its source URL and download date
+    README.md            this map
+    methodologies/       the Moody's methodology PDF (reference)
+    system/              the system under test: scorecard.py (deterministic scoring engine),
+                         analyst.py (the model call, v0), redact.py (rating-disclosure removal)
+    evaluation/          the measuring apparatus; see evaluation/README.md for the full story:
+                         mapping records, gold set + review sheet, pipeline/ (15 documented
+                         steps), companies/ (generated per-company folders, gitignored)
+    notes/               experiment logs, chronological; notes/README.md is the index
+    docs/                experiment plan, leakage audit, assumptions review
+    data/                raw and derived data (gitignored); data/README.md documents every
+                         file, its source URL and download date
+
+Every script states its purpose, inputs and outputs in its docstring and is listed with its
+pipeline position in evaluation/README.md. Decisions (mapping, gold set) live in committed,
+append-only records; everything generated is regenerable from data/ plus the scripts.
+
+## Next: the analyst architecture
+
+v0 is one monolithic call. The open design work: decompose per subfactor (peer tables for
+Market Position, multi-year filings for Stability — input configurations already exist as
+runner switches), decide where XBRL replaces model extraction, add the methodology's notching
+factors, and fuse the scorecard and direct channels. Iteration happens on non-gold
+observations; the frozen gold set is only for milestone claims.
 
 ## Open questions
 
-- Size and shape of the initial dataset: how many companies, which years, which sectors.
-- Which rating is the target: senior unsecured, or the corporate family rating.
-- Whether the sector methodologies share the same scoring mechanics, so that the scorecard engine
-  can be generic with one configuration per sector.
-- How amendments and restatements are handled, so that evaluation stays point-in-time.
-- What may be done with the Moody's documents beyond keeping them here for reference.
+- Sector strategy: methodology-faithful sector by sector (current mandate) versus
+  sector-agnostic pure prediction — a project-scope decision for Giesecke/Ding.
+- Whether peer *ratings* (not just peer figures) are admissible input, or leakage.
+- Five scope calls: CVS, Samsonite, Good Sam, Amazon, Sherwin-Williams.
+- The lab's dataset (Ding): strictly blocking only for the post-cutoff clean-window arm.
+- What may be done with the Moody's documents beyond local reference (terms of use).
+- Contamination probes (same observation, no documents) are designed but not yet run.
 
 ## Notes on the methodology
 
-The retail scorecard has eight subfactors. Four are quantitative and computed from the accounts
-(revenue, Debt/EBITDA, (EBITDA − capex)/interest, RCF/net debt) and carry 55% of the weight. Four
-are qualitative and scored from narrative sections of the filing (market characteristics, market
-position, revenue and earnings stability, financial policy) and carry the other 45%.
-
-Once the subfactor scores are fixed, the aggregation is deterministic: weighted sum, then a lookup
-table onto the rating scale. So the scoring engine can be a plain function with tests, and the
-model's job is to propose inputs rather than to produce a rating.
+The retail scorecard has eight subfactors: four quantitative, computed from the accounts
+(revenue, Debt/EBITDA, (EBITDA−capex)/interest, RCF/net debt, 55% weight) and four qualitative
+(market characteristics, market position, revenue and earnings stability, financial policy,
+45%). Aggregation is deterministic: weighted sum, then a lookup onto the 21-notch scale. The
+scoring engine is therefore a plain function with tests; the model's job is to propose inputs,
+not to produce the rating.

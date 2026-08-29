@@ -38,9 +38,9 @@ Per company folder:
 | Step | Script | Does |
 |---|---|---|
 | 1 | `pipeline/build_frame.py` | parses the two 17g-7 zips, unions Corporate entities, matches names to EDGAR CIKs (three normalisation forms, strictly ordered), fetches SIC codes, filters to Retail and Apparel, writes `data/frame/retail_frame.json` |
-| 2 | `pipeline/sic_sweep_listed.py` | fetches the SIC code of every listed SEC company (~8,000), enabling the reverse completeness check |
+| 2 | `pipeline/sic_sweep_listed.py` | fetches the SIC code of every listed SEC company (~8,000), enabling the reverse completeness check *(one-shot, done; rerun only to refresh)* |
 | 3 | `pipeline/build_queue.py` | turns the frame into mapping items (plus reverse items: listed retailers with no mapping); merges into `mapping.json` without touching decided items |
-| 4 | `pipeline/bulk_accept.py` | records Robert's wholesale acceptance of the automatic proposals as bulk decisions in the log |
+| 4 | `pipeline/bulk_accept.py` | records Robert's wholesale acceptance of the automatic proposals as bulk decisions in the log *(one-shot, done; kept as executable provenance)* |
 | 5 | `pipeline/compile_folders.py` | confirmed decisions → `companies/` folders (company.json + ratings.json); never deletes, only rewrites those two files |
 | 6 | `pipeline/fetch_filings.py` | SEC filing manifest + latest annual report into each folder |
 | 7 | `pipeline/verify_mapping.py` | the independent check: compares ratings the filer discloses in its own annual report against the mapped Moody's entity's ratings in effect at the filing date → `mapping-verification.md` |

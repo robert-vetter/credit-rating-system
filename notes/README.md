@@ -11,6 +11,10 @@ attribution header saying what was verified against source documents and what wa
 - `blind-test.md` is the five-company blind test with stripped filings and a memory control, plus
   `scripts/blind_metrics.py` for the error numbers and `scripts/strip_ratings.py` for the stripping.
   This supersedes the two earlier runs as evidence.
+- `blinding-minitest.md` answers whether the model can be stopped from recognising the company
+  it is rating (mostly no: identified from seven numbers alone).
+- `rating-history-file.md` is the parse of Moody's official 17g-7 rating histories: label
+  verification, the 12-month embargo measured, the sector frame with its full correction history.
 - `what-else-feeds-a-rating.md` goes through all eight subfactors and asks which of them a 10-K can
   support, and records the leakage problem: companies disclose their own credit ratings in the filing.
 - the scoring arithmetic for the runs lives in `system/scorecard.py` (the deterministic engine, moved
