@@ -21,3 +21,4 @@ venv/
 *.swp
 evaluation/companies/
 evaluation/runs/
+experiments/01-oos-cross-section/runs/

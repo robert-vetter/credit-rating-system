@@ -1,7 +1,9 @@
 # Experiment 01 — Out-of-sample cross-section: what does a current LLM's rating accuracy look like on data it cannot have seen?
 
-*Specification draft v0.1, 2026-08-30. Designed jointly by Robert Vetter and Claude (Opus 5);
-decisions and their owners are logged in decisions.md. Status: DRAFT — key decisions open.*
+*Specification v1.0, 2026-08-30. Designed jointly by Robert Vetter and Claude (Opus 5);
+decisions and their owners are logged in decisions.md. Status: first pass EXECUTED under the
+$5 cap — see results.md. Files: candidates.json (hand-validated labels with evidence),
+probe.py, run_pairs.py, runs/ (full transcripts, gitignored contents regenerable).*
 
 ## 1. Objective (Xiaowei's ask, made precise)
 
