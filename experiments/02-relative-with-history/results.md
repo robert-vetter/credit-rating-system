@@ -61,6 +61,19 @@ all via the Batch API. Every prompt verbatim in `runs/msgbatch_016jjPxBbXaxaowQy
    Memory in this era is directional at best and wrong on specifics, consistent with every
    earlier probe in this project.
 
+## Defect found in the post-run check (disclosed, fixed, scored)
+
+The history pack's line "rating in effect at quarter start" was computed with an inclusive
+date, so a Moody's action dated exactly on the quarter's first day counted as prior
+knowledge. It happened once in this run: **Under Armour (G27)** was cut Ba1→Ba2 on
+2020-04-01 and Ba2→Ba3 on 2020-05-21; the pack told the model "Ba2 in effect", which is
+information from inside the observation quarter. The event list itself was filtered strictly
+and did not contain the action; only the summary line leaked. Fixed in history_pack.py (the
+line now states the rating as of the day before the quarter starts). G27 is therefore not a
+leak-free observation; every channel still missed the label (Ba3), so the leak manufactured
+no hit. **Metrics without G27 (n = 8): persistence 3/8 exact, MAE 0.75; A-direct 6/8 exact, MAE 0.25; B 4/8 exact, MAE 0.50; A 2/8 exact, MAE 1.75.** The other eight observations
+have no action on their quarter-start day (checked against the raw records).
+
 ## Cost — and a miss on my side
 
 Metered spend **$5.21** (probes + 18 document requests, batch prices), **21 cents over
