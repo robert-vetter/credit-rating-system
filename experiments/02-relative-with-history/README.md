@@ -1,7 +1,10 @@
 # Experiment 02 — Relative rating determination with the issuer's own history
 
-*Specification v0.1, 2026-08-30. Designed jointly by Robert Vetter and Claude; decisions in
-decisions.md. Status: inputs built, scope under the budget cap pending (D5).*
+*Specification v1.0, 2026-08-30. Designed jointly by Robert Vetter and Claude; decisions in
+decisions.md. Status: batch submitted (9 gold observations, 6 changed / 3 unchanged, 10-K +
+history pack, probes + paired A/B, Opus 4.5, worst-case $4.59). Files: selection.json (the
+draw and its budget trim, bias disclosed), run_batch.py, runs/<batch>/requests.json (every
+prompt verbatim), results.md once collected.*
 
 ## 1. What changes versus Experiment 01
 
