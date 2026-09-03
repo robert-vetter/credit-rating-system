@@ -28,6 +28,10 @@ current filing plus the history pack, contamination probes on the same 10, all v
 Batch API (50% off): ~$3.30. The full-gold-set run stays a later, separately funded step;
 D2's one-shot rule applies to these 10 (no tuning against them).
 
+**Post-run note (2026-08-30):** metered spend $5.21, 21 cents over the cap, caused by the
+cache-write premium in batch mode (see results.md). Runner fixed. Robert to decide whether
+the full-gold-set run (~$15 batched) is funded.
+
 ## OPEN
 
 *(none)*

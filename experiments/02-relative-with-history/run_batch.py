@@ -96,7 +96,10 @@ def build_requests(client=None):
                     model=MODEL, system=SYSTEM,
                     messages=[{"role": "user", "content": docs + pack + A_TASK}]).input_tokens <= CONTEXT_GUARD:
                 break
-        doc_block = {"type": "text", "text": docs, "cache_control": {"type": "ephemeral"}}
+        # No cache_control in batch mode: requests run in parallel, so A and B both paid the
+        # 1.25x cache-write premium with zero reads (measured: 1.57M cache-creation tokens,
+        # 0 read) - which is what pushed the first run 21 cents over the cap.
+        doc_block = {"type": "text", "text": docs}
         shared = [doc_block, {"type": "text", "text": pack}]
         probe_q = (f"As of {t}: what was the Moody's long-term credit rating of {c['edgar_name']} "
                    f"({it['group']})? Did Moody's take any rating action on it in the quarter ending "
@@ -128,7 +131,7 @@ def dry(client):
                                          messages=r["params"]["messages"]).input_tokens
         total += n
         print(f"  {r['custom_id']:<12} {n:>8,} Tokens")
-    worst = (total * 5 / 1e6 + 30 * 3000 * 25 / 1e6) * 0.5     # no cache hits, batch price
+    worst = (total * 5 / 1e6 + len(reqs) * 3000 * 25 / 1e6) * 0.5   # batch price, no caching
     print(f"\n{len(reqs)} Requests, {total:,} Input-Tokens gesamt. Worst-case Batch-Kosten ~${worst:.2f}")
     return reqs, manifest
 
