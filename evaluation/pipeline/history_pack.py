@@ -179,8 +179,12 @@ def build(slug, t, n_prior=3):
         rows.append("  note: fiscal years ending before mid-2019 predate ASC 842, so their tagged debt "
                     "excludes operating-lease liabilities; the debt jump at adoption is accounting, not borrowing")
     hist = "\n".join(f"  {e[0]}  {e[1]}  ({e[2]}, {e[3]}-level)" for e in shown) or "  (no events on record)"
-    r_qs = rating_at(ratings, qs)
-    hist += f"\n  => rating in effect at quarter start ({qs}): {r_qs or 'none'}"
+    # Strictly before the observation quarter: an action dated on the quarter's first day is
+    # part of the quarter (Under Armour, 2020-04-01, leaked into a run before this fix).
+    import datetime as _dt
+    prev_day = (_dt.date(*map(int, qs.split("-"))) - _dt.timedelta(days=1)).isoformat()
+    r_qs = rating_at(ratings, prev_day)
+    hist += f"\n  => rating in effect entering the quarter (as of {prev_day}): {r_qs or 'none'}"
     peers = peer_table.build(t, exclude_slug=slug) or "(peer table unavailable at this date)"
     text = (f"<history_pack company=\"{company['group']}\" as_of=\"{t}\">\n"
             f"Rating history (Moody's, complete through {qs}; nothing later is provided):\n{hist}\n\n"
