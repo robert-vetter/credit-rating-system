@@ -22,3 +22,5 @@ venv/
 evaluation/companies/
 evaluation/runs/
 experiments/01-oos-cross-section/runs/
+experiments/02-relative-with-history/runs/
+experiments/02-relative-with-history/LAST_BATCH

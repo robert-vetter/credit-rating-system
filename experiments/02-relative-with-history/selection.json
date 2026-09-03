@@ -1,0 +1,114 @@
+{
+ "seed": 20260830,
+ "rule": "Seeded draw (seed 20260830): 6 changed + 4 unchanged from the frozen gold set. Budget adjustment (Robert's $5 cap, worst-case priced without cache): observations whose redacted 10-K exceeded ~120k tokens were replaced by the next changed items in the same seeded order that fit (<=110k, company not already selected): G29 Walgreens and G24 Signet -> G17 Macy's and G14 Leslie's; the largest unchanged item G43 National Vision was dropped without replacement. Final: 9 observations, 6 changed / 3 unchanged. Document-size selection is a disclosed bias.",
+ "items": [
+  {
+   "id": "G05",
+   "slug": "dollar-general",
+   "group": "DOLLAR GENERAL CORPORATION",
+   "date": "2013-03-31",
+   "kind": "changed",
+   "label": "Baa3",
+   "persistence": "Ba1",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Baa"
+  },
+  {
+   "id": "G13",
+   "slug": "kohl-s",
+   "group": "KOHL'S CORPORATION",
+   "date": "2025-06-30",
+   "kind": "changed",
+   "label": "B2",
+   "persistence": "Ba3",
+   "delta": 2,
+   "era": "2022-2025",
+   "bucket": "B"
+  },
+  {
+   "id": "G14",
+   "slug": "leslie-s-poolmart",
+   "group": "LESLIE'S POOLMART, INC.",
+   "date": "2024-09-30",
+   "kind": "changed",
+   "label": "B2",
+   "persistence": "B1",
+   "delta": 1,
+   "era": "2022-2025",
+   "bucket": "B"
+  },
+  {
+   "id": "G17",
+   "slug": "macy-s",
+   "group": "MACY'S",
+   "date": "2022-03-31",
+   "kind": "changed",
+   "label": "Ba1",
+   "persistence": "Ba2",
+   "delta": -1,
+   "era": "2022-2025",
+   "bucket": "Ba"
+  },
+  {
+   "id": "G20",
+   "slug": "o-reilly",
+   "group": "O'REILLY",
+   "date": "2013-12-31",
+   "kind": "changed",
+   "label": "Baa2",
+   "persistence": "Baa3",
+   "delta": -1,
+   "era": "2012-2016",
+   "bucket": "Baa"
+  },
+  {
+   "id": "G27",
+   "slug": "under-armour",
+   "group": "UNDER ARMOUR, INC.",
+   "date": "2020-06-30",
+   "kind": "changed",
+   "label": "Ba3",
+   "persistence": "Ba1",
+   "delta": 2,
+   "era": "2020-2021",
+   "bucket": "Ba"
+  },
+  {
+   "id": "G37",
+   "slug": "group-1-automotive",
+   "group": "GROUP 1 AUTOMOTIVE, INC.",
+   "date": "2023-09-30",
+   "kind": "unchanged",
+   "label": "Ba1",
+   "persistence": "Ba1",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Ba"
+  },
+  {
+   "id": "G39",
+   "slug": "j-jill",
+   "group": "J.JILL",
+   "date": "2022-03-31",
+   "kind": "unchanged",
+   "label": "Caa1",
+   "persistence": "Caa1",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Caa+"
+  },
+  {
+   "id": "G49",
+   "slug": "victoria-s-secret",
+   "group": "VICTORIA'S SECRET & CO.",
+   "date": "2024-12-31",
+   "kind": "unchanged",
+   "label": "Ba3",
+   "persistence": "Ba3",
+   "delta": 0,
+   "era": "2022-2025",
+   "bucket": "Ba"
+  }
+ ]
+}
