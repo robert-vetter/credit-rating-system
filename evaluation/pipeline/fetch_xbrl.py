@@ -62,6 +62,27 @@ INSTANT = {"cash", "lt_debt_noncurrent", "lt_debt_current", "st_borrowings",
            "operating_lease_current", "operating_lease_noncurrent"}
 
 
+def quarterly_values(units, instant):
+    """Single-quarter values (fp Q1-Q3; Q4 flows are not tagged separately - derive as FY minus
+    nine-month YTD downstream if needed), deduped by period end, earliest filing wins."""
+    best = {}
+    for e in units:
+        if e.get("form") not in ("10-Q", "10-Q/A") or e.get("fp") not in ("Q1", "Q2", "Q3") or "val" not in e:
+            continue
+        if not instant:
+            start, end = e.get("start", ""), e.get("end", "")
+            if not start or not end:
+                continue
+            days = (int(end[:4]) - int(start[:4])) * 365 + (int(end[5:7]) - int(start[5:7])) * 30
+            if not 75 <= days <= 110:       # one quarter, not year-to-date
+                continue
+        k = e["end"]
+        if k not in best or e.get("filed", "9999") < best[k]["filed"]:
+            best[k] = {"end": e["end"], "val": e["val"], "filed": e.get("filed", ""),
+                       "form": e.get("form", ""), "fp": e.get("fp", "")}
+    return sorted(best.values(), key=lambda x: x["end"])
+
+
 def annual_values(units, instant):
     """Fiscal-year values from a us-gaap concept's USD unit list, deduped by period end."""
     best = {}
@@ -107,16 +128,20 @@ def main():
         gaap = raw.get("facts", {}).get("us-gaap", {})
         fields = {}
         for canon, tags in CONCEPTS.items():
-            merged = {}
+            merged, merged_q = {}, {}
             for tag in tags:
                 units = gaap.get(tag, {}).get("units", {}).get("USD", [])
                 for v in annual_values(units, canon in INSTANT):
                     if v["end"] not in merged:            # earlier-listed tag wins
                         merged[v["end"]] = {**v, "tag": tag}
-            if merged:
-                fields[canon] = {"annual": sorted(merged.values(), key=lambda x: x["end"])}
+                for v in quarterly_values(units, canon in INSTANT):
+                    if v["end"] not in merged_q:
+                        merged_q[v["end"]] = {**v, "tag": tag}
+            if merged or merged_q:
+                fields[canon] = {"annual": sorted(merged.values(), key=lambda x: x["end"]),
+                                 "quarterly": sorted(merged_q.values(), key=lambda x: x["end"])}
         json.dump({"cik": c["cik"], "entity": raw.get("entityName", ""),
-                   "source": "SEC companyfacts API, fetched 2026-08-29", "fields": fields},
+                   "source": "SEC companyfacts API, fetched 2026-08-31 (annual + quarterly)", "fields": fields},
                   open(os.path.join(OUT, slug, "xbrl.json"), "w"), indent=0)
         yrs = fields.get("revenue", {}).get("annual", [])
         print(f"  {slug:<30} {len(fields):>2}/16 Konzepte, Revenue {len(yrs)} Jahre"

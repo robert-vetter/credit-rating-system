@@ -131,14 +131,39 @@ def rating_at(ratings, t):
     return max(sen)[1] if sen else None
 
 
-def build(slug, t, n_prior=3):
+def quarterly_rows(xbrl, filed_leq, n=4):
+    """Last n single-quarter values of the ten figures (issuer-tagged, filed on/before filed_leq)."""
+    q = {}
+    for field, blob in xbrl.get("fields", {}).items():
+        for v in blob.get("quarterly", []):
+            if v.get("filed", "9999") <= filed_leq:
+                q.setdefault(v["end"], {})[field] = v["val"]
+    ends = sorted(e for e, vals in q.items() if "revenue" in vals)[-n:]
+    rows = []
+    for e in ends:
+        vals = q[e]
+        f = lambda k: (f"{vals[k] / 1e6:,.0f}" if k in vals else "n/a")
+        rows.append(f"  quarter ending {e}: revenue {f('revenue')}m; operating income {f('operating_income')}m; "
+                    f"D&A {f('d_and_a')}m; capex {f('capex')}m; CFO {f('cfo')}m; cash {f('cash')}m; "
+                    f"LT debt {f('lt_debt_noncurrent')}m; op-lease liab. {f('operating_lease_noncurrent')}m")
+    return rows
+
+
+def build(slug, t, n_prior=3, history_end=None):
+    """history_end: cap the rating history there instead of at the observation quarter start
+    (Experiment 03: the 17g-7 file ends 2025-08-11, observation dates lie after it)."""
     d = os.path.join(OUT, slug)
     company = json.load(open(os.path.join(d, "company.json")))
     ratings = json.load(open(os.path.join(d, "ratings.json")))
     obs = json.load(open(os.path.join(d, "observations.json")))["observations"]
     o = next((x for x in obs if x["date"] == t), None)
-    qs = quarter_start(t)
-    path = [e for e in (o["rating_path"] if o else []) if e[0] < qs]
+    if history_end:
+        qs = history_end
+        src = o or (obs[-1] if obs else None)
+        path = [e for e in (src["rating_path"] if src else []) if e[0] <= history_end]
+    else:
+        qs = quarter_start(t)
+        path = [e for e in (o["rating_path"] if o else []) if e[0] < qs]
     xp = os.path.join(d, "xbrl.json")
     xbrl = json.load(open(xp)) if os.path.exists(xp) else {}
     years = fy_values(xbrl, t)
@@ -150,11 +175,18 @@ def build(slug, t, n_prior=3):
     for end in prior_ends + ([current_end] if current_end else []):
         m = metrics_for(years[end])
         qsc = quant_contribution(m)
-        r_then = rating_at(ratings, end) if end != current_end else None
+        if end == current_end:
+            r_then = None
+        elif history_end and end > history_end:
+            r_then = rating_at(ratings, history_end)      # last known rating, not the rating "then"
+        else:
+            r_then = rating_at(ratings, end)
         anchor = implied_anchor(r_then, qsc) if r_then else None
         log["years"][end] = {"metrics": {k: v for k, v in m.items() if k != "debt_components"},
                              "quant_scores": qsc, "rating_then": r_then, "anchor": anchor}
-        tag = "current FY (latest 10-K before t)" if end == current_end else f"rating then {r_then or '?'}"
+        tag = ("current FY (latest 10-K before t)" if end == current_end else
+               (f"last known rating {r_then or '?'} (history ends {history_end})"
+                if history_end and end > history_end else f"rating then {r_then or '?'}"))
         f = lambda v, fmt: (fmt.format(v) if v is not None else "n/a")
         rows.append(f"  FY ending {end} [{tag}]: revenue {f(m['revenue_usd_bn'], '{:.1f}')}bn; "
                     f"EBITDA {f(m['ebitda_usd_m'], '{:,.0f}')}m; debt {f(m['debt_usd_m'], '{:,.0f}')}m; "
@@ -182,9 +214,18 @@ def build(slug, t, n_prior=3):
     # Strictly before the observation quarter: an action dated on the quarter's first day is
     # part of the quarter (Under Armour, 2020-04-01, leaked into a run before this fix).
     import datetime as _dt
-    prev_day = (_dt.date(*map(int, qs.split("-"))) - _dt.timedelta(days=1)).isoformat()
-    r_qs = rating_at(ratings, prev_day)
-    hist += f"\n  => rating in effect entering the quarter (as of {prev_day}): {r_qs or 'none'}"
+    if history_end:
+        r_qs = rating_at(ratings, history_end)
+        hist += f"\n  => rating in effect at the end of the available history ({history_end}): {r_qs or 'none'}"
+    else:
+        prev_day = (_dt.date(*map(int, qs.split("-"))) - _dt.timedelta(days=1)).isoformat()
+        r_qs = rating_at(ratings, prev_day)
+        hist += f"\n  => rating in effect entering the quarter (as of {prev_day}): {r_qs or 'none'}"
+    qrows = quarterly_rows(xbrl, t)
+    if qrows:
+        rows.append("  Recent single quarters (issuer-tagged XBRL, USD m, filed on or before the as-of date):")
+        rows.extend(qrows)
+    log["quarterly_rows"] = len(qrows)
     peers = peer_table.build(t, exclude_slug=slug) or "(peer table unavailable at this date)"
     text = (f"<history_pack company=\"{company['group']}\" as_of=\"{t}\">\n"
             f"Rating history (Moody's, complete through {qs}; nothing later is provided):\n{hist}\n\n"
