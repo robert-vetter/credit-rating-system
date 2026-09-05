@@ -74,6 +74,8 @@ def build_requests():
     cand = candidates()
     reqs, audit = [], []
     for it in cand["items"]:
+        if not it.get("in_run", True) or it.get("status") != "confirmed":
+            continue
         slug = it["slug"]
         cdir = os.path.join(ROOT, "evaluation", "companies", slug)
         c = json.load(open(os.path.join(cdir, "company.json")))
@@ -178,6 +180,8 @@ def collect(client):
 
     results = []
     for it in candidates()["items"]:
+        if not it.get("in_run", True):
+            continue
         v, p = outs.get(f"vf-{it['id']}", {}), outs.get(f"probe-{it['id']}", {})
         if not v or "figures_usd_m" not in v:
             continue

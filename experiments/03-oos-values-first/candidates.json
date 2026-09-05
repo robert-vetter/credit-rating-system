@@ -22,7 +22,9 @@
     "note": "table as of Aug 1, 2026: Moody's Corporate Ba2 (senior unsecured w/ guarantee Ba2, senior unsecured B1)"
    },
    "n_statements_in_window": 0,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X02",
@@ -40,7 +42,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X03",
@@ -58,7 +62,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 3,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X04",
@@ -76,7 +82,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 4,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X05",
@@ -94,7 +102,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 4,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X06",
@@ -112,7 +122,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X07",
@@ -130,7 +142,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X08",
@@ -149,7 +163,9 @@
     "note": "narrative: 'received downgraded credit ratings from Moody's to (Caa3 from Caa1)' during quarter ended Oct 4, 2025; file shows the CFR action on 2025-08-13, i.e. before B -> unchanged vs file end"
    },
    "n_statements_in_window": 0,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": false
   },
   {
    "id": "X09",
@@ -167,7 +183,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": false
   },
   {
    "id": "X10",
@@ -185,7 +203,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 3,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X11",
@@ -203,7 +223,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X12",
@@ -221,7 +243,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 3,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X13",
@@ -239,7 +263,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 9,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": false
   },
   {
    "id": "X14",
@@ -258,7 +284,9 @@
     "note": "narrative: 'during October 2025 ... downgraded LI LLC's corporate family rating from Caa1 to Caa3 and its senior unsecured rating from Caa3 to C'; October 2025 > B -> genuine out-of-sample change; no later filing discloses a further action"
    },
    "n_statements_in_window": 0,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X15",
@@ -276,7 +304,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 1,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X16",
@@ -294,7 +324,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 4,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X17",
@@ -312,7 +344,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 2,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X18",
@@ -330,7 +364,9 @@
     "class": "statement"
    },
    "n_statements_in_window": 12,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": false
   },
   {
    "id": "X19",
@@ -349,7 +385,9 @@
     "note": "table as of May 2, 2026: Moody's Corporate Ba3 (senior secured Ba2, senior unsecured B1)"
    },
    "n_statements_in_window": 0,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   },
   {
    "id": "X20",
@@ -367,7 +405,10 @@
     "class": "statement"
    },
    "n_statements_in_window": 4,
-   "status": "proposed"
+   "status": "confirmed",
+   "confirmed_by": "Robert Vetter (Chat, 2026-08-31, nach Handlesen aller Belege durch Claude)",
+   "in_run": true
   }
- ]
+ ],
+ "selection_rule": "D9: cap $10 -> both changed cases plus the cheapest unchanged cases by estimated input tokens; excluded for cost: X08 leslie-s-poolmart, X09 levi-strauss, X13 pvh, X18 v-f (all unchanged). They remain confirmed labels for a later run."
 }

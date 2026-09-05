@@ -1,7 +1,7 @@
 # Experiment 03 — Out-of-sample cross-section, values-first: the leakage-free answer to Xiaowei's question
 
-*Design plan v0.1, 2026-08-31, by Robert Vetter and Claude (Opus 5). Status: PLAN — no run
-until Robert signs off on the decisions in decisions.md. This document supersedes the fresh
+*Design plan v0.1, 2026-08-31, by Robert Vetter and Claude (Opus 5). Status: READY — decisions D1–D10 taken (decisions.md), 20 labels confirmed, 16 selected for the
+run under the $10 cap; waiting only on API credits for the count_tokens preflight and submission. This document supersedes the fresh
 arm of Experiment 01 and replaces Experiment 02's historical arm as the basis for any
 out-of-sample claim.*
 

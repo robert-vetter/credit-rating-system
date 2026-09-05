@@ -6,6 +6,19 @@
 
 ## DECIDED (Robert, 2026-08-31, via chat)
 
+**D10 — Labels confirmed: all 20 candidates** (2 out-of-sample changes: Nike A1→A2, November
+2025; Qurate Caa1→Caa3, October 2025; 18 unchanged), after Claude's hand-read of every
+disclosure hit (label-review.md, candidates.json evidence). Persistence reference corrected to
+the file's true content end 2025-08-28.
+
+**D9 applied — cap $10 kept: 16 of 20 in the run** (both changed cases plus the 14 cheapest
+unchanged by estimated input tokens); Leslie's, Levi Strauss, PVH and V.F. (all unchanged,
+longest filing sets) stay confirmed but out of this run. Offline estimate ~$9.3; the real
+count_tokens figure gates submission.
+
+**Blocker (external):** the API account's prepaid balance is exhausted (even count_tokens is
+refused); Robert tops up before --dry / --submit.
+
 **D1 — Boundary B = 2025-09-30** (training cutoff Aug 2025 + one-month buffer). Alternative
 considered: 2025-08-31 without buffer.
 
