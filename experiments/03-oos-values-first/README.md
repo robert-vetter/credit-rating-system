@@ -70,7 +70,8 @@ threshold or grid language / historical reference), Robert confirms; accepted la
 only): 15 companies, 1 change; with all filings and 8-Ks: more coverage, plausibly 3–6
 changes. The true count is a result of the harvest, not an assumption.
 
-Persistence baseline per company = rating in effect at the end of the 17g-7 file (Aug 2025),
+Persistence baseline per company = rating in effect at the end of the 17g-7 file's content
+(2025-08-28, the latest action date in the file — measured, not assumed from the file date),
 the last rating anyone could have known without post-cutoff information.
 
 ## 4. Inputs — everything useful the model may legitimately see (decision D2/D3)

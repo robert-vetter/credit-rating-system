@@ -29,7 +29,7 @@ import history_pack, redact, run_eval, scorecard   # noqa: E402,E401
 MODEL = "claude-opus-4-6"
 B = "2025-09-30"
 AS_OF = "2026-08-29"
-HISTORY_END = "2025-08-11"          # 17g-7 file date; content through Aug 2025
+HISTORY_END = "2025-08-28"          # latest action date in the 17g-7 file (measured), content end
 CAP_USD = 10.00                     # decision D9
 PRICE_IN, PRICE_OUT = 5 / 1e6, 25 / 1e6
 RUNS = os.path.join(HERE, "runs")
