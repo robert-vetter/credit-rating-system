@@ -1,3 +1,12 @@
+> **Scope warning (added 2026-08-31 after Robert's review): this is NOT an out-of-sample
+> experiment.** All nine observations (2013–2025) predate Opus 4.5's training cutoff
+> (Aug 2025) and may sit in its training data. Leakage through training memory is
+> controlled here only by the per-observation probes and the relative-to-history framing —
+> it is *measured*, not excluded. The lift reported below is therefore in-training-period
+> evidence and must not be read as out-of-sample skill; the leakage-free test is
+> Experiment 01's post-cutoff window (and its planned extensions, see README §3). The
+> earlier headline ("first lift over persistence") stands only with this qualifier.
+
 # Experiment 02 — Results (batch msgbatch_016jjPxBbXaxaowQymd9LSuH, collected 2026-08-30)
 
 *Nine gold-set observations (6 rating changes / 3 unchanged, 2013–2025, nine companies), Opus

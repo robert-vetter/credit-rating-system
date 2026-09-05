@@ -42,6 +42,13 @@ issuer up to the previous quarter, and what is new, is the rating still right?*
 
 ## 3. Two arms, one leakage discipline
 
+> **Scope warning (2026-08-31):** the historical arm below uses observations that lie
+> *before* the model's training cutoff. It is not out of sample. Its value is (a) the only
+> place with enough rating changes to test changed vs. unchanged behaviour across companies
+> and years, and (b) the within-model contrast against the post-cutoff arm; probes measure,
+> but cannot exclude, training-memory leakage. Out-of-sample claims come from the fresh arm
+> only.
+
 - **Historical arm — the gold set** (50 hand-validated observations, 30 changed / 20
   unchanged, 2012–2025, 44 companies). Leakage control against training memory: (i)
   per-observation contamination probes before any documents, dated to the observation;
