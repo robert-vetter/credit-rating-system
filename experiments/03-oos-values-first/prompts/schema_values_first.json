@@ -1,0 +1,232 @@
+{
+ "type": "object",
+ "properties": {
+  "fiscal_year_label": {
+   "type": "string"
+  },
+  "figures_usd_m": {
+   "type": "object",
+   "properties": {
+    "revenue": {
+     "type": "number",
+     "description": "total revenue, most recent full fiscal year"
+    },
+    "operating_income": {
+     "type": "number",
+     "description": "operating income, same fiscal year"
+    },
+    "d_and_a": {
+     "type": "number",
+     "description": "depreciation and amortisation (cash-flow statement)"
+    },
+    "capex": {
+     "type": "number",
+     "description": "capital expenditures"
+    },
+    "interest": {
+     "type": "number",
+     "description": "gross interest expense incl. finance-lease interest where split out; if only net interest is disclosed, use it and say so in notes"
+    },
+    "cash": {
+     "type": "number",
+     "description": "cash and cash equivalents at fiscal year end"
+    },
+    "dividends": {
+     "type": "number",
+     "description": "dividends paid (cash-flow statement); 0 if none"
+    },
+    "cfo": {
+     "type": "number",
+     "description": "net cash provided by operating activities"
+    },
+    "wc_swing": {
+     "type": "number",
+     "description": "sum of working-capital change lines inside operating cash flow (sign as reported: negative if working capital consumed cash)"
+    },
+    "debt": {
+     "type": "number",
+     "description": "Moody's-adjusted total debt: short-term debt + current portion + long-term debt + finance-lease liabilities (current and noncurrent) + operating-lease liabilities (current and noncurrent) + financing obligations"
+    }
+   },
+   "required": [
+    "revenue",
+    "operating_income",
+    "d_and_a",
+    "capex",
+    "interest",
+    "cash",
+    "dividends",
+    "cfo",
+    "wc_swing",
+    "debt"
+   ],
+   "additionalProperties": false
+  },
+  "figure_notes": {
+   "type": "string",
+   "description": "which lines were summed for debt/interest/wc_swing, any judgement calls"
+  },
+  "qualitative": {
+   "type": "object",
+   "properties": {
+    "Market Characteristics": {
+     "type": "string",
+     "enum": [
+      "Aaa",
+      "Aa",
+      "A",
+      "Baa",
+      "Ba",
+      "B",
+      "Caa",
+      "Ca"
+     ]
+    },
+    "Market Position": {
+     "type": "string",
+     "enum": [
+      "Aaa",
+      "Aa",
+      "A",
+      "Baa",
+      "Ba",
+      "B",
+      "Caa",
+      "Ca"
+     ]
+    },
+    "Revenue and Earnings Stability": {
+     "type": "string",
+     "enum": [
+      "Aaa",
+      "Aa",
+      "A",
+      "Baa",
+      "Ba",
+      "B",
+      "Caa",
+      "Ca"
+     ]
+    },
+    "Financial Policy": {
+     "type": "string",
+     "enum": [
+      "Aaa",
+      "Aa",
+      "A",
+      "Baa",
+      "Ba",
+      "B",
+      "Caa",
+      "Ca"
+     ]
+    }
+   },
+   "required": [
+    "Market Characteristics",
+    "Market Position",
+    "Revenue and Earnings Stability",
+    "Financial Policy"
+   ],
+   "additionalProperties": false
+  },
+  "qualitative_rationale": {
+   "type": "string",
+   "description": "one sentence per factor"
+  },
+  "direct_rating": {
+   "type": "string",
+   "enum": [
+    "Aaa",
+    "Aa1",
+    "Aa2",
+    "Aa3",
+    "A1",
+    "A2",
+    "A3",
+    "Baa1",
+    "Baa2",
+    "Baa3",
+    "Ba1",
+    "Ba2",
+    "Ba3",
+    "B1",
+    "B2",
+    "B3",
+    "Caa1",
+    "Caa2",
+    "Caa3",
+    "Ca",
+    "C"
+   ],
+   "description": "your own overall rating judgement for this issuer, independent of the scorecard arithmetic"
+  },
+  "direct_rationale": {
+   "type": "string"
+  },
+  "qualitative_relative": {
+   "type": "object",
+   "properties": {
+    "Market Characteristics": {
+     "type": "string",
+     "enum": [
+      "up",
+      "same",
+      "down"
+     ]
+    },
+    "Market Position": {
+     "type": "string",
+     "enum": [
+      "up",
+      "same",
+      "down"
+     ]
+    },
+    "Revenue and Earnings Stability": {
+     "type": "string",
+     "enum": [
+      "up",
+      "same",
+      "down"
+     ]
+    },
+    "Financial Policy": {
+     "type": "string",
+     "enum": [
+      "up",
+      "same",
+      "down"
+     ]
+    }
+   },
+   "required": [
+    "Market Characteristics",
+    "Market Position",
+    "Revenue and Earnings Stability",
+    "Financial Policy"
+   ],
+   "additionalProperties": false
+  },
+  "vs_last_known": {
+   "type": "string",
+   "enum": [
+    "upgrade",
+    "unchanged",
+    "downgrade"
+   ]
+  }
+ },
+ "required": [
+  "fiscal_year_label",
+  "figures_usd_m",
+  "figure_notes",
+  "qualitative",
+  "qualitative_rationale",
+  "direct_rating",
+  "direct_rationale",
+  "qualitative_relative",
+  "vs_last_known"
+ ],
+ "additionalProperties": false
+}

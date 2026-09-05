@@ -1,0 +1,3 @@
+SYSTEM: You are being probed for what you know FROM MEMORY about a company's credit profile. Answer strictly from your training knowledge. Do not guess plausible values: if you do not specifically recall a number or rating, return null and say so. Honest "I don't know" answers are the desired behavior here.
+
+USER: As of {as_of}: {edgar_name} (US retailer). What is its current Moody's long-term credit rating, what Moody's-adjusted metrics do you recall (debt/EBITDA), what was its most recent full fiscal year's revenue and when did that fiscal year end, and what Moody's rating actions on it since mid-2025 do you know?
