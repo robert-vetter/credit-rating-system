@@ -31,7 +31,11 @@ B = "2025-09-30"
 AS_OF = "2026-08-29"
 HISTORY_END = "2025-08-28"          # latest action date in the 17g-7 file (measured), content end
 CAP_USD = 9.60                      # decision D9: $10 balance minus pre-flight and margin
-VF_MAX_TOKENS, PROBE_MAX_TOKENS = 9000, 1200
+CAP_RERUN = 1.60                    # remaining budget after the first batch ($2.47), with margin
+# max_tokens is the ceiling for thinking AND answer together. At effort=high on Opus 4.6 the
+# successful runs spent 6.6k-8.6k output tokens, so the original 9000 was borderline and 11 of
+# 16 requests hit the ceiling inside the thinking block and returned no answer (2026-09-10).
+VF_MAX_TOKENS, PROBE_MAX_TOKENS = 24000, 1200
 PRICE_IN, PRICE_OUT = 5 / 1e6, 25 / 1e6
 RUNS = os.path.join(HERE, "runs")
 SCALE = ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3", "Ba1", "Ba2",
@@ -71,11 +75,13 @@ def pick_documents(manifest):
     return [k] + qs
 
 
-def build_requests():
+def build_requests(only=None, include_probes=True):
     cand = candidates()
     reqs, audit = [], []
     for it in cand["items"]:
         if not it.get("in_run", True) or it.get("status") != "confirmed":
+            continue
+        if only and it["id"] not in only:
             continue
         slug = it["slug"]
         cdir = os.path.join(ROOT, "evaluation", "companies", slug)
@@ -103,20 +109,21 @@ def build_requests():
         body = [{"type": "text", "text": docs}, {"type": "text", "text": pack},
                 {"type": "text", "text": f"As-of date: {AS_OF}.\n\n{TASK}"}]
         probe_q = PROBE_USER.replace("{as_of}", AS_OF).replace("{edgar_name}", c["edgar_name"])
-        reqs += [
+        probe_req = [
             {"custom_id": f"probe-{it['id']}", "params": {
                 "model": MODEL, "max_tokens": PROBE_MAX_TOKENS, "system": PROBE_SYSTEM,
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": probe_q}],
                 "output_config": {"format": {"type": "json_schema", "schema": PROBE_SCHEMA},
-                                  "effort": "low"}}},
+                                  "effort": "low"}}}]
+        vf_req = [
             {"custom_id": f"vf-{it['id']}", "params": {
                 "model": MODEL, "max_tokens": VF_MAX_TOKENS, "system": SYSTEM,   # thinking + answer headroom
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": body}],
                 "output_config": {"format": {"type": "json_schema", "schema": SCHEMA},
-                                  "effort": "high"}}},
-        ]
+                                  "effort": "high"}}}]
+        reqs += (probe_req if include_probes else []) + vf_req
         audit.append({"id": it["id"], "slug": slug, "skipped": False, "checks": checks,
                       "documents": doc_meta, "pack_quarterly_rows": pack_log.get("quarterly_rows"),
                       "pack_text": pack, "probe_question": probe_q,
@@ -132,8 +139,9 @@ def worst_case(reqs, per):
     return (inp * PRICE_IN + out * PRICE_OUT) * 0.5
 
 
-def dry(client, quiet=False):
-    reqs, audit = build_requests()
+def dry(client, quiet=False, only=None, include_probes=True, cap=None):
+    cap = CAP_USD if cap is None else cap
+    reqs, audit = build_requests(only, include_probes)
     per = {}
     for r in reqs:
         per[r["custom_id"]] = client.messages.count_tokens(
@@ -143,7 +151,7 @@ def dry(client, quiet=False):
     # D9 auto-trim: while over the cap, drop the most expensive UNCHANGED observation (both requests)
     cand = {it["id"]: it for it in candidates()["items"]}
     dropped = []
-    while worst_case(reqs, per) > CAP_USD:
+    while worst_case(reqs, per) > cap:
         unch = [r for r in reqs if r["custom_id"].startswith("vf-") and not cand[r["custom_id"][3:]]["changed"]]
         if not unch:
             break
@@ -155,14 +163,15 @@ def dry(client, quiet=False):
     worst = worst_case(reqs, per)
     n_vf = sum(1 for r in reqs if r["custom_id"].startswith("vf-"))
     print(f"\n{len(reqs)} Requests ({n_vf} Beobachtungen), {sum(per[r['custom_id']] for r in reqs):,} Input-Tokens. "
-          f"Exakter Worst Case ${worst:.2f} (Cap {CAP_USD}){'; D9-Trim: ' + ', '.join(dropped) if dropped else ''}")
+          f"Exakter Worst Case ${worst:.2f} (Cap {cap}){'; D9-Trim: ' + ', '.join(dropped) if dropped else ''}")
     return reqs, audit, per, worst
 
 
-def submit(client):
-    reqs, audit, per, worst = dry(client, quiet=True)
-    if worst > CAP_USD:
-        print(f"ABBRUCH: worst case ${worst:.2f} > Cap ${CAP_USD}. Kandidaten reduzieren (Regel D9)."); return
+def submit(client, only=None, include_probes=True, cap=None, tag=""):
+    cap = CAP_USD if cap is None else cap
+    reqs, audit, per, worst = dry(client, quiet=True, only=only, include_probes=include_probes, cap=cap)
+    if worst > cap:
+        print(f"ABBRUCH: worst case ${worst:.2f} > Cap ${cap}. Kandidaten reduzieren (Regel D9)."); return
     batch = client.messages.batches.create(requests=reqs)
     d = os.path.join(RUNS, batch.id); os.makedirs(d, exist_ok=True)
     json.dump({"batch_id": batch.id, "model": MODEL, "boundary_B": B, "as_of": AS_OF,
@@ -170,8 +179,8 @@ def submit(client):
                "probe_system": PROBE_SYSTEM, "token_counts": per, "worst_case_usd": worst,
                "observations": audit}, open(os.path.join(d, "audit.json"), "w"), indent=1, ensure_ascii=False)
     json.dump(reqs, open(os.path.join(d, "requests_raw.json"), "w"))
-    open(os.path.join(HERE, "LAST_BATCH"), "w").write(batch.id)
-    print(f"submitted {batch.id}: {batch.processing_status}")
+    open(os.path.join(HERE, "LAST_BATCH" + tag), "w").write(batch.id)
+    print(f"submitted {batch.id}: {batch.processing_status} ({len(reqs)} requests, worst case ${worst:.2f})")
 
 
 def notch(r):
@@ -179,8 +188,8 @@ def notch(r):
     return SCALE.index(r) if r in SCALE else None
 
 
-def collect(client):
-    bid = open(os.path.join(HERE, "LAST_BATCH")).read().strip()
+def collect(client, tag=""):
+    bid = open(os.path.join(HERE, "LAST_BATCH" + tag)).read().strip()
     st = client.messages.batches.retrieve(bid)
     if st.processing_status != "ended":
         print(f"{bid}: {st.processing_status} {st.request_counts}"); return
@@ -191,12 +200,19 @@ def collect(client):
             outs[item.custom_id] = {"error": item.result.type}; continue
         m = item.result.message
         models[item.custom_id] = m.model            # run-time provenance of the exact model served
-        text = next(b.text for b in m.content if b.type == "text")
+        u = m.usage.model_dump(); usage["in"] += u["input_tokens"]; usage["out"] += u["output_tokens"]
+        text = next((b.text for b in m.content if b.type == "text"), None)
+        if text is None or m.stop_reason == "max_tokens":
+            # max_tokens is the ceiling for thinking AND answer; when thinking exhausts it the
+            # response carries no (complete) answer. Recorded as a failed observation, not scored.
+            outs[item.custom_id] = {"failed": True, "reason": "no_text_or_truncated",
+                                    "stop_reason": m.stop_reason,
+                                    "block_types": [b.type for b in m.content], "usage": u}
+            continue
         try:
             outs[item.custom_id] = json.loads(text[text.index("{"):text.rindex("}") + 1])
         except Exception:
             outs[item.custom_id] = {"parse_error": text[:400], "stop_reason": m.stop_reason}
-        u = m.usage.model_dump(); usage["in"] += u["input_tokens"]; usage["out"] += u["output_tokens"]
     json.dump(outs, open(os.path.join(d, "raw_outputs.json"), "w"), indent=1, ensure_ascii=False)
 
     results = []
@@ -250,5 +266,17 @@ def make_client():
                                http_client=anthropic.DefaultHttpxClient(transport=httpx2.HTTPTransport(retries=5)))
 
 
+def rerun(client):
+    """Re-run named observations (vf only; probes already succeeded) under the remaining budget."""
+    ids = sys.argv[2].split(",")
+    submit(client, only=ids, include_probes=False, cap=CAP_RERUN, tag="_RERUN")
+
+
 if __name__ == "__main__":
-    {"--dry": dry, "--submit": submit, "--collect": collect}[sys.argv[1]](make_client())
+    c = make_client()
+    if sys.argv[1] == "--rerun":
+        rerun(c)
+    elif sys.argv[1] == "--collect-rerun":
+        collect(c, tag="_RERUN")
+    else:
+        {"--dry": dry, "--submit": submit, "--collect": collect}[sys.argv[1]](c)
