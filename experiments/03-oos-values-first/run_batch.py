@@ -110,7 +110,7 @@ def build_requests():
                 "output_config": {"format": {"type": "json_schema", "schema": PROBE_SCHEMA},
                                   "effort": "low"}}},
             {"custom_id": f"vf-{it['id']}", "params": {
-                "model": MODEL, "max_tokens": 10000, "system": SYSTEM,
+                "model": MODEL, "max_tokens": 12000, "system": SYSTEM,   # thinking + answer headroom
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": body}],
                 "output_config": {"format": {"type": "json_schema", "schema": SCHEMA},
@@ -165,16 +165,17 @@ def collect(client):
     if st.processing_status != "ended":
         print(f"{bid}: {st.processing_status} {st.request_counts}"); return
     d = os.path.join(RUNS, bid)
-    outs, usage = {}, {"in": 0, "out": 0}
+    outs, usage, models = {}, {"in": 0, "out": 0}, {}
     for item in client.messages.batches.results(bid):
         if item.result.type != "succeeded":
             outs[item.custom_id] = {"error": item.result.type}; continue
         m = item.result.message
+        models[item.custom_id] = m.model            # run-time provenance of the exact model served
         text = next(b.text for b in m.content if b.type == "text")
         try:
             outs[item.custom_id] = json.loads(text[text.index("{"):text.rindex("}") + 1])
         except Exception:
-            outs[item.custom_id] = {"parse_error": text[:400]}
+            outs[item.custom_id] = {"parse_error": text[:400], "stop_reason": m.stop_reason}
         u = m.usage.model_dump(); usage["in"] += u["input_tokens"]; usage["out"] += u["output_tokens"]
     json.dump(outs, open(os.path.join(d, "raw_outputs.json"), "w"), indent=1, ensure_ascii=False)
 
@@ -205,7 +206,8 @@ def collect(client):
                         "err": {"scorecard": e(pred), "direct": e(v.get("direct_rating")),
                                 "persistence": abs(per - lab) if per is not None and lab is not None else None}})
     cost = (usage["in"] * PRICE_IN + usage["out"] * PRICE_OUT) * 0.5
-    json.dump({"batch_id": bid, "usage": usage, "cost_usd_batch": round(cost, 3), "results": results},
+    json.dump({"batch_id": bid, "models_served": sorted(set(models.values())), "usage": usage,
+               "cost_usd_batch": round(cost, 3), "results": results},
               open(os.path.join(d, "results.json"), "w"), indent=1, ensure_ascii=False)
     for r in results:
         print(f"  {r['id']} {r['slug']:<22} {r['persistence']:>4}->{r['label']:<4} "

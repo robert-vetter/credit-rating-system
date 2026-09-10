@@ -98,6 +98,17 @@ Per observation, in this order inside one request:
    justification tied to the documents and a "relative to prior implied anchor: up / same /
    down" flag; then, as a separate field, the model's own overall rating judgement.
 
+## 4a. Why this counts as "a relatively good prompt"
+
+The prompt is the third iteration of the project's analyst prompt, each step measured:
+v0 (system/analyst.py, Experiment 01) extracted the figures and grades from a single filing
+and matched persistence; Experiment 02 added the history pack with implied anchors and the
+relative "up / same / down" framing, which produced the first movement away from persistence
+in the right direction; Experiment 03 adds the full post-cutoff document set, the quarterly
+XBRL trajectory and the peer table, and keeps the methodology's own factor definitions and
+Moody's adjustment rules in the instructions. It is grounded, decomposed and machine-readable;
+it is not tuned on the gold set or on this cross-section.
+
 ## 5. Method — values first, arithmetic second, judgement recorded (decision D6)
 
 - **Primary channel (this experiment's method):** the ten figures → `system/scorecard.py`
@@ -123,11 +134,32 @@ prompts/probe.txt.
 
 ## 7. Metrics
 
-Xiaowei's accuracy ratio = exact-hit share of the scorecard-indicated rating against the
-label; also within-one-notch share and MAE; all next to the persistence baseline; split by
+**Accuracy ratio (Xiaowei's number), defined:** `hits / n`, where a hit is an observation whose
+scorecard-indicated rating equals the label exactly (21-notch scale); reported once for the
+scorecard channel and once for the recorded judgement channel, each next to the persistence
+baseline's own hit share on the same n. With n = 16 one observation moves the ratio by 6.25
+points, so the ratio is reported with a bootstrap interval and the changed/unchanged split.
+Power statement, stated up front: 16 observations with 2 rating changes can show whether the
+model reproduces the cross-section at all and whether it avoids false alarms; they cannot
+establish change-detection skill — that needs the larger changed samples of the main project.
+
+Also reported: also within-one-notch share and MAE; all next to the persistence baseline; split by
 changed / unchanged (false-alarm rate on unchanged; direction accuracy on changed); the
 recorded judgement channel scored the same way; paired bootstrap CI. Extraction accuracy of
 the ten figures scored against XBRL (`check_extraction.py`) at zero model cost.
+
+### Caveats attached to every number
+
+- **Label staleness.** A label is the rating the company last disclosed before as_of; a Moody's
+  action between that disclosure and as_of would be missed. The gap is at most one filing
+  cycle (evidence dates in candidates.json; most are June–August 2026). Qurate/QVC is the
+  weakest label: a distressed issuer whose filings after November 2025 name no symbols, so
+  results are reported with and without it.
+- **Disclosing-subset bias.** Only issuers that print their ratings are labelable; the
+  cross-section over-represents larger, more transparent issuers (documented in §3).
+- **Snapshot dates.** Cross-section date 2026-08-29; filing manifests, harvest and XBRL were
+  taken that day. Filings after 2026-08-29 are deliberately ignored even though the run
+  happens later (September 2026).
 
 ## 8. Cost (decision D9)
 
@@ -147,6 +179,8 @@ including probes. Exact figure from `count_tokens` before submission; hard guard
 | Nike's 10-K did not fit Opus 4.5's 200K context | Opus 4.6, 1M context; count_tokens preflight per request |
 | `cache_control` in batch charged the write premium twice, 21 cents over cap | No cache_control in batch; guard prices the worst case; cap enforced before submission |
 | Memory can hold the answer (blind test) | Probes per observation; clean-subset headline |
+| Credit agreements attached as exhibits carry rating-pricing grids (leakage audit, channel 4) | Only each filing's primary document is used, never exhibits; measured after redaction on all 16 packages: 0 surviving lines pair "downgrade/upgrade" with rating language (the 7 candidates were cyber "degrade", system "upgrades", internal-control text) |
+| Structured output + thinking parameters untested on the chosen model | Pre-flight: one tiny real request with the exact parameter set (adaptive thinking, effort high, JSON schema) before the batch, ≈ $0.05 |
 | Filings disclose their own ratings (leakage audit) | Redaction before input, removed lines stored; 8-Ks never used as input |
 
 ## 10. Deliverables
