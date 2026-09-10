@@ -1,8 +1,8 @@
 # Experiment 03 — Out-of-sample cross-section, values-first: the leakage-free answer to Xiaowei's question
 
-*Design plan v0.1, 2026-08-31, by Robert Vetter and Claude (Opus 5). Status: SUBMITTED 2026-09-10 — batch msgbatch_01EwnHhsKjahuwhmL8S5h2Sx, 16 observations (32 requests),
-2,272,866 counted input tokens, exact worst case $7.72 under the $9.60 cap, no D9 trim needed;
-pre-flight passed (claude-opus-4-6, end_turn, schema complete). Results follow in results.md. This document supersedes the fresh
+*Design plan v0.1, 2026-08-31, by Robert Vetter and Claude (Opus 5). Status: COMPLETE 2026-09-10 — see results.md. Two batches: msgbatch_01EwnHhsKjahuwhmL8S5h2Sx (16
+observations, 11 lost to a max_tokens ceiling) and msgbatch_01QsBQnMF1itHj1Ysz3jguKZ (both changed
+cases re-run). 7 scored observations, $8.74 of the $10 balance spent. This document supersedes the fresh
 arm of Experiment 01 and replaces Experiment 02's historical arm as the basis for any
 out-of-sample claim.*
 
