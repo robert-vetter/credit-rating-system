@@ -30,7 +30,8 @@ MODEL = "claude-opus-4-6"
 B = "2025-09-30"
 AS_OF = "2026-08-29"
 HISTORY_END = "2025-08-28"          # latest action date in the 17g-7 file (measured), content end
-CAP_USD = 10.00                     # decision D9
+CAP_USD = 9.60                      # decision D9: $10 balance minus pre-flight and margin
+VF_MAX_TOKENS, PROBE_MAX_TOKENS = 9000, 1200
 PRICE_IN, PRICE_OUT = 5 / 1e6, 25 / 1e6
 RUNS = os.path.join(HERE, "runs")
 SCALE = ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3", "Ba1", "Ba2",
@@ -104,13 +105,13 @@ def build_requests():
         probe_q = PROBE_USER.replace("{as_of}", AS_OF).replace("{edgar_name}", c["edgar_name"])
         reqs += [
             {"custom_id": f"probe-{it['id']}", "params": {
-                "model": MODEL, "max_tokens": 1200, "system": PROBE_SYSTEM,
+                "model": MODEL, "max_tokens": PROBE_MAX_TOKENS, "system": PROBE_SYSTEM,
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": probe_q}],
                 "output_config": {"format": {"type": "json_schema", "schema": PROBE_SCHEMA},
                                   "effort": "low"}}},
             {"custom_id": f"vf-{it['id']}", "params": {
-                "model": MODEL, "max_tokens": 12000, "system": SYSTEM,   # thinking + answer headroom
+                "model": MODEL, "max_tokens": VF_MAX_TOKENS, "system": SYSTEM,   # thinking + answer headroom
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": body}],
                 "output_config": {"format": {"type": "json_schema", "schema": SCHEMA},
@@ -124,18 +125,37 @@ def build_requests():
     return reqs, audit
 
 
+def worst_case(reqs, per):
+    """Exact ceiling at batch prices: counted input + max_tokens of every request as output."""
+    inp = sum(per[r["custom_id"]] for r in reqs)
+    out = sum(r["params"]["max_tokens"] for r in reqs)
+    return (inp * PRICE_IN + out * PRICE_OUT) * 0.5
+
+
 def dry(client, quiet=False):
     reqs, audit = build_requests()
-    total, per = 0, {}
+    per = {}
     for r in reqs:
-        n = client.messages.count_tokens(model=MODEL, system=r["params"]["system"],
-                                         messages=r["params"]["messages"]).input_tokens
-        per[r["custom_id"]] = n; total += n
+        per[r["custom_id"]] = client.messages.count_tokens(
+            model=MODEL, system=r["params"]["system"], messages=r["params"]["messages"]).input_tokens
         if not quiet:
-            print(f"  {r['custom_id']:<12} {n:>9,} Tokens")
+            print(f"  {r['custom_id']:<12} {per[r['custom_id']]:>9,} Tokens")
+    # D9 auto-trim: while over the cap, drop the most expensive UNCHANGED observation (both requests)
+    cand = {it["id"]: it for it in candidates()["items"]}
+    dropped = []
+    while worst_case(reqs, per) > CAP_USD:
+        unch = [r for r in reqs if r["custom_id"].startswith("vf-") and not cand[r["custom_id"][3:]]["changed"]]
+        if not unch:
+            break
+        victim = max(unch, key=lambda r: per[r["custom_id"]])["custom_id"][3:]
+        reqs = [r for r in reqs if not r["custom_id"].endswith(f"-{victim}")]
+        audit = [a for a in audit if a["id"] != victim] + [{"id": victim, "slug": cand[victim]["slug"],
+                                                            "skipped": True, "reason": "D9 cost trim"}]
+        dropped.append(victim)
+    worst = worst_case(reqs, per)
     n_vf = sum(1 for r in reqs if r["custom_id"].startswith("vf-"))
-    worst = (total * PRICE_IN + (n_vf * 8000 + (len(reqs) - n_vf) * 800) * PRICE_OUT) * 0.5
-    print(f"\n{len(reqs)} Requests, {total:,} Input-Tokens. Worst-case Batch-Kosten ~${worst:.2f} (Cap {CAP_USD})")
+    print(f"\n{len(reqs)} Requests ({n_vf} Beobachtungen), {sum(per[r['custom_id']] for r in reqs):,} Input-Tokens. "
+          f"Exakter Worst Case ${worst:.2f} (Cap {CAP_USD}){'; D9-Trim: ' + ', '.join(dropped) if dropped else ''}")
     return reqs, audit, per, worst
 
 
