@@ -23,6 +23,7 @@ MINI = ("MINIATURE TEST FILING, Retail Co. FY ended 2026-01-31, USD millions: re
 
 
 def main():
+    rb.require_paid_authorization()
     client = rb.make_client()
     body = [{"type": "text", "text": f'<document name="test">{MINI}</document>'},
             {"type": "text", "text": "<history_pack>rating history: 2023-05-01 Ba2 (NW); => rating in effect "
@@ -46,5 +47,6 @@ def main():
 
 
 if __name__ == "__main__":
+    rb.require_paid_authorization()
     os.makedirs(os.path.join(HERE, "runs"), exist_ok=True)
     main()

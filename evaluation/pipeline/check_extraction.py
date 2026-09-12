@@ -38,18 +38,21 @@ DEBT_PARTS = ["lt_debt_noncurrent", "lt_debt_current", "st_borrowings",
 
 def xbrl_year(slug, fy_end_leq, filed_leq=None):
     """{field: value} for the latest fiscal year ending on or before fy_end_leq."""
+    from history_pack import fact_available
     p = os.path.join(OUT, slug, "xbrl.json")
     if not os.path.exists(p):
         return None, None
-    fields = json.load(open(p)).get("fields", {})
+    with open(p) as source:
+        fields = json.load(source).get("fields", {})
     rev = [v for v in fields.get("revenue", {}).get("annual", [])
-           if v["end"] <= fy_end_leq and (not filed_leq or v["filed"] <= filed_leq)]
+           if v["end"] <= fy_end_leq and fact_available(v, filed_leq or fy_end_leq)]
     if not rev:
         return None, None
-    end = rev[-1]["end"]
+    end = max(v["end"] for v in rev)
     out = {}
     for f, blob in fields.items():
-        hit = [v for v in blob["annual"] if v["end"] == end]
+        hit = [v for v in blob["annual"] if v["end"] == end
+               and fact_available(v, filed_leq or fy_end_leq)]
         if hit:
             out[f] = hit[0]["val"]
     return end, out

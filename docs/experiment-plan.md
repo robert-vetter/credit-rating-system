@@ -1,9 +1,11 @@
-> **Status, 29 August 2026** — this plan predates the build; it remains the design rationale.
-> What stands today: Phase 1 (leakage audit) done; the harness, sample frame, observations,
-> gold set (50, frozen), runner, metrics and XBRL extraction-check are built and live-tested
-> (see evaluation/README.md). Phase 0 config freezing now happens per run (run_meta.json).
-> Phase 2 contamination probes: designed, not yet run. Phase 3/4 (baselines, ablations): next,
-> against the frozen gold set. The post-cutoff clean window still waits on the lab's labels.
+> Current framing, 2026-09-12, by Codex at Robert's direction, verified against his supplied
+> lab email history: the first requested experiment estimates outstanding ratings after a
+> documented model cutoff, including unchanged issuers. Exact accuracy and persistence come
+> first; changed/unchanged results are diagnostic splits. See the executed
+> [Experiment 03 specification](../experiments/03-oos-values-first/README.md) and
+> [results](../experiments/03-oos-values-first/results.md). The broader plan below is historical
+> design rationale, not a claim that every planned control has run. Paid completion is closed.
+> The corrected historical calibration study is separate from the post-cutoff pilot.
 
 # Experiment plan
 
@@ -25,11 +27,12 @@ An accuracy number for a rating predictor is uninterpretable on its own, because
 is very strong. Ratings change rarely: most issuer-years are unchanged from the prior year. A system
 that outputs the last known rating and nothing else will score well.
 
-So the quantity of interest is not accuracy. It is **accuracy relative to persistence**:
+Report exact accuracy on the outstanding-rating cross-section and also the error relative
+to persistence:
 
     lift = MAE(persistence baseline) - MAE(system)
 
-If that is not positive, nothing else in the evaluation matters. The blind test already showed the
+A non-positive lift means the system has not improved on persistence under this metric. The blind test already showed the
 adjacent version of this problem: a memory-only control scored 0.40 notches MAE against 1.40 for the
 full document-based analysis. Persistence is the same failure mode with the model's memory replaced by
 a lookup table, and it will be at least as hard to beat.
@@ -47,18 +50,15 @@ The comparison baseline is the sector prior. Rating history in the input would b
 because ratings are inert, so the last rating approximately equals the current one for most
 issuer-dates.
 
-**Task B, update prediction, and this is the primary experiment.** Inputs are fundamentals plus the
-issuer's full rating path up to the observation date; predicted is the rating at that date (or,
-equivalently, the action relative to the last known rating). This matches what an analyst actually
+**Task B, history-conditioned rating-state estimation.** Inputs are fundamentals plus the
+issuer's rating path capped strictly before the target window; predicted is the outstanding
+rating at the observation date. The difference from the prior rating is a diagnostic output. This matches what an analyst actually
 does, since no analyst works without knowing the current rating. Persistence sits inside the input,
-so the system reproduces it trivially and the only number that matters is lift over persistence,
-concentrated in the changed subset.
+so accuracy must be accompanied by persistence and separate changed/unchanged results.
 
-Task B has a property that makes it the primary choice: **putting the rating path into the input
-neutralises most of what parametric memory could contribute.** Whatever the model memorised about an
-issuer's rating is handed to it openly, so the memorised copy is redundant. What remains to predict
-is the change, and for observation dates after the training cutoff the change cannot be in the
-weights.
+Supplying historical ratings makes that permitted information explicit. It does not eliminate
+other memorized information or establish absent contamination. The cutoff, input boundaries,
+probes and persistence comparisons address different parts of that problem.
 
 ## What "no memory" can and cannot mean
 
@@ -78,10 +78,10 @@ themselves identify large issuers (exactly one retailer has $713bn revenue, and 
 input that cannot be perturbed). So blinding degrades with size, and its success is **measured per
 sample** with a de-anonymisation probe, see Phase 2.
 
-**Time.** A rating action after the training cutoff cannot be in the weights. Caveat, which is
-Ding's inertia point in another form: for unchanged issuers the post-cutoff rating equals the
-pre-cutoff rating, which is in the weights. Time protects only the changed subset. A sample is clean
-when it is post-cutoff **and** (changed **or** successfully blinded).
+**Time.** Use the documented training cutoff to define the post-cutoff observation window.
+Unchanged issuers remain eligible even if their ratings could be recalled from training.
+The vendor cutoff and unsuccessful probes are not proof of absent contamination; report
+persistence and changed/unchanged splits rather than declaring a clean sample by this rule.
 
 **Measurement.** The probes in Phase 2 quantify whatever the first two levers let through.
 

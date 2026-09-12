@@ -12,6 +12,8 @@ not a GAAP line item. Changing those inputs is the point of keeping this separat
 Run with plain python3, no dependencies. python3 scorecard.py
 """
 
+import math
+
 # ----------------------------------------------------------------------------- company inputs
 
 WALMART = {
@@ -108,6 +110,11 @@ OUTCOME = [
 
 
 def score_quant(metric, value):
+    if not math.isfinite(value):
+        raise ValueError(f"Non-finite {metric}: {value}")
+    # Methodology p. 5, footnote 2: negative Debt/EBITDA gets the worst score.
+    if metric == "debt_ebitda" and value < 0:
+        return 20.5
     bands = BANDS[metric]
     best, worst = bands[0][0], bands[-1][1]
     ascending = best > worst                     # a higher metric value is better
@@ -123,6 +130,8 @@ def score_quant(metric, value):
 
 
 def outcome(aggregate):
+    if not math.isfinite(aggregate):
+        raise ValueError("Non-finite aggregate")
     for ceiling, label in OUTCOME:
         if aggregate <= ceiling:
             return label
@@ -130,10 +139,18 @@ def outcome(aggregate):
 
 
 def derive(c):
+    for key in ("revenue", "operating_income", "d_and_a", "capex", "interest",
+                "cash", "dividends", "cfo", "wc_swing", "debt"):
+        if not isinstance(c[key], (int, float)) or not math.isfinite(c[key]):
+            raise ValueError(f"Missing or non-finite input: {key}")
     ebitda = c["operating_income"] + c["d_and_a"]
     net_debt = c["debt"] - c["cash"]
     ffo = c["cfo"] - c["wc_swing"]
     rcf = ffo - c["dividends"]
+    # The methodology specifies negative denominators, but does not define zero cases
+    # here. Fail explicitly instead of inventing a rating or silently dividing by zero.
+    if ebitda == 0 or net_debt == 0 or c["interest"] <= 0:
+        raise ValueError("Undefined ratio: zero EBITDA/net debt or non-positive interest; review required")
     return {
         "ebitda": ebitda, "net_debt": net_debt, "ffo": ffo, "rcf": rcf,
         "revenue_usd_bn": c["revenue"] / 1000,
@@ -153,7 +170,10 @@ def build(c, overrides=None):
         ("Revenue and Earnings Stability", QUALITATIVE[c["qualitative"]["Revenue and Earnings Stability"]]),
         ("Debt/EBITDA", score_quant("debt_ebitda", m["debt_ebitda"])),
         ("(EBITDA-Capex)/Interest", score_quant("ebitda_capex_interest", m["ebitda_capex_interest"])),
-        ("RCF/Net Debt", score_quant("rcf_net_debt_pct", m["rcf_net_debt_pct"])),
+        # Methodology p. 5, footnote 3: net-cash issuers need the sign of RCF,
+        # which cannot be recovered from the ratio alone.
+        ("RCF/Net Debt", (0.5 if m["rcf"] > 0 else 20.5) if m["net_debt"] < 0
+         else score_quant("rcf_net_debt_pct", m["rcf_net_debt_pct"])),
         ("Financial Policy", QUALITATIVE[c["qualitative"]["Financial Policy"]]),
     ]
     if overrides:

@@ -1,5 +1,17 @@
 # Decision log — Experiment 03
 
+*D11 recorded by Codex, directed by Robert Vetter, 2026-09-12; verified against Robert's
+explicit instruction in this task. Earlier decisions below retain their original owners.*
+
+## Current decision
+
+**D11 — Stop paid completion** (Robert, 2026-09-12, via this task). Do not run the 13
+remaining observations. No further paid model calls or paid preflight are authorized.
+Review the existing work, strengthen the cutoff simulation and discuss the next step using
+local evidence. Experiment 03 remains a seven-success pilot; candidates and labels are
+unchanged. `run_batch.py` and `preflight.py` reject paid execution. A new explicit budget
+decision is required to reopen it. The previous top-up blocker below is historical.
+
 ## OPEN (Robert)
 
 **D8** remains open (AWS/Bedrock access for Sonnet 4 / Opus 4.1).

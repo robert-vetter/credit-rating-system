@@ -28,6 +28,7 @@ XBRL fields and get a pack with the quantitative sections marked unavailable.
 import json
 import os
 import sys
+from datetime import date
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.insert(0, os.path.join(ROOT, "system"))
@@ -50,23 +51,71 @@ def quarter_start(t):
 
 
 def fy_values(xbrl, filed_leq):
-    """{fy_end: {field: val}} for fiscal years whose values were filed on/before filed_leq."""
-    years = {}
+    """{fy_end: {field: val, "_tags": {field: tag}}} for fiscal years whose values were filed
+    on/before filed_leq. The tags let metrics_for avoid double counting where a combined
+    debt concept already contains a separately tagged part (added 2026-09-11)."""
+    years, tags = {}, {}
     for field, blob in xbrl.get("fields", {}).items():
         for v in blob["annual"]:
-            if v.get("filed", "9999") <= filed_leq:
+            if fact_available(v, filed_leq):
                 years.setdefault(v["end"], {})[field] = v["val"]
-    return {k: v for k, v in years.items() if "revenue" in v}
+                tags.setdefault(v["end"], {})[field] = v.get("tag")
+    out = {k: v for k, v in years.items() if "revenue" in v}
+    for k in out:
+        out[k]["_tags"] = tags[k]
+    return out
+
+
+def fact_available(value, as_of):
+    """Fail closed on missing dates; validate every field, not just the revenue date."""
+    if not value.get("filed") or not value.get("end"):
+        return False
+    end, filed, boundary = (date.fromisoformat(s) for s in
+                            (value["end"], value["filed"], as_of))
+    if end > filed:
+        return False
+    return filed <= boundary
+
+
+def invalid_fact_dates(xbrl):
+    """Quarantined source records, retained in audit logs rather than used as inputs."""
+    bad = []
+    for field, blob in xbrl.get("fields", {}).items():
+        for kind in ("annual", "quarterly"):
+            for value in blob.get(kind, []):
+                if not value.get("filed") or not value.get("end") or value["end"] > value["filed"]:
+                    bad.append({"field": field, "kind": kind, **value})
+    return bad
+
+
+def fact_sources(xbrl, as_of, kind, ends):
+    """Per-field provenance for exactly the periods shown in a history pack."""
+    return {end: {field: {k: v.get(k) for k in ("end", "filed", "tag", "form")}
+                  for field, blob in xbrl.get("fields", {}).items()
+                  for v in blob.get(kind, []) if v.get("end") == end and fact_available(v, as_of)}
+            for end in ends}
+
+
+# A combined debt concept already contains the part named on the right; when the combined tag
+# was the source of the field on the left, that part must not be added again (2026-09-11; the
+# LongTermDebt case is a pre-existing overlap of the same kind, 19 company-years in the frame).
+CONTAINS = {"lt_debt_noncurrent": {"LongTermDebtAndCapitalLeaseObligations": ("finance_lease_noncurrent",),
+                                   "LongTermDebt": ("lt_debt_current",)},
+            "lt_debt_current": {"LongTermDebtAndCapitalLeaseObligationsCurrent": ("finance_lease_current",),
+                                "DebtCurrent": ("st_borrowings",)}}
 
 
 def metrics_for(y):
     m = {"revenue_usd_bn": y["revenue"] / 1e9}
     ebitda = (y["operating_income"] + y["d_and_a"]) if "operating_income" in y and "d_and_a" in y else None
-    parts = [y[p] for p in DEBT_PARTS if p in y]
+    tags = y.get("_tags", {})
+    skip = {part for field, by_tag in CONTAINS.items() for part in by_tag.get(tags.get(field), ())}
+    components = [p for p in DEBT_PARTS if p in y and p not in skip]
+    parts = [y[p] for p in components]
     debt = sum(parts) if parts else None
     m["ebitda_usd_m"] = ebitda / 1e6 if ebitda else None
     m["debt_usd_m"] = debt / 1e6 if debt else None
-    m["debt_components"] = [p for p in DEBT_PARTS if p in y]
+    m["debt_components"] = components
     m["debt_ebitda"] = debt / ebitda if debt and ebitda and ebitda > 0 else None
     if ebitda and y.get("capex") is not None and y.get("interest"):
         m["ebitda_capex_interest"] = (ebitda - y["capex"]) / abs(y["interest"])
@@ -136,7 +185,7 @@ def quarterly_rows(xbrl, filed_leq, n=4):
     q = {}
     for field, blob in xbrl.get("fields", {}).items():
         for v in blob.get("quarterly", []):
-            if v.get("filed", "9999") <= filed_leq:
+            if fact_available(v, filed_leq):
                 q.setdefault(v["end"], {})[field] = v["val"]
     ends = sorted(e for e, vals in q.items() if "revenue" in vals)[-n:]
     rows = []
@@ -146,6 +195,10 @@ def quarterly_rows(xbrl, filed_leq, n=4):
         rows.append(f"  quarter ending {e}: revenue {f('revenue')}m; operating income {f('operating_income')}m; "
                     f"D&A {f('d_and_a')}m; capex {f('capex')}m; CFO {f('cfo')}m; cash {f('cash')}m; "
                     f"LT debt {f('lt_debt_noncurrent')}m; op-lease liab. {f('operating_lease_noncurrent')}m")
+        sources = fact_sources(xbrl, filed_leq, "quarterly", [e])[e]
+        shown = ("revenue", "operating_income", "d_and_a", "capex", "cfo", "cash",
+                 "lt_debt_noncurrent", "operating_lease_noncurrent")
+        rows.append("    filed dates: " + "; ".join(f"{k} {sources[k]['filed']}" for k in shown if k in sources))
     return rows
 
 
@@ -172,6 +225,9 @@ def build(slug, t, n_prior=3, history_end=None):
     prior_ends = ends[-1 - n_prior:-1] if len(ends) > 1 else []
 
     rows, log = [], {"slug": slug, "date": t, "path_cutoff": qs, "years": {}}
+    log["invalid_fact_dates"] = invalid_fact_dates(xbrl)
+    sources = fact_sources(xbrl, t, "annual", prior_ends + ([current_end] if current_end else []))
+    log["annual_sources"] = sources
     for end in prior_ends + ([current_end] if current_end else []):
         m = metrics_for(years[end])
         qsc = quant_contribution(m)
@@ -194,6 +250,7 @@ def build(slug, t, n_prior=3, history_end=None):
                     f"{f(m['ebitda_capex_interest'], '{:.1f}x')}; RCF/net debt {f(m['rcf_net_debt_pct'], '{:.0f}%')}"
                     + (f"; implied avg qualitative grade ≈ {anchor['implied_grade']} (score {anchor['implied_qual_score']})"
                        if anchor else ""))
+        rows.append("    filed dates: " + "; ".join(f"{k} {v['filed']}" for k, v in sources[end].items()))
     shown, last = [], None
     for e in path:
         if e[1] == "WR":
@@ -225,8 +282,12 @@ def build(slug, t, n_prior=3, history_end=None):
     if qrows:
         rows.append("  Recent single quarters (issuer-tagged XBRL, USD m, filed on or before the as-of date):")
         rows.extend(qrows)
-    log["quarterly_rows"] = len(qrows)
-    peers = peer_table.build(t, exclude_slug=slug) or "(peer table unavailable at this date)"
+    log["quarterly_rows"] = sum(line.startswith("  quarter ending") for line in qrows)
+    quarter_ends = [line.split(":", 1)[0].split()[-1] for line in qrows if line.startswith("  quarter ending")]
+    log["quarterly_sources"] = fact_sources(xbrl, t, "quarterly", quarter_ends)
+    peer_log = {}
+    peers = peer_table.build(t, exclude_slug=slug, audit=peer_log) or "(peer table unavailable at this date)"
+    log["peers"] = peer_log
     text = (f"<history_pack company=\"{company['group']}\" as_of=\"{t}\">\n"
             f"Rating history (Moody's, complete through {qs}; nothing later is provided):\n{hist}\n\n"
             "Fiscal-year fundamentals from XBRL (issuer-tagged, USD; EBITDA = operating income + D&A; "

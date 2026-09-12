@@ -21,5 +21,10 @@ attribution header saying what was verified against source documents and what wa
   out of notes/ in the 2026-08-29 reorganisation).
 - `smoke-test.md` is the first live end-to-end run of the evaluation pipeline (n=2, ~$1.60):
   plumbing proven, extraction verified 14/14 against XBRL, caveats recorded.
+- `scorecard-calibration.md` (2026-09-11) is the numbers-only study over the historical frame: how far the
+  quantitative scorecard sits from Moody's assigned ratings, what a monotone recalibration recovers, and
+  whether the tested annual-data signals improve on persistence, with the September 12
+  correction for gold exclusion and nested fitting. Tables in `evaluation/calibration-summary.md`,
+  code in `evaluation/pipeline/calibrate_scorecard.py`.
 - `scripts/` holds the small pieces of code these experiments used; everything pipeline-grade lives
   in `evaluation/pipeline/`.

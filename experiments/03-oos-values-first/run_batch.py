@@ -38,6 +38,15 @@ CAP_RERUN = 1.60                    # remaining budget after the first batch ($2
 VF_MAX_TOKENS, PROBE_MAX_TOKENS = 24000, 1200
 PRICE_IN, PRICE_OUT = 5 / 1e6, 25 / 1e6
 RUNS = os.path.join(HERE, "runs")
+PAID_RUNS_CLOSED = True  # Robert, 2026-09-12, D11: no remaining observations or paid pre-flight.
+
+
+def require_paid_authorization():
+    if PAID_RUNS_CLOSED:
+        raise RuntimeError("Experiment 03 is closed to paid calls (Robert, 2026-09-12, D11). "
+                           "Use audit_saved_run.py for the offline review. A new explicit budget "
+                           "decision is required before changing this guard.")
+
 SCALE = ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3", "Ba1", "Ba2",
          "Ba3", "B1", "B2", "B3", "Caa1", "Caa2", "Caa3", "Ca", "C"]
 
@@ -127,6 +136,7 @@ def build_requests(only=None, include_probes=True):
         audit.append({"id": it["id"], "slug": slug, "skipped": False, "checks": checks,
                       "documents": doc_meta, "pack_quarterly_rows": pack_log.get("quarterly_rows"),
                       "pack_text": pack, "probe_question": probe_q,
+                      "pack_provenance": pack_log,
                       "label": it["label"], "label_evidence": it["label_evidence"],
                       "persistence": it["persistence"], "changed": it["changed"]})
     return reqs, audit
@@ -168,6 +178,7 @@ def dry(client, quiet=False, only=None, include_probes=True, cap=None):
 
 
 def submit(client, only=None, include_probes=True, cap=None, tag=""):
+    require_paid_authorization()
     cap = CAP_USD if cap is None else cap
     reqs, audit, per, worst = dry(client, quiet=True, only=only, include_probes=include_probes, cap=cap)
     if worst > cap:
@@ -224,7 +235,9 @@ def collect(client, tag=""):
             continue
         fig = dict(v["figures_usd_m"]); fig["qualitative"] = v["qualitative"]; fig["label"] = it["id"]
         try:
-            agg = round(scorecard.aggregate(scorecard.build(fig)), 3); pred = scorecard.outcome(agg)
+            exact_aggregate = scorecard.aggregate(scorecard.build(fig))
+            pred = scorecard.outcome(exact_aggregate)
+            agg = round(exact_aggregate, 3)
         except Exception as exc:
             agg, pred = None, f"error: {exc}"
         lab, per = notch(it["label"]), notch(it["persistence"])
@@ -273,6 +286,10 @@ def rerun(client):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        raise SystemExit("Use audit_saved_run.py (offline), --dry, or --collect. Paid execution is closed.")
+    if sys.argv[1] in ("--submit", "--rerun"):
+        require_paid_authorization()
     c = make_client()
     if sys.argv[1] == "--rerun":
         rerun(c)

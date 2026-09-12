@@ -1,113 +1,118 @@
-# Experiment 03 — Results: out-of-sample accuracy ratio, values-first
+# Experiment 03 results: outstanding-rating pilot after the model cutoff
 
-*Run 2026-09-10 by Robert Vetter and Claude. Model **claude-opus-4-6**, training data cutoff
-**Aug 2025** (https://platform.claude.com/docs/en/models/opus-4-6/overview, Capabilities
-table), adaptive thinking, effort `high`, structured output, **no tools array**. Every
-observation is strictly after the boundary B = 2025-09-30. Design in README.md, decisions in
-decisions.md, prompts verbatim in prompts/, per-observation date checks in
-runs/&lt;batch&gt;/audit.json, raw model outputs in runs/&lt;batch&gt;/raw_outputs.json.*
+*Updated by Codex, directed by Robert Vetter, 2026-09-12. Model runs by Robert and Claude
+on 2026-09-10. Verified against the two saved batches, offline replay and methodology
+page 5 footnotes. The correction uses saved model outputs; no new model calls were made.*
 
-## Headline: the accuracy ratio Xiaowei asked for
+## Result and interpretation
 
-Seven out-of-sample observations (2 rating changes, 5 unchanged), each scored against the
-company's own post-cutoff rating disclosure:
+The model was Claude Opus 4.6, with a vendor-reported August 2025 training-data cutoff.
+The target was the outstanding rating at August 29, 2026. See the [full specification](README.md)
+for inputs, prompts, parameters, labels and control limitations.
 
-| Channel | Exact hit | Within 1 notch | MAE (notches) |
+There are seven completed cases, compared with the latest accepted company disclosure.
+One label, Qurate, is materially stale relative to its input documents. These are pilot
+results, not a certified outstanding-rating benchmark or evidence of superior predictive
+accuracy. Unchanged issuers are included; persistence is scored on the same labels.
+
+| Channel | Exact accuracy | Within one notch | MAE, notches |
 |---|---|---|---|
-| **Values-first → deterministic scorecard** | **3/7 (43%)** | 5/7 (71%) | 1.57 |
-| **Model's own judgement after extracting** | **4/7 (57%)** | 6/7 (86%) | 0.57 |
-| Persistence baseline (carry last known rating) | 5/7 (71%) | 6/7 (86%) | 0.43 |
+| Scorecard, corrected arithmetic | 3/7 (43%) | 6/7 (86%) | 1.14 |
+| Model judgement after extraction | 4/7 (57%) | 6/7 (86%) | 0.57 |
+| Persistence | 5/7 (71%) | 6/7 (86%) | 0.43 |
+| Original scorecard, before correction | 3/7 (43%) | 5/7 (71%) | 1.57 |
 
-**The honest reading: on this cross-section no channel beats persistence on raw accuracy,**
-because five of seven ratings did not move and persistence gets those for free. The accuracy
-ratio in isolation is therefore not the interesting number — which is exactly why the design
-reports it next to persistence and splits by changed/unchanged.
+The correction changes Qurate's scorecard rating from B2 to Caa2. Negative Debt/EBITDA had
+received the best leverage score; methodology page 5 footnote 2 requires the worst. Its
+aggregate changes from the saved rounded 15.346 to 18.346 under corrected arithmetic.
+No label or model output was modified. The earlier explanation that this discrepancy was
+solely an aggregation limitation was incorrect.
 
 ## Per observation
 
-| ID | Company | Label (self-disclosed) | Persistence | Scorecard | Direct | Probe |
+| ID | Company | Accepted disclosure label | Persistence | Corrected scorecard | Model judgement |
+|---|---|---|---|---|---|
+| X12 | Nike | A2 | A1 | A2 | A1 |
+| X14 | Qurate/QVC | Caa3 | Caa1 | Caa2 | Ca |
+| X15 | Signet | Ba3 | Ba3 | Baa1 | Ba1 |
+| X16 | Target | A2 | A2 | A2 | A2 |
+| X17 | Tractor Supply | Baa1 | Baa1 | Baa2 | Baa1 |
+| X19 | Victoria's Secret | Ba3 | Ba3 | Ba3 | Ba3 |
+| X20 | Walmart | Aa2 | Aa2 | Aa3 | Aa2 |
+
+Qurate's accepted Caa3 evidence identifies LI LLC's corporate family rating in a filing
+of November 5, 2025. Its input covers consolidated QVC Group and contains 2026 filings
+reporting April bankruptcy. The label is 297 days old by the observation date, measured
+from its evidence filing date. Its outstanding rating and target-entity alignment need
+verification. The model's Ca rationale explicitly uses the bankruptcy information; this
+must not be described as forecasting the bankruptcy or the earlier downgrade.
+
+## Changed and unchanged diagnostics
+
+Here, changed means the accepted disclosure label differs from the archive-based
+persistence rating. It does not redefine the sample as rating actions.
+
+| Channel | Changed exact, n=2 | Changed MAE | Correct direction, n=2 | Unchanged exact, n=5 | Unchanged MAE | False alarms, n=5 |
 |---|---|---|---|---|---|---|
-| X12 | Nike | **A2** (changed) | A1 | **A2 ✓** | A1 ✗ | no post-cutoff knowledge |
-| X14 | Qurate/QVC | **Caa3** (changed) | Caa1 | B2 ✗ (4 notches, wrong direction) | Ca (1 notch, right direction) | no post-cutoff knowledge |
-| X15 | Signet | Ba3 | Ba3 | Baa1 ✗ (5) | Ba1 ✗ (2, false alarm) | recalls prior Ba3 |
-| X16 | Target | A2 | A2 | A2 ✓ | A2 ✓ | recalls prior |
-| X17 | Tractor Supply | Baa1 | Baa1 | Baa2 ✗ (1) | Baa1 ✓ | recalls prior |
-| X19 | Victoria's Secret | Ba3 | Ba3 | Ba3 ✓ | Ba3 ✓ | wrong/none |
-| X20 | Walmart | Aa2 | Aa2 | Aa3 ✗ (1) | Aa2 ✓ | recalls prior |
+| Corrected scorecard | 1/2 | 0.50 | 2/2 | 2/5 | 1.40 | 3/5 |
+| Model judgement | 0/2 | 1.00 | 1/2 | 4/5 | 0.40 | 1/5 |
+| Persistence | 0/2 | 1.50 | 0/2 | 5/5 | 0.00 | 0/5 |
+| Original scorecard | 1/2 | 2.00 | 1/2 | 2/5 | 1.40 | 3/5 |
 
-**Changed subset (n = 2):** persistence is wrong by construction (MAE 1.5). Scorecard MAE 2.0,
-direct MAE 1.0. Direction: **each channel caught exactly one of the two changes, and not the
-same one.** The scorecard nailed Nike's downgrade to A2 exactly; the direct judgement caught
-Qurate's collapse in direction (Ca, one notch past the actual Caa3) while the scorecard put it
-four notches too high.
+Two changed cases, including Qurate's unresolved label, cannot establish change-detection
+skill. Nike illustrates a disagreement worth investigating: its qualitative deterioration
+translated into A2 through the scorecard, while the model's overall judgement stayed at A1.
+That is a case observation, not an independently established causal explanation.
 
-**Unchanged subset (n = 5):** false-alarm rate — scorecard 3/5, direct 1/5 (Signet).
+## Sensitivity excluding Qurate
 
-## What the model actually did, in its own grades
+| Channel, n=6 | Exact accuracy | Within one notch | MAE |
+|---|---|---|---|
+| Scorecard | 3/6 (50%) | 5/6 (83%) | 1.17 |
+| Model judgement | 4/6 (67%) | 5/6 (83%) | 0.50 |
+| Persistence | 5/6 (83%) | 6/6 (100%) | 0.17 |
 
-Nike is the instructive case. Asked to grade relative to the implied anchor, the model marked
-**Market Position "down" and Revenue and Earnings Stability "down"** ("revenue has
-plateaued/declined"), which is precisely the deterioration behind Moody's November 2025
-downgrade. The arithmetic converted that into A2 — the correct new rating. Its own free-form
-judgement, however, said "unchanged A1": **it detected the deterioration but was not willing
-to call the downgrade.** The decomposition captured what the holistic judgement suppressed.
+Nike is the single changed case in this sensitivity. Its scorecard, judgement and
+persistence errors are 0, 1 and 1 notches respectively. The five unchanged cases and their
+false-alarm rates are unchanged from the table above. Excluding Qurate does not establish
+that the remaining six labels were still outstanding on August 29.
 
-Qurate is the mirror image. The model graded the business honestly ("TV home-shopping in
-multi-year secular decline, revenue fell ~24% over 2022-2025") and its direct judgement said
-Ca — a downgrade, essentially right. But the scorecard arithmetic returned B2, four notches
-too generous, because the methodology's quantitative bands do not model a distressed issuer's
-liquidity and exchange risk. This is the same systematic optimism measured in Experiments 01
-and 02, now visible at its extreme.
+## Sample attrition, uncertainty and cost
 
-## Leakage: controlled and measured, not assumed
+Twenty candidates were confirmed. The budget rule scheduled both changed cases and the
+14 cheapest unchanged input packages. Eleven of 16 initial document requests exhausted a
+9,000-token output ceiling, which includes thinking, and returned no usable answer. The
+two changed cases were rerun at 24,000 tokens. The seven successes therefore comprise five
+initial unchanged successes and two selected changed reruns. The remaining nine scheduled
+cases are X01-X07, X10 and X11; the four never scheduled are X08, X09, X13 and X18.
 
-- **Training memory.** Every observation lies after the model's Aug 2025 training cutoff.
-  Per-observation memory probes (no documents, separate request) ran first: **no probe
-  reproduced any post-cutoff specific.** For both changed cases the probe returned no usable
-  rating knowledge — the model did not know Nike's or Qurate's new rating. Four probes
-  recalled the *prior* rating, which the history pack supplies anyway.
-- **Live access.** No `tools` array in any request; retrieval is structurally impossible.
-- **Documents.** Every input filing has `filingDate > 2025-09-30`, asserted per observation
-  and logged in audit.json. Rating self-disclosures stripped before input; removed lines
-  stored. 8-K filings were used for label harvesting only, never as model input.
-- **History pack.** Rating path ends at the 17g-7 file's true content end (2025-08-28,
-  measured); all quantitative facts filed on or before the as-of date.
-- **Labels.** Company self-disclosures in post-boundary filings, every one hand-read to
-  separate a statement of the current rating from covenant thresholds and pricing grids.
+Descriptive 95% Wilson intervals for exact accuracy on n=7 are 15.8%-74.9% for the
+scorecard, 25.0%-84.2% for judgement and 35.9%-91.8% for persistence. The offline audit
+also records paired bootstrap intervals for the MAE difference against persistence.
+These intervals do not correct disclosure-selection, cost-selection or response-failure bias.
 
-## Extraction quality, verified for free
+Recorded spending was approximately $8.74: $7.49 for the first batch, $1.21 for the
+rerun and $0.04 for the miniature preflight. Robert closed paid completion on September 12
+([D11](decisions.md)); the 13 remaining cases will not be run. The preflight checked API
+parameter compatibility, but did not establish adequate output headroom for full filings.
 
-The ten scorecard figures were checked against SEC XBRL company facts: **46 of 47 comparable
-figures within 2%, median deviation 0.0%.** The reading step is not the weak link — the
-weighting and the qualitative judgement are.
+## What the audit establishes and what it does not
 
-## What went wrong, and what it cost
+All 18 saved document-request packages replay exactly from their cached primary filings.
+The request/form/date checks pass, and no model request declares tools or cache directives.
+This verifies specific controls, not complete absence of rating information or training
+contamination. The first batch did not establish that probes completed before documents.
+The offline join restores the original probes to the reruns; Nike's original probe recalled
+A1, its prior rating, rather than having no rating knowledge.
 
-**11 of the original 16 observations were lost to a max_tokens ceiling I set too low.**
-`max_tokens` caps thinking and answer together; at effort `high` the successful runs spent
-6.6k–8.6k output tokens, so the 9,000 ceiling chosen as a cost control was borderline, and 11
-requests exhausted it inside the thinking block and returned no answer — billed, worthless.
-Both changed cases were among the losses. Fixed (ceiling raised to 24,000, with the reason in
-the code) and the two changed cases were re-run within the remaining budget; nine unchanged
-observations stayed unrun. A second defect surfaced with it: the collector crashed on a
-text-free response instead of recording it; it now logs stop reason and block types.
+The original history/peer packs lacked per-field source provenance. The prompt supplied
+short qualitative descriptions rather than the complete methodology rubric. Its 46/47
+reported agreement with XBRL is a consistency result, since XBRL was already part of the
+input. It does not prove that extraction or financial adjustments are solved.
 
-Spend: first batch $7.49, re-run $1.21, pre-flight $0.04 — **$8.74 of the $10 balance**, about
-$1.26 left. The n = 7 sample is a direct consequence of that mistake, and the confidence
-intervals on every number above are correspondingly wide.
-
-## Conclusions
-
-1. **The accuracy ratio is 43% (scorecard) / 57% (direct) exact, 71% / 86% within one notch,
-   on genuinely out-of-sample data with leakage controlled and measured.** Persistence scores
-   71% / 86%. On an inert cross-section, accuracy alone cannot separate a working system from
-   inertia.
-2. **The signal is in the changed cases, and it is real but thin:** each channel caught one of
-   two changes, and the model's relative grades pointed the right way on both. Two cases
-   cannot support a stronger claim.
-3. **Extraction is solved; aggregation is not.** Perfect figure reading, systematically
-   optimistic arithmetic, and a holistic judgement that is well calibrated on stable issuers
-   but reluctant to call a change.
-4. **Next, cheaply:** re-run the nine unrun unchanged observations (~$3 at the corrected
-   ceiling) to firm up the false-alarm rate, and calibrate the scorecard's optimism against
-   the 218 changed quarters in the historical frame.
+The [integrity review](../../docs/oos-integrity-review.md) records the full findings and
+repairs. Original paid artifacts remain under the two ignored run directories:
+`msgbatch_01EwnHhsKjahuwhmL8S5h2Sx` and `msgbatch_01QsBQnMF1itHj1Ysz3jguKZ`.
+The local offline audit is `runs/offline-review-2026-09-12/audit.json`; raw files are not
+included in a fresh repository clone. The previous results narrative is retained in Git
+history, while this page is the current interpretation.

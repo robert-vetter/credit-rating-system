@@ -24,6 +24,7 @@ redistributed pending the terms-of-use question (docs/assumptions-review.md).
 | `cik-lookup-data.txt` | Every EDGAR registrant name ever, ~900k lines "NAME:CIK:". https://www.sec.gov/Archives/edgar/cik-lookup-data.txt, fetched 2026-08-29 |
 | `sic_cache.json` | CIK → [SIC code, description], built from https://data.sec.gov/submissions/CIK##########.json by `build_frame.py` (matched entities) and `sic_sweep_listed.py` (all listed companies) |
 | `sic_sweep_listed.done` | Marker that the listed-universe sweep completed, with counts |
+| `companyfacts/<slug>.json` | Raw SEC XBRL companyfacts response per company folder (5-20 MB each, 218 MB total, 82 companies; four historical or foreign filers return 404 and are recorded as such), https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json, fetched 2026-09-11; `_fetched.json` records the date per company. Kept so `fetch_xbrl.py` can re-extract offline and reproducibly; `fetch_xbrl.py --refresh` re-downloads |
 
 ## frame/ — the sample frame
 

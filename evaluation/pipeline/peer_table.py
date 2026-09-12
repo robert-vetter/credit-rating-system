@@ -32,27 +32,49 @@ def _latest(field, t):
     return vals[-1]["val"] if vals else None
 
 
-def build(t, exclude_slug=None):
+def build(t, exclude_slug=None, audit=None):
     """Plain-text peer table for observation date t; None if too few peers have data."""
+    # Local import avoids the history_pack -> peer_table import cycle.
+    from history_pack import fact_available, invalid_fact_dates, metrics_for
     rows = []
     for slug in sorted(os.listdir(OUT)):
         d = os.path.join(OUT, slug)
         xp, cp = os.path.join(d, "xbrl.json"), os.path.join(d, "company.json")
         if slug == exclude_slug or not os.path.exists(xp) or not os.path.exists(cp):
             continue
-        c = json.load(open(cp))
+        with open(cp) as source:
+            c = json.load(source)
         if c.get("scope") != "in":
             continue
-        f = json.load(open(xp)).get("fields", {})
-        g = {k: _latest(v, t) for k, v in f.items()}
+        with open(xp) as source:
+            xbrl = json.load(source)
+        f = xbrl.get("fields", {})
+        revenue = [v for v in f.get("revenue", {}).get("annual", []) if fact_available(v, t)]
+        if not revenue:
+            continue
+        end = max(v["end"] for v in revenue)
+        selected = {k: next((v for v in blob.get("annual", [])
+                             if v["end"] == end and fact_available(v, t)), None)
+                    for k, blob in f.items()}
+        selected = {k: v for k, v in selected.items() if v is not None}
+        g = {k: v["val"] for k, v in selected.items()}
+        g["_tags"] = {k: v.get("tag") for k, v in selected.items()}
         if not g.get("revenue"):
             continue
         ebitda = (g["operating_income"] + g["d_and_a"]
                   if g.get("operating_income") is not None and g.get("d_and_a") is not None else None)
-        debt_parts = [g[p] for p in DEBT_PARTS if g.get(p) is not None]
-        debt = sum(debt_parts) if debt_parts else None
+        metrics = metrics_for(g)
+        debt = metrics["debt_usd_m"]
+        debt = debt * 1e6 if debt is not None else None
+        sources = {k: {key: v.get(key) for key in ("end", "filed", "tag", "form")}
+                   for k, v in selected.items()}
+        if audit is not None:
+            audit[slug] = {"fiscal_end": end, "sources": sources,
+                           "invalid_fact_dates": invalid_fact_dates(xbrl),
+                           "debt_components": metrics["debt_components"]}
         rows.append({
             "name": c["group"], "revenue": g["revenue"], "ebitda": ebitda,
+            "end": end, "sources": sources,
             "margin": ebitda / g["revenue"] if ebitda else None,
             "debt": debt,
             "debt_ebitda": debt / ebitda if debt and ebitda and ebitda > 0 else None,
@@ -78,6 +100,8 @@ def build(t, exclude_slug=None):
         lines.append(f"{r['name'][:27]:<28}{bn(r['revenue'])}{bn(r['ebitda'])}"
                      f"{x(r['margin'], '{:7.1%}')}{bn(r['debt'])}{x(r['debt_ebitda'], '{:7.1f}x')}"
                      f"{bn(r['capex'])}{bn(r['cfo'])}{bn(r['dividends'])}")
+        lines.append(f"  FY ending {r['end']}; filed dates: " + "; ".join(
+            f"{k} {v['filed']}" for k, v in r["sources"].items()))
     return "\n".join(lines)
 
 

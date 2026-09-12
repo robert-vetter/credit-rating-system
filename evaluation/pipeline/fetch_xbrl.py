@@ -1,37 +1,56 @@
 """
 Structured financials per company from SEC's XBRL companyfacts API.
 
-Written by Claude (Opus 5), directed by Robert Vetter.
+Written by Claude (Opus 5), directed by Robert Vetter. Fallback tags and the offline
+re-extraction added 2026-09-11 (Claude, Fable 5.1) for the scorecard calibration study.
 
 Why: two uses, both without model cost. (1) Extraction verification: the analyst's job is to
 read figures out of the filing text; XBRL carries the same figures machine-tagged, so the
 extraction step can be scored automatically (check_extraction.py). (2) Peer key-figure tables
 as an input configuration for the Market Position subfactor (peer_table.py), built from data
-rather than from more model calls.
+rather than from more model calls. Since 2026-09-11 also (3): the numbers-only scorecard over
+the whole historical frame (calibrate_scorecard.py).
 
 Source: https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json (free, no key). The raw
-response is 5-20 MB per company; only the concepts the scorecard needs are kept, annual
-(fiscal-year) values only, stored compactly as evaluation/companies/<slug>/xbrl.json with the
-"filed" date preserved so downstream use can stay point-in-time (only facts filed before an
-observation date may be shown for that date).
+response is 5-20 MB per company and is kept verbatim under data/edgar/companyfacts/<slug>.json
+(gitignored, documented in data/README.md) so the extraction below can be re-run offline and
+reproduced exactly; only the concepts the scorecard needs are kept, stored compactly as
+evaluation/companies/<slug>/xbrl.json with the "filed" date preserved so downstream use can
+stay point-in-time (only facts filed before an observation date may be shown for that date).
 
 Concept fallback chains: issuers tag the same economic line under different us-gaap concepts,
 and tag usage changes over time (revenue moved tags with ASC 606 around 2018). Values are
 therefore MERGED across a field's accepted tags, keyed by period end, earlier-listed tags
 winning conflicts - first-hit-only would lose the pre-2018 history. The tag used is recorded
 per value. Companies whose filings predate XBRL (roughly 2009) simply have no data; recorded
-as such, not an error.
+as such, not an error. Foreign IFRS filers have no us-gaap facts and come back empty.
 
-Run after compile_folders.py: python3 evaluation/pipeline/fetch_xbrl.py
+Fallbacks added 2026-09-11, each last in its chain so no previously extracted value changes
+(verified by diff at the time): interest expense falls back to InterestAndDebtExpense,
+InterestExpenseLongTermDebt, then cash interest paid (InterestPaidNet, InterestPaid; where an
+issuer tags both, cash paid is 0.96 of expense at the median, 0.76 to 1.19 between the 10th
+and 90th percentile); D&A falls back to Depreciation plus AmortizationOfIntangibleAssets when
+both are tagged, else Depreciation alone (amortisation then missing, EBITDA understated by
+that amount); debt falls back to the combined debt-and-capital-lease concepts and to
+DebtCurrent / LineOfCredit. InterestExpenseOther was considered and rejected: where issuers
+tag it next to interest expense it is a small component (median 6% of expense). Any value from
+a fallback tag carries its tag, so a consumer can tell.
+
+Run after compile_folders.py:
+    python3 evaluation/pipeline/fetch_xbrl.py            # uses the cached raw response when present
+    python3 evaluation/pipeline/fetch_xbrl.py --refresh  # re-downloads every company first
 """
+import datetime
 import json
 import os
+import sys
 import time
 import urllib.error
 import urllib.request
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "evaluation", "companies")
+CACHE = os.path.join(ROOT, "data", "edgar", "companyfacts")
 UA = {"User-Agent": "Robert Vetter robert@certus-ai.com"}
 ANNUAL_FORMS = ("10-K", "10-K/A", "20-F", "40-F")
 
@@ -40,18 +59,24 @@ CONCEPTS = {
                 "SalesRevenueNet", "SalesRevenueGoodsNet"],
     "operating_income": ["OperatingIncomeLoss"],
     "d_and_a": ["DepreciationDepletionAndAmortization", "DepreciationAmortizationAndAccretionNet",
-                "DepreciationAndAmortization"],
+                "DepreciationAndAmortization",
+                "Depreciation"],                                        # fallback 2026-09-11
     "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
     "interest": ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt",
-                 "InterestIncomeExpenseNet"],
+                 "InterestIncomeExpenseNet",
+                 "InterestAndDebtExpense", "InterestExpenseLongTermDebt",        # fallbacks 2026-09-11
+                 "InterestPaidNet", "InterestPaid"],
     "cash": ["CashAndCashEquivalentsAtCarryingValue",
              "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
     "dividends": ["PaymentsOfDividends", "PaymentsOfDividendsCommonStock"],
     "cfo": ["NetCashProvidedByUsedInOperatingActivities",
             "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"],
-    "lt_debt_noncurrent": ["LongTermDebtNoncurrent", "LongTermDebt"],
-    "lt_debt_current": ["LongTermDebtCurrent"],
-    "st_borrowings": ["ShortTermBorrowings", "CommercialPaper"],
+    "lt_debt_noncurrent": ["LongTermDebtNoncurrent", "LongTermDebt",
+                           "LongTermDebtAndCapitalLeaseObligations"],           # fallback 2026-09-11
+    "lt_debt_current": ["LongTermDebtCurrent",
+                        "LongTermDebtAndCapitalLeaseObligationsCurrent", "DebtCurrent"],   # fallbacks 2026-09-11
+    "st_borrowings": ["ShortTermBorrowings", "CommercialPaper",
+                      "LineOfCredit"],                                          # fallback 2026-09-11
     "finance_lease_current": ["FinanceLeaseLiabilityCurrent"],
     "finance_lease_noncurrent": ["FinanceLeaseLiabilityNoncurrent", "FinanceLeaseLiability"],
     "operating_lease_current": ["OperatingLeaseLiabilityCurrent"],
@@ -106,42 +131,88 @@ def annual_values(units, instant):
     return sorted(best.values(), key=lambda x: x["end"])
 
 
+def extract(raw):
+    """The compact per-company record from a raw companyfacts response."""
+    gaap = raw.get("facts", {}).get("us-gaap", {})
+    fields = {}
+    for canon, tags in CONCEPTS.items():
+        merged, merged_q = {}, {}
+        for tag in tags:
+            units = gaap.get(tag, {}).get("units", {}).get("USD", [])
+            for v in annual_values(units, canon in INSTANT):
+                if v["end"] not in merged:            # earlier-listed tag wins
+                    merged[v["end"]] = {**v, "tag": tag}
+            for v in quarterly_values(units, canon in INSTANT):
+                if v["end"] not in merged_q:
+                    merged_q[v["end"]] = {**v, "tag": tag}
+        if canon == "d_and_a":
+            # Composite fallback (2026-09-11): where no combined D&A concept exists but the issuer
+            # tags depreciation and intangibles amortisation separately, their sum is the D&A
+            # line; the plain "Depreciation" fallback above then only covers years without an
+            # amortisation tag (and understates EBITDA by that amount, which the tag reveals).
+            amort = {v["end"]: v for v in annual_values(
+                gaap.get("AmortizationOfIntangibleAssets", {}).get("units", {}).get("USD", []), False)}
+            for end, v in list(merged.items()):
+                if v["tag"] == "Depreciation" and end in amort:
+                    merged[end] = {**v, "val": v["val"] + amort[end]["val"],
+                                   "filed": max(v["filed"], amort[end]["filed"]),
+                                   "tag": "Depreciation+AmortizationOfIntangibleAssets"}
+        if merged or merged_q:
+            fields[canon] = {"annual": sorted(merged.values(), key=lambda x: x["end"]),
+                             "quarterly": sorted(merged_q.values(), key=lambda x: x["end"])}
+    return fields
+
+
+def raw_for(slug, cik, refresh):
+    """Raw companyfacts for one company: from data/edgar/companyfacts/ unless absent or --refresh.
+    Returns (raw_or_None, fetched_date, note)."""
+    os.makedirs(CACHE, exist_ok=True)
+    path = os.path.join(CACHE, f"{slug}.json")
+    manifest_path = os.path.join(CACHE, "_fetched.json")
+    manifest = json.load(open(manifest_path)) if os.path.exists(manifest_path) else {}
+    if not refresh and os.path.exists(path):
+        d = json.load(open(path))
+        fetched = manifest.get(slug, {}).get("fetched", "unknown date")
+        if "error" in d:
+            return None, fetched, f"no companyfacts ({d['error'][:40]})"
+        return d, fetched, None
+    time.sleep(0.3)
+    today = datetime.date.today().isoformat()
+    try:
+        raw = json.loads(urllib.request.urlopen(urllib.request.Request(
+            f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json",
+            headers=UA), timeout=60).read())
+    except urllib.error.HTTPError as exc:
+        json.dump({"error": f"HTTP Error {exc.code}"}, open(path, "w"))
+        manifest[slug] = {"fetched": today, "status": f"error: HTTP {exc.code}"}
+        json.dump(manifest, open(manifest_path, "w"), indent=1)
+        return None, today, f"no companyfacts (HTTP {exc.code})"
+    json.dump(raw, open(path, "w"))
+    manifest[slug] = {"fetched": today, "status": "ok"}
+    json.dump(manifest, open(manifest_path, "w"), indent=1)
+    return raw, today, None
+
+
 def main():
+    refresh = "--refresh" in sys.argv
+    today = datetime.date.today().isoformat()
     done = empty = 0
     for slug in sorted(os.listdir(OUT)):
         cj = os.path.join(OUT, slug, "company.json")
         if not os.path.exists(cj):
             continue
         c = json.load(open(cj))
-        time.sleep(0.3)
-        try:
-            raw = json.loads(urllib.request.urlopen(urllib.request.Request(
-                f"https://data.sec.gov/api/xbrl/companyfacts/CIK{c['cik']:010d}.json",
-                headers=UA), timeout=60).read())
-        except urllib.error.HTTPError as exc:
-            print(f"  {slug:<30} keine companyfacts ({exc.code})", flush=True)
-            json.dump({"cik": c["cik"], "note": f"no companyfacts (HTTP {exc.code})",
-                       "fields": {}},
+        raw, fetched, note = raw_for(slug, c["cik"], refresh)
+        if raw is None:
+            print(f"  {slug:<30} {note}", flush=True)
+            json.dump({"cik": c["cik"], "note": note, "fields": {}},
                       open(os.path.join(OUT, slug, "xbrl.json"), "w"))
             empty += 1
             continue
-        gaap = raw.get("facts", {}).get("us-gaap", {})
-        fields = {}
-        for canon, tags in CONCEPTS.items():
-            merged, merged_q = {}, {}
-            for tag in tags:
-                units = gaap.get(tag, {}).get("units", {}).get("USD", [])
-                for v in annual_values(units, canon in INSTANT):
-                    if v["end"] not in merged:            # earlier-listed tag wins
-                        merged[v["end"]] = {**v, "tag": tag}
-                for v in quarterly_values(units, canon in INSTANT):
-                    if v["end"] not in merged_q:
-                        merged_q[v["end"]] = {**v, "tag": tag}
-            if merged or merged_q:
-                fields[canon] = {"annual": sorted(merged.values(), key=lambda x: x["end"]),
-                                 "quarterly": sorted(merged_q.values(), key=lambda x: x["end"])}
+        fields = extract(raw)
         json.dump({"cik": c["cik"], "entity": raw.get("entityName", ""),
-                   "source": "SEC companyfacts API, fetched 2026-08-31 (annual + quarterly)", "fields": fields},
+                   "source": f"SEC companyfacts API, fetched {fetched}, extracted {today} (annual + quarterly)",
+                   "fields": fields},
                   open(os.path.join(OUT, slug, "xbrl.json"), "w"), indent=0)
         yrs = fields.get("revenue", {}).get("annual", [])
         print(f"  {slug:<30} {len(fields):>2}/16 Konzepte, Revenue {len(yrs)} Jahre"

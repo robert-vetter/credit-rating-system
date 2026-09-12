@@ -13,3 +13,8 @@ from filing text before the model sees it, logging what it cut.
 
 Sector expansion later means one configuration (bands, weights, qualitative criteria) per
 methodology on top of the same mechanics.
+
+Review update, 2026-09-12, by Codex at Robert's direction: negative Debt/EBITDA and net-cash
+RCF scoring now follow page 5 footnotes 2 and 3. Non-finite inputs and undefined ratio cases
+fail explicitly. Regression checks live in `experiments/03-oos-values-first/test_integrity.py`;
+measured impact and limitations are in `docs/oos-integrity-review.md`.
