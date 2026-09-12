@@ -18,7 +18,7 @@ is Codex's review note from earlier the same day and remains valid.*
 `experiments/04-open-weight-cross-section/RUN-SPEC.md`. Next steps, in order: (1) hand that
 specification to Codex for the review listed in its section 10, before any paid call;
 (2) get Robert's cap (section 8 proposes $3.00 of the $7.54 balance) and his answers to D5 to
-D10 in that folder's `decisions.md`; (3) implement `run_openrouter.py` in that folder with the
+D10 and D12 in that folder's `decisions.md`; (3) implement `run_openrouter.py` in that folder with the
 guards of section 7; (4) free pre-flight, then one single real request, inspected, then the
 rest; (5) score through `evaluation/pipeline/score_run.py` and write `results.md`. Do not
 start (3) before (1) and (2).
@@ -43,6 +43,7 @@ variable is the model. The specification goes to Codex for review before money i
 | Byte-based token estimates | unreliable, do not use them: X17 estimated 389,000, actual 149,955 |
 | Per-provider facts | `evidence/endpoints-2026-09-12/`, one JSON per model, with context, price, quantisation and supported parameters |
 | GMICloud price | $0.0875 / $0.35 per MTok is a 75% promotion (`discount: 0.75`) off a list price of $0.35 / $1.40; three replicates cost $1.03 shown, $4.14 at list (later session, 2026-09-12) |
+| History packs | none of the 16 packs saved in Experiment 03 equals the current builder's output; saved 3,828 to 4,472 tokens, current 17,694 to 18,822; with the saved packs Qurate fits untrimmed at 243,144 (later session, 2026-09-12) |
 
 **Time-left curve, measured.** How many labelled rating changes remain available for a given
 model bound is in the Experiment 04 README section 1. The short version: a bound after January
@@ -78,6 +79,20 @@ now gives both models one code path), the truncation tolerance (2% on the count 
 schema, from measured overheads), and `count_tokens_qwen.py`, which now regenerates the
 evidence file offline with per-document sizes and the trimmed variants. The full list is
 RUN-SPEC.md section 12. D5 to D10 remain Robert's; the Codex review has not happened.
+
+**Second finding, same session: the history packs are not the packs Opus saw.** The integrity
+review rebuilt `history_pack.py` and `peer_table.py`, and the XBRL re-extraction of 2026-09-11
+changed figures, all after Experiment 03 ran. None of the 16 packs saved in Experiment 03's
+`audit.json` equals today's builder output; the saved packs are 3,828 to 4,472 Qwen tokens,
+today's 17,694 to 18,822. With the saved packs Qurate fits untrimmed. RUN-SPEC.md section 5
+gives three options; decision D12 is Robert's, option (c) recommended: current packs for all
+20 plus the 7 Opus issuers once more on their saved packs, about $0.35 extra.
+
+**The Codex brief.** The complete review brief for Codex (goal, correspondence requirements,
+journey, state, plan, cutoff logic, labels, scoring, success criteria, the unsent lab update,
+checklist and sign-off form) is at `/Users/robert/Developer/giesecke/codex-review-brief-2026-09-12.md`,
+outside the repository because it carries correspondence and the draft. Robert hands it to
+Codex; Codex writes its verdict to `experiments/04-open-weight-cross-section/review-codex-2026-09-12.md`.
 
 ## Current instruction and review, 2026-09-12
 
@@ -456,5 +471,7 @@ they are. The model-facing code is Anthropic-specific and small:
   never went through score_run.py), and the truncation tolerance (2% on the count without the
   schema). Rewrote count_tokens_qwen.py so the evidence file regenerates offline with
   per-document sizes and the trimmed variants; every number reproduced. Corrections listed in
-  RUN-SPEC.md section 12. Experiment 04 runs folder gitignored. Nothing run, nothing spent;
-  D5 to D10 open; the Codex review has not happened.
+  RUN-SPEC.md section 12. Experiment 04 runs folder gitignored. Then found that the history
+  packs are not the packs Opus saw (builder and XBRL extraction changed after the run); recorded
+  the options as D12. Wrote the Codex review brief outside the repository. Nothing run, nothing
+  spent; D5 to D10 and D12 open; the Codex review has not happened.

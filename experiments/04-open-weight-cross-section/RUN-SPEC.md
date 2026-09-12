@@ -12,9 +12,12 @@ and the corrections are listed in section 12. Still nothing run, nothing spent.*
 
 ## 1. What this run is and is not
 
-The same test as Experiment 03, same boundary, same documents, same prompts, same labels, one
-thing changed: the model. Opus 4.6 produced 7 usable observations of 20 because of cost. Qwen3
-costs about 2% as much per token, so all 20 run with three replicates for about a dollar.
+The same test as Experiment 03: same boundary, same documents, same prompts, same labels. The
+model changes. The history pack is the one open point: the integrity review of 2026-09-12
+rebuilt the pack builder after Experiment 03 ran, so the current builder's packs are not the
+packs Opus saw (section 5, decision D12). Opus 4.6 produced 7 usable observations of 20 because
+of cost. Qwen3 costs about 2% as much per token, so all 20 run with three replicates for about
+a dollar.
 
 It is a post-cutoff cross-section of the outstanding rating at one date, scored against
 persistence. It is not a forecast, not a certified benchmark, and not a claim about label
@@ -96,14 +99,15 @@ template 13. The counts above include the schema text; in the request the schema
 257,089). Dropping the single oldest 10-Q brings both under it, as shown. This is the only
 deviation from Experiment 03's document rule and it must be flagged per observation in the
 results: for these two issuers the model sees one 10-Q less than Opus 4.6 did. Never allow the
-provider to truncate instead (section 7).
+provider to truncate instead (section 7). With the saved Experiment 03 pack instead of the
+current one (D12), Qurate fits untrimmed at 243,144 tokens; Levi does not fit either way.
 
 **Thirteen issuers Opus never scored.** X01, X02, X03, X04, X05, X06, X07, X10, X11 were scheduled
 but lost to the output ceiling; X08, X09, X13, X18 were never scheduled. All 13 are in this
 run. The seven Opus scored (X12, X14, X15, X16, X17, X19, X20) are also in it, which gives a
 direct model-to-model comparison on identical inputs.
 
-## 5. Request contents, unchanged from Experiment 03
+## 5. Request contents, as in Experiment 03 except the history pack
 
 Per issuer, one document request containing, in this order:
 
@@ -112,10 +116,22 @@ Per issuer, one document request containing, in this order:
    `<document name="10-K filed 2026-03-12">...</document>`. Text extraction by
    `run_eval.to_text`, rating self-disclosures removed by `system/redact.py`, removed lines
    stored per observation. No exhibits, no 8-Ks.
-3. The history pack from `evaluation/pipeline/history_pack.py` with
-   `history_end="2025-08-28"`: rating path to that date, the rating then in effect, three
-   prior fiscal years plus the current one from XBRL with filed dates, the implied qualitative
-   anchors, recent quarterly rows, and the peer table without ratings.
+3. The history pack with `history_end="2025-08-28"`: rating path to that date, the rating then
+   in effect, three prior fiscal years plus the current one from XBRL, the implied qualitative
+   anchors, recent quarterly rows, and the peer table without ratings. **Which pack is open
+   (D12).** Measured on 2026-09-12: none of the 16 packs saved in Experiment 03's `audit.json`
+   equals what `evaluation/pipeline/history_pack.py` builds today. The integrity review rebuilt
+   the builder after the Opus run (per-fact filing dates, matching peer fiscal periods), and the
+   XBRL re-extraction of 2026-09-11 changed some figures (Target's FY2023 debt is 19,147m in the
+   saved pack and 19,018m now; Bath & Body Works' prior-year EBITDA was empty then and is filled
+   now). The saved packs are 3,828 to 4,472 Qwen tokens, the current ones 17,694 to 18,822. With
+   the saved packs every one of the 16 fits the limit, Qurate untrimmed at 243,144; Levi, never
+   scheduled and without a saved pack, stays over the limit on its documents alone. Options for
+   Robert: (a) the saved packs verbatim for the 16 and the current builder for the 4 never
+   scheduled, flagged, so that for the 16 only the model changes; (b) the current builder for
+   all 20, accepting that the 7-issuer comparison then confounds model and pack; (c) recommended:
+   the current builder for all 20 as the main run, plus the 7 Opus issuers once more on their
+   saved packs for the exact model comparison, 1,088,487 input tokens per pass.
 4. `As-of date: 2026-08-29.` followed by `prompts/task_values_first.txt`, verbatim.
 5. The output schema, `prompts/schema_values_first.json`, as a JSON-schema response format.
 
@@ -185,7 +201,8 @@ probes); a typical answer is a fraction of that.
 | Three replicates | 9,855,489 | **$1.03** | $4.14 | $1.16 |
 | 20 memory probes | about 8,000 | $0.01 | $0.04 | $0.01 |
 | One pass on the 7 Opus issuers only, for the direct comparison | 1,143,322 | $0.12 | $0.48 | $0.13 |
-| **Proposed run total** | | **about $1.05 of $7.54** | | |
+| The 7 Opus issuers on their saved packs, three replicates (D12 option c) | 3,265,461 | $0.35 | $1.38 | $0.39 |
+| **Proposed run total** | | **about $1.05 of $7.54, about $1.40 with D12 option (c)** | | |
 
 The shown GMICloud price is marked "75% off" on OpenRouter's model page and `discount: 0.75`
 in the endpoint record, both re-read on 2026-09-12. If the promotion ends during the run,
@@ -236,8 +253,11 @@ the model comparison is like for like. Qurate reported with and without, as in E
 5. **The bound.** Using the release date as the training-data bound where the vendor states no
    cutoff. Is the release date of `Qwen3-235B-A22B-Instruct-2507` (2025-07-21) established well
    enough, and is a bound of this kind defensible in the write-up?
-6. **Leakage.** The history pack and peer table are byte-identical to Experiment 03, so no new
-   channel opens; confirm that, and confirm that OpenRouter adds no retrieval by default.
+6. **Leakage and input parity.** The documents replay byte-identically from the cache and the
+   redactor (integrity review); the history pack does not (section 5, D12). Check the current
+   builder's packs for any new channel (the added filing dates, the filled figures), say which
+   option of D12 keeps the comparison honest, and confirm that OpenRouter adds no retrieval
+   unless `plugins` or a web-search model suffix is requested.
 7. **The cost ledger.** Does the guard actually prevent an overrun mid-run, including retries
    and re-asks, and does it hold if GMICloud's 75% promotion ends between two requests
    (section 8)?
@@ -256,6 +276,8 @@ the model comparison is like for like. Qurate reported with and without, as in E
   about $2 per pass, or keep that for later.
 - Transport: `httpx` (installed) rather than installing the `openai` package, as proposed in
   section 6; no decision needed unless Robert prefers otherwise.
+- D12, the history pack: the saved Experiment 03 packs, the current builder, or both
+  (section 5, option (c) recommended).
 
 ## 12. Corrections made on 2026-09-12 before review
 
@@ -278,3 +300,6 @@ the design plan's rules 4 and 10, and the evidence script.
    tokens and the trimmed variants, and reproduces every number in section 4 exactly.
 6. Transport named as `httpx`; the design plan's rule 10 said the `openai` client, which is
    not installed and not needed.
+7. The claim that the history pack and peer table were byte-identical to Experiment 03 was
+   wrong: the builder and the XBRL extraction changed after the Opus run. Measured on the 16
+   saved packs; section 5 gives the options and D12 records the open decision.

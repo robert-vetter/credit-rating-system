@@ -42,3 +42,10 @@ or later.
 **D11 Arm 2** (official Moody's labels, boundary 2024-09-30, 59 issuers, 12 changes) needs a
 model whose bound predates August 2024, so DeepSeek V3-0324 or Llama 4 Maverick, not Qwen.
 Separate decision.
+
+**D12 History pack version.** The packs Opus saw in Experiment 03 are saved in that experiment's
+`audit.json` (16 issuers) and differ from what the current builder produces (measured
+2026-09-12, RUN-SPEC.md section 5): the builder and the XBRL extraction changed after the Opus
+run. Options: (a) saved packs for the 16, current builder for the 4 never scheduled, flagged;
+(b) current builder for all 20; (c) recommended: current builder for all 20 plus the 7 Opus
+issuers once more on their saved packs, about $0.35 extra at the shown price.
