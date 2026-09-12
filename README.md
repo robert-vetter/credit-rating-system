@@ -75,6 +75,8 @@ next design.
 | [evaluation/](evaluation/) | Mapping, fixed evaluation set and pipeline |
 | [experiments/](experiments/) | Specifications, prompts, decisions and results for each experiment |
 | [docs/oos-integrity-review.md](docs/oos-integrity-review.md) | Audit findings, repairs and proposed analyst architecture |
+| [docs/architecture.md](docs/architecture.md) | Analyst architecture proposal: one-page pipeline, build order, decisions needed |
+| [experiments/04-open-weight-cross-section/](experiments/04-open-weight-cross-section/README.md) | The post-cutoff test on cheap open-weight models: design plan, and [RUN-SPEC.md](experiments/04-open-weight-cross-section/RUN-SPEC.md), the exact Arm 1 specification awaiting review (not run) |
 | [notes/](notes/) | Historical experiment logs and their corrections |
 | [data/README.md](data/README.md) | Data sources and local cache inventory |
 | [methodologies/](methodologies/) | Methodology reference |
@@ -85,7 +87,8 @@ from a fresh clone. Local replay requires the original saved requests and filing
 
 ## Next work
 
-The architecture proposal separates dated evidence, quantitative normalization, qualitative
+The architecture proposal (docs/architecture.md, 2026-09-12) maps Giesecke's blocks onto the
+methodology's own pipeline and separates dated evidence, quantitative normalization, qualitative
 factor analysis, methodology scoring and overall judgement. Its next proposed implementation
 is an evidence ledger and a quarterly/TTM quantitative baseline, using non-gold data and no
 paid model calls. The prototype is not yet built. Rating-entity/type consistency, label

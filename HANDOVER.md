@@ -7,6 +7,64 @@ correspondence that is not in the repository, that is said. Read this file first
 README.md, then the experiment folders. Keep this file current: append a dated entry to
 section 13 whenever the state changes.*
 
+## Session continuation, 2026-09-12 late (read this first)
+
+*Written by Claude (Fable 5.1) at Robert's request as a gapless handover: he hit usage limits
+and continues in a fresh session on another account. Everything below was measured or decided
+on 2026-09-12 and supersedes older statements where they conflict. The section after this one
+is Codex's review note from earlier the same day and remains valid.*
+
+**The immediate next task.** Experiment 04 Arm 1 is fully specified in
+`experiments/04-open-weight-cross-section/RUN-SPEC.md`. Next steps, in order: (1) hand that
+specification to Codex for the review listed in its section 10, before any paid call;
+(2) get Robert's cap (section 8 proposes $3.00 of the $7.54 balance) and his answers to D5 to
+D10 in that folder's `decisions.md`; (3) implement `run_openrouter.py` in that folder with the
+guards of section 7; (4) free pre-flight, then one single real request, inspected, then the
+rest; (5) score through `evaluation/pipeline/score_run.py` and write `results.md`. Do not
+start (3) before (1) and (2).
+
+**What Robert decided today.** Qwen3-235B-A22B-2507 through OpenRouter is the model, because
+Opus 4.6 cost about a dollar per issuer and capped Experiment 03 at seven observations, and
+because it is the most recent open-weight model whose training-data bound still clears the
+Experiment 03 boundary. Arm 1 first, same window and labels as Experiment 03, so the only
+variable is the model. The specification goes to Codex for review before money is spent.
+
+**Facts measured today that exist nowhere else.**
+
+| Fact | Value |
+|---|---|
+| OpenRouter key | in `.env` as `OPEN_ROUTER_API_KEY` (not the usual spelling) |
+| OpenRouter balance | 55.00 credits granted, 47.46 used, **$7.536 left** (credits endpoint, 2026-09-12) |
+| `openai` package | **not installed**; `httpx` 0.28.1 and `tiktoken` and `transformers` 4.57.6 are |
+| Qwen token counts | exact, all 20 packages, `evidence/qwen-token-counts-2026-09-12.json`, regenerable with `count_tokens_qwen.py` |
+| Qwen versus Anthropic tokenizer | Qwen counts are 0.976 of the Anthropic count at the median over the 16 saved packages |
+| Packages over the 253,952 limit | only X09 Levi (285,930) and X14 Qurate (257,089); dropping one 10-Q gives 235,598 and 212,906 |
+| Document cache | all 51 documents of all 20 issuers are already cached; the run needs no SEC download |
+| Byte-based token estimates | unreliable, do not use them: X17 estimated 389,000, actual 149,955 |
+| Per-provider facts | `evidence/endpoints-2026-09-12/`, one JSON per model, with context, price, quantisation and supported parameters |
+
+**Time-left curve, measured.** How many labelled rating changes remain available for a given
+model bound is in the Experiment 04 README section 1. The short version: a bound after January
+2025 loses the February to April 10-K season, the official Moody's window is empty after May
+2025, and from then on only the 20 disclosure labels exist. Each monthly refresh of Moody's
+file adds roughly two changes.
+
+**The lab update.** Robert wants the update to tell the story of how he got here: started with
+the strongest model, found it too expensive at this input size, went looking for the sweet spot
+between model strength and cutoff date, landed on Qwen through OpenRouter, and runs two model
+families against each other (Claude Fable 5.1 implements, OpenAI Codex audits, and the other
+way round) with the scorecard bug that audit found as the concrete example. The draft with that
+story is at `/Users/robert/Developer/giesecke/lab-update-draft-2026-09-12.md`, deliberately
+outside the repository because the repository is public. It has not been sent. Robert's earlier
+edits to it stand: no Qurate caveat sentence, no "labels are the limiting factor" phrasing, and
+the cost explanation for n = 7 stays in.
+
+**Repository state.** Uncommitted on `main` at the end of this session: `docs/architecture.md`,
+the whole `experiments/04-open-weight-cross-section/` folder, and pointer edits in `README.md`
+and this file. Commit them. Nothing has been run against OpenRouter; no paid call was made in
+this session. `experiments/03-oos-values-first/run_batch.py` still refuses paid calls by
+decision D11 and that guard stays.
+
 ## Current instruction and review, 2026-09-12
 
 *Written by Codex, directed by Robert Vetter. Verified against the saved Experiment 03
@@ -359,3 +417,20 @@ they are. The model-facing code is Anthropic-specific and small:
   corrected scores and label limitations. Prepared the lab reply and repository update. Verified all 10 regressions, saved-request
   replay, documentation links and unchanged protected artifacts before committing. Raw
   run directories remain ignored; the lab reply has not been sent.
+- 2026-09-12, Claude (Fable 5.1) at Robert's direction: verified Codex's review (both scoring fixes
+  match methodology page 5 footnotes 2 and 3; the 10 regressions pass; the offline audit
+  reproduces the corrected numbers). Wrote docs/architecture.md, the analyst architecture
+  proposal v0.1 Giesecke asked for on day one, with open decisions in its section 8. Drafted a
+  revised lab email (not in the repository, not sent). Repository visibility still unresolved.
+- 2026-09-12, Claude (Fable 5.1) at Robert's direction: Robert asked for cheap open-weight models to run the
+  post-cutoff test at scale. Wrote experiments/04-open-weight-cross-section/ (design plan v0.1, decisions D1 to D7
+  open, evidence with vendor cutoff quotes and the OpenRouter model list). Key facts: Llama 4 Maverick (Aug 2024
+  cutoff, 1M context, $0.20/$0.70) and gpt-oss-120b (Jun 2024, 131k) have vendor-stated cutoffs; Qwen3, Kimi, GLM
+  model cards state none, so their release dates are the bound. Arm 2 (official labels, B = 2024-09-30, as-of
+  2025-06-30) has 59 issuers with documents and 12 changes for about $2.30 per pass on Llama 4. Nothing run.
+- 2026-09-12 late, Claude (Fable 5.1) at Robert's direction: measured the capability-versus-labels
+  trade-off across candidate model bounds, checked the OpenRouter key and balance, counted exact
+  Qwen tokens for all 20 packages, confirmed every document is cached, and wrote
+  experiments/04-open-weight-cross-section/RUN-SPEC.md (Arm 1, ready for Codex review) with
+  decisions D1 to D4 recorded and D5 to D11 open. Moved the lab-update draft outside the
+  repository. Nothing run, nothing spent, nothing committed.

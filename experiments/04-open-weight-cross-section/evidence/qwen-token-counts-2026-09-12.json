@@ -1,0 +1,353 @@
+[
+ {
+  "id": "X01",
+  "slug": "bath-body-works",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba2",
+  "persistence": "Ba2",
+  "docs": [
+   "10-K 2026-03-12",
+   "10-Q 2026-05-27",
+   "10-Q 2026-08-26"
+  ],
+  "redacted_lines": 24,
+  "qwen_tokens_total": 148071,
+  "qwen_tokens_docs": 128016,
+  "qwen_tokens_pack": 18575,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X02",
+  "slug": "best-buy-co",
+  "in_run": true,
+  "changed": false,
+  "label": "A3",
+  "persistence": "A3",
+  "docs": [
+   "10-K 2026-03-18",
+   "10-Q 2026-06-05"
+  ],
+  "redacted_lines": 21,
+  "qwen_tokens_total": 124993,
+  "qwen_tokens_docs": 104766,
+  "qwen_tokens_pack": 18747,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X03",
+  "slug": "dick-s-sporting-goods",
+  "in_run": true,
+  "changed": false,
+  "label": "Baa2",
+  "persistence": "Baa2",
+  "docs": [
+   "10-K 2026-03-27",
+   "10-Q 2026-06-04"
+  ],
+  "redacted_lines": 9,
+  "qwen_tokens_total": 156121,
+  "qwen_tokens_docs": 136202,
+  "qwen_tokens_pack": 18439,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X04",
+  "slug": "dollar-general",
+  "in_run": true,
+  "changed": false,
+  "label": "Baa3",
+  "persistence": "Baa3",
+  "docs": [
+   "10-K 2026-03-20",
+   "10-Q 2026-06-02",
+   "10-Q 2026-08-27"
+  ],
+  "redacted_lines": 79,
+  "qwen_tokens_total": 167207,
+  "qwen_tokens_docs": 147115,
+  "qwen_tokens_pack": 18612,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X05",
+  "slug": "floor-decor",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba3",
+  "persistence": "Ba3",
+  "docs": [
+   "10-K 2026-02-19",
+   "10-Q 2026-04-30",
+   "10-Q 2026-07-30"
+  ],
+  "redacted_lines": 17,
+  "qwen_tokens_total": 155707,
+  "qwen_tokens_docs": 135739,
+  "qwen_tokens_pack": 18488,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X06",
+  "slug": "gap-inc-the",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba2",
+  "persistence": "Ba2",
+  "docs": [
+   "10-K 2026-03-17",
+   "10-Q 2026-05-29",
+   "10-Q 2026-08-28"
+  ],
+  "redacted_lines": 5,
+  "qwen_tokens_total": 146783,
+  "qwen_tokens_docs": 126581,
+  "qwen_tokens_pack": 18722,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X07",
+  "slug": "kohl-s",
+  "in_run": true,
+  "changed": false,
+  "label": "B2",
+  "persistence": "B2",
+  "docs": [
+   "10-K 2026-03-19",
+   "10-Q 2026-06-04"
+  ],
+  "redacted_lines": 25,
+  "qwen_tokens_total": 92748,
+  "qwen_tokens_docs": 72446,
+  "qwen_tokens_pack": 18822,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X08",
+  "slug": "leslie-s-poolmart",
+  "in_run": false,
+  "changed": false,
+  "label": "Caa3",
+  "persistence": "Caa3",
+  "docs": [
+   "10-K 2025-12-18",
+   "10-Q 2026-02-18",
+   "10-Q 2026-05-13",
+   "10-Q 2026-08-12"
+  ],
+  "redacted_lines": 12,
+  "qwen_tokens_total": 200033,
+  "qwen_tokens_docs": 179969,
+  "qwen_tokens_pack": 18584,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X09",
+  "slug": "levi-strauss",
+  "in_run": false,
+  "changed": false,
+  "label": "Ba1",
+  "persistence": "Ba1",
+  "docs": [
+   "10-K 2026-01-28",
+   "10-Q 2026-04-07",
+   "10-Q 2026-07-08"
+  ],
+  "redacted_lines": 7,
+  "qwen_tokens_total": 285930,
+  "qwen_tokens_docs": 265875,
+  "qwen_tokens_pack": 18575,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X10",
+  "slug": "lowe-s-companies",
+  "in_run": true,
+  "changed": false,
+  "label": "Baa1",
+  "persistence": "Baa1",
+  "docs": [
+   "10-K 2026-03-23",
+   "10-Q 2026-05-28",
+   "10-Q 2026-08-27"
+  ],
+  "redacted_lines": 22,
+  "qwen_tokens_total": 162053,
+  "qwen_tokens_docs": 141848,
+  "qwen_tokens_pack": 18725,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X11",
+  "slug": "macy-s",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba1",
+  "persistence": "Ba1",
+  "docs": [
+   "10-K 2026-03-27",
+   "10-Q 2026-06-04"
+  ],
+  "redacted_lines": 11,
+  "qwen_tokens_total": 127584,
+  "qwen_tokens_docs": 107428,
+  "qwen_tokens_pack": 18676,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X12",
+  "slug": "nike",
+  "in_run": true,
+  "changed": true,
+  "label": "A2",
+  "persistence": "A1",
+  "docs": [
+   "10-K 2026-07-15"
+  ],
+  "redacted_lines": 11,
+  "qwen_tokens_total": 128813,
+  "qwen_tokens_docs": 109639,
+  "qwen_tokens_pack": 17694,
+  "quarterly_rows": 0
+ },
+ {
+  "id": "X13",
+  "slug": "pvh",
+  "in_run": false,
+  "changed": false,
+  "label": "Baa3",
+  "persistence": "Baa3",
+  "docs": [
+   "10-K 2026-03-31",
+   "10-Q 2026-06-05"
+  ],
+  "redacted_lines": 11,
+  "qwen_tokens_total": 210531,
+  "qwen_tokens_docs": 190366,
+  "qwen_tokens_pack": 18685,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X14",
+  "slug": "qurate-qvc",
+  "in_run": true,
+  "changed": true,
+  "label": "Caa3",
+  "persistence": "Caa1",
+  "docs": [
+   "10-K 2026-04-15",
+   "10-Q 2026-05-15",
+   "10-Q 2026-08-04"
+  ],
+  "redacted_lines": 14,
+  "qwen_tokens_total": 257089,
+  "qwen_tokens_docs": 237646,
+  "qwen_tokens_pack": 17963,
+  "quarterly_rows": 0
+ },
+ {
+  "id": "X15",
+  "slug": "signet",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba3",
+  "persistence": "Ba3",
+  "docs": [
+   "10-K 2026-03-19",
+   "10-Q 2026-06-02"
+  ],
+  "redacted_lines": 20,
+  "qwen_tokens_total": 189926,
+  "qwen_tokens_docs": 169793,
+  "qwen_tokens_pack": 18653,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X16",
+  "slug": "target",
+  "in_run": true,
+  "changed": false,
+  "label": "A2",
+  "persistence": "A2",
+  "docs": [
+   "10-K 2026-03-11",
+   "10-Q 2026-05-29",
+   "10-Q 2026-08-28"
+  ],
+  "redacted_lines": 28,
+  "qwen_tokens_total": 132137,
+  "qwen_tokens_docs": 111972,
+  "qwen_tokens_pack": 18685,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X17",
+  "slug": "tractor-supply",
+  "in_run": true,
+  "changed": false,
+  "label": "Baa1",
+  "persistence": "Baa1",
+  "docs": [
+   "10-K 2026-02-19",
+   "10-Q 2026-05-07",
+   "10-Q 2026-08-06"
+  ],
+  "redacted_lines": 13,
+  "qwen_tokens_total": 149955,
+  "qwen_tokens_docs": 129858,
+  "qwen_tokens_pack": 18617,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X18",
+  "slug": "v-f",
+  "in_run": false,
+  "changed": false,
+  "label": "Ba2",
+  "persistence": "Ba2",
+  "docs": [
+   "10-K 2026-05-20",
+   "10-Q 2026-07-29"
+  ],
+  "redacted_lines": 30,
+  "qwen_tokens_total": 214412,
+  "qwen_tokens_docs": 194276,
+  "qwen_tokens_pack": 18656,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X19",
+  "slug": "victoria-s-secret",
+  "in_run": true,
+  "changed": false,
+  "label": "Ba3",
+  "persistence": "Ba3",
+  "docs": [
+   "10-K 2026-03-20",
+   "10-Q 2026-06-05"
+  ],
+  "redacted_lines": 19,
+  "qwen_tokens_total": 135215,
+  "qwen_tokens_docs": 115180,
+  "qwen_tokens_pack": 18555,
+  "quarterly_rows": 4
+ },
+ {
+  "id": "X20",
+  "slug": "walmart",
+  "in_run": true,
+  "changed": false,
+  "label": "Aa2",
+  "persistence": "Aa2",
+  "docs": [
+   "10-K 2026-03-13",
+   "10-Q 2026-05-29",
+   "10-Q 2026-08-28"
+  ],
+  "redacted_lines": 27,
+  "qwen_tokens_total": 194370,
+  "qwen_tokens_docs": 174926,
+  "qwen_tokens_pack": 17964,
+  "quarterly_rows": 0
+ }
+]
