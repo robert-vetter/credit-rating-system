@@ -49,7 +49,7 @@ model's generation, not our measurement; section 4 measures it on our task.
 | DeepSeek V3, `deepseek/deepseek-chat` | release 2024-12-26 | 2025-01-31 | 10 + 2 = 12 | 164k (DeepInfra, fp4 only) | $0.32 / $0.89 | Dec 2024, the best open model of its time |
 | DeepSeek V3-0324, `deepseek/deepseek-chat-v3-0324` | release 2025-03-24 | 2025-04-30 | 5 + 2 = 7 | 164k (Crusoe bf16, SiliconFlow fp8) | $0.25 to $0.50 / $1.00 to $1.50 | Mar 2025, strong non-reasoning |
 | Qwen3-235B-A22B, `qwen/qwen3-235b-a22b` | release 2025-04-28 | 2025-05-31 | 3 + 2 = 5 | 131k (Alibaba only) | $0.45 / $1.82 | Apr 2025, hybrid reasoning, context too small for full packages |
-| Qwen3-235B-A22B-2507, `qwen/qwen3-235b-a22b-2507` | release 2025-07-21 | 2025-08-31 | 1 + 2 = 3 | 262k (GMICloud, DeepInfra, Nebius, Google; fp8) | $0.09 / $0.35 | Jul 2025, strong non-reasoning, cheapest fit |
+| Qwen3-235B-A22B-2507, `qwen/qwen3-235b-a22b-2507` | release 2025-07-21 | 2025-08-31 | 1 + 2 = 3 | 262k (GMICloud, DeepInfra, Nebius, Google; fp8) | $0.0875 / $0.35 at GMICloud, a 75% promotion off $0.35 / $1.40; DeepInfra $0.09 / $0.55 | Jul 2025, strong non-reasoning, cheapest fit |
 | Kimi K2-0905, `moonshotai/kimi-k2-0905` | release 2025-09-04 | 2025-10-31 | 2 | 262k (Novita, fp8) | $0.60 / $2.50 | Sep 2025, strong non-reasoning |
 | Qwen3-Max, `qwen/qwen3-max` | release 2025-09-23 | 2025-10-31 | 2 | 262k (Alibaba, closed weights) | $0.78 / $3.90 | Sep 2025, Alibaba flagship |
 | GLM-4.6, `z-ai/glm-4.6` | release 2025-09-30 | 2025-10-31 | 2 | 205k (Novita, bf16) | $0.55 / $2.20 | Sep 2025, strong, reasoning mode |
@@ -109,7 +109,7 @@ truncated by the provider (section 5, rule 4).
 3. The bound recorded with evidence per model (release announcement or vendor cutoff
    statement, quoted and dated).
 4. No silent truncation: the provider's prompt-token count must match the local count within
-   10%, otherwise the observation is discarded and logged.
+   2% (RUN-SPEC.md section 7), otherwise the observation is discarded and logged.
 5. Three replicates at temperature 0 with a fixed seed where accepted; spread reported.
 6. JSON schema through `response_format` (every shortlisted provider supports it); one re-ask
    on a parse failure, failures counted.
@@ -123,8 +123,9 @@ truncated by the provider (section 5, rule 4).
    score_run.py.
 9. Cost guard: local token count and a cap set by Robert before submission; actual cost read
    back per request.
-10. Transport: OpenRouter's OpenAI-compatible endpoint through the `openai` client; the
-    request record keeps the Experiment 03 shape so results are comparable.
+10. Transport: OpenRouter's chat completions endpoint over HTTPS with `httpx` (the `openai`
+    package is not installed and not needed); the request record keeps the Experiment 03
+    shape so results are comparable.
 
 ## 5a. Status, 2026-09-12
 
@@ -132,7 +133,9 @@ Arm 1 is specified in full in [RUN-SPEC.md](RUN-SPEC.md) and is waiting for Code
 Robert's cap. Measured since v0.2: exact Qwen token counts for all 20 packages
 (evidence/qwen-token-counts-2026-09-12.json, regenerable with count_tokens_qwen.py), 18 of 20
 fit 253,952 tokens and the two that do not fit after dropping one 10-Q; all 51 documents are
-already cached locally; the OpenRouter key works and the balance is $7.54.
+already cached locally; the OpenRouter key works and the balance is $7.54. Corrected later the
+same day before review (RUN-SPEC.md section 12); the correction that matters most for the cap
+is that GMICloud's shown price is a 75% promotion off $0.35 / $1.40.
 
 ## 6. Deliverables
 

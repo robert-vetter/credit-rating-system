@@ -42,6 +42,7 @@ variable is the model. The specification goes to Codex for review before money i
 | Document cache | all 51 documents of all 20 issuers are already cached; the run needs no SEC download |
 | Byte-based token estimates | unreliable, do not use them: X17 estimated 389,000, actual 149,955 |
 | Per-provider facts | `evidence/endpoints-2026-09-12/`, one JSON per model, with context, price, quantisation and supported parameters |
+| GMICloud price | $0.0875 / $0.35 per MTok is a 75% promotion (`discount: 0.75`) off a list price of $0.35 / $1.40; three replicates cost $1.03 shown, $4.14 at list (later session, 2026-09-12) |
 
 **Time-left curve, measured.** How many labelled rating changes remain available for a given
 model bound is in the Experiment 04 README section 1. The short version: a bound after January
@@ -59,11 +60,24 @@ outside the repository because the repository is public. It has not been sent. R
 edits to it stand: no Qurate caveat sentence, no "labels are the limiting factor" phrasing, and
 the cost explanation for n = 7 stays in.
 
-**Repository state.** Uncommitted on `main` at the end of this session: `docs/architecture.md`,
-the whole `experiments/04-open-weight-cross-section/` folder, and pointer edits in `README.md`
-and this file. Commit them. Nothing has been run against OpenRouter; no paid call was made in
-this session. `experiments/03-oos-values-first/run_batch.py` still refuses paid calls by
-decision D11 and that guard stays.
+**Repository state.** Committed on `main` on 2026-09-12 by the later session: the previous
+session's deliverables (`docs/architecture.md`, the `experiments/04-open-weight-cross-section/`
+folder, pointer edits) as 1298fe9, and the spec corrections below as the commit after it. Not
+pushed. Nothing has been run against OpenRouter; no paid call was made in either session.
+`experiments/03-oos-values-first/run_batch.py` still refuses paid calls by decision D11 and
+that guard stays.
+
+**Corrections by the later session, 2026-09-12, before the Codex review.** Every number in
+RUN-SPEC.md was checked against the evidence files and OpenRouter's documentation. The one
+that matters for the cap: GMICloud's $0.0875 / $0.35 is a 75% promotion off $0.35 / $1.40
+(`discount: 0.75` in the endpoint record, "75% off" on the model page), so three replicates
+cost $1.03 at the shown price and up to $4.14 if the promotion ends mid-run; the ledger guard
+now prices from the live endpoint and stops at the cap. Also fixed: the 7-issuer subtotal, a
+heading, the claim that Experiment 03 was scored through `score_run.py` (it was not; section 9
+now gives both models one code path), the truncation tolerance (2% on the count without the
+schema, from measured overheads), and `count_tokens_qwen.py`, which now regenerates the
+evidence file offline with per-document sizes and the trimmed variants. The full list is
+RUN-SPEC.md section 12. D5 to D10 remain Robert's; the Codex review has not happened.
 
 ## Current instruction and review, 2026-09-12
 
@@ -434,3 +448,13 @@ they are. The model-facing code is Anthropic-specific and small:
   experiments/04-open-weight-cross-section/RUN-SPEC.md (Arm 1, ready for Codex review) with
   decisions D1 to D4 recorded and D5 to D11 open. Moved the lab-update draft outside the
   repository. Nothing run, nothing spent, nothing committed.
+- 2026-09-12, later session, Claude (Fable 5.1) at Robert's direction: committed the previous
+  session's deliverables (1298fe9). Checked RUN-SPEC.md against the evidence files and
+  OpenRouter's documentation before the Codex review: GMICloud's $0.0875 / $0.35 is a 75%
+  promotion off $0.35 / $1.40, so three replicates cost $1.03 at the shown price and up to
+  $4.14 at list. Fixed the 7-issuer subtotal, a heading, the scoring-parity claim (Experiment 03
+  never went through score_run.py), and the truncation tolerance (2% on the count without the
+  schema). Rewrote count_tokens_qwen.py so the evidence file regenerates offline with
+  per-document sizes and the trimmed variants; every number reproduced. Corrections listed in
+  RUN-SPEC.md section 12. Experiment 04 runs folder gitignored. Nothing run, nothing spent;
+  D5 to D10 open; the Codex review has not happened.

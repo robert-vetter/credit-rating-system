@@ -1,353 +1,842 @@
-[
- {
-  "id": "X01",
-  "slug": "bath-body-works",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba2",
-  "persistence": "Ba2",
-  "docs": [
-   "10-K 2026-03-12",
-   "10-Q 2026-05-27",
-   "10-Q 2026-08-26"
-  ],
-  "redacted_lines": 24,
-  "qwen_tokens_total": 148071,
-  "qwen_tokens_docs": 128016,
-  "qwen_tokens_pack": 18575,
-  "quarterly_rows": 4
+{
+ "generated": "2026-09-12",
+ "tokenizer": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+ "transformers": "4.57.6",
+ "boundary_B": "2025-09-30",
+ "as_of": "2026-08-29",
+ "history_end": "2025-08-28",
+ "context": 262144,
+ "max_tokens_out": 8192,
+ "limit": 253952,
+ "counted": "system + documents + history pack + as-of line + task + json.dumps(schema), add_special_tokens=False, without the chat template",
+ "fixed_overhead_tokens": {
+  "system": 85,
+  "task": 377,
+  "schema_json_dumps": 1003,
+  "chat_template": 13
  },
- {
-  "id": "X02",
-  "slug": "best-buy-co",
-  "in_run": true,
-  "changed": false,
-  "label": "A3",
-  "persistence": "A3",
-  "docs": [
-   "10-K 2026-03-18",
-   "10-Q 2026-06-05"
-  ],
-  "redacted_lines": 21,
-  "qwen_tokens_total": 124993,
-  "qwen_tokens_docs": 104766,
-  "qwen_tokens_pack": 18747,
-  "quarterly_rows": 4
- },
- {
-  "id": "X03",
-  "slug": "dick-s-sporting-goods",
-  "in_run": true,
-  "changed": false,
-  "label": "Baa2",
-  "persistence": "Baa2",
-  "docs": [
-   "10-K 2026-03-27",
-   "10-Q 2026-06-04"
-  ],
-  "redacted_lines": 9,
-  "qwen_tokens_total": 156121,
-  "qwen_tokens_docs": 136202,
-  "qwen_tokens_pack": 18439,
-  "quarterly_rows": 4
- },
- {
-  "id": "X04",
-  "slug": "dollar-general",
-  "in_run": true,
-  "changed": false,
-  "label": "Baa3",
-  "persistence": "Baa3",
-  "docs": [
-   "10-K 2026-03-20",
-   "10-Q 2026-06-02",
-   "10-Q 2026-08-27"
-  ],
-  "redacted_lines": 79,
-  "qwen_tokens_total": 167207,
-  "qwen_tokens_docs": 147115,
-  "qwen_tokens_pack": 18612,
-  "quarterly_rows": 4
- },
- {
-  "id": "X05",
-  "slug": "floor-decor",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba3",
-  "persistence": "Ba3",
-  "docs": [
-   "10-K 2026-02-19",
-   "10-Q 2026-04-30",
-   "10-Q 2026-07-30"
-  ],
-  "redacted_lines": 17,
-  "qwen_tokens_total": 155707,
-  "qwen_tokens_docs": 135739,
-  "qwen_tokens_pack": 18488,
-  "quarterly_rows": 4
- },
- {
-  "id": "X06",
-  "slug": "gap-inc-the",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba2",
-  "persistence": "Ba2",
-  "docs": [
-   "10-K 2026-03-17",
-   "10-Q 2026-05-29",
-   "10-Q 2026-08-28"
-  ],
-  "redacted_lines": 5,
-  "qwen_tokens_total": 146783,
-  "qwen_tokens_docs": 126581,
-  "qwen_tokens_pack": 18722,
-  "quarterly_rows": 4
- },
- {
-  "id": "X07",
-  "slug": "kohl-s",
-  "in_run": true,
-  "changed": false,
-  "label": "B2",
-  "persistence": "B2",
-  "docs": [
-   "10-K 2026-03-19",
-   "10-Q 2026-06-04"
-  ],
-  "redacted_lines": 25,
-  "qwen_tokens_total": 92748,
-  "qwen_tokens_docs": 72446,
-  "qwen_tokens_pack": 18822,
-  "quarterly_rows": 4
- },
- {
-  "id": "X08",
-  "slug": "leslie-s-poolmart",
-  "in_run": false,
-  "changed": false,
-  "label": "Caa3",
-  "persistence": "Caa3",
-  "docs": [
-   "10-K 2025-12-18",
-   "10-Q 2026-02-18",
-   "10-Q 2026-05-13",
-   "10-Q 2026-08-12"
-  ],
-  "redacted_lines": 12,
-  "qwen_tokens_total": 200033,
-  "qwen_tokens_docs": 179969,
-  "qwen_tokens_pack": 18584,
-  "quarterly_rows": 4
- },
- {
-  "id": "X09",
-  "slug": "levi-strauss",
-  "in_run": false,
-  "changed": false,
-  "label": "Ba1",
-  "persistence": "Ba1",
-  "docs": [
-   "10-K 2026-01-28",
-   "10-Q 2026-04-07",
-   "10-Q 2026-07-08"
-  ],
-  "redacted_lines": 7,
-  "qwen_tokens_total": 285930,
-  "qwen_tokens_docs": 265875,
-  "qwen_tokens_pack": 18575,
-  "quarterly_rows": 4
- },
- {
-  "id": "X10",
-  "slug": "lowe-s-companies",
-  "in_run": true,
-  "changed": false,
-  "label": "Baa1",
-  "persistence": "Baa1",
-  "docs": [
-   "10-K 2026-03-23",
-   "10-Q 2026-05-28",
-   "10-Q 2026-08-27"
-  ],
-  "redacted_lines": 22,
-  "qwen_tokens_total": 162053,
-  "qwen_tokens_docs": 141848,
-  "qwen_tokens_pack": 18725,
-  "quarterly_rows": 4
- },
- {
-  "id": "X11",
-  "slug": "macy-s",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba1",
-  "persistence": "Ba1",
-  "docs": [
-   "10-K 2026-03-27",
-   "10-Q 2026-06-04"
-  ],
-  "redacted_lines": 11,
-  "qwen_tokens_total": 127584,
-  "qwen_tokens_docs": 107428,
-  "qwen_tokens_pack": 18676,
-  "quarterly_rows": 4
- },
- {
-  "id": "X12",
-  "slug": "nike",
-  "in_run": true,
-  "changed": true,
-  "label": "A2",
-  "persistence": "A1",
-  "docs": [
-   "10-K 2026-07-15"
-  ],
-  "redacted_lines": 11,
-  "qwen_tokens_total": 128813,
-  "qwen_tokens_docs": 109639,
-  "qwen_tokens_pack": 17694,
-  "quarterly_rows": 0
- },
- {
-  "id": "X13",
-  "slug": "pvh",
-  "in_run": false,
-  "changed": false,
-  "label": "Baa3",
-  "persistence": "Baa3",
-  "docs": [
-   "10-K 2026-03-31",
-   "10-Q 2026-06-05"
-  ],
-  "redacted_lines": 11,
-  "qwen_tokens_total": 210531,
-  "qwen_tokens_docs": 190366,
-  "qwen_tokens_pack": 18685,
-  "quarterly_rows": 4
- },
- {
-  "id": "X14",
-  "slug": "qurate-qvc",
-  "in_run": true,
-  "changed": true,
-  "label": "Caa3",
-  "persistence": "Caa1",
-  "docs": [
-   "10-K 2026-04-15",
-   "10-Q 2026-05-15",
-   "10-Q 2026-08-04"
-  ],
-  "redacted_lines": 14,
-  "qwen_tokens_total": 257089,
-  "qwen_tokens_docs": 237646,
-  "qwen_tokens_pack": 17963,
-  "quarterly_rows": 0
- },
- {
-  "id": "X15",
-  "slug": "signet",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba3",
-  "persistence": "Ba3",
-  "docs": [
-   "10-K 2026-03-19",
-   "10-Q 2026-06-02"
-  ],
-  "redacted_lines": 20,
-  "qwen_tokens_total": 189926,
-  "qwen_tokens_docs": 169793,
-  "qwen_tokens_pack": 18653,
-  "quarterly_rows": 4
- },
- {
-  "id": "X16",
-  "slug": "target",
-  "in_run": true,
-  "changed": false,
-  "label": "A2",
-  "persistence": "A2",
-  "docs": [
-   "10-K 2026-03-11",
-   "10-Q 2026-05-29",
-   "10-Q 2026-08-28"
-  ],
-  "redacted_lines": 28,
-  "qwen_tokens_total": 132137,
-  "qwen_tokens_docs": 111972,
-  "qwen_tokens_pack": 18685,
-  "quarterly_rows": 4
- },
- {
-  "id": "X17",
-  "slug": "tractor-supply",
-  "in_run": true,
-  "changed": false,
-  "label": "Baa1",
-  "persistence": "Baa1",
-  "docs": [
-   "10-K 2026-02-19",
-   "10-Q 2026-05-07",
-   "10-Q 2026-08-06"
-  ],
-  "redacted_lines": 13,
-  "qwen_tokens_total": 149955,
-  "qwen_tokens_docs": 129858,
-  "qwen_tokens_pack": 18617,
-  "quarterly_rows": 4
- },
- {
-  "id": "X18",
-  "slug": "v-f",
-  "in_run": false,
-  "changed": false,
-  "label": "Ba2",
-  "persistence": "Ba2",
-  "docs": [
-   "10-K 2026-05-20",
-   "10-Q 2026-07-29"
-  ],
-  "redacted_lines": 30,
-  "qwen_tokens_total": 214412,
-  "qwen_tokens_docs": 194276,
-  "qwen_tokens_pack": 18656,
-  "quarterly_rows": 4
- },
- {
-  "id": "X19",
-  "slug": "victoria-s-secret",
-  "in_run": true,
-  "changed": false,
-  "label": "Ba3",
-  "persistence": "Ba3",
-  "docs": [
-   "10-K 2026-03-20",
-   "10-Q 2026-06-05"
-  ],
-  "redacted_lines": 19,
-  "qwen_tokens_total": 135215,
-  "qwen_tokens_docs": 115180,
-  "qwen_tokens_pack": 18555,
-  "quarterly_rows": 4
- },
- {
-  "id": "X20",
-  "slug": "walmart",
-  "in_run": true,
-  "changed": false,
-  "label": "Aa2",
-  "persistence": "Aa2",
-  "docs": [
-   "10-K 2026-03-13",
-   "10-Q 2026-05-29",
-   "10-Q 2026-08-28"
-  ],
-  "redacted_lines": 27,
-  "qwen_tokens_total": 194370,
-  "qwen_tokens_docs": 174926,
-  "qwen_tokens_pack": 17964,
-  "quarterly_rows": 0
- }
-]
+ "items": [
+  {
+   "id": "X01",
+   "slug": "bath-body-works",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba2",
+   "persistence": "Ba2",
+   "docs": [
+    "10-K 2026-03-12",
+    "10-Q 2026-05-27",
+    "10-Q 2026-08-26"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-12",
+     "file": "2026-03-12_10-K_000070198526000008.htm",
+     "tokens": 70833,
+     "redacted_lines": 12
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-27",
+     "file": "2026-05-27_10-Q_000070198526000014.htm",
+     "tokens": 25833,
+     "redacted_lines": 6
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-26",
+     "file": "2026-08-26_10-Q_000070198526000029.htm",
+     "tokens": 31350,
+     "redacted_lines": 6
+    }
+   ],
+   "redacted_lines": 24,
+   "qwen_tokens_total": 148071,
+   "qwen_tokens_docs": 128016,
+   "qwen_tokens_pack": 18575,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X02",
+   "slug": "best-buy-co",
+   "in_run": true,
+   "changed": false,
+   "label": "A3",
+   "persistence": "A3",
+   "docs": [
+    "10-K 2026-03-18",
+    "10-Q 2026-06-05"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-18",
+     "file": "2026-03-18_10-K_000076447826000009.htm",
+     "tokens": 77939,
+     "redacted_lines": 19
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-05",
+     "file": "2026-06-05_10-Q_000076447826000022.htm",
+     "tokens": 26827,
+     "redacted_lines": 2
+    }
+   ],
+   "redacted_lines": 21,
+   "qwen_tokens_total": 124993,
+   "qwen_tokens_docs": 104766,
+   "qwen_tokens_pack": 18747,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X03",
+   "slug": "dick-s-sporting-goods",
+   "in_run": true,
+   "changed": false,
+   "label": "Baa2",
+   "persistence": "Baa2",
+   "docs": [
+    "10-K 2026-03-27",
+    "10-Q 2026-06-04"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-27",
+     "file": "2026-03-27_10-K_000108906326000007.htm",
+     "tokens": 102533,
+     "redacted_lines": 7
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-04",
+     "file": "2026-06-04_10-Q_000108906326000027.htm",
+     "tokens": 33669,
+     "redacted_lines": 2
+    }
+   ],
+   "redacted_lines": 9,
+   "qwen_tokens_total": 156121,
+   "qwen_tokens_docs": 136202,
+   "qwen_tokens_pack": 18439,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X04",
+   "slug": "dollar-general",
+   "in_run": true,
+   "changed": false,
+   "label": "Baa3",
+   "persistence": "Baa3",
+   "docs": [
+    "10-K 2026-03-20",
+    "10-Q 2026-06-02",
+    "10-Q 2026-08-27"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-20",
+     "file": "2026-03-20_10-K_000110465926032325.htm",
+     "tokens": 85415,
+     "redacted_lines": 33
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-02",
+     "file": "2026-06-02_10-Q_000110465926069205.htm",
+     "tokens": 28531,
+     "redacted_lines": 23
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-27",
+     "file": "2026-08-27_10-Q_000110465926101932.htm",
+     "tokens": 33169,
+     "redacted_lines": 23
+    }
+   ],
+   "redacted_lines": 79,
+   "qwen_tokens_total": 167207,
+   "qwen_tokens_docs": 147115,
+   "qwen_tokens_pack": 18612,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X05",
+   "slug": "floor-decor",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba3",
+   "persistence": "Ba3",
+   "docs": [
+    "10-K 2026-02-19",
+    "10-Q 2026-04-30",
+    "10-Q 2026-07-30"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-02-19",
+     "file": "2026-02-19_10-K_000162828026009770.htm",
+     "tokens": 77217,
+     "redacted_lines": 9
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-04-30",
+     "file": "2026-04-30_10-Q_000162828026028915.htm",
+     "tokens": 24535,
+     "redacted_lines": 5
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-07-30",
+     "file": "2026-07-30_10-Q_000162828026051069.htm",
+     "tokens": 33987,
+     "redacted_lines": 3
+    }
+   ],
+   "redacted_lines": 17,
+   "qwen_tokens_total": 155707,
+   "qwen_tokens_docs": 135739,
+   "qwen_tokens_pack": 18488,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X06",
+   "slug": "gap-inc-the",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba2",
+   "persistence": "Ba2",
+   "docs": [
+    "10-K 2026-03-17",
+    "10-Q 2026-05-29",
+    "10-Q 2026-08-28"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-17",
+     "file": "2026-03-17_10-K_000162828026018573.htm",
+     "tokens": 66512,
+     "redacted_lines": 5
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-29",
+     "file": "2026-05-29_10-Q_000162828026039070.htm",
+     "tokens": 26318,
+     "redacted_lines": 0
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-28",
+     "file": "2026-08-28_10-Q_000162828026059345.htm",
+     "tokens": 33751,
+     "redacted_lines": 0
+    }
+   ],
+   "redacted_lines": 5,
+   "qwen_tokens_total": 146783,
+   "qwen_tokens_docs": 126581,
+   "qwen_tokens_pack": 18722,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X07",
+   "slug": "kohl-s",
+   "in_run": true,
+   "changed": false,
+   "label": "B2",
+   "persistence": "B2",
+   "docs": [
+    "10-K 2026-03-19",
+    "10-Q 2026-06-04"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-19",
+     "file": "2026-03-19_10-K_000119312526115982.htm",
+     "tokens": 53614,
+     "redacted_lines": 16
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-04",
+     "file": "2026-06-04_10-Q_000119312526257402.htm",
+     "tokens": 18832,
+     "redacted_lines": 9
+    }
+   ],
+   "redacted_lines": 25,
+   "qwen_tokens_total": 92748,
+   "qwen_tokens_docs": 72446,
+   "qwen_tokens_pack": 18822,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X08",
+   "slug": "leslie-s-poolmart",
+   "in_run": false,
+   "changed": false,
+   "label": "Caa3",
+   "persistence": "Caa3",
+   "docs": [
+    "10-K 2025-12-18",
+    "10-Q 2026-02-18",
+    "10-Q 2026-05-13",
+    "10-Q 2026-08-12"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2025-12-18",
+     "file": "2025-12-18_10-K_000119312525323811.htm",
+     "tokens": 74553,
+     "redacted_lines": 3
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-02-18",
+     "file": "2026-02-18_10-Q_000119312526056080.htm",
+     "tokens": 29897,
+     "redacted_lines": 1
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-13",
+     "file": "2026-05-13_10-Q_000119312526221811.htm",
+     "tokens": 35523,
+     "redacted_lines": 1
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-12",
+     "file": "2026-08-12_10-Q_000119312526347169.htm",
+     "tokens": 39996,
+     "redacted_lines": 7
+    }
+   ],
+   "redacted_lines": 12,
+   "qwen_tokens_total": 200033,
+   "qwen_tokens_docs": 179969,
+   "qwen_tokens_pack": 18584,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X09",
+   "slug": "levi-strauss",
+   "in_run": false,
+   "changed": false,
+   "label": "Ba1",
+   "persistence": "Ba1",
+   "docs": [
+    "10-K 2026-01-28",
+    "10-Q 2026-04-07",
+    "10-Q 2026-07-08"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-01-28",
+     "file": "2026-01-28_10-K_000009484526000008.htm",
+     "tokens": 148937,
+     "redacted_lines": 7
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-04-07",
+     "file": "2026-04-07_10-Q_000009484526000020.htm",
+     "tokens": 50332,
+     "redacted_lines": 0
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-07-08",
+     "file": "2026-07-08_10-Q_000009484526000037.htm",
+     "tokens": 66606,
+     "redacted_lines": 0
+    }
+   ],
+   "redacted_lines": 7,
+   "qwen_tokens_total": 285930,
+   "qwen_tokens_docs": 265875,
+   "qwen_tokens_pack": 18575,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": false,
+   "trimmed": true,
+   "dropped_doc": "10-Q 2026-04-07",
+   "docs_used": [
+    "10-K 2026-01-28",
+    "10-Q 2026-07-08"
+   ],
+   "qwen_tokens_total_trimmed": 235598,
+   "fits_after_trim": true
+  },
+  {
+   "id": "X10",
+   "slug": "lowe-s-companies",
+   "in_run": true,
+   "changed": false,
+   "label": "Baa1",
+   "persistence": "Baa1",
+   "docs": [
+    "10-K 2026-03-23",
+    "10-Q 2026-05-28",
+    "10-Q 2026-08-27"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-23",
+     "file": "2026-03-23_10-K_000006066726000029.htm",
+     "tokens": 82866,
+     "redacted_lines": 12
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-28",
+     "file": "2026-05-28_10-Q_000006066726000072.htm",
+     "tokens": 26555,
+     "redacted_lines": 5
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-27",
+     "file": "2026-08-27_10-Q_000006066726000117.htm",
+     "tokens": 32427,
+     "redacted_lines": 5
+    }
+   ],
+   "redacted_lines": 22,
+   "qwen_tokens_total": 162053,
+   "qwen_tokens_docs": 141848,
+   "qwen_tokens_pack": 18725,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X11",
+   "slug": "macy-s",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba1",
+   "persistence": "Ba1",
+   "docs": [
+    "10-K 2026-03-27",
+    "10-Q 2026-06-04"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-27",
+     "file": "2026-03-27_10-K_000162828026021721.htm",
+     "tokens": 85756,
+     "redacted_lines": 10
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-04",
+     "file": "2026-06-04_10-Q_000162828026040820.htm",
+     "tokens": 21672,
+     "redacted_lines": 1
+    }
+   ],
+   "redacted_lines": 11,
+   "qwen_tokens_total": 127584,
+   "qwen_tokens_docs": 107428,
+   "qwen_tokens_pack": 18676,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X12",
+   "slug": "nike",
+   "in_run": true,
+   "changed": true,
+   "label": "A2",
+   "persistence": "A1",
+   "docs": [
+    "10-K 2026-07-15"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-07-15",
+     "file": "2026-07-15_10-K_000032018726000088.htm",
+     "tokens": 109639,
+     "redacted_lines": 11
+    }
+   ],
+   "redacted_lines": 11,
+   "qwen_tokens_total": 128813,
+   "qwen_tokens_docs": 109639,
+   "qwen_tokens_pack": 17694,
+   "quarterly_rows": 0,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X13",
+   "slug": "pvh",
+   "in_run": false,
+   "changed": false,
+   "label": "Baa3",
+   "persistence": "Baa3",
+   "docs": [
+    "10-K 2026-03-31",
+    "10-Q 2026-06-05"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-31",
+     "file": "2026-03-31_10-K_000007823926000021.htm",
+     "tokens": 134879,
+     "redacted_lines": 8
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-05",
+     "file": "2026-06-05_10-Q_000007823926000040.htm",
+     "tokens": 55487,
+     "redacted_lines": 3
+    }
+   ],
+   "redacted_lines": 11,
+   "qwen_tokens_total": 210531,
+   "qwen_tokens_docs": 190366,
+   "qwen_tokens_pack": 18685,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X14",
+   "slug": "qurate-qvc",
+   "in_run": true,
+   "changed": true,
+   "label": "Caa3",
+   "persistence": "Caa1",
+   "docs": [
+    "10-K 2026-04-15",
+    "10-Q 2026-05-15",
+    "10-Q 2026-08-04"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-04-15",
+     "file": "2026-04-15_10-K_000135509626000010.htm",
+     "tokens": 132359,
+     "redacted_lines": 9
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-15",
+     "file": "2026-05-15_10-Q_000135509626000019.htm",
+     "tokens": 44183,
+     "redacted_lines": 2
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-04",
+     "file": "2026-08-04_10-Q_000135509626000027.htm",
+     "tokens": 61104,
+     "redacted_lines": 3
+    }
+   ],
+   "redacted_lines": 14,
+   "qwen_tokens_total": 257089,
+   "qwen_tokens_docs": 237646,
+   "qwen_tokens_pack": 17963,
+   "quarterly_rows": 0,
+   "limit": 253952,
+   "fits": false,
+   "trimmed": true,
+   "dropped_doc": "10-Q 2026-05-15",
+   "docs_used": [
+    "10-K 2026-04-15",
+    "10-Q 2026-08-04"
+   ],
+   "qwen_tokens_total_trimmed": 212906,
+   "fits_after_trim": true
+  },
+  {
+   "id": "X15",
+   "slug": "signet",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba3",
+   "persistence": "Ba3",
+   "docs": [
+    "10-K 2026-03-19",
+    "10-Q 2026-06-02"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-19",
+     "file": "2026-03-19_10-K_000083298826000055.htm",
+     "tokens": 123898,
+     "redacted_lines": 16
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-02",
+     "file": "2026-06-02_10-Q_000083298826000159.htm",
+     "tokens": 45895,
+     "redacted_lines": 4
+    }
+   ],
+   "redacted_lines": 20,
+   "qwen_tokens_total": 189926,
+   "qwen_tokens_docs": 169793,
+   "qwen_tokens_pack": 18653,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X16",
+   "slug": "target",
+   "in_run": true,
+   "changed": false,
+   "label": "A2",
+   "persistence": "A2",
+   "docs": [
+    "10-K 2026-03-11",
+    "10-Q 2026-05-29",
+    "10-Q 2026-08-28"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-11",
+     "file": "2026-03-11_10-K_000002741926000016.htm",
+     "tokens": 65600,
+     "redacted_lines": 12
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-29",
+     "file": "2026-05-29_10-Q_000002741926000022.htm",
+     "tokens": 20609,
+     "redacted_lines": 8
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-28",
+     "file": "2026-08-28_10-Q_000002741926000042.htm",
+     "tokens": 25763,
+     "redacted_lines": 8
+    }
+   ],
+   "redacted_lines": 28,
+   "qwen_tokens_total": 132137,
+   "qwen_tokens_docs": 111972,
+   "qwen_tokens_pack": 18685,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X17",
+   "slug": "tractor-supply",
+   "in_run": true,
+   "changed": false,
+   "label": "Baa1",
+   "persistence": "Baa1",
+   "docs": [
+    "10-K 2026-02-19",
+    "10-Q 2026-05-07",
+    "10-Q 2026-08-06"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-02-19",
+     "file": "2026-02-19_10-K_000091636526000014.htm",
+     "tokens": 75841,
+     "redacted_lines": 11
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-07",
+     "file": "2026-05-07_10-Q_000091636526000024.htm",
+     "tokens": 21220,
+     "redacted_lines": 1
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-06",
+     "file": "2026-08-06_10-Q_000091636526000059.htm",
+     "tokens": 32797,
+     "redacted_lines": 1
+    }
+   ],
+   "redacted_lines": 13,
+   "qwen_tokens_total": 149955,
+   "qwen_tokens_docs": 129858,
+   "qwen_tokens_pack": 18617,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X18",
+   "slug": "v-f",
+   "in_run": false,
+   "changed": false,
+   "label": "Ba2",
+   "persistence": "Ba2",
+   "docs": [
+    "10-K 2026-05-20",
+    "10-Q 2026-07-29"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-05-20",
+     "file": "2026-05-20_10-K_000010337926000030.htm",
+     "tokens": 148415,
+     "redacted_lines": 23
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-07-29",
+     "file": "2026-07-29_10-Q_000010337926000114.htm",
+     "tokens": 45861,
+     "redacted_lines": 7
+    }
+   ],
+   "redacted_lines": 30,
+   "qwen_tokens_total": 214412,
+   "qwen_tokens_docs": 194276,
+   "qwen_tokens_pack": 18656,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X19",
+   "slug": "victoria-s-secret",
+   "in_run": true,
+   "changed": false,
+   "label": "Ba3",
+   "persistence": "Ba3",
+   "docs": [
+    "10-K 2026-03-20",
+    "10-Q 2026-06-05"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-20",
+     "file": "2026-03-20_10-K_000185643726000004.htm",
+     "tokens": 82336,
+     "redacted_lines": 12
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-06-05",
+     "file": "2026-06-05_10-Q_000185643726000013.htm",
+     "tokens": 32844,
+     "redacted_lines": 7
+    }
+   ],
+   "redacted_lines": 19,
+   "qwen_tokens_total": 135215,
+   "qwen_tokens_docs": 115180,
+   "qwen_tokens_pack": 18555,
+   "quarterly_rows": 4,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  },
+  {
+   "id": "X20",
+   "slug": "walmart",
+   "in_run": true,
+   "changed": false,
+   "label": "Aa2",
+   "persistence": "Aa2",
+   "docs": [
+    "10-K 2026-03-13",
+    "10-Q 2026-05-29",
+    "10-Q 2026-08-28"
+   ],
+   "docs_tokens": [
+    {
+     "form": "10-K",
+     "filed": "2026-03-13",
+     "file": "2026-03-13_10-K_000010416926000055.htm",
+     "tokens": 95370,
+     "redacted_lines": 10
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-05-29",
+     "file": "2026-05-29_10-Q_000010416926000102.htm",
+     "tokens": 35748,
+     "redacted_lines": 8
+    },
+    {
+     "form": "10-Q",
+     "filed": "2026-08-28",
+     "file": "2026-08-28_10-Q_000010416926000154.htm",
+     "tokens": 43808,
+     "redacted_lines": 9
+    }
+   ],
+   "redacted_lines": 27,
+   "qwen_tokens_total": 194370,
+   "qwen_tokens_docs": 174926,
+   "qwen_tokens_pack": 17964,
+   "quarterly_rows": 0,
+   "limit": 253952,
+   "fits": true,
+   "trimmed": false
+  }
+ ]
+}

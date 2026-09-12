@@ -19,10 +19,14 @@ section 10) before any paid call.
 
 ## OPEN (Robert)
 
-**D5 Cap** exact number, $3.00 proposed.
+**D5 Cap** exact number, $3.00 proposed. Information (Claude, 2026-09-12, later session): at
+GMICloud's shown price three replicates cost at most $1.03; at its list price, if the 75%
+promotion ends, $4.14. The ledger guard stops the run at the cap either way (RUN-SPEC.md
+sections 7 and 8).
 
-**D6 Provider:** GMICloud proposed (262k, fp8, $0.09/$0.35, supports response_format, seed,
-temperature), DeepInfra as fallback; fp4 providers excluded.
+**D6 Provider:** GMICloud proposed (262k, fp8, $0.0875/$0.35 shown as a 75% promotion off
+$0.35/$1.40, supports response_format, seed, temperature), DeepInfra ($0.09/$0.55, no discount)
+as fallback by explicit switch, not automatic; fp4 providers excluded.
 
 **D7 Replicates:** three proposed, temperature 0, seed 20260912.
 
