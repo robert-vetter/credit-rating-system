@@ -1,305 +1,208 @@
-# Experiment 04, Arm 1: exact run specification for review
+# Experiment 04, Arm 1: the run specification as frozen and executed
 
-*Written 2026-09-12 by Claude (Fable 5.1), directed by Robert Vetter. Nothing has been run.
-Every number here was measured locally on 2026-09-12: token counts with the Qwen3 tokenizer
-(transformers 4.57.6, `Qwen/Qwen3-235B-A22B-Instruct-2507`) on the actual assembled requests,
-provider facts from OpenRouter's endpoints API (evidence/endpoints-2026-09-12/), credit balance
-from OpenRouter's credits endpoint. **This document is for Codex to review before any money is
-spent.** Section 10 lists what to attack. Revised later the same day by Claude (Fable 5.1) in
-a fresh session, directed by Robert Vetter: every number was recomputed from the regenerated
-evidence file, OpenRouter's documentation and live endpoint listing were read on 2026-09-12,
-and the corrections are listed in section 12. Still nothing run, nothing spent.*
+*Written 2026-09-12 by Claude (Fable 5.1), directed by Robert Vetter, reviewed by Codex the same
+day (review-codex-2026-09-12.md, twelve acceptance gates), then rewritten on 2026-09-13 to
+describe the experiment exactly as it was frozen in the manifest and executed under Robert's
+authorization EXP04-ARM1-A1. Every number below is either in the manifest, the ledger or the
+audit files under runs/EXP04-ARM1-A1/ (gitignored, on this machine), or in the evidence
+folder. Results and actual spend are in results.md. Earlier versions of this file, including
+the two rounds of pre-review corrections, are in Git history.*
 
 ## 1. What this run is and is not
 
-The same test as Experiment 03: same boundary, same documents, same prompts, same labels. The
-model changes. The history pack is the one open point: the integrity review of 2026-09-12
-rebuilt the pack builder after Experiment 03 ran, so the current builder's packs are not the
-packs Opus saw (section 5, decision D12). Opus 4.6 produced 7 usable observations of 20 because
-of cost. Qwen3 costs about 2% as much per token, so all 20 run with three replicates for about
-a dollar.
+A post-release, history-conditioned disclosure-label pilot. The same test as Experiment 03
+(same boundary, documents, prompts, labels and scoring arithmetic) on an open-weight model
+whose public checkpoint release precedes the labelled rating actions, run twice: once on the
+current, repaired inputs for all 20 confirmed issuers, and once on the exact saved inputs
+Opus 4.6 saw for the seven issuers it scored. Three replicates each, one memory probe per
+issuer first.
 
-It is a post-cutoff cross-section of the outstanding rating at one date, scored against
-persistence. It is not a forecast, not a certified benchmark, and not a claim about label
-validity beyond what Experiment 03 already documented.
+It is not a certified outstanding-rating benchmark: the labels are the issuers' own
+disclosures, hand-read and confirmed, whose validity at the observation date is not
+established (Qurate's is unresolved and is reported as a diagnostic only). It does not claim
+absent contamination, solved extraction, advance forecasting, equivalence with Opus, or
+generalised superiority over persistence.
 
-## 2. Model and provider
+## 2. Model, provider and bound
 
-| Item | Value | Source |
+| Item | Value | Evidence |
 |---|---|---|
-| Model ID | `qwen/qwen3-235b-a22b-2507` | OpenRouter model list |
-| Weights | Qwen3-235B-A22B-Instruct-2507, open weights, Apache 2.0 | Hugging Face model card |
-| Training data bound | **release 2025-07-21**; the model card states no cutoff, so the release date of the pinned checkpoint is the bound | evidence/cutoffs-2026-09-12.md |
-| Reasoning | none; this is the non-thinking Instruct variant (`reasoning` not offered by its endpoints) | endpoints API |
-| Context served | 262,144 (GMICloud, DeepInfra, Nebius, Google) | endpoints API |
-| Price | GMICloud $0.0875 in / $0.35 out per MTok, **shown as "75% off"**: the endpoint record carries `discount: 0.75`, so the provider's list price is $0.35 / $1.40 and the shown price is a promotion that can end without notice; DeepInfra $0.09 / $0.55, no discount | endpoints API and model page, both re-read 2026-09-12 |
-| Provider to pin | **GMICloud** (routing slug `gmicloud`), fp8, 262k, `max_completion_tokens` 235,929, supports `response_format`, `structured_outputs`, `seed`, `temperature`; fallback DeepInfra (`deepinfra`), same precision and context, `max_completion_tokens` 16,384, switched to by explicit decision rather than automatic fallback so that all replicates of an issuer come from one provider | endpoints API |
-| Quantisation | fp8 (recorded per response; fp4 providers are excluded) | endpoints API |
+| Model | `qwen/qwen3-235b-a22b-2507` (Qwen3-235B-A22B-Instruct-2507, open weights, Apache 2.0, non-thinking) | OpenRouter listing; Hugging Face model card |
+| Training-data bound | the public checkpoint release, upload commit `d4dc8b02` of 2025-07-21, weight shards unchanged since; an upper bound on the training information of those weights, not a vendor-stated cutoff | evidence/cutoffs-2026-09-12.md; review-codex-2026-09-12.md |
+| Tokenizer used locally | the same repository, snapshot `ac9c66cc9b46af7306746a9250f23d47083d689e`, file hashes in audit/environment.json | Hugging Face cache, offline |
+| Provider | DeepInfra, endpoint `deepinfra/fp8`, 262,144 context, 16,384 completion limit; pinned by `provider.order`, `allow_fallbacks: false`, `require_parameters: true`, `quantizations: ["fp8"]`, `max_price` $0.09 / $0.55 per million tokens (decision D6) | evidence/endpoints-2026-09-12/, live listing re-read at every submission |
+| Served identity | every response's `model` and `provider` fields and the generation record are compared with the authorization; a mismatch halts the run. The hosted fp8 deployment is the host's identity claim; it is recorded, not proven | ledger |
+| Reasoning | none (Instruct variant) | endpoint parameters |
 
-**Why this model.** Its bound (2025-07-21) lies before the boundary below, so the run is out of
-sample by the same rule as Experiment 03. It is the most recent open-weight model whose bound
-still clears the boundary, and 262k fits the packages. Everything stronger and newer (GLM-5,
-DeepSeek V4, Qwen3.5, Kimi K2.5) was released after the labelled rating actions and is
-therefore ineligible, however cheap.
-
-**Boundary check for this model.** Documents used are filed 2025-12-18 to 2026-08-28, all after
-2025-07-21. The two labelled rating actions are October and November 2025, also after it. The
-history pack ends 2025-08-28, which is public information the model may legitimately hold.
-
-## 3. Boundary and dates, unchanged from Experiment 03
+## 3. Boundary and dates
 
 | Object | Rule |
 |---|---|
-| Document boundary B | 2025-09-30, every input filing has `filingDate > B` |
-| Observation date | 2026-08-29, every input filing has `filingDate <= as_of` |
-| History pack | rating events through 2025-08-28 only; XBRL facts filed on or before as_of |
-| Peer table | XBRL facts filed on or before as_of, no peer ratings |
-| Labels | the issuer's own rating disclosure in a filing in (B, as_of], hand-read, confirmed by Robert 2026-08-31 |
+| Document boundary B | 2025-09-30; every input filing has `filingDate > B` |
+| Observation date | 2026-08-29; every input filing, pack fact and peer fact has `filingDate <= as_of` |
+| History end | 2025-08-28, the true content end of Moody's public file; the rating path and the persistence reference stop there |
+| Labels | the issuer's own rating disclosure in a filing in (B, as_of], hand-read, confirmed by Robert on 2026-08-31 (Experiment 03 D10); frozen in candidates.json |
+| Margin | 71 days from the checkpoint release to B; the two labelled actions (Nike, November 2025; Qurate, October 2025) lie later still |
 
-## 4. The 20 issuers, their documents, and exact token counts
+The history end is after the model's release, so the task is history-conditioned: rating
+events between 2025-07-21 and 2025-08-28 (Leslie's Caa3 of 2025-08-13 among them) are
+supplied as input. They are public information, not labels.
 
-Counted on the fully assembled request (system prompt, redacted documents, history pack with
-peer table, task, schema) with the Qwen3 tokenizer. Limit is 253,952 = 262,144 minus 8,192
-reserved for output.
+## 4. Cohort and reporting contract
 
-| ID | Issuer | Persistence | Label | Changed | Documents used | Qwen tokens | Fit |
-|---|---|---|---|---|---|---|---|
-| X01 | Bath & Body Works | Ba2 | Ba2 | no | 10-K 2026-03-12, 10-Q 2026-05-27, 10-Q 2026-08-26 | 148,071 | yes |
-| X02 | Best Buy | A3 | A3 | no | 10-K 2026-03-18, 10-Q 2026-06-05 | 124,993 | yes |
-| X03 | Dick's Sporting Goods | Baa2 | Baa2 | no | 10-K 2026-03-27, 10-Q 2026-06-04 | 156,121 | yes |
-| X04 | Dollar General | Baa3 | Baa3 | no | 10-K 2026-03-20, 10-Q 2026-06-02, 10-Q 2026-08-27 | 167,207 | yes |
-| X05 | Floor & Decor | Ba3 | Ba3 | no | 10-K 2026-02-19, 10-Q 2026-04-30, 10-Q 2026-07-30 | 155,707 | yes |
-| X06 | Gap | Ba2 | Ba2 | no | 10-K 2026-03-17, 10-Q 2026-05-29, 10-Q 2026-08-28 | 146,783 | yes |
-| X07 | Kohl's | B2 | B2 | no | 10-K 2026-03-19, 10-Q 2026-06-04 | 92,748 | yes |
-| X08 | Leslie's | Caa3 | Caa3 | no | 10-K 2025-12-18, 10-Q 2026-02-18, 10-Q 2026-05-13, 10-Q 2026-08-12 | 200,033 | yes |
-| X09 | Levi Strauss | Ba1 | Ba1 | no | 10-K 2026-01-28, 10-Q 2026-07-08 (oldest 10-Q dropped) | 235,598 | trimmed |
-| X10 | Lowe's | Baa1 | Baa1 | no | 10-K 2026-03-23, 10-Q 2026-05-28, 10-Q 2026-08-27 | 162,053 | yes |
-| X11 | Macy's | Ba1 | Ba1 | no | 10-K 2026-03-27, 10-Q 2026-06-04 | 127,584 | yes |
-| X12 | Nike | A1 | **A2** | **yes** | 10-K 2026-07-15 | 128,813 | yes |
-| X13 | PVH | Baa3 | Baa3 | no | 10-K 2026-03-31, 10-Q 2026-06-05 | 210,531 | yes |
-| X14 | Qurate / QVC | Caa1 | **Caa3** | **yes** | 10-K 2026-04-15, 10-Q 2026-08-04 (oldest 10-Q dropped) | 212,906 | trimmed |
-| X15 | Signet | Ba3 | Ba3 | no | 10-K 2026-03-19, 10-Q 2026-06-02 | 189,926 | yes |
-| X16 | Target | A2 | A2 | no | 10-K 2026-03-11, 10-Q 2026-05-29, 10-Q 2026-08-28 | 132,137 | yes |
-| X17 | Tractor Supply | Baa1 | Baa1 | no | 10-K 2026-02-19, 10-Q 2026-05-07, 10-Q 2026-08-06 | 149,955 | yes |
-| X18 | V.F. | Ba2 | Ba2 | no | 10-K 2026-05-20, 10-Q 2026-07-29 | 214,412 | yes |
-| X19 | Victoria's Secret | Ba3 | Ba3 | no | 10-K 2026-03-20, 10-Q 2026-06-05 | 135,215 | yes |
-| X20 | Walmart | Aa2 | Aa2 | no | 10-K 2026-03-13, 10-Q 2026-05-29, 10-Q 2026-08-28 | 194,370 | yes |
+All 20 confirmed candidates, X01 to X20, selected explicitly; Experiment 03's cost-driven
+`in_run` exclusions are not inherited. Primary cohort: the 19 without Qurate (X14). Qurate is
+executed in full and reported as a diagnostic (decision D8). Saved-input arm: the seven Opus
+successes X12, X14, X15, X16, X17, X19, X20. Persistence is the rating in effect at the
+history end per the documented selector (entity-level long-term rating where alive, else the
+senior unsecured instrument rating); on the 20 it is exact 18 times, MAE 0.15; on the 19,
+exact 18 times, MAE 1/19. `changed` equals `label != persistence` for every candidate.
 
-Totals: 51 documents, all already cached locally under
-`evaluation/companies/<slug>/filings/`, so the run needs no SEC download. Input for one pass
-after trimming: **3,285,163 tokens**. Largest package 235,598, smallest 92,748. The history
-pack is 17,700 to 18,800 tokens per issuer, most of it the peer table. Fixed overhead per
-request: system prompt 85 tokens, task 377, the schema 1,003 as `json.dumps` text, chat
-template 13. The counts above include the schema text; in the request the schema travels in
-`response_format`, not in the prompt. The smallest single document is 18,832 tokens (Kohl's
-10-Q of 2026-06-04) and no document is less than 14% of its package. All of this is in
-`evidence/qwen-token-counts-2026-09-12.json`, regenerated offline by `count_tokens_qwen.py`.
+## 5. Inputs
 
-**Trim rule.** Two packages exceed the limit with the full document set (Levi 285,930, Qurate
-257,089). Dropping the single oldest 10-Q brings both under it, as shown. This is the only
-deviation from Experiment 03's document rule and it must be flagged per observation in the
-results: for these two issuers the model sees one 10-Q less than Opus 4.6 did. Never allow the
-provider to truncate instead (section 7). With the saved Experiment 03 pack instead of the
-current one (D12), Qurate fits untrimmed at 243,144 tokens; Levi does not fit either way.
+**Current arm, 20 issuers.** Documents by the Experiment 03 rule: the latest 10-K filed after
+B and every later 10-Q filed on or before the observation date, from the local cache only,
+HTML to text, rating self-disclosures removed by `system/redact.py` with the removed lines
+stored outside the bodies. Trim (decision D9): the oldest 10-Q is dropped only where the
+finalized package exceeds the context allowance; that is Levi Strauss (10-Q of 2026-04-07
+dropped) and Qurate (10-Q of 2026-05-15 dropped). 49 of 51 cached documents are used.
 
-**Thirteen issuers Opus never scored.** X01, X02, X03, X04, X05, X06, X07, X10, X11 were scheduled
-but lost to the output ceiling; X08, X09, X13, X18 were never scheduled. All 13 are in this
-run. The seven Opus scored (X12, X14, X15, X16, X17, X19, X20) are also in it, which gives a
-direct model-to-model comparison on identical inputs.
+The history pack is rebuilt by `evaluation/pipeline/history_pack.py` as repaired on
+2026-09-12: the rating path comes from the raw 17g-7 records (entity-level long-term and
+senior unsecured instrument events, typed, withdrawals kept and labelled, collapsed only
+where consecutive symbols repeat), not from the June 2025 observation grid that omitted
+later events; the terminal state is printed with its level and action date and asserted
+equal to the frozen persistence for all 20. Fiscal-year and quarterly rows carry per-fact
+filing dates; every fact satisfies end <= filed <= as_of; derived rows inherit their
+components' dates; anchors stop at the history end. Peer policy (Robert, 2026-09-12): peers
+whose latest fiscal year ended before 2024-08-29, 24 calendar months before the observation
+date, are excluded and logged (10 excluded, 56 remain). XBRL source forms are 10-K, 10-K/A,
+10-Q, 10-Q/A, 20-F and 40-F; primary documents are 10-K and 10-Q only; no 8-K anywhere.
 
-## 5. Request contents, as in Experiment 03 except the history pack
+**Saved-input arm, 7 issuers.** The exact user text Opus received (documents, history pack,
+as-of line and task) from the saved Experiment 03 requests, the batch that produced the
+scored success, verified: the system prompt, task and schema equal the frozen prompt files;
+the rerun bodies equal the first-batch bodies; the documents replay byte-identically from the
+cache and the redactor; the history pack is reproduced byte-identically by the vendored
+2026-09-10 builders (`legacy_builders/`) from the raw companyfacts cache, which yields the
+source record (period end, filing date, tag, form, value) for every figure shown: 43 to 60
+annual records, 0 to 45 quarterly records and 843 to 847 peer records per issuer, all with
+end <= filed <= as_of (`legacy_provenance.py`, audit/legacy/). Qurate keeps its three
+original documents untrimmed. The saved packs' rating paths came from the observation grid;
+for these seven no raw event after 2025-06-30 exists, so they are complete.
 
-Per issuer, one document request containing, in this order:
+**Assembly.** User message = documents + newline + history pack + blank line + "As-of date:
+2026-08-29." + blank line + task, in both arms. System message = the frozen system prompt.
+The output schema travels in `response_format`, not in the prompt.
 
-1. `prompts/system.txt` of Experiment 03, verbatim, as the system message.
-2. The redacted documents, each wrapped as
-   `<document name="10-K filed 2026-03-12">...</document>`. Text extraction by
-   `run_eval.to_text`, rating self-disclosures removed by `system/redact.py`, removed lines
-   stored per observation. No exhibits, no 8-Ks.
-3. The history pack with `history_end="2025-08-28"`: rating path to that date, the rating then
-   in effect, three prior fiscal years plus the current one from XBRL, the implied qualitative
-   anchors, recent quarterly rows, and the peer table without ratings. **Which pack is open
-   (D12).** Measured on 2026-09-12: none of the 16 packs saved in Experiment 03's `audit.json`
-   equals what `evaluation/pipeline/history_pack.py` builds today. The integrity review rebuilt
-   the builder after the Opus run (per-fact filing dates, matching peer fiscal periods), and the
-   XBRL re-extraction of 2026-09-11 changed some figures (Target's FY2023 debt is 19,147m in the
-   saved pack and 19,018m now; Bath & Body Works' prior-year EBITDA was empty then and is filled
-   now). The saved packs are 3,828 to 4,472 Qwen tokens, the current ones 17,694 to 18,822. With
-   the saved packs every one of the 16 fits the limit, Qurate untrimmed at 243,144; Levi, never
-   scheduled and without a saved pack, stays over the limit on its documents alone. Options for
-   Robert: (a) the saved packs verbatim for the 16 and the current builder for the 4 never
-   scheduled, flagged, so that for the 16 only the model changes; (b) the current builder for
-   all 20, accepting that the 7-issuer comparison then confounds model and pack; (c) recommended:
-   the current builder for all 20 as the main run, plus the 7 Opus issuers once more on their
-   saved packs for the exact model comparison, 1,088,487 input tokens per pass.
-4. `As-of date: 2026-08-29.` followed by `prompts/task_values_first.txt`, verbatim.
-5. The output schema, `prompts/schema_values_first.json`, as a JSON-schema response format.
+**Probes.** The Experiment 03 probe prompt and schema, one request per issuer with its EDGAR
+name; completed and reviewed (probe_review.json, with a review timestamp after the response)
+before the issuer's first document request in either arm; never part of any document body.
 
-Per issuer, one memory probe request submitted and reviewed **before** the document request:
-`prompts/probe.txt` system and user, the issuer's EDGAR name, the probe schema from
-`run_batch.py`, no documents. This fixes the Experiment 03 defect where probes and documents
-shared one batch and probe-first processing could not be proven.
+## 6. Request bodies
 
-No tools array, no retrieval, no web access, no RAG. OpenRouter's plugins and web search are
-not used; the request carries no `tools` and no `plugins` field.
+Exactly these fields, checked against an allowlist at every submission: `model`, `messages`
+(system, user), `temperature` 0, `seed` 20260912, `max_tokens` (8,192 documents, 1,200
+probes), `response_format` (`json_schema`, `strict: true`, the frozen schema), `provider` (as
+in section 2), `transforms: []`, `stream: false`. No `tools`, no `plugins`, no web suffix.
+Bodies contain model input only: no labels, evidence snippets, changed flags, probe answers,
+removed lines or audit data. Replicates send byte-identical bodies.
 
-## 6. Sampling, replicates, output
+## 7. Token accounting
 
-| Parameter | Value | Reason |
-|---|---|---|
-| `temperature` | 0 | determinism as far as the provider allows |
-| `seed` | 20260912 | accepted by GMICloud and DeepInfra |
-| `max_tokens` | 8,192 for documents, 1,200 for probes | the Experiment 03 lesson: the ceiling must comfortably exceed the answer. This model has no thinking tokens, and the Opus answers were 6.6k to 8.6k including thinking, so 8,192 for answer only is generous |
-| `response_format` | `{"type":"json_schema","json_schema":{"name":"scorecard_inputs","strict":true,"schema": <prompts/schema_values_first.json>}}` | the Anthropic `output_config.format` equivalent |
-| Replicates | 3 per issuer, same seed, submitted as separate requests | a third-party fp8 MoE is not bit-reproducible; the spread is the measurement, per the experiment plan's Phase 0 |
-| Transport | OpenRouter chat completions over HTTPS with `httpx` (installed; the `openai` package is not and is not needed), synchronous, sequential, retry on transport errors only; the JSON body of every request stored verbatim | OpenRouter has no batch discount; there is nothing to gain from concurrency here |
-| `provider` routing | `{"order": ["gmicloud"], "allow_fallbacks": false, "require_parameters": true, "quantizations": ["fp8"]}` | OpenRouter's documentation, read 2026-09-12: `order` takes provider slugs, `allow_fallbacks: false` fails the request instead of routing elsewhere, `require_parameters: true` restricts routing to endpoints that support every parameter sent, which its structured-outputs page recommends for `response_format` |
-| Usage and cost | read from the response's `usage` object (`prompt_tokens`, `completion_tokens`, `cost`), which OpenRouter always includes and counts with the model's native tokenizer | OpenRouter's usage-accounting documentation, read 2026-09-12 |
+Rendered input tokens are counted on the full chat template with the pinned tokenizer.
+Context allowance: rendered + 2 x schema tokens + 512 + max_tokens <= 262,144 for every
+body. Reservation bound = rendered + 2 x schema tokens + 512. Policy for the reported
+`prompt_tokens`: it must lie between rendered minus 256 and the reservation bound; below is
+suspected truncation, above is an unexplained count; either records the attempt as suspect,
+keeps its charge and halts the run. Observed in the pilot: 165 reported against 161 rendered
+for the probe, and 242,155 reported against 242,155 rendered for the largest document, so
+the provider renders the template as the local tokenizer does and injects nothing.
 
-## 7. Guards
+## 8. Guards as implemented (`run_openrouter.py`, tested by `test_runner.py`)
 
-1. **Cumulative cost ledger.** A JSON file that every request appends to: request id, issuer,
-   replicate, reported prompt and completion tokens, and the `cost` OpenRouter reports in the
-   response's usage. The runner refuses to start a request if the ledger total plus the worst
-   case of that request would exceed the cap. The worst case is priced from the endpoint's
-   live price, fetched once at start (a free GET) and compared with the snapshot, never from
-   a constant, because GMICloud's shown price is a promotion (section 8). If any response
-   costs more than 25% above its projection the run stops, since the price has changed.
-   Retries and re-asks are requests like any other and pass the same check. This replaces
-   Experiment 03's per-submission constants, which the integrity review flagged as reusable.
-2. **Pre-flight, free.** Local token count per request, printed, compared against the limit,
-   and a cost projection, with no network call. Then exactly one real request on one issuer,
-   inspected, before the remaining 59.
-3. **Truncation check.** The provider's reported `prompt_tokens`, which OpenRouter counts
-   with the model's native tokenizer, must be within 2% of the local Qwen count without the
-   schema text (the schema travels in `response_format`; the chat template adds 13 tokens). A
-   provider that injects the schema into the prompt would show a surplus of about 1,000
-   tokens, at most 1.1% of the smallest package, still inside the tolerance; a dropped
-   document is at least 14% short and is caught. A shortfall means the input was silently
-   truncated: the observation is discarded, logged, and not scored. This is the main new risk
-   relative to a first-party API.
-4. **Parse failures.** One re-ask per failed JSON parse, then the observation is recorded as
-   failed and counted in the results. Never silently dropped.
-5. **Provenance.** Per response store the `model` string, the provider name, the finish
-   reason, usage, and the OpenRouter generation id, so the served model and provider are
-   evidence rather than an assumption.
-6. **The fixed scorecard.** Scoring uses `system/scorecard.py` as of 2026-09-12, with the
-   negative-EBITDA and net-cash rules. Qurate is exactly the case that triggers the negative
-   Debt/EBITDA rule, so an unfixed engine would silently produce the old wrong answer.
+1. **Authorization (G1).** `authorization.json` binds the cap, model, endpoint, ceilings,
+   replicates, retry allowance, cohort, pilot and the manifest's SHA-256. No request leaves
+   without it; a manifest that does not match is refused.
+2. **Frozen bytes (G3).** Every body file, the code and prompt files, the primary documents
+   and the hashes file are re-hashed at every submission against the manifest; submission
+   loads bodies from disk and never rebuilds, tokenizes or downloads.
+3. **Ledger (G7, G8).** One append-only, fsynced `ledger.jsonl` at the path named in the
+   authorization, independent of the run directory. Before dispatch an attempt reserves its
+   worst case (exact decimal at the ceilings); dispatch is refused unless committed charges
+   plus unresolved reservations plus open reservations plus the new reservation stay within
+   the cap. After a response the charge is the larger of `usage.cost` and the generation
+   record's `total_cost`; the reservation is released only then. An explicit provider error
+   releases the reservation without a charge. A transport failure, an unreadable outcome or a
+   missing charge leaves the reservation charged as unresolved and halts the run. A file lock
+   refuses a second process; a halt refuses every dispatch until cleared with a note.
+4. **Live prices (G7).** The endpoint listing is read before any dispatch in a process:
+   prices at or below the ceilings, fp8, context and completion limits sufficient, else refuse.
+5. **Attempts (G2).** At most two attempts per request and at most ten attempts beyond the
+   101 planned; an unresolved attempt is never retried without an explicit flag.
+6. **Provenance and validation (G9).** Raw response bytes are saved before parsing. Model and
+   provider must equal the authorized ones. `finish_reason` must be `stop`. Content is parsed
+   strictly (duplicate keys, NaN and Infinity rejected), validated against the schema, figures
+   checked finite and non-boolean; the scorecard and direct channels fail independently, and a
+   valid direct rating survives an undefined scorecard ratio.
+7. **Sequencing (G10, G12).** Documents wait for the issuer's reviewed probe; nothing but the
+   pilot pair runs before the pilot verdict file says pass.
 
-## 8. Cost against the real balance
+## 9. Cost
 
-OpenRouter balance on 2026-09-12: 55.00 credits granted, 47.46 used, **7.536 remaining**
-(credits endpoint). The key is in `.env` as `OPEN_ROUTER_API_KEY`.
+| Item | Value |
+|---|---|
+| Sum of the 101 reservations (worst case at the ceilings) | $1.557689 |
+| Retry allowance, 10 x the largest document reservation $0.026487 | $0.264870 |
+| Conservative plan total | $1.822559 |
+| Cap (decision D5) | $3.00 |
+| Actual spend (2026-09-13) | $1.242279 committed for 104 responses, $0.141521 held for seven transport failures, $1.383800 against the cap; details in results.md |
 
-Worst case means every request uses its full `max_tokens` (8,192 for documents, 1,200 for
-probes); a typical answer is a fraction of that.
+## 10. Execution order
 
-| Item | Input tokens | Worst case at GMICloud's shown price, $0.0875 / $0.35 | At GMICloud's list price, $0.35 / $1.40 | At DeepInfra, $0.09 / $0.55 |
-|---|---|---|---|---|
-| One pass, 20 issuers | 3,285,163 | **$0.35** | $1.38 | $0.39 |
-| Three replicates | 9,855,489 | **$1.03** | $4.14 | $1.16 |
-| 20 memory probes | about 8,000 | $0.01 | $0.04 | $0.01 |
-| One pass on the 7 Opus issuers only, for the direct comparison | 1,143,322 | $0.12 | $0.48 | $0.13 |
-| The 7 Opus issuers on their saved packs, three replicates (D12 option c) | 3,265,461 | $0.35 | $1.38 | $0.39 |
-| **Proposed run total** | | **about $1.05 of $7.54, about $1.40 with D12 option (c)** | | |
+The pilot: the largest document request by rendered tokens, `doc-saved-X14-r1` at 242,155,
+after its probe; both inspected against the review's acceptance conditions
+(pilot_review.json). Then the remaining 19 probes, reviewed; then the documents issuer by
+issuer, X01 to X20, current replicates 1 to 3 and, for the seven, saved replicates 1 to 3.
 
-The shown GMICloud price is marked "75% off" on OpenRouter's model page and `discount: 0.75`
-in the endpoint record, both re-read on 2026-09-12. If the promotion ends during the run,
-three replicates cost up to $4.14, more than the proposed cap; the ledger guard (section 7)
-then stops the run at the cap with the replicates completed so far, and its price check
-stops it at the first response that costs more than projected.
+## 11. Scoring and reporting
 
-Proposed cap: **$3.00**, which at the shown price leaves room for one full re-run after a
-defect and still keeps more than half the balance. Robert sets the final number.
+Flat records per arm and replicate (`pred_scorecard`, `pred_direct`, `label`, `persistence`,
+`changed`), scored by `evaluation/pipeline/score_run.py`'s `score_channel`, channel by
+channel, on the valid subset, with the planned and valid counts, exact hits over the planned
+denominator, and persistence on the full cohort and on the same subset. Consensus per
+channel: the median notch of three valid ratings; fewer than three is reported as
+incomplete, never rounded into an answer. Spread: highest minus lowest notch per channel,
+the range of every extracted figure, and whether the qualitative grades agree. Cohorts: all
+20 and the 19 primary; for the saved arm, the seven and the six without Qurate, next to Opus
+4.6's corrected saved outputs converted to the same flat records (the conversion reproduces
+3/7, 6/7, MAE 1.143 for the scorecard and 4/7, 6/7, 0.571 for the judgement). Failed and
+suspect attempts stay visible with their charges. Bootstrap fractions are descriptive.
 
-## 9. Outputs and scoring
+Validity conditions, as revised by the review: probes completed and reviewed first with
+flags rather than exclusions; a 20 by 3 attempt grid with per-channel coverage and no bought
+replacements; the token policy of section 7; provenance stored per response; complete hashes
+and date checks; one corrected scoring path. Reading rules: lead with exact accuracy on the
+full eligible cohort next to persistence and coverage; treat the seven-issuer comparison as
+selected Opus successes on matched saved information with different inference settings
+(Opus: adaptive high-effort thinking; Qwen: non-thinking, fp8, temperature 0); report both
+channels, each replicate and the consensus; no automatic escalation to more paid work.
 
-Everything under `experiments/04-open-weight-cross-section/runs/<timestamp>/` (gitignored):
-`requests.json` with every prompt verbatim, `raw_outputs.json`, `audit.json` with the date
-checks, per-observation token counts, trim flags, provider and model strings, redacted-line
-counts and the cost ledger, and `results.json` with the scored records.
+## 12. Corrections and incidents
 
-Scored by `evaluation/pipeline/score_run.py`: exact accuracy, within one notch, MAE, all next
-to persistence on the same labels, split changed and unchanged, false alarms on the unchanged
-subset, paired bootstrap. That script reads flat records (`pred_scorecard`, `pred_direct`,
-`label`, `persistence`, `changed`) as `run_eval.py` writes them. Experiment 03's `run_batch.py`
-did not use it: it scored inline and wrote nested records (`scorecard.pred`, `direct.pred`),
-and the corrected numbers come from the offline review's `audit_saved_run.py`. For one code
-path, proposed: the Experiment 04 runner writes `results.json` in the flat shape, one file per
-replicate pass and one consensus pass (median notch across the three replicates, per channel),
-and a small converter turns the Experiment 03 saved outputs, with the corrected arithmetic,
-into the same flat shape, so that both models are scored by the same script on records of the
-same shape. The replicate spread per observation (highest minus lowest notch, per channel) is
-reported next to the consensus. Reported both on all 20 and on the 7 issuers Opus scored, so
-the model comparison is like for like. Qurate reported with and without, as in Experiment 03.
-
-## 10. What Codex should attack in this specification
-
-1. **The response-format translation.** Anthropic's `output_config.format` became OpenRouter's
-   `response_format` with `strict: true`. Does the schema in `prompts/schema_values_first.json`
-   satisfy the provider's strict-mode constraints (required keys, `additionalProperties`,
-   nested objects), and does GMICloud actually enforce it rather than ignoring it?
-2. **The truncation check.** Is comparing the provider's `prompt_tokens` against a local
-   `AutoTokenizer` count sound? Measured: the chat template adds 13 tokens, the schema text is
-   1,003, the smallest document is 14% of its package, so the tolerance is now 2% on the count
-   without the schema (section 7). Is that right, and does any shortlisted provider inject the
-   schema into the prompt?
-3. **The trim.** Levi and Qurate lose their oldest 10-Q. Does that break the model-to-model
-   comparison for Qurate, which is one of only two changed cases?
-4. **Determinism.** Temperature 0 with a seed on an fp8 MoE served by a third party. Is three
-   replicates enough to characterise the spread, and should the spread be measured on the
-   scorecard inputs or only on the final rating?
-5. **The bound.** Using the release date as the training-data bound where the vendor states no
-   cutoff. Is the release date of `Qwen3-235B-A22B-Instruct-2507` (2025-07-21) established well
-   enough, and is a bound of this kind defensible in the write-up?
-6. **Leakage and input parity.** The documents replay byte-identically from the cache and the
-   redactor (integrity review); the history pack does not (section 5, D12). Check the current
-   builder's packs for any new channel (the added filing dates, the filled figures), say which
-   option of D12 keeps the comparison honest, and confirm that OpenRouter adds no retrieval
-   unless `plugins` or a web-search model suffix is requested.
-7. **The cost ledger.** Does the guard actually prevent an overrun mid-run, including retries
-   and re-asks, and does it hold if GMICloud's 75% promotion ends between two requests
-   (section 8)?
-8. **Scoring parity.** Section 9 now routes both models through `score_run.py` on flat
-   records, with a converter for the saved Experiment 03 outputs. Is the median-notch consensus
-   across replicates the right summary, and is the corrected arithmetic the right basis for
-   the Opus side of the comparison?
-
-## 11. Decisions still needed from Robert
-
-- Cap: $3.00 proposed against a $7.54 balance.
-- Provider: GMICloud proposed, DeepInfra as fallback; fp4 providers excluded.
-- Replicates: three proposed.
-- Qurate: keep in the set and report with and without, as in Experiment 03.
-- Whether to also run the second-tier model (GLM-4.6 or Kimi K2-0905) for a second opinion at
-  about $2 per pass, or keep that for later.
-- Transport: `httpx` (installed) rather than installing the `openai` package, as proposed in
-  section 6; no decision needed unless Robert prefers otherwise.
-- D12, the history pack: the saved Experiment 03 packs, the current builder, or both
-  (section 5, option (c) recommended).
-
-## 12. Corrections made on 2026-09-12 before review
-
-Found by the fresh session while checking every number against the evidence files and
-OpenRouter's documentation. Nothing had been run, so nothing is affected beyond this document,
-the design plan's rules 4 and 10, and the evidence script.
-
-1. GMICloud's price was quoted as a plain $0.09 / $0.35. It is a 75% promotion off
-   $0.35 / $1.40 (section 8). The cost table now prices the worst case at both, and the ledger
-   guard prices from the live endpoint, not from a constant.
-2. The subtotal for the 7 issuers Opus scored was 1,141,046 tokens; the evidence file gives
-   1,143,322. The heading "Eight issuers Opus never ran" counted thirteen.
-3. The scoring paragraph said the Qwen results would be scored "exactly as Experiment 03 and
-   `score_run.py`"; Experiment 03 never went through `score_run.py`. Section 9 now says how
-   both sides get one code path.
-4. The truncation tolerance was 10%; the measured overheads and document sizes give 2% on the
-   count without the schema (section 7).
-5. `count_tokens_qwen.py` wrote its output to a session-specific temporary path and did not
-   implement the trim. It now writes the evidence file next to itself, records per-document
-   tokens and the trimmed variants, and reproduces every number in section 4 exactly.
-6. Transport named as `httpx`; the design plan's rule 10 said the `openai` client, which is
-   not installed and not needed.
-7. The claim that the history pack and peer table were byte-identical to Experiment 03 was
-   wrong: the builder and the XBRL extraction changed after the Opus run. Measured on the 16
-   saved packs; section 5 gives the options and D12 records the open decision.
+Before review (2026-09-12): the GMICloud price was a 75% promotion (the run uses DeepInfra
+instead); the seven-issuer subtotal and a heading were wrong; the scoring-parity claim was
+false and is now implemented; the truncation tolerance was replaced by the rendered-count
+policy; the token evidence became regenerable; the history packs were found not to be the
+packs Opus saw, which became decision D12. From the review's final pass: the history path
+now comes from the raw records (Leslie's August 2025 downgrade had been omitted), the peer
+policy is frozen, probes are staged, the ledger is authorization-wide, and the scorer keeps
+denominators. During execution (2026-09-13): 111 dispatches for 101 planned requests; seven transport
+failures (the same TLS "bad record MAC" error within a tenth of a second of dispatch, before
+any HTTP response; from the second one on, every request ran in its own process, which did
+not remove the fault), four output-length failures (repetition loops inside a rationale
+string, charged and recorded, no ceiling enlarged), and Walmart's first probe answer, which
+stopped inside a JSON string with `finish_reason` stop. The ten extra attempts were all
+used, one per request; nine retries succeeded. Two saved-input replicates (Qurate 3,
+Victoria's Secret 3) have no valid response and are reported as failures; all 60
+current-input requests are valid. Every reviewer decision is a `note` event in the ledger.

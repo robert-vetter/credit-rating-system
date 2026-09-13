@@ -2,7 +2,8 @@
 
 *Updated by Codex, directed by Robert Vetter, 2026-09-12. Verified against the saved
 Experiment 03 requests and outputs, offline integrity audit, and corrected calibration run.
-Earlier experiments were implemented with Claude; attribution remains in their notes.*
+Earlier experiments were implemented with Claude; attribution remains in their notes. The
+Experiment 04 paragraph was added by Claude (Fable 5.1), directed by Robert Vetter, 2026-09-13.*
 
 Research with Prof. Kay Giesecke and Xiaowei Ding: build a system that reads SEC filings,
 applies Moody's published rating methodology and estimates an issuer's rating. The first
@@ -31,6 +32,15 @@ an old label that predates bankruptcy information in its inputs. Excluding it as
 sensitivity leaves six cases: scorecard 3/6 exact, MAE 1.17; judgement 4/6, MAE 0.50;
 persistence 5/6, MAE 0.17. The other six are not thereby certified free of label problems.
 Full splits, selection failures and uncertainty are in the results.
+
+**Experiment 04, Arm 1 (2026-09-13)** repeats the test on Qwen3-235B-A22B-Instruct-2507
+(open weights, public checkpoint of 2025-07-21, DeepInfra fp8 through OpenRouter) for all 20
+disclosure labels, three replicates each, at $1.24. On the 19-issuer primary cohort the model's
+judgement is 17/19 exact with MAE 0.10 against persistence's 18/19 and 0.05, with one false
+alarm and both rating changes missed; the scorecard channel is 3/19 with MAE 1.84 and runs
+1.2 notches favourable on average. On the seven issuers Opus scored, identical inputs gave
+identical judgement accuracy. Tables, coverage and every failed request:
+[Experiment 04 results](experiments/04-open-weight-cross-section/results.md).
 
 Start with the [experiment specification](experiments/03-oos-values-first/README.md),
 [results and limitations](experiments/03-oos-values-first/results.md), and
@@ -76,7 +86,7 @@ next design.
 | [experiments/](experiments/) | Specifications, prompts, decisions and results for each experiment |
 | [docs/oos-integrity-review.md](docs/oos-integrity-review.md) | Audit findings, repairs and proposed analyst architecture |
 | [docs/architecture.md](docs/architecture.md) | Analyst architecture proposal: one-page pipeline, build order, decisions needed |
-| [experiments/04-open-weight-cross-section/](experiments/04-open-weight-cross-section/README.md) | The post-cutoff test on cheap open-weight models: design plan, and [RUN-SPEC.md](experiments/04-open-weight-cross-section/RUN-SPEC.md), the exact Arm 1 specification awaiting review (not run) |
+| [experiments/04-open-weight-cross-section/](experiments/04-open-weight-cross-section/README.md) | The post-release test on an open-weight model: design plan, Codex's review, [RUN-SPEC.md](experiments/04-open-weight-cross-section/RUN-SPEC.md) as executed, and [results.md](experiments/04-open-weight-cross-section/results.md) (Arm 1, 2026-09-13) |
 | [notes/](notes/) | Historical experiment logs and their corrections |
 | [data/README.md](data/README.md) | Data sources and local cache inventory |
 | [methodologies/](methodologies/) | Methodology reference |

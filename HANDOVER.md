@@ -7,92 +7,59 @@ correspondence that is not in the repository, that is said. Read this file first
 README.md, then the experiment folders. Keep this file current: append a dated entry to
 section 13 whenever the state changes.*
 
-## Session continuation, 2026-09-12 late (read this first)
+## Session continuation, 2026-09-13 (read this first)
 
-*Written by Claude (Fable 5.1) at Robert's request as a gapless handover: he hit usage limits
-and continues in a fresh session on another account. Everything below was measured or decided
-on 2026-09-12 and supersedes older statements where they conflict. The section after this one
-is Codex's review note from earlier the same day and remains valid.*
+*Written by Claude (Fable 5.1) at Robert's direction after implementing and running Experiment
+04, Arm 1, on 2026-09-13. Everything below was measured on that day and supersedes the older
+statements where they conflict. The two sections after this one, Codex's review note and the
+2026-09-12 continuation, remain valid history.*
 
-**The immediate next task.** Experiment 04 Arm 1 is fully specified in
-`experiments/04-open-weight-cross-section/RUN-SPEC.md`. Next steps, in order: (1) hand that
-specification to Codex for the review listed in its section 10, before any paid call;
-(2) get Robert's cap (section 8 proposes $3.00 of the $7.54 balance) and his answers to D5 to
-D10 and D12 in that folder's `decisions.md`; (3) implement `run_openrouter.py` in that folder with the
-guards of section 7; (4) free pre-flight, then one single real request, inspected, then the
-rest; (5) score through `evaluation/pipeline/score_run.py` and write `results.md`. Do not
-start (3) before (1) and (2).
+**What happened.** Codex's review of 2026-09-12 refused the first Arm 1 specification and set
+twelve acceptance gates. Robert then authorized the run with decisions D5 to D12 (a $3.00 cap,
+DeepInfra fp8 with price ceilings, three replicates, Qurate as a diagnostic, the trim rule,
+option (c) for the history packs, a 24-month peer policy, ten extra attempts). Claude
+implemented the runner (`run_openrouter.py`, `prepare_inputs.py`, `legacy_provenance.py`,
+`test_runner.py`, the vendored 2026-09-10 builders), repaired the history path in
+`evaluation/pipeline/history_pack.py` and the peer policy in `peer_table.py`, passed the
+forty acceptance tests and the manifest gates, ran the inspected pilot, and then the whole
+plan. The results note is `experiments/04-open-weight-cross-section/results.md`; the
+specification as executed is `RUN-SPEC.md` in that folder.
 
-**What Robert decided today.** Qwen3-235B-A22B-2507 through OpenRouter is the model, because
-Opus 4.6 cost about a dollar per issuer and capped Experiment 03 at seven observations, and
-because it is the most recent open-weight model whose training-data bound still clears the
-Experiment 03 boundary. Arm 1 first, same window and labels as Experiment 03, so the only
-variable is the model. The specification goes to Codex for review before money is spent.
+**The result, primary cohort of 19.** Judgement consensus 17/19 exact, MAE 0.10, one false
+alarm on 18 unchanged; scorecard consensus 3/19 exact, MAE 1.84, 15 false alarms;
+persistence 18/19, MAE 0.05. The judgement channel is persistence with one false alarm and
+missed both rating changes; the scorecard channel is systematically favourable, 1.23 notches
+in the issuer's favour on average. On the seven issuers Opus scored, with byte-identical
+inputs, Qwen's judgement reproduced Opus's numbers exactly (4/7, MAE 0.57) and its scorecard
+was worse (2/7, MAE 1.86 against 3/7, 1.14). Replicates: the judgement's spread is zero on 19
+of 20 issuers; the scorecard's exceeds a notch on 4.
 
-**Facts measured today that exist nowhere else.**
+**Facts measured on 2026-09-13.**
 
 | Fact | Value |
 |---|---|
-| OpenRouter key | in `.env` as `OPEN_ROUTER_API_KEY` (not the usual spelling) |
-| OpenRouter balance | 55.00 credits granted, 47.46 used, **$7.536 left** (credits endpoint, 2026-09-12) |
-| `openai` package | **not installed**; `httpx` 0.28.1 and `tiktoken` and `transformers` 4.57.6 are |
-| Qwen token counts | exact, all 20 packages, `evidence/qwen-token-counts-2026-09-12.json`, regenerable with `count_tokens_qwen.py` |
-| Qwen versus Anthropic tokenizer | Qwen counts are 0.976 of the Anthropic count at the median over the 16 saved packages |
-| Packages over the 253,952 limit | only X09 Levi (285,930) and X14 Qurate (257,089); dropping one 10-Q gives 235,598 and 212,906 |
-| Document cache | all 51 documents of all 20 issuers are already cached; the run needs no SEC download |
-| Byte-based token estimates | unreliable, do not use them: X17 estimated 389,000, actual 149,955 |
-| Per-provider facts | `evidence/endpoints-2026-09-12/`, one JSON per model, with context, price, quantisation and supported parameters |
-| GMICloud price | $0.0875 / $0.35 per MTok is a 75% promotion (`discount: 0.75`) off a list price of $0.35 / $1.40; three replicates cost $1.03 shown, $4.14 at list (later session, 2026-09-12) |
-| History packs | none of the 16 packs saved in Experiment 03 equals the current builder's output; saved 3,828 to 4,472 tokens, current 17,694 to 18,822; with the saved packs Qurate fits untrimmed at 243,144 (later session, 2026-09-12) |
+| Spend | $1.242279 committed (104 responses), $0.141521 held for seven transport failures, $1.383800 against the $3.00 cap |
+| OpenRouter balance after the run | $6.31 (usage 48.6897 of 55 credits); the account's usage rose by exactly the reconciled charges, so the held attempts were most likely never billed |
+| Coverage | 20 of 20 probes, 79 of 81 document requests valid; all 60 current-input requests valid; two saved-input replicates (Qurate 3, Victoria's Secret 3) have no valid response |
+| Attempts | 111 dispatches, the ten extra attempts all used; 7 TLS "bad record MAC" transport failures, 4 output-length repetition loops, 1 probe answer that stopped inside a string |
+| Token accounting | every response's prompt tokens equalled the locally rendered count exactly; no compression or schema injection at DeepInfra |
+| Run time | 2026-09-13 01:00 to 04:00 UTC, one request per process after the second transport failure |
+| Two saved packs were not the packs Opus saw | resolved: the seven saved inputs were reproduced byte-for-byte from the raw XBRL cache with the vendored 2026-09-10 builders, so every figure has a source date; the current arm uses the repaired packs |
 
-**Time-left curve, measured.** How many labelled rating changes remain available for a given
-model bound is in the Experiment 04 README section 1. The short version: a bound after January
-2025 loses the February to April 10-K season, the official Moody's window is empty after May
-2025, and from then on only the 20 disclosure labels exist. Each monthly refresh of Moody's
-file adds roughly two changes.
+**The immediate next task, all Robert's.** (1) Read `results.md` and decide whether the
+numbers go into the lab update now; the corrected draft is at
+`/Users/robert/Developer/giesecke/lab-update-draft-2026-09-13.md`, outside the repository,
+unsent; it supersedes the 2026-09-12 draft. (2) Commit the session's work: the working tree
+holds the new Experiment 04 files, the two builder repairs, `results.md`, this file, the
+README pointers and `RUN-SPEC.md`; nothing was committed or pushed on 2026-09-13 because the
+instruction said not to. (3) Decide what, if anything, follows: the review's discussion
+trigger applies (judgement equals persistence, scorecard favourable); a second model, more
+replicates and Arm 2 are not authorized. (4) Repository visibility is still open.
 
-**The lab update.** Robert wants the update to tell the story of how he got here: started with
-the strongest model, found it too expensive at this input size, went looking for the sweet spot
-between model strength and cutoff date, landed on Qwen through OpenRouter, and runs two model
-families against each other (Claude Fable 5.1 implements, OpenAI Codex audits, and the other
-way round) with the scorecard bug that audit found as the concrete example. The draft with that
-story is at `/Users/robert/Developer/giesecke/lab-update-draft-2026-09-12.md`, deliberately
-outside the repository because the repository is public. It has not been sent. Robert's earlier
-edits to it stand: no Qurate caveat sentence, no "labels are the limiting factor" phrasing, and
-the cost explanation for n = 7 stays in.
-
-**Repository state.** Committed on `main` on 2026-09-12 by the later session: the previous
-session's deliverables (`docs/architecture.md`, the `experiments/04-open-weight-cross-section/`
-folder, pointer edits) as 1298fe9, and the spec corrections below as the commit after it. Not
-pushed. Nothing has been run against OpenRouter; no paid call was made in either session.
-`experiments/03-oos-values-first/run_batch.py` still refuses paid calls by decision D11 and
-that guard stays.
-
-**Corrections by the later session, 2026-09-12, before the Codex review.** Every number in
-RUN-SPEC.md was checked against the evidence files and OpenRouter's documentation. The one
-that matters for the cap: GMICloud's $0.0875 / $0.35 is a 75% promotion off $0.35 / $1.40
-(`discount: 0.75` in the endpoint record, "75% off" on the model page), so three replicates
-cost $1.03 at the shown price and up to $4.14 if the promotion ends mid-run; the ledger guard
-now prices from the live endpoint and stops at the cap. Also fixed: the 7-issuer subtotal, a
-heading, the claim that Experiment 03 was scored through `score_run.py` (it was not; section 9
-now gives both models one code path), the truncation tolerance (2% on the count without the
-schema, from measured overheads), and `count_tokens_qwen.py`, which now regenerates the
-evidence file offline with per-document sizes and the trimmed variants. The full list is
-RUN-SPEC.md section 12. D5 to D10 remain Robert's; the Codex review has not happened.
-
-**Second finding, same session: the history packs are not the packs Opus saw.** The integrity
-review rebuilt `history_pack.py` and `peer_table.py`, and the XBRL re-extraction of 2026-09-11
-changed figures, all after Experiment 03 ran. None of the 16 packs saved in Experiment 03's
-`audit.json` equals today's builder output; the saved packs are 3,828 to 4,472 Qwen tokens,
-today's 17,694 to 18,822. With the saved packs Qurate fits untrimmed. RUN-SPEC.md section 5
-gives three options; decision D12 is Robert's, option (c) recommended: current packs for all
-20 plus the 7 Opus issuers once more on their saved packs, about $0.35 extra.
-
-**The Codex brief.** The complete review brief for Codex (goal, correspondence requirements,
-journey, state, plan, cutoff logic, labels, scoring, success criteria, the unsent lab update,
-checklist and sign-off form) is at `/Users/robert/Developer/giesecke/codex-review-brief-2026-09-12.md`,
-outside the repository because it carries correspondence and the draft. Robert hands it to
-Codex; Codex writes its verdict to `experiments/04-open-weight-cross-section/review-codex-2026-09-12.md`.
+**Rules that held.** No paid call outside authorization EXP04-ARM1-A1; no body carried a
+label, probe answer or audit field; prompts, candidates, mapping, gold set and Experiment
+03's records unchanged; Experiment 03's paid-call guard untouched; every failure recorded with
+its charge; no ceiling enlarged, no prompt changed, no provider switched after a failure.
 
 ## Current instruction and review, 2026-09-12
 
@@ -350,8 +317,16 @@ small-sample and missing-response selection, and distinguish a post-cutoff ratin
 reconstruction from a forecast made before a rating action.
 
 Robert closed the paid experiment at seven successes. The thirteen remaining cases will
-not be run. Next work is the proposed analyst architecture and local evidence/TTM baseline;
-new paid work or human label decisions require separate authorization.
+not be run on Opus.
+
+**Experiment 04, Arm 1 (2026-09-13) extends the answer to 19 disclosure labels** on
+Qwen3-235B-A22B-Instruct-2507 (public checkpoint of 2025-07-21, DeepInfra fp8 through
+OpenRouter), three replicates each: judgement 17/19 exact, MAE 0.10; scorecard 3/19, MAE
+1.84; persistence 18/19, MAE 0.05. Both rating changes were missed by the judgement channel.
+On the seven issuers Opus scored, identical inputs gave identical judgement accuracy (4/7,
+MAE 0.57). Full tables, coverage and limitations: experiments/04-open-weight-cross-section/results.md.
+Next work needs Robert's decision; new paid work or label decisions require separate
+authorization.
 
 ## 10. Open items and dependencies
 
@@ -360,7 +335,8 @@ new paid work or human label decisions require separate authorization.
 | Repository visibility (public, contains Moody's PDF) | Robert | flagged 2026-09-12, undecided |
 | Repository synchronization | Codex, directed by Robert | Documentation and integrity/calibration changes consolidated in the 2026-09-12 update; verify remote with Git |
 | Experiment 03 completion, 13 observations | Robert | Closed 2026-09-12 at Robert's request. Do not run or request a top-up; see D11. |
-| Send specification and results to the lab | Robert | Reply requested and drafted here; not sent |
+| Send specification and results to the lab | Robert | Corrected draft of 2026-09-13 outside the repository, with the Experiment 04 numbers; not sent |
+| Experiment 04, Arm 1 | done 2026-09-13 | 79 of 81 document requests valid, $1.38 of the $3.00 cap; results.md; a second model, more replicates and Arm 2 not authorized |
 | Analyst architecture | Robert / lab | Proposal in docs/oos-integrity-review.md; prototype and TTM baseline not built |
 | Sector strategy: methodology-faithful per sector versus sector-agnostic prediction | Giesecke / Ding | open |
 | Whether peer ratings (not only peer figures) are admissible input | Giesecke / Ding | open |
@@ -475,3 +451,27 @@ they are. The model-facing code is Anthropic-specific and small:
   packs are not the packs Opus saw (builder and XBRL extraction changed after the run); recorded
   the options as D12. Wrote the Codex review brief outside the repository. Nothing run, nothing
   spent; D5 to D10 and D12 open; the Codex review has not happened.
+- 2026-09-12, Codex at Robert's direction: completed the independent Experiment 04 Arm 1
+  specification review in experiments/04-open-weight-cross-section/review-codex-2026-09-12.md.
+  Verdict: not approved as specified, with required changes and recommendations for Robert's
+  decisions. Verified saved-run replay, all 10 regressions, regenerated token counts, saved
+  input differences, current source dates, and free Hugging Face/OpenRouter evidence. Found
+  an incomplete Leslie's history path, a probe-token tolerance defect, missing-prediction
+  denominator problems and an unsafe proposed price-change guard. No implementation changes,
+  model calls, installations, commits, pushes or messages; protected artifacts unchanged.
+- 2026-09-12, Codex at Robert's direction: completed the requested final adversarial pass
+  on the same Experiment 04 review and added twelve explicit implementation acceptance
+  gates plus pilot/continuation criteria. Expanded findings to the old 16-issuer selector,
+  other omitted instrument events, peer-source freshness, numeric validation and budget
+  persistence across crashes and new directories. Offline re-extraction matched all 67
+  issuer/peer financial caches examined, with no as-of filtering differences at this date.
+  Specification review is complete; implementation verification remains NO-GO because
+  the runner and fixes are not implemented. No model calls or protected-file changes.
+- 2026-09-13, Claude (Fable 5.1) at Robert's direction: implemented Experiment 04 Arm 1 to Codex's
+  twelve gates (runner with authorization-wide ledger, reservations, price ceilings, halts,
+  probe sequencing and pilot gate; offline preparation with frozen hashes and token bounds;
+  legacy provenance for the seven saved inputs; forty acceptance tests, all passing), repaired
+  the history path and added the peer policy in the shared builders, recorded D5 to D12, ran
+  the pilot and the full plan: 111 dispatches, 99 valid, $1.24 committed plus $0.14 held, no
+  cap breach. Wrote results.md, rewrote RUN-SPEC.md as executed, updated the README pages and
+  drafted the corrected lab update outside the repository. Nothing committed, pushed or sent.

@@ -1,3 +1,9 @@
+"""VENDORED COPY, DO NOT EDIT: evaluation/pipeline/history_pack.py exactly as committed at
+fe4613c (2026-09-10), the version in effect when Experiment 03 ran. Kept under Experiment 04
+so the saved Experiment 03 inputs can be reconstructed and their source dates proven
+(legacy_provenance.py). Only the three lines marked VENDOR-PATCH differ: the repository
+root path and the sibling imports. Vendored by Claude (Fable 5.1), directed by Robert
+Vetter, 2026-09-12."""
 """
 History pack: the point-in-time historical context for a rating observation.
 
@@ -28,12 +34,11 @@ XBRL fields and get a pack with the quantitative sections marked unavailable.
 import json
 import os
 import sys
-from datetime import date
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))  # VENDOR-PATCH
 sys.path.insert(0, os.path.join(ROOT, "system"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import peer_table   # noqa: E402
+import peer_table_20260910 as peer_table   # noqa: E402  VENDOR-PATCH
 import scorecard    # noqa: E402
 
 OUT = os.path.join(ROOT, "evaluation", "companies")
@@ -51,71 +56,23 @@ def quarter_start(t):
 
 
 def fy_values(xbrl, filed_leq):
-    """{fy_end: {field: val, "_tags": {field: tag}}} for fiscal years whose values were filed
-    on/before filed_leq. The tags let metrics_for avoid double counting where a combined
-    debt concept already contains a separately tagged part (added 2026-09-11)."""
-    years, tags = {}, {}
+    """{fy_end: {field: val}} for fiscal years whose values were filed on/before filed_leq."""
+    years = {}
     for field, blob in xbrl.get("fields", {}).items():
         for v in blob["annual"]:
-            if fact_available(v, filed_leq):
+            if v.get("filed", "9999") <= filed_leq:
                 years.setdefault(v["end"], {})[field] = v["val"]
-                tags.setdefault(v["end"], {})[field] = v.get("tag")
-    out = {k: v for k, v in years.items() if "revenue" in v}
-    for k in out:
-        out[k]["_tags"] = tags[k]
-    return out
-
-
-def fact_available(value, as_of):
-    """Fail closed on missing dates; validate every field, not just the revenue date."""
-    if not value.get("filed") or not value.get("end"):
-        return False
-    end, filed, boundary = (date.fromisoformat(s) for s in
-                            (value["end"], value["filed"], as_of))
-    if end > filed:
-        return False
-    return filed <= boundary
-
-
-def invalid_fact_dates(xbrl):
-    """Quarantined source records, retained in audit logs rather than used as inputs."""
-    bad = []
-    for field, blob in xbrl.get("fields", {}).items():
-        for kind in ("annual", "quarterly"):
-            for value in blob.get(kind, []):
-                if not value.get("filed") or not value.get("end") or value["end"] > value["filed"]:
-                    bad.append({"field": field, "kind": kind, **value})
-    return bad
-
-
-def fact_sources(xbrl, as_of, kind, ends):
-    """Per-field provenance for exactly the periods shown in a history pack."""
-    return {end: {field: {k: v.get(k) for k in ("end", "filed", "tag", "form")}
-                  for field, blob in xbrl.get("fields", {}).items()
-                  for v in blob.get(kind, []) if v.get("end") == end and fact_available(v, as_of)}
-            for end in ends}
-
-
-# A combined debt concept already contains the part named on the right; when the combined tag
-# was the source of the field on the left, that part must not be added again (2026-09-11; the
-# LongTermDebt case is a pre-existing overlap of the same kind, 19 company-years in the frame).
-CONTAINS = {"lt_debt_noncurrent": {"LongTermDebtAndCapitalLeaseObligations": ("finance_lease_noncurrent",),
-                                   "LongTermDebt": ("lt_debt_current",)},
-            "lt_debt_current": {"LongTermDebtAndCapitalLeaseObligationsCurrent": ("finance_lease_current",),
-                                "DebtCurrent": ("st_borrowings",)}}
+    return {k: v for k, v in years.items() if "revenue" in v}
 
 
 def metrics_for(y):
     m = {"revenue_usd_bn": y["revenue"] / 1e9}
     ebitda = (y["operating_income"] + y["d_and_a"]) if "operating_income" in y and "d_and_a" in y else None
-    tags = y.get("_tags", {})
-    skip = {part for field, by_tag in CONTAINS.items() for part in by_tag.get(tags.get(field), ())}
-    components = [p for p in DEBT_PARTS if p in y and p not in skip]
-    parts = [y[p] for p in components]
+    parts = [y[p] for p in DEBT_PARTS if p in y]
     debt = sum(parts) if parts else None
     m["ebitda_usd_m"] = ebitda / 1e6 if ebitda else None
     m["debt_usd_m"] = debt / 1e6 if debt else None
-    m["debt_components"] = components
+    m["debt_components"] = [p for p in DEBT_PARTS if p in y]
     m["debt_ebitda"] = debt / ebitda if debt and ebitda and ebitda > 0 else None
     if ebitda and y.get("capex") is not None and y.get("interest"):
         m["ebitda_capex_interest"] = (ebitda - y["capex"]) / abs(y["interest"])
@@ -161,65 +118,6 @@ def implied_anchor(rating, quant_scores):
     return {"implied_qual_score": round(q, 2), "implied_grade": grade}
 
 
-def typed_events(ratings, upto):
-    """Every entity-level long-term and senior-unsecured instrument event on or before `upto`,
-    read from the raw 17g-7 records rather than from a stored observation (Experiment 04 repair,
-    2026-09-12: the observation grid ends 2025-06-30, so a path copied from the latest
-    observation silently omitted later events such as Leslie's 2025-08-13 downgrade).
-    Each event: (date, rating, action, level, rating type, oi). Withdrawals stay in."""
-    ev = set()
-    for e in ratings["entities"]:
-        for r in (e.get("obligor_records") or []):
-            if r.get("RT", "").upper() in LT and r.get("RAD") and r["RAD"] <= upto and r.get("R"):
-                ev.add((r["RAD"], r["R"], r.get("RAC", ""), "entity", r["RT"], e["oi"]))
-        for ins in (e.get("instruments") or []):
-            for r in ins["records"]:
-                if r.get("RT") == "Senior Unsecured" and r.get("RAD") and r["RAD"] <= upto and r.get("R"):
-                    ev.add((r["RAD"], r["R"], r.get("RAC", ""), "instrument", r["RT"], e["oi"]))
-    return sorted(ev)
-
-
-def rating_state_at(ratings, t):
-    """The rating rating_at() selects at t, with its level, type and action date, plus the
-    senior unsecured instrument state where one is alive. Same precedence as rating_at()."""
-    ent, sen = [], []
-    for e in ratings["entities"]:
-        recs = sorted([r for r in (e.get("obligor_records") or [])
-                       if r.get("RT", "").upper() in LT and r.get("RAD") and r["RAD"] <= t],
-                      key=lambda r: r["RAD"])
-        if recs and recs[-1].get("R") != "WR":
-            ent.append((recs[-1]["RAD"], recs[-1]["R"], recs[-1]["RT"], e["oi"]))
-        for ins in (e.get("instruments") or []):
-            recs = sorted([r for r in ins["records"] if r.get("RT") == "Senior Unsecured"
-                           and r.get("RAD") and r["RAD"] <= t], key=lambda r: r["RAD"])
-            if recs and recs[-1].get("R") != "WR":
-                sen.append((recs[-1]["RAD"], recs[-1]["R"], recs[-1]["RT"], e["oi"]))
-    pick = lambda lst, level: ({"rating": max(lst)[1], "level": level, "rating_type": max(lst)[2],
-                                "action_date": max(lst)[0], "oi": max(lst)[3]} if lst else None)
-    selected = pick(ent, "entity") or pick(sen, "instrument")
-    return {"selected": selected, "entity": pick(ent, "entity"), "senior_unsecured": pick(sen, "instrument")}
-
-
-def typed_history_lines(events, history_end, per_level=10):
-    """Printable typed path: per level, consecutive identical symbols collapsed, the last
-    `per_level` shown, merged by date. Withdrawals are labelled as instrument or entity
-    withdrawals, never re-interpreted as the other."""
-    shown = []
-    for level in ("entity", "instrument"):
-        seq, last = [], None
-        for e in [x for x in events if x[3] == level]:
-            if e[1] != last:
-                seq.append(e); last = e[1]
-        shown.extend(seq[-per_level:])
-    shown.sort()
-    lines = []
-    for d, r, act, level, rt, oi in shown:
-        note = (f"; {'an instrument' if level == 'instrument' else 'an entity-level'} withdrawal"
-                + (", not an issuer withdrawal" if level == "instrument" else "")) if r == "WR" else ""
-        lines.append(f"  {d}  {r}  ({act}, {level}-level {rt}{note})")
-    return lines
-
-
 def rating_at(ratings, t):
     """Entity-level LT rating in effect at t, else senior unsecured (same rule as elsewhere)."""
     ent, sen = [], []
@@ -244,7 +142,7 @@ def quarterly_rows(xbrl, filed_leq, n=4):
     q = {}
     for field, blob in xbrl.get("fields", {}).items():
         for v in blob.get("quarterly", []):
-            if fact_available(v, filed_leq):
+            if v.get("filed", "9999") <= filed_leq:
                 q.setdefault(v["end"], {})[field] = v["val"]
     ends = sorted(e for e, vals in q.items() if "revenue" in vals)[-n:]
     rows = []
@@ -254,18 +152,12 @@ def quarterly_rows(xbrl, filed_leq, n=4):
         rows.append(f"  quarter ending {e}: revenue {f('revenue')}m; operating income {f('operating_income')}m; "
                     f"D&A {f('d_and_a')}m; capex {f('capex')}m; CFO {f('cfo')}m; cash {f('cash')}m; "
                     f"LT debt {f('lt_debt_noncurrent')}m; op-lease liab. {f('operating_lease_noncurrent')}m")
-        sources = fact_sources(xbrl, filed_leq, "quarterly", [e])[e]
-        shown = ("revenue", "operating_income", "d_and_a", "capex", "cfo", "cash",
-                 "lt_debt_noncurrent", "operating_lease_noncurrent")
-        rows.append("    filed dates: " + "; ".join(f"{k} {sources[k]['filed']}" for k in shown if k in sources))
     return rows
 
 
-def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
+def build(slug, t, n_prior=3, history_end=None):
     """history_end: cap the rating history there instead of at the observation quarter start
-    (Experiment 03: the 17g-7 file ends 2025-08-11, observation dates lie after it). With a
-    history_end the path comes from the raw rating records (typed_events), not from a stored
-    observation. peer_max_age_months is passed to peer_table.build (Experiment 04 policy)."""
+    (Experiment 03: the 17g-7 file ends 2025-08-11, observation dates lie after it)."""
     d = os.path.join(OUT, slug)
     company = json.load(open(os.path.join(d, "company.json")))
     ratings = json.load(open(os.path.join(d, "ratings.json")))
@@ -273,7 +165,8 @@ def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
     o = next((x for x in obs if x["date"] == t), None)
     if history_end:
         qs = history_end
-        path = typed_events(ratings, history_end)
+        src = o or (obs[-1] if obs else None)
+        path = [e for e in (src["rating_path"] if src else []) if e[0] <= history_end]
     else:
         qs = quarter_start(t)
         path = [e for e in (o["rating_path"] if o else []) if e[0] < qs]
@@ -285,9 +178,6 @@ def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
     prior_ends = ends[-1 - n_prior:-1] if len(ends) > 1 else []
 
     rows, log = [], {"slug": slug, "date": t, "path_cutoff": qs, "years": {}}
-    log["invalid_fact_dates"] = invalid_fact_dates(xbrl)
-    sources = fact_sources(xbrl, t, "annual", prior_ends + ([current_end] if current_end else []))
-    log["annual_sources"] = sources
     for end in prior_ends + ([current_end] if current_end else []):
         m = metrics_for(years[end])
         qsc = quant_contribution(m)
@@ -310,9 +200,8 @@ def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
                     f"{f(m['ebitda_capex_interest'], '{:.1f}x')}; RCF/net debt {f(m['rcf_net_debt_pct'], '{:.0f}%')}"
                     + (f"; implied avg qualitative grade ≈ {anchor['implied_grade']} (score {anchor['implied_qual_score']})"
                        if anchor else ""))
-        rows.append("    filed dates: " + "; ".join(f"{k} {v['filed']}" for k, v in sources[end].items()))
     shown, last = [], None
-    for e in ([] if history_end else path):
+    for e in path:
         if e[1] == "WR":
             continue                      # matured/withdrawn instruments are not rating changes
         if e[1] != last:
@@ -327,31 +216,13 @@ def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
     if any(end < "2019-06-01" for end in prior_ends):
         rows.append("  note: fiscal years ending before mid-2019 predate ASC 842, so their tagged debt "
                     "excludes operating-lease liabilities; the debt jump at adoption is accounting, not borrowing")
-    if history_end:
-        hist = "\n".join(typed_history_lines(path, history_end)) or "  (no events on record)"
-    else:
-        hist = "\n".join(f"  {e[0]}  {e[1]}  ({e[2]}, {e[3]}-level)" for e in shown) or "  (no events on record)"
+    hist = "\n".join(f"  {e[0]}  {e[1]}  ({e[2]}, {e[3]}-level)" for e in shown) or "  (no events on record)"
     # Strictly before the observation quarter: an action dated on the quarter's first day is
     # part of the quarter (Under Armour, 2020-04-01, leaked into a run before this fix).
     import datetime as _dt
     if history_end:
-        state = rating_state_at(ratings, history_end)
         r_qs = rating_at(ratings, history_end)
-        sel = state["selected"]
-        assert (sel or {}).get("rating") == r_qs, "rating_state_at and rating_at disagree"
-        if sel:
-            hist += (f"\n  => rating in effect at the end of the available history ({history_end}): {r_qs} "
-                     f"({sel['level']}-level {sel['rating_type']}, action of {sel['action_date']}); "
-                     f"this is the reference rating")
-            su = state["senior_unsecured"]
-            if sel["level"] == "entity" and su and su["rating"] != r_qs:
-                hist += (f"\n  => senior unsecured instrument rating in effect then: {su['rating']} "
-                         f"(action of {su['action_date']}), shown for completeness")
-        else:
-            hist += f"\n  => rating in effect at the end of the available history ({history_end}): none"
-        log["path_source"] = "ratings.json raw records: entity-level LT and senior unsecured instrument events"
-        log["path_events"] = [list(e) for e in path]
-        log["terminal_state"] = state
+        hist += f"\n  => rating in effect at the end of the available history ({history_end}): {r_qs or 'none'}"
     else:
         prev_day = (_dt.date(*map(int, qs.split("-"))) - _dt.timedelta(days=1)).isoformat()
         r_qs = rating_at(ratings, prev_day)
@@ -360,13 +231,8 @@ def build(slug, t, n_prior=3, history_end=None, peer_max_age_months=None):
     if qrows:
         rows.append("  Recent single quarters (issuer-tagged XBRL, USD m, filed on or before the as-of date):")
         rows.extend(qrows)
-    log["quarterly_rows"] = sum(line.startswith("  quarter ending") for line in qrows)
-    quarter_ends = [line.split(":", 1)[0].split()[-1] for line in qrows if line.startswith("  quarter ending")]
-    log["quarterly_sources"] = fact_sources(xbrl, t, "quarterly", quarter_ends)
-    peer_log = {}
-    peers = peer_table.build(t, exclude_slug=slug, audit=peer_log,
-                             max_age_months=peer_max_age_months) or "(peer table unavailable at this date)"
-    log["peers"] = peer_log
+    log["quarterly_rows"] = len(qrows)
+    peers = peer_table.build(t, exclude_slug=slug) or "(peer table unavailable at this date)"
     text = (f"<history_pack company=\"{company['group']}\" as_of=\"{t}\">\n"
             f"Rating history (Moody's, complete through {qs}; nothing later is provided):\n{hist}\n\n"
             "Fiscal-year fundamentals from XBRL (issuer-tagged, USD; EBITDA = operating income + D&A; "

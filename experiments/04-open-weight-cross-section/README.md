@@ -127,18 +127,24 @@ truncated by the provider (section 5, rule 4).
     package is not installed and not needed); the request record keeps the Experiment 03
     shape so results are comparable.
 
-## 5a. Status, 2026-09-12
+## 5a. Status, 2026-09-13
 
-Arm 1 is specified in full in [RUN-SPEC.md](RUN-SPEC.md) and is waiting for Codex's review and
-Robert's cap. Measured since v0.2: exact Qwen token counts for all 20 packages
-(evidence/qwen-token-counts-2026-09-12.json, regenerable with count_tokens_qwen.py), 18 of 20
-fit 253,952 tokens and the two that do not fit after dropping one 10-Q; all 51 documents are
-already cached locally; the OpenRouter key works and the balance is $7.54. Corrected later the
-same day before review (RUN-SPEC.md section 12); the correction that matters most for the cap
-is that GMICloud's shown price is a 75% promotion off $0.35 / $1.40.
+Arm 1 was frozen, reviewed and executed. Codex's review of 2026-09-12
+([review-codex-2026-09-12.md](review-codex-2026-09-12.md)) refused the first specification and
+set twelve acceptance gates; the implementation of 2026-09-13 satisfies them with recorded
+evidence (runs/EXP04-ARM1-A1/gates/, forty offline tests against the production dispatch path).
+Robert's decisions D5 to D12 are in [decisions.md](decisions.md); the specification as
+executed is [RUN-SPEC.md](RUN-SPEC.md); the results, with every attempt and the actual spend,
+are in [results.md](results.md). Two rules in this plan changed on the way: rule 4's tolerance
+became the rendered-count policy of RUN-SPEC.md section 7, and rule 10's transport is `httpx`.
 
 ## 6. Deliverables
 
-This README, decisions.md, evidence/ (cutoff notes, OpenRouter model list and per-provider
-endpoint snapshots), prompts/ (copied from Experiment 03, unchanged), run_openrouter.py (dry,
-submit, collect, with the guards above), runs/ (gitignored), results.md.
+This README (design plan), RUN-SPEC.md (the run as executed), decisions.md, the Codex review,
+authorization.json (the cap and scope bound to the manifest hash), evidence/ (cutoff notes,
+OpenRouter model list, per-provider endpoint snapshots, exact token counts), prepare_inputs.py
+(offline preparation of every body, hash and bound), run_openrouter.py (guarded submission,
+ledger, validation, scoring, gates), test_runner.py (the acceptance tests), legacy_provenance.py
+with legacy_builders/ (the 2026-09-10 builders, vendored, for the saved-input control's source
+dates), count_tokens_qwen.py, runs/ (gitignored: manifest, bodies, ledger, raw responses,
+audit, results), and results.md. Prompts are read from Experiment 03's folder, unchanged.
