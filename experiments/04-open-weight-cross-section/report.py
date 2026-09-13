@@ -21,22 +21,26 @@ def pct(a, b):
 
 
 def channel_row(name, m, cohort_n):
-    """One table row for a channel block from ro.metrics()."""
+    """One table row for a channel block from ro.metrics(); MAE from the exact error sum (the
+    audit of 2026-09-13 found a double rounding: 2/19 printed as 0.10)."""
     mv = m["metrics_on_valid"]
     if not mv:
-        return f"| {name} | 0/{cohort_n} | n/a | n/a | n/a |"
+        return f"| {name} | 0/{cohort_n} | n/a | n/a | n/a | n/a |"
+    mae = m["error_sum"] / m["n_valid"]
+    pm = m["persistence_on_valid"]
     return (f"| {name} | {m['n_valid']}/{cohort_n} | {pct(m['exact_over_planned'], cohort_n)} "
-            f"| {pct(round(mv['within_1'] * mv['n']), mv['n'])} | {mv['mae']:.2f} |")
+            f"| {pct(round(mv['within_1'] * mv['n']), mv['n'])} | {mae:.2f} ({m['error_sum']}/{m['n_valid']}) "
+            f"| {pm['exact']}/{m['n_valid']}, MAE {pm['error_sum'] / m['n_valid']:.2f} |")
 
 
 def persistence_row(p, cohort_n):
-    return (f"| Persistence | {p['n']}/{cohort_n} | {pct(round(p['exact_rate'] * p['n']), p['n'])} "
-            f"| {pct(round(p['within_1'] * p['n']), p['n'])} | {p['mae']:.2f} |")
+    return (f"| Persistence, full cohort | {p['n']}/{cohort_n} | {pct(round(p['exact_rate'] * p['n']), p['n'])} "
+            f"| {pct(round(p['within_1'] * p['n']), p['n'])} | {p['error_sum'] / p['n']:.2f} ({p['error_sum']}/{p['n']}) | |")
 
 
 def block(title, arm_scores, cohort, cohort_n):
-    lines = [f"**{title}**", "", "| Channel | Valid / planned | Exact (over planned) | Within one (over valid) | MAE (over valid) |",
-             "|---|---|---|---|---|"]
+    lines = [f"**{title}**", "", "| Channel | Valid / planned | Exact (over planned) | Within one (over valid) | MAE (over valid) | Persistence on the same valid issuers |",
+             "|---|---|---|---|---|---|"]
     for k in ("r1", "r2", "r3"):
         m = arm_scores["replicates"][k][cohort]
         lines.append(channel_row(f"Scorecard, replicate {k[1]}", m["pred_scorecard"], cohort_n))
@@ -113,12 +117,16 @@ def main():
     out.append(block("All 20", s["arms"]["current"], "all", 20))
     out.append("## Current inputs, primary cohort of 19 (Qurate excluded)\n")
     out.append(block("19 primary", s["arms"]["current"], "primary_without_diagnostic", 19))
+    out.append("## Current inputs, post-hoc 18 (Kohl's leak and Qurate excluded)\n")
+    out.append(block("18 post hoc", s["arms"]["current"], "post_hoc_without_X07", 18))
+    out.append("## Current inputs, post-hoc 17 (Kohl's, Dollar General's fragments and Qurate excluded)\n")
+    out.append(block("17 post hoc", s["arms"]["current"], "post_hoc_without_X07_X04", 17))
     out.append("## Saved Experiment 03 inputs, the seven Opus successes\n")
     out.append(block("Seven", s["arms"]["saved"], "all", 7))
     out.append(block("Six without Qurate", s["arms"]["saved"], "primary_without_diagnostic", 6))
     o7, o6 = s["opus46_corrected_saved_inputs"]["seven"], s["opus46_corrected_saved_inputs"]["six_without_diagnostic"]
     out.append("**Opus 4.6 on the same saved inputs (Experiment 03, corrected arithmetic, one response each)**\n")
-    out.append("| Channel | Valid / planned | Exact | Within one | MAE |\n|---|---|---|---|---|")
+    out.append("| Channel | Valid / planned | Exact | Within one | MAE | Persistence on the same valid issuers |\n|---|---|---|---|---|---|")
     out.append(channel_row("Scorecard, seven", o7["pred_scorecard"], 7))
     out.append(channel_row("Judgement, seven", o7["pred_direct"], 7))
     out.append(persistence_row(o7["persistence_full_cohort"], 7))
@@ -127,6 +135,8 @@ def main():
     out.append(persistence_row(o6["persistence_full_cohort"], 6) + "\n")
     out.append("## Changed and unchanged diagnostics, current inputs, 19 primary\n")
     out.append(diagnostics(RUN, "current", primary, labels))
+    out.append("## Changed and unchanged diagnostics, current inputs, post-hoc 18\n")
+    out.append(diagnostics(RUN, "current", [x for x in primary if x != "X07"], labels))
     out.append("## Changed and unchanged diagnostics, current inputs, all 20\n")
     out.append(diagnostics(RUN, "current", ids, labels))
     out.append("## Changed and unchanged diagnostics, saved inputs, seven\n")

@@ -6,16 +6,20 @@ describe the experiment exactly as it was frozen in the manifest and executed un
 authorization EXP04-ARM1-A1. Every number below is either in the manifest, the ledger or the
 audit files under runs/EXP04-ARM1-A1/ (gitignored, on this machine), or in the evidence
 folder. Results and actual spend are in results.md. Earlier versions of this file, including
-the two rounds of pre-review corrections, are in Git history.*
+the two rounds of pre-review corrections, are in Git history. Revised again on 2026-09-13
+after Codex's post-run audit (review-codex-2026-09-13.md): the redaction failure, the
+corrected probe count, the two guard defects and their repairs, and the differences between
+the arms are recorded below.*
 
 ## 1. What this run is and is not
 
-A post-release, history-conditioned disclosure-label pilot. The same test as Experiment 03
-(same boundary, documents, prompts, labels and scoring arithmetic) on an open-weight model
-whose public checkpoint release precedes the labelled rating actions, run twice: once on the
-current, repaired inputs for all 20 confirmed issuers, and once on the exact saved inputs
-Opus 4.6 saw for the seven issuers it scored. Three replicates each, one memory probe per
-issuer first.
+A post-release, history-conditioned disclosure-label pilot. The same boundary, documents,
+prompts, labels and scoring arithmetic as Experiment 03, on an open-weight model whose public
+checkpoint release precedes the labelled rating actions, run twice: once on the current,
+repaired inputs for all 20 confirmed issuers (the main measurement, whose packs, peer policy
+and trimming differ from Experiment 03's), and once on the exact saved inputs Opus 4.6 saw
+for the seven issuers it scored (the only matched-information comparison, and one with
+different inference settings). Three replicates each, one memory probe per issuer first.
 
 It is not a certified outstanding-rating benchmark: the labels are the issuers' own
 disclosures, hand-read and confirmed, whose validity at the observation date is not
@@ -63,7 +67,14 @@ exact 18 times, MAE 1/19. `changed` equals `label != persistence` for every cand
 **Current arm, 20 issuers.** Documents by the Experiment 03 rule: the latest 10-K filed after
 B and every later 10-Q filed on or before the observation date, from the local cache only,
 HTML to text, rating self-disclosures removed by `system/redact.py` with the removed lines
-stored outside the bodies. Trim (decision D9): the oldest 10-Q is dropped only where the
+stored outside the bodies. **The redaction failed on Kohl's**: its rating table, rendered one
+cell per line, kept "Corporate credit", "B2", "B+", "Outlook" and the outlook words in all
+three replicates' bodies, and Dollar General's bodies kept its short-term rating "P-3" and
+outlook cells after the Baa3 cell was removed (found by the post-run audit and a follow-up
+scan; results.md reports post-hoc sensitivities). The residual scan used at preparation time
+counted agency mentions, which the redactor always removes, and so could not see surviving
+cells. A structural second pass and a fragment scan now exist for future runs; the executed
+bodies are unchanged. Trim (decision D9): the oldest 10-Q is dropped only where the
 finalized package exceeds the context allowance; that is Levi Strauss (10-Q of 2026-04-07
 dropped) and Qurate (10-Q of 2026-05-15 dropped). 49 of 51 cached documents are used.
 
@@ -115,9 +126,10 @@ Context allowance: rendered + 2 x schema tokens + 512 + max_tokens <= 262,144 fo
 body. Reservation bound = rendered + 2 x schema tokens + 512. Policy for the reported
 `prompt_tokens`: it must lie between rendered minus 256 and the reservation bound; below is
 suspected truncation, above is an unexplained count; either records the attempt as suspect,
-keeps its charge and halts the run. Observed in the pilot: 165 reported against 161 rendered
-for the probe, and 242,155 reported against 242,155 rendered for the largest document, so
-the provider renders the template as the local tokenizer does and injects nothing.
+keeps its charge and halts the run. Observed: all 104 responses reported exactly the rendered
+count, the pilot probe 165 against 165 and the largest document 242,155 against 242,155. That
+is accounting equality consistent with compatible rendering; it does not prove that nothing
+was transformed or that the model attended to everything.
 
 ## 8. Guards as implemented (`run_openrouter.py`, tested by `test_runner.py`)
 
@@ -147,6 +159,15 @@ the provider renders the template as the local tokenizer does and injects nothin
    valid direct rating survives an undefined scorecard ratio.
 7. **Sequencing (G10, G12).** Documents wait for the issuer's reviewed probe; nothing but the
    pilot pair runs before the pilot verdict file says pass.
+8. **Repairs after the run (audit of 2026-09-13).** Two defects were demonstrated with fake
+   responses and did not occur in the run: an error response that carried a charge was
+   released as unbilled, and a response charging more than the cap was accepted without a
+   halt. Now an error response with usage or an id is reconciled and halts, or stays
+   unresolved; a 5xx or unreadable outcome stays unresolved; a charge above its reservation
+   or an exposure above the cap halts; every process performs its own live price check; the
+   generation payloads are archived. A parse or schema failure of a complete response is
+   recorded with its charge and does not halt by itself. A strict schema is requested from
+   the provider, not guaranteed by it.
 
 ## 9. Cost
 
@@ -157,6 +178,8 @@ the provider renders the template as the local tokenizer does and injects nothin
 | Conservative plan total | $1.822559 |
 | Cap (decision D5) | $3.00 |
 | Actual spend (2026-09-13) | $1.242279 committed for 104 responses, $0.141521 held for seven transport failures, $1.383800 against the cap; details in results.md |
+
+Decision D11 (Arm 2) remains open; nothing beyond Arm 1 is authorized.
 
 ## 10. Execution order
 

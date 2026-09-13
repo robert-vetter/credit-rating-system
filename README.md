@@ -36,11 +36,14 @@ Full splits, selection failures and uncertainty are in the results.
 **Experiment 04, Arm 1 (2026-09-13)** repeats the test on Qwen3-235B-A22B-Instruct-2507
 (open weights, public checkpoint of 2025-07-21, DeepInfra fp8 through OpenRouter) for all 20
 disclosure labels, three replicates each, at $1.24. On the 19-issuer primary cohort the model's
-judgement is 17/19 exact with MAE 0.10 against persistence's 18/19 and 0.05, with one false
+judgement is 17/19 exact with MAE 0.11 against persistence's 18/19 and 0.05, with one false
 alarm and both rating changes missed; the scorecard channel is 3/19 with MAE 1.84 and runs
-1.2 notches favourable on average. On the seven issuers Opus scored, identical inputs gave
-identical judgement accuracy. Tables, coverage and every failed request:
-[Experiment 04 results](experiments/04-open-weight-cross-section/results.md).
+1.2 notches favourable on average. An independent audit found that one issuer's disclosed
+rating survived redaction; without it the sensitivity is 16/18 against persistence's 17/18.
+On the seven issuers Opus scored, the same supplied information gave the same aggregate
+judgement accuracy in two of three replicates. Tables, coverage, every failed request and the
+audit: [Experiment 04 results](experiments/04-open-weight-cross-section/results.md) and
+[the review](experiments/04-open-weight-cross-section/review-codex-2026-09-13.md).
 
 Start with the [experiment specification](experiments/03-oos-values-first/README.md),
 [results and limitations](experiments/03-oos-values-first/results.md), and
@@ -85,7 +88,7 @@ next design.
 | [evaluation/](evaluation/) | Mapping, fixed evaluation set and pipeline |
 | [experiments/](experiments/) | Specifications, prompts, decisions and results for each experiment |
 | [docs/oos-integrity-review.md](docs/oos-integrity-review.md) | Audit findings, repairs and proposed analyst architecture |
-| [docs/architecture.md](docs/architecture.md) | Analyst architecture proposal: one-page pipeline, build order, decisions needed |
+| [docs/architecture-codex-2026-09-13.md](docs/architecture-codex-2026-09-13.md) | Analyst architecture, first draft from the evidence of all four experiments (Codex, 2026-09-13); supersedes [docs/architecture.md](docs/architecture.md) |
 | [experiments/04-open-weight-cross-section/](experiments/04-open-weight-cross-section/README.md) | The post-release test on an open-weight model: design plan, Codex's review, [RUN-SPEC.md](experiments/04-open-weight-cross-section/RUN-SPEC.md) as executed, and [results.md](experiments/04-open-weight-cross-section/results.md) (Arm 1, 2026-09-13) |
 | [notes/](notes/) | Historical experiment logs and their corrections |
 | [data/README.md](data/README.md) | Data sources and local cache inventory |

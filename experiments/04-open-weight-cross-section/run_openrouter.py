@@ -28,6 +28,12 @@ Attempt lifecycle, as recorded in the ledger: reserve -> dispatch -> one of
   unresolved (no readable outcome: the reservation stays charged and a halt is recorded)
 A halt blocks every further dispatch until cleared with a note. Retries: at most two attempts
 per request and at most ten attempts beyond the plan, never automatic after an unresolved one.
+A parse or schema failure of an otherwise complete response is recorded as invalid with its
+charge and does not halt by itself. Repairs after the 2026-09-13 audit: an error response that
+carries usage or an id is never released (its charge is reconciled and the run halts, or it
+stays unresolved); a 5xx or unreadable outcome stays unresolved; a charge above its reservation
+or an exposure above the cap halts; a live price check is required in every process; the raw
+generation payloads are archived next to the responses.
 """
 import datetime
 import fcntl
@@ -278,6 +284,7 @@ class Runner:
         self.ledger = Ledger(os.path.join(HERE, self.auth["ledger_path"]))
         self.cap = Decimal(self.auth["cap_usd"])
         self.lock = None
+        self.price_checked = False      # a live price check is required in every process, not once per ledger
 
     # ---- locking ----
     def __enter__(self):
@@ -382,6 +389,7 @@ class Runner:
         self.ledger.append({"event": "price_check", "prompt_per_mtok": str(p_in), "completion_per_mtok": str(p_out),
                             "context_length": ep.get("context_length"), "provider_name": ep.get("provider_name"),
                             "quantization": ep.get("quantization"), "endpoint_name": ep.get("name")})
+        self.price_checked = True
         return {"prompt": p_in, "completion": p_out}
 
     # ---- G10, G12 and the other pre-dispatch guards ----
@@ -412,8 +420,8 @@ class Runner:
         st = self.ledger.state()
         if st["authorization_id"] != self.auth["authorization_id"]:
             raise Refusal("ledger not opened under this authorization (run preflight_checks)")
-        if not st["price_checks"]:
-            raise Refusal("no live price check recorded in this ledger")
+        if not self.price_checked:
+            raise Refusal("no live price check in this process (a recorded check from an earlier process does not count)")
         if request_id not in self.req:
             raise Refusal(f"{request_id} is not in the plan")
         if st["halts"]:
@@ -473,23 +481,43 @@ class Runner:
             obj = json.loads(r.body)
         except ValueError:
             obj = None
-        if r.status != 200 or not isinstance(obj, dict) or ("error" in obj and "usage" not in obj):
+        is_error = r.status != 200 or not isinstance(obj, dict) or "error" in obj or not obj.get("choices")
+        if is_error:
             msg = (obj or {}).get("error") if isinstance(obj, dict) else r.body[:200].decode("utf-8", "replace")
-            if r.status is not None and (r.status == 200 or 400 <= r.status < 600) and isinstance(obj, dict):
+            evidence = isinstance(obj, dict) and (bool(obj.get("usage")) or bool(obj.get("id")))
+            if isinstance(obj, dict) and r.status is not None and 400 <= r.status < 500 and not evidence:
+                # an explicit client-side rejection without any billing evidence: not billed
                 self.ledger.append({"event": "failed_not_billed", "attempt_id": aid, "request_id": request_id,
                                     "reason": f"HTTP {r.status}: {json.dumps(msg)[:300]}"})
                 if r.status in (400, 401, 402, 403, 422):
                     self.ledger.append({"event": "halt", "halt_id": f"halt-{aid}", "attempt_id": aid,
                                         "reason": f"request rejected with HTTP {r.status}; protocol review needed"})
                 return {"attempt_id": aid, "status": "failed_not_billed"}
+            # ambiguous (a 5xx, an unreadable body, or an error that carries usage or an id): never release
+            gen = self._generation(obj.get("id"), aid) if isinstance(obj, dict) and obj.get("id") else None
+            usage = (obj.get("usage") if isinstance(obj, dict) else None) or {}
+            charges = [Decimal(str(c)) for c in (usage.get("cost"), (gen or {}).get("total_cost"))
+                       if isinstance(c, (int, float)) and not isinstance(c, bool) and math.isfinite(c) and c >= 0]
+            if charges:
+                charge = max(charges).quantize(Decimal("0.000001"), rounding=ROUND_UP)
+                self.ledger.append({"event": "reconcile", "attempt_id": aid, "request_id": request_id,
+                                    "charge_usd": str(charge), "usage_cost": usage.get("cost"),
+                                    "generation_total_cost": (gen or {}).get("total_cost"), "generation_id": obj.get("id"),
+                                    "error_response": True})
+                self.ledger.append({"event": "invalid", "attempt_id": aid, "request_id": request_id,
+                                    "reason": f"error response with a charge, HTTP {r.status}: {json.dumps(msg)[:200]}"})
+                self.ledger.append({"event": "halt", "halt_id": f"halt-{aid}", "attempt_id": aid,
+                                    "reason": "an error response carried a charge; review before continuing"})
+                return {"attempt_id": aid, "status": "invalid"}
             self.ledger.append({"event": "unresolved", "attempt_id": aid, "request_id": request_id,
-                                "reason": f"unreadable outcome, HTTP {r.status}"})
-            self.ledger.append({"event": "halt", "halt_id": f"halt-{aid}", "attempt_id": aid, "reason": "unreadable outcome"})
+                                "reason": f"ambiguous outcome, HTTP {r.status}: {json.dumps(msg)[:200]}"})
+            self.ledger.append({"event": "halt", "halt_id": f"halt-{aid}", "attempt_id": aid,
+                                "reason": "ambiguous error outcome; billing unknown"})
             return {"attempt_id": aid, "status": "unresolved"}
         usage = obj.get("usage") or {}
         gen_id = obj.get("id")
         cost = usage.get("cost")
-        gen = self._generation(gen_id) if gen_id else None
+        gen = self._generation(gen_id, aid) if gen_id else None
         charges = [Decimal(str(c)) for c in (cost, (gen or {}).get("total_cost")) if isinstance(c, (int, float))
                    and not isinstance(c, bool) and math.isfinite(c) and c >= 0]
         if not charges:
@@ -508,6 +536,15 @@ class Runner:
                             "model": obj.get("model"), "provider": obj.get("provider") or (gen or {}).get("provider_name"),
                             "finish_reason": choice.get("finish_reason"),
                             "native_finish_reason": choice.get("native_finish_reason")})
+        # the actual charge against its reservation and the cap (audit of 2026-09-13)
+        st_now = self.ledger.state()
+        exposure = st_now["committed"] + st_now["unresolved"] + sum(st_now["open"].values(), Decimal("0"))
+        if charge > Decimal(req["reservation_usd"]) or exposure > self.cap:
+            why = (f"charge {charge} above its reservation {req['reservation_usd']}" if charge > Decimal(req["reservation_usd"])
+                   else f"exposure {exposure} above the cap {self.cap}")
+            self.ledger.append({"event": "suspect", "attempt_id": aid, "request_id": request_id, "reason": why})
+            self.ledger.append({"event": "halt", "halt_id": f"halt-{aid}", "attempt_id": aid, "reason": why})
+            return {"attempt_id": aid, "status": "suspect"}
         # provenance
         provider = obj.get("provider") or (gen or {}).get("provider_name")
         if obj.get("model") != self.auth["model"] or (provider or "").lower() != self.auth["provider_name"].lower():
@@ -558,10 +595,16 @@ class Runner:
                             "claimed_moodys_rating": parsed.get("claimed_moodys_rating")})
         return {"attempt_id": aid, "status": "valid", "parsed": parsed}
 
-    def _generation(self, gen_id):
+    def _generation(self, gen_id, aid=None):
         for _ in range(6):
             r = self.transport.generation(gen_id)
             if r.error is None and r.status == 200:
+                if aid:      # archive the raw generation payload next to the response (audit of 2026-09-13)
+                    os.makedirs(os.path.join(self.run_dir, "responses"), exist_ok=True)
+                    with open(os.path.join(self.run_dir, "responses", f"{aid}.generation.json"), "wb") as f:
+                        f.write(r.body)
+                        f.flush()
+                        os.fsync(f.fileno())
                 try:
                     return json.loads(r.body).get("data") or {}
                 except ValueError:
@@ -655,9 +698,13 @@ def metrics(records, ids):
     for ch in ("pred_scorecard", "pred_direct"):
         valid = [r for r in rows if notch(r[ch]) is not None]
         out[ch] = {"n_valid": len(valid), "exact_over_planned": sum(notch(r[ch]) == notch(r["label"]) for r in valid),
+                   "error_sum": sum(abs(notch(r[ch]) - notch(r["label"])) for r in valid),
+                   "persistence_on_valid": {"exact": sum(notch(r["persistence"]) == notch(r["label"]) for r in valid),
+                                            "error_sum": sum(abs(notch(r["persistence"]) - notch(r["label"])) for r in valid)},
                    "metrics_on_valid": score_run.score_channel(valid, ch) if valid else None}
     pers = [{**r, "pred_persistence": r["persistence"]} for r in rows]
     out["persistence_full_cohort"] = score_run.score_channel(pers, "pred_persistence")
+    out["persistence_full_cohort"]["error_sum"] = sum(abs(notch(r["persistence"]) - notch(r["label"])) for r in rows)
     return out
 
 
@@ -710,6 +757,11 @@ def score(run_dir):
         cons = consensus(reps, arm_ids)
         json.dump(cons, open(os.path.join(out_dir, f"results_{arm}_consensus.json"), "w"), indent=1)
         cohorts = {"all": arm_ids, "primary_without_diagnostic": [x for x in arm_ids if x not in diag]}
+        if arm == "current":
+            # post-hoc sensitivities from the 2026-09-13 audit: Kohl's (X07) carried its disclosed
+            # rating table; Dollar General (X04) carried its short-term rating and outlook cells
+            cohorts["post_hoc_without_X07"] = [x for x in arm_ids if x not in diag and x != "X07"]
+            cohorts["post_hoc_without_X07_X04"] = [x for x in arm_ids if x not in diag and x not in ("X07", "X04")]
         result["arms"][arm] = {"replicates": {f"r{k}": {c: metrics(recs, cids) for c, cids in cohorts.items()}
                                               for k, recs in enumerate(reps, 1)},
                                "consensus": {c: metrics(cons, cids) for c, cids in cohorts.items()},

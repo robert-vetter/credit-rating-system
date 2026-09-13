@@ -25,14 +25,19 @@ forty acceptance tests and the manifest gates, ran the inspected pilot, and then
 plan. The results note is `experiments/04-open-weight-cross-section/results.md`; the
 specification as executed is `RUN-SPEC.md` in that folder.
 
-**The result, primary cohort of 19.** Judgement consensus 17/19 exact, MAE 0.10, one false
-alarm on 18 unchanged; scorecard consensus 3/19 exact, MAE 1.84, 15 false alarms;
-persistence 18/19, MAE 0.05. The judgement channel is persistence with one false alarm and
-missed both rating changes; the scorecard channel is systematically favourable, 1.23 notches
-in the issuer's favour on average. On the seven issuers Opus scored, with byte-identical
-inputs, Qwen's judgement reproduced Opus's numbers exactly (4/7, MAE 0.57) and its scorecard
-was worse (2/7, MAE 1.86 against 3/7, 1.14). Replicates: the judgement's spread is zero on 19
-of 20 issuers; the scorecard's exceeds a notch on 4.
+**The result, primary cohort of 19, as corrected after Codex's post-run audit.** Judgement
+consensus 17/19 exact, MAE 2/19 = 0.11, one false alarm on 18 unchanged; scorecard consensus
+3/19 exact, MAE 1.84, 15 false alarms; persistence 18/19, MAE 0.05. The audit found that
+Kohl's disclosed B2 survived redaction in all three replicates (a rating table rendered one
+cell per line), and a follow-up scan found Dollar General's short-term rating and outlook
+cells; without Kohl's the post-hoc sensitivity is judgement 16/18 and persistence 17/18,
+without both 16/17 and 16/17. 56 of 60 direct ratings equal the supplied prior and all three
+replicates equal it on 18 of 20 issuers; both rating changes were missed. The scorecard runs
+1.23 notches favourable on average, partly through accounting-concept errors the audit
+documented (zero debt for Signet, net interest income as interest expense). On the seven
+issuers Opus scored, with the same supplied information, two of Qwen's three judgement
+replicates give Opus's aggregate numbers (4/7, MAE 0.57) with different mistakes; its
+scorecard is worse. Neither channel beats persistence on any cohort.
 
 **Facts measured on 2026-09-13.**
 
@@ -42,24 +47,39 @@ of 20 issuers; the scorecard's exceeds a notch on 4.
 | OpenRouter balance after the run | $6.31 (usage 48.6897 of 55 credits); the account's usage rose by exactly the reconciled charges, so the held attempts were most likely never billed |
 | Coverage | 20 of 20 probes, 79 of 81 document requests valid; all 60 current-input requests valid; two saved-input replicates (Qurate 3, Victoria's Secret 3) have no valid response |
 | Attempts | 111 dispatches, the ten extra attempts all used; 7 TLS "bad record MAC" transport failures, 4 output-length repetition loops, 1 probe answer that stopped inside a string |
-| Token accounting | every response's prompt tokens equalled the locally rendered count exactly; no compression or schema injection at DeepInfra |
+| Token accounting | every response's prompt tokens equalled the locally rendered count exactly; consistent with compatible rendering, not proof of anything more |
+| Redaction failure | Kohl's rating-table cells (B2 and outlooks) and Dollar General's short-term rating cells survived the original redactor; `system/redact.py` now has a structural second pass and a fragment scan for future runs; the executed bodies are unchanged |
+| Runner defects found by the audit | an error response carrying a charge was released; an over-cap charge was accepted without a halt; both repaired with tests on 2026-09-13, with a per-process price check and archived generation payloads |
 | Run time | 2026-09-13 01:00 to 04:00 UTC, one request per process after the second transport failure |
 | Two saved packs were not the packs Opus saw | resolved: the seven saved inputs were reproduced byte-for-byte from the raw XBRL cache with the vendored 2026-09-10 builders, so every figure has a source date; the current arm uses the repaired packs |
 
-**The immediate next task, all Robert's.** (1) Read `results.md` and decide whether the
-numbers go into the lab update now; the corrected draft is at
-`/Users/robert/Developer/giesecke/lab-update-draft-2026-09-13.md`, outside the repository,
-unsent; it supersedes the 2026-09-12 draft. (2) Commit the session's work: the working tree
+**The immediate next task, all Robert's.** (1) Read `results.md` and the audit, then send the
+lab update; the final draft in Robert's voice is at
+`/Users/robert/Developer/giesecke/lab-update-final-2026-09-13.md`, outside the repository,
+unsent; it supersedes the drafts of 2026-09-12 and 2026-09-13 (Claude's and Codex's) and
+lists the attachments. (2) Commit the session's work: the working tree
 holds the new Experiment 04 files, the two builder repairs, `results.md`, this file, the
 README pointers and `RUN-SPEC.md`; nothing was committed or pushed on 2026-09-13 because the
 instruction said not to. (3) Decide what, if anything, follows: the review's discussion
 trigger applies (judgement equals persistence, scorecard favourable); a second model, more
 replicates and Arm 2 are not authorized. (4) Repository visibility is still open.
 
-**Rules that held.** No paid call outside authorization EXP04-ARM1-A1; no body carried a
-label, probe answer or audit field; prompts, candidates, mapping, gold set and Experiment
-03's records unchanged; Experiment 03's paid-call guard untouched; every failure recorded with
-its charge; no ceiling enlarged, no prompt changed, no provider switched after a failure.
+**The second Codex brief.** `/Users/robert/Developer/giesecke/codex-review-brief-2026-09-13.md`,
+outside the repository, asks Codex for a post-run audit of Experiment 04 and of every decision
+in it, a first architecture draft from the evidence
+(`docs/architecture-codex-2026-09-13.md`), and its version of the lab email; it documents
+Robert's journey from day one as the email's raw material. Codex's audit is expected at
+`experiments/04-open-weight-cross-section/review-codex-2026-09-13.md`. Five findings measured
+after results.md was written are listed in the brief's section 1 for Codex to verify and
+place (the `vs_last_known` inconsistencies, the scorecard's position against persistence,
+figure and grade variability across replicates, Nike's grades and interest figure).
+
+**Rules that held, and one that did not.** No paid call outside authorization EXP04-ARM1-A1;
+no body carried a label field, a probe answer or audit data, but two bodies carried rating
+cells that the redactor should have removed (Kohl's disclosed B2, Dollar General's P-3);
+prompts, candidates, mapping, gold set and Experiment 03's records unchanged; Experiment 03's
+paid-call guard untouched; every failure recorded with its charge; no ceiling enlarged, no
+prompt changed, no provider switched after a failure.
 
 ## Current instruction and review, 2026-09-12
 
@@ -321,10 +341,13 @@ not be run on Opus.
 
 **Experiment 04, Arm 1 (2026-09-13) extends the answer to 19 disclosure labels** on
 Qwen3-235B-A22B-Instruct-2507 (public checkpoint of 2025-07-21, DeepInfra fp8 through
-OpenRouter), three replicates each: judgement 17/19 exact, MAE 0.10; scorecard 3/19, MAE
-1.84; persistence 18/19, MAE 0.05. Both rating changes were missed by the judgement channel.
-On the seven issuers Opus scored, identical inputs gave identical judgement accuracy (4/7,
-MAE 0.57). Full tables, coverage and limitations: experiments/04-open-weight-cross-section/results.md.
+OpenRouter), three replicates each: judgement 17/19 exact, MAE 0.11; scorecard 3/19, MAE
+1.84; persistence 18/19, MAE 0.05; one issuer's disclosed rating survived redaction, and
+without it the sensitivity is 16/18 against persistence's 17/18. Both rating changes were
+missed by the judgement channel. On the seven issuers Opus scored, the same supplied
+information gave the same aggregate judgement accuracy in two of three replicates (4/7, MAE
+0.57). Full tables, coverage, the audit and limitations:
+experiments/04-open-weight-cross-section/results.md and review-codex-2026-09-13.md.
 Next work needs Robert's decision; new paid work or label decisions require separate
 authorization.
 
@@ -475,3 +498,33 @@ they are. The model-facing code is Anthropic-specific and small:
   the pilot and the full plan: 111 dispatches, 99 valid, $1.24 committed plus $0.14 held, no
   cap breach. Wrote results.md, rewrote RUN-SPEC.md as executed, updated the README pages and
   drafted the corrected lab update outside the repository. Nothing committed, pushed or sent.
+- 2026-09-13 UTC, OpenAI Codex at Robert's direction: completed the post-execution review
+  in `experiments/04-open-weight-cross-section/review-codex-2026-09-13.md`, architecture
+  proposal in `docs/architecture-codex-2026-09-13.md`, and unsent email draft at
+  `/Users/robert/Developer/giesecke/lab-update-draft-codex-2026-09-13.md`. Verified all 111
+  attempts, 104 HTTP responses, 555 ledger events, all current/saved input replays and
+  frozen source hashes. Existing 40 plus 10 tests pass. Found a material residual B2/outlook
+  table in Kohl's X07 inputs, so the original 19-case result cannot be described as fully
+  redacted; its judgement MAE is 2/19 = 0.105263, rounded 0.11. Post-hoc exclusion of X07
+  and the already diagnostic X14 gives judgement 16/18 exact versus persistence 17/18;
+  this is a sensitivity, not a newly certified holdout. Actual peak budget exposure was
+  $1.388231 under the $3 cap, but two additional fake-transport cases expose unsafe
+  error-response billing release and above-cap settlement without a halt. No future paid
+  run is cleared by this review. Further corrections cover 103/104 generation-detail
+  confirmations, prior agreement, replicate completeness and semantic financial errors.
+  These findings supersede contradictory clean-input/guard/result claims earlier in this
+  file and in the current results/specification notes; those notes remain unchanged pending
+  the listed corrections. No paid calls, run-record or frozen-data edits, installs, commits,
+  pushes or messages. The pre-existing HANDOVER edit was preserved.
+- 2026-09-13, Claude (Fable 5.1) at Robert's direction, after Codex's post-run audit
+  (review-codex-2026-09-13.md, which found Kohl's disclosed rating in the model input, two
+  settlement defects in the runner and sixteen editorial errors): applied the corrections to
+  results.md, RUN-SPEC.md, this file and the README; added a structural second-pass redactor
+  and fragment scan to system/redact.py (the original function unchanged, Experiment 03's
+  replay still exact) with the Kohl's and Dollar General cases as regressions; repaired the
+  runner's settlement (error responses with billing evidence never released, over-reservation
+  and over-cap charges halt, a live price check per process, archived generation payloads);
+  fixed the report's double rounding and added matched baselines and the post-hoc cohorts;
+  51 Experiment 04 tests and 10 Experiment 03 regressions pass. Found Dollar General's
+  short-term rating cells as a second, weaker residual. Wrote the final lab email draft
+  outside the repository. Committed; nothing sent.

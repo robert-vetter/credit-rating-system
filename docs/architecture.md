@@ -1,4 +1,12 @@
-# Analyst architecture, proposal v0.2
+# Analyst architecture, proposal v0.2 (superseded)
+
+*Superseded on 2026-09-13 by docs/architecture-codex-2026-09-13.md, written from the evidence
+of all four experiments. Kept as history. Codex's audit corrected three claims made here: the
+scorecard-indicated outcome is an input to rating analysis, not a deterministic assignment
+rule; the "four notches too high" anecdote used defective arithmetic and an unresolved
+target; and "annual numbers cannot time changes" was not shown, only that four tested
+signals and their selection rule chose persistence. The 8-K evidence step and the "move only
+if both scorecards move" rule were never authorized or validated.*
 
 *Claude (Fable 5.1), directed by Robert Vetter, 2026-09-12. Page numbers refer to the Moody's
 Retail and Apparel methodology of 12 September 2025. Every "why" is a result measured in this

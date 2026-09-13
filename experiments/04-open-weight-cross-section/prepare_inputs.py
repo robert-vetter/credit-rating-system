@@ -156,13 +156,34 @@ def assemble_documents(slug, chosen):
         assert f["form"] in ALLOWED_PRIMARY_FORMS and B < f["filingDate"] <= AS_OF
         path, fn = cached_document(slug, f)
         raw = open(path, "rb").read()
-        clean, removed = redact.redact(run_eval.to_text(raw.decode("utf-8", "ignore")))
+        clean, removed = redact.redact_v2(run_eval.to_text(raw.decode("utf-8", "ignore")))
+        fragments = redact.rating_fragments(clean)
+        assert not fragments, f"{slug} {fn}: rating fragments survived redaction: {fragments[:3]}"
         text = f'<document name="{f["form"]} filed {f["filingDate"]}">\n{clean}\n</document>\n'
         docs += text
         meta.append({"form": f["form"], "filed": f["filingDate"], "file": fn,
                      "accession": f["accessionNumber"], "primary_document": f["primaryDocument"],
                      "source_sha256": sha256_bytes(raw), "redacted_text_sha256": sha256_bytes(clean.encode()),
-                     "chars": len(clean), "redacted_lines": len(removed)})
+                     "chars": len(clean), "redacted_lines": len(removed), "redactor": "redact_v2",
+                     "rating_fragments_after_redaction": 0})
+        removed_all[fn] = removed
+    return docs, meta, removed_all
+
+
+def assemble_documents_v1(slug, chosen):
+    """The Experiment 03 assembly with the original redactor, used only to verify that a saved
+    input replays byte for byte; the saved arm sends the saved text, never a re-redacted one."""
+    docs, meta, removed_all = "", [], {}
+    for f in chosen:
+        path, fn = cached_document(slug, f)
+        raw = open(path, "rb").read()
+        clean, removed = redact.redact(run_eval.to_text(raw.decode("utf-8", "ignore")))
+        docs += f'<document name="{f["form"]} filed {f["filingDate"]}">\n{clean}\n</document>\n'
+        meta.append({"form": f["form"], "filed": f["filingDate"], "file": fn, "accession": f["accessionNumber"],
+                     "primary_document": f["primaryDocument"], "source_sha256": sha256_bytes(raw),
+                     "redacted_text_sha256": sha256_bytes(clean.encode()), "chars": len(clean),
+                     "redacted_lines": len(removed), "redactor": "redact (2026-08-29), as in Experiment 03",
+                     "rating_fragments_after_redaction": len(redact.rating_fragments(clean))})
         removed_all[fn] = removed
     return docs, meta, removed_all
 
@@ -346,7 +367,7 @@ def prepare(run_dir=RUN_DIR):
         chosen_meta = saved_audit["documents"]
         manifest = json.load(open(os.path.join(COMPANIES, slug, "filings", "manifest.json")))["filings"]
         chosen = [next(f for f in manifest if f["accessionNumber"].replace("-", "") in m["file"]) for m in chosen_meta]
-        docs, meta, removed = assemble_documents(slug, chosen)
+        docs, meta, removed = assemble_documents_v1(slug, chosen)
         assert docs == blocks[0], f"{xid}: documents do not replay from the cache"
         prov = legacy_provenance.provenance(mirror, slug, blocks[1])
         assert prov["all_dated_and_eligible"], (xid, prov["problems"])

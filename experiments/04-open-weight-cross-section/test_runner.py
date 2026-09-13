@@ -119,7 +119,7 @@ ENDPOINTS_OK = {"data": {"endpoints": [{"tag": "deepinfra/fp8", "provider_name":
                                         "pricing": {"prompt": "0.00000009", "completion": "0.00000055"}}]}}
 
 
-def completion(content, prompt_tokens=1000, cost=0.001, model=MODEL, provider="DeepInfra", finish="stop",
+def completion(content, prompt_tokens=1000, cost=0.0005, model=MODEL, provider="DeepInfra", finish="stop",
                gen_id="gen-1", usage=True):
     o = {"id": gen_id, "model": model, "provider": provider,
          "choices": [{"message": {"role": "assistant", "content": content}, "finish_reason": finish}]}
@@ -337,7 +337,7 @@ class G6Tokens(Base):
             r.dispatch("doc-saved-X12-r1")
         self.assertEqual(len(fake.sends), 2)
         st = r.ledger.state()
-        self.assertEqual(st["committed"], Decimal("0.002"))     # the suspect charge is kept
+        self.assertEqual(st["committed"], Decimal("0.001"))     # both charges kept, the suspect one included
 
 
 class G7Prices(Base):
@@ -457,7 +457,7 @@ class G8CrashResume(Base):
     def test_new_directory_shares_the_cap(self):
         fake = Fake(responses=[completion(PROBE_OK, 150, cost=2.5)])
         r = self.ready(fake)
-        self.assertEqual(r.dispatch("probe-X12")["status"], "valid")
+        self.assertEqual(r.dispatch("probe-X12")["status"], "suspect")   # a charge above its reservation halts
         r.__exit__(None, None, None)
         other = os.path.join(self.tmp, "runs", "NEW-DIR")
         shutil.copytree(self.run, other)
@@ -629,3 +629,128 @@ class G12Rollout(Base):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class G7SettlementRepairs(Base):
+    """Repairs after the 2026-09-13 audit: error responses carrying billing evidence are never
+    released, charges above the reservation or the cap halt, and every process checks the price."""
+
+    def test_error_response_with_charge_is_not_released(self):
+        body = json.dumps({"error": {"message": "upstream"}, "id": "gen-e", "usage": {"prompt_tokens": 150, "completion_tokens": 10, "cost": 0.01}}).encode()
+        fake = Fake(responses=[ro.Response(500, body)], gen={"total_cost": 0.01, "provider_name": "DeepInfra"})
+        r = self.ready(fake)
+        out = r.dispatch("probe-X12")
+        st = r.ledger.state()
+        self.assertEqual(out["status"], "invalid")
+        self.assertEqual(st["committed"], Decimal("0.01"))
+        self.assertEqual(sum(st["open"].values(), Decimal("0")), Decimal("0"))
+        self.assertTrue(st["halts"])
+
+    def test_5xx_without_billing_evidence_stays_unresolved(self):
+        fake = Fake(responses=[ro.Response(502, json.dumps({"error": {"message": "bad gateway"}}).encode())])
+        r = self.ready(fake)
+        self.assertEqual(r.dispatch("probe-X12")["status"], "unresolved")
+        st = r.ledger.state()
+        self.assertEqual(st["unresolved"], Decimal(r.req["probe-X12"]["reservation_usd"]))
+        self.assertTrue(st["halts"])
+
+    def test_4xx_without_billing_evidence_is_released(self):
+        fake = Fake(responses=[ro.Response(429, json.dumps({"error": {"message": "rate"}}).encode())])
+        r = self.ready(fake)
+        self.assertEqual(r.dispatch("probe-X12")["status"], "failed_not_billed")
+        st = r.ledger.state()
+        self.assertEqual(st["committed"] + st["unresolved"] + sum(st["open"].values(), Decimal("0")), Decimal("0"))
+
+    def test_charge_above_reservation_halts_but_is_committed(self):
+        fake = Fake(responses=[completion(PROBE_OK, 150, cost=0.05)])
+        r = self.ready(fake)
+        self.assertEqual(r.dispatch("probe-X12")["status"], "suspect")
+        st = r.ledger.state()
+        self.assertEqual(st["committed"], Decimal("0.05"))
+        self.assertTrue(st["halts"])
+        with self.assertRaises(ro.Refusal):
+            r.dispatch("probe-X01")
+
+    def test_charge_above_cap_halts(self):
+        fake = Fake(responses=[completion(PROBE_OK, 150, cost=3.5)])
+        r = self.ready(fake)
+        self.assertEqual(r.dispatch("probe-X12")["status"], "suspect")
+        st = r.ledger.state()
+        self.assertEqual(st["committed"], Decimal("3.5"))
+        self.assertTrue(st["halts"])
+
+    def test_price_check_required_in_every_process(self):
+        fake = Fake(responses=[completion(PROBE_OK, 150)])
+        r = self.ready(fake)
+        self.assertEqual(r.dispatch("probe-X12")["status"], "valid")
+        r.__exit__(None, None, None)
+        fake2 = Fake(responses=[completion(PROBE_OK, 150)])
+        r2 = self.runner(fake2)
+        r2.preflight_checks()                      # no live_price_check in this process
+        self.assertTrue(r2.ledger.state()["price_checks"])
+        with self.assertRaises(ro.Refusal):
+            r2.dispatch("probe-X01")
+        self.assertEqual(fake2.sends, [])
+
+    def test_generation_payload_archived(self):
+        fake = Fake(responses=[completion(PROBE_OK, 150)], gen={"total_cost": 0.0007, "provider_name": "DeepInfra"})
+        r = self.ready(fake)
+        out = r.dispatch("probe-X12")
+        self.assertTrue(os.path.exists(os.path.join(self.run, "responses", f"{out['attempt_id']}.generation.json")))
+
+
+class RedactionV2(unittest.TestCase):
+    """The Kohl's and Dollar General table cells that survived the original redactor."""
+
+    KOHLS = ("Our financing strategy is to ensure adequate liquidity.\n"
+             "As of January 31, 2026, our corporate credit ratings and outlook were as follows:\n"
+             "Moody\u2019s\nS&P\nFitch\nCorporate credit\nB2\nB+\nBB-\nOutlook\nStable\nNegative\nNegative\n"
+             "The majority of our financing activities generally include proceeds from borrowings.")
+    DG = ("Our current credit ratings, as well as future rating agency actions, could affect our cost.\n"
+          "\u200b\nRating Agency\n\u200b\nSenior unsecured debt rating\n\u200b\nCommercial paper rating\n\u200b\nOutlook\n"
+          "Moody\u2019s\n\u200b\nBaa3\n\u200b\nP-3\n\u200b\nStable outlook\nStandard & Poor\u2019s\n\u200b\nBBB\n\u200b\nA-2\n\u200b\nStable outlook\n\u200b\n"
+          "Changes in Cash Flows\nUnless otherwise noted, all references to the 2026 and 2025 periods are to fiscal periods.")
+
+    def test_original_redactor_leaves_the_cells(self):
+        import redact
+        clean, _ = redact.redact(self.KOHLS)
+        self.assertIn("\nB2\n", clean)
+        self.assertTrue(redact.rating_fragments(clean))
+
+    def test_v2_removes_the_table_cells_and_keeps_the_prose(self):
+        import redact
+        for text, cells in ((self.KOHLS, ("B2", "B+", "BB-", "Stable", "Negative", "Corporate credit")),
+                            (self.DG, ("Baa3", "P-3", "A-2", "BBB", "Stable outlook", "Commercial paper rating"))):
+            clean, removed = redact.redact_v2(text)
+            for c in cells:
+                self.assertNotIn("\n" + c + "\n", "\n" + clean + "\n", c)
+            self.assertEqual(redact.rating_fragments(clean), [])
+        clean, _ = redact.redact_v2(self.KOHLS)
+        self.assertIn("The majority of our financing activities", clean)
+        clean, _ = redact.redact_v2(self.DG)
+        self.assertIn("Unless otherwise noted", clean)
+
+    def test_v2_keeps_single_letter_section_labels_and_prose_symbols(self):
+        import redact
+        text = "Item 1A. Risk Factors\nA\nB\nC\nOur Series A preferred stock and our B2B channel grew.\nWe operate 1,200 stores."
+        clean, removed = redact.redact_v2(text)
+        self.assertEqual(clean, text)
+        self.assertEqual(removed, [])
+
+    def test_cached_filings_of_the_run_have_no_fragments_after_v2(self):
+        import redact, run_eval
+        run = os.path.join(HERE, "runs", "EXP04-ARM1-A1")
+        if not os.path.exists(os.path.join(run, "audit", "hashes.json")):
+            self.skipTest("run records not present")
+        hashes = json.load(open(os.path.join(run, "audit", "hashes.json")))
+        left = {}
+        for rel in hashes["primary_documents"]:
+            path = os.path.join(ROOT, "evaluation", "companies", rel)
+            if not os.path.exists(path):
+                self.skipTest("cached filings not present")
+            text = run_eval.to_text(open(path, "rb").read().decode("utf-8", "ignore"))
+            clean, _ = redact.redact_v2(text)
+            frags = redact.rating_fragments(clean)
+            if frags:
+                left[rel] = frags[:2]
+        self.assertEqual(left, {})
