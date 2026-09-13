@@ -7,79 +7,142 @@ correspondence that is not in the repository, that is said. Read this file first
 README.md, then the experiment folders. Keep this file current: append a dated entry to
 section 13 whenever the state changes.*
 
-## Session continuation, 2026-09-13 (read this first)
+## State of the project, 2026-09-13 (read this first)
 
-*Written by Claude (Fable 5.1) at Robert's direction after implementing and running Experiment
-04, Arm 1, on 2026-09-13. Everything below was measured on that day and supersedes the older
-statements where they conflict. The two sections after this one, Codex's review note and the
-2026-09-12 continuation, remain valid history.*
+*Written by Claude (Opus 5) at Robert Vetter's direction on 2026-09-13, as a gapless handover
+for a new session in any tool. It replaces the earlier continuation sections at the top of
+this file; those, and Codex's note below, remain valid history. Everything here was measured
+or decided on 2026-09-12 and 2026-09-13 and supersedes older statements where they conflict.*
 
-**What happened.** Codex's review of 2026-09-12 refused the first Arm 1 specification and set
-twelve acceptance gates. Robert then authorized the run with decisions D5 to D12 (a $3.00 cap,
-DeepInfra fp8 with price ceilings, three replicates, Qurate as a diagnostic, the trim rule,
-option (c) for the history packs, a 24-month peer policy, ten extra attempts). Claude
-implemented the runner (`run_openrouter.py`, `prepare_inputs.py`, `legacy_provenance.py`,
-`test_runner.py`, the vendored 2026-09-10 builders), repaired the history path in
-`evaluation/pipeline/history_pack.py` and the peer policy in `peer_table.py`, passed the
-forty acceptance tests and the manifest gates, ran the inspected pilot, and then the whole
-plan. The results note is `experiments/04-open-weight-cross-section/results.md`; the
-specification as executed is `RUN-SPEC.md` in that folder.
+**Where the project stands.** Four experiments are done. The fourth, Experiment 04 Arm 1, was
+specified, independently reviewed, refused once, repaired, authorized, executed, independently
+audited after the run, and corrected. It is the current answer to Xiaowei's first-step ask
+(section 9). No work is in flight. Nothing has been sent to the lab. Five commits sit on local
+`main` and are not pushed; the GitHub repository is public and the visibility question is still
+open (section 2).
 
-**The result, primary cohort of 19, as corrected after Codex's post-run audit.** Judgement
-consensus 17/19 exact, MAE 2/19 = 0.11, one false alarm on 18 unchanged; scorecard consensus
-3/19 exact, MAE 1.84, 15 false alarms; persistence 18/19, MAE 0.05. The audit found that
-Kohl's disclosed B2 survived redaction in all three replicates (a rating table rendered one
-cell per line), and a follow-up scan found Dollar General's short-term rating and outlook
-cells; without Kohl's the post-hoc sensitivity is judgement 16/18 and persistence 17/18,
-without both 16/17 and 16/17. 56 of 60 direct ratings equal the supplied prior and all three
-replicates equal it on 18 of 20 issuers; both rating changes were missed. The scorecard runs
-1.23 notches favourable on average, partly through accounting-concept errors the audit
-documented (zero debt for Signet, net interest income as interest expense). On the seven
-issuers Opus scored, with the same supplied information, two of Qwen's three judgement
-replicates give Opus's aggregate numbers (4/7, MAE 0.57) with different mistakes; its
-scorecard is worse. Neither channel beats persistence on any cohort.
+**The result, Experiment 04 Arm 1, consensus of three replicates per issuer.** Model
+Qwen3-235B-A22B-Instruct-2507, open weights, public checkpoint of 2025-07-21, served fp8 by
+DeepInfra through OpenRouter. Labels are the issuers' own rating disclosures in filings after
+the 2025-09-30 boundary, target date 2026-08-29.
 
-**Facts measured on 2026-09-13.**
+| Cohort, current inputs | Judgement exact, MAE | Scorecard exact, MAE | Persistence exact, MAE |
+|---|---|---|---|
+| Primary 19 (Qurate held out as a diagnostic) | 17/19, 0.11 | 3/19, 1.84 | 18/19, 0.05 |
+| Post-hoc 18, without Kohl's | 16/18, 0.11 | 3/18, 1.78 | 17/18, 0.06 |
+| Post-hoc 17, without Kohl's and Dollar General | 16/17, 0.06 | 3/17, 1.71 | 16/17, 0.06 |
+| All 20 | 17/20, 0.20 | 3/20, 1.80 | 18/20, 0.15 |
 
-| Fact | Value |
+Neither channel beats persistence on any cohort. The judgement channel returned the supplied
+prior in 56 of 60 answers and all three replicates returned it on 18 of 20 issuers; it made one
+false alarm (Dollar General) and missed both rating changes. The scorecard channel runs 1.23
+notches favourable on average and disagrees with persistence on 15 of 18 unchanged issuers. On
+the seven issuers Opus 4.6 scored in Experiment 03, with byte-identical supplied information,
+two of Qwen's three judgement replicates reproduce Opus's aggregate numbers (4/7 exact, MAE
+0.57) with different mistakes, and its scorecard is worse. Full tables, coverage, every failed
+request and the limitations are in `experiments/04-open-weight-cross-section/results.md`.
+
+**The two findings that matter more than the numbers.** First, the post-run audit
+(`experiments/04-open-weight-cross-section/review-codex-2026-09-13.md`) found that Kohl's
+disclosed B2 rating survived redaction in all three of its replicates: the filing renders its
+rating table one cell per line, the redactor removed the agency line and stopped at the row
+label, and a lone "B2" was not recognised as a rating row. A follow-up scan found Dollar
+General's short-term rating and outlook cells the same way. The frozen bodies are unchanged and
+the leak is disclosed with post-hoc sensitivities. Second, the extracted scorecard inputs are
+consistent across replicates without being correct: net interest income used as interest
+expense (Nike, Signet), lease liabilities dropped from debt (Signet, which returned zero debt),
+pretax income used as operating income (Nike), a wrong fiscal-year date (Gap). Consistency is
+not extraction accuracy, and the favourable bias is not only missing Moody's adjustments.
+
+**Repairs made on 2026-09-13, all tested, none retroactive to the paid bodies.**
+
+| Repair | Where |
 |---|---|
-| Spend | $1.242279 committed (104 responses), $0.141521 held for seven transport failures, $1.383800 against the $3.00 cap |
-| OpenRouter balance after the run | $6.31 (usage 48.6897 of 55 credits); the account's usage rose by exactly the reconciled charges, so the held attempts were most likely never billed |
-| Coverage | 20 of 20 probes, 79 of 81 document requests valid; all 60 current-input requests valid; two saved-input replicates (Qurate 3, Victoria's Secret 3) have no valid response |
-| Attempts | 111 dispatches, the ten extra attempts all used; 7 TLS "bad record MAC" transport failures, 4 output-length repetition loops, 1 probe answer that stopped inside a string |
-| Token accounting | every response's prompt tokens equalled the locally rendered count exactly; consistent with compatible rendering, not proof of anything more |
-| Redaction failure | Kohl's rating-table cells (B2 and outlooks) and Dollar General's short-term rating cells survived the original redactor; `system/redact.py` now has a structural second pass and a fragment scan for future runs; the executed bodies are unchanged |
-| Runner defects found by the audit | an error response carrying a charge was released; an over-cap charge was accepted without a halt; both repaired with tests on 2026-09-13, with a per-process price check and archived generation payloads |
-| Run time | 2026-09-13 01:00 to 04:00 UTC, one request per process after the second transport failure |
-| Two saved packs were not the packs Opus saw | resolved: the seven saved inputs were reproduced byte-for-byte from the raw XBRL cache with the vendored 2026-09-10 builders, so every figure has a source date; the current arm uses the repaired packs |
+| Structural second pass that removes rating-table blocks and orphan symbol cells, plus a scan that must return nothing before a run | `system/redact.py`, functions `redact_v2` and `rating_fragments`; the original `redact` is untouched so Experiment 03's replay stays byte exact |
+| Kohl's and Dollar General cases as regressions, and a check that no cached filing of the run has a fragment after the second pass | `experiments/04-open-weight-cross-section/test_runner.py`, class `RedactionV2` |
+| An error response that carries usage or an id is never released as unbilled; it is reconciled and halts, or stays unresolved | `run_openrouter.py`, `_settle` |
+| A charge above its reservation, or an exposure above the cap, halts the run | `run_openrouter.py`, after the reconcile event |
+| Every process performs its own live price check; a recorded check from an earlier process does not count | `run_openrouter.py`, `guards` and `live_price_check` |
+| Raw generation payloads archived next to the responses | `run_openrouter.py`, `_generation` |
+| Exact MAE from the error sum (a double rounding had printed 2/19 as 0.10), matched persistence baselines on the valid subset, and the post-hoc cohorts | `report.py`, `run_openrouter.metrics` and `score` |
 
-**The immediate next task, all Robert's.** (1) Read `results.md` and the audit, then send the
-lab update; the final draft in Robert's voice is at
-`/Users/robert/Developer/giesecke/lab-update-final-2026-09-13.md`, outside the repository,
-unsent; it supersedes the drafts of 2026-09-12 and 2026-09-13 (Claude's and Codex's) and
-lists the attachments. (2) Commit the session's work: the working tree
-holds the new Experiment 04 files, the two builder repairs, `results.md`, this file, the
-README pointers and `RUN-SPEC.md`; nothing was committed or pushed on 2026-09-13 because the
-instruction said not to. (3) Decide what, if anything, follows: the review's discussion
-trigger applies (judgement equals persistence, scorecard favourable); a second model, more
-replicates and Arm 2 are not authorized. (4) Repository visibility is still open.
+51 Experiment 04 tests and 10 Experiment 03 regressions pass. The Experiment 03 offline replay
+still reproduces all 18 saved document packages exactly.
 
-**The second Codex brief.** `/Users/robert/Developer/giesecke/codex-review-brief-2026-09-13.md`,
-outside the repository, asks Codex for a post-run audit of Experiment 04 and of every decision
-in it, a first architecture draft from the evidence
-(`docs/architecture-codex-2026-09-13.md`), and its version of the lab email; it documents
-Robert's journey from day one as the email's raw material. Codex's audit is expected at
-`experiments/04-open-weight-cross-section/review-codex-2026-09-13.md`. Five findings measured
-after results.md was written are listed in the brief's section 1 for Codex to verify and
-place (the `vs_last_known` inconsistencies, the scorecard's position against persistence,
-figure and grade variability across replicates, Nike's grades and interest figure).
+**What exists in the Experiment 04 folder.**
 
-**Rules that held, and one that did not.** No paid call outside authorization EXP04-ARM1-A1;
-no body carried a label field, a probe answer or audit data, but two bodies carried rating
-cells that the redactor should have removed (Kohl's disclosed B2, Dollar General's P-3);
-prompts, candidates, mapping, gold set and Experiment 03's records unchanged; Experiment 03's
-paid-call guard untouched; every failure recorded with its charge; no ceiling enlarged, no
-prompt changed, no provider switched after a failure.
+| File | What it is |
+|---|---|
+| `RUN-SPEC.md` | the specification as frozen and executed, with the incidents and repairs in section 12 |
+| `results.md` | the results note, corrected after the audit, with the sixteen corrections listed at the end |
+| `decisions.md` | D1 to D12; D5 to D10 and D12 decided by Robert on 2026-09-12, D11 (Arm 2) still open |
+| `authorization.json` | the $3.00 cap and the scope, bound to the manifest hash; the runner refuses to dispatch without it |
+| `review-codex-2026-09-12.md` | the pre-run review that refused the first specification and set twelve acceptance gates |
+| `review-codex-2026-09-13.md` | the post-run audit: reconstructed tables, the leak, the guard defects, sixteen corrections |
+| `prepare_inputs.py` | offline preparation: cohort, documents, packs, bodies, rendered token counts, hashes, manifest, free pre-flight |
+| `run_openrouter.py` | the runner: ledger, reservations, guards, dispatch, validation, scoring, gates |
+| `test_runner.py` | 51 acceptance tests against the production dispatch path with a fake transport |
+| `legacy_provenance.py`, `legacy_builders/` | the saved-input control: the vendored 2026-09-10 builders and the per-figure source dates |
+| `report.py` | the tables in results.md, from `results/scores.json` |
+| `count_tokens_qwen.py`, `evidence/` | the token evidence and the cutoff, model-list and per-provider snapshots |
+
+**The run record.** `experiments/04-open-weight-cross-section/runs/EXP04-ARM1-A1/`, 55 MB,
+gitignored, on this machine only. It holds `manifest.json` and `bodies/` (the frozen plan and
+every body sent), `ledger.jsonl` (555 events: every reservation, dispatch, charge, failure,
+halt and reviewer note), `responses/` (raw bytes of all 104 HTTP responses, saved before
+parsing), `audit/` (per-issuer document and pack provenance, the saved-input evidence, removed
+lines, probes, residual scan, hashes, environment), `gates/`, `probe_review.json`,
+`pilot_review.json`, `results/` (attempts, flat records, consensus, scores, report) and the
+execution log. A fresh clone does not contain it; the results notes are the public record.
+
+**Money.** Experiment 04 spent $1.242279 in reconciled charges for 104 responses and holds
+$0.141521 for seven attempts that failed before any HTTP response, so $1.383800 of the $3.00
+cap. The OpenRouter balance is about $6.31 (usage 48.69 of 55 credits). The Anthropic prepaid
+balance is about $1.26 and Experiment 03 is closed to paid calls by decision D11. No paid call
+is authorized now: authorization EXP04-ARM1-A1 covered exactly the plan that ran.
+
+**What a new session must not do without a fresh decision from Robert.** Do not make any paid
+model call. Do not edit `evaluation/mapping.json`, `decisions.jsonl`, `goldset.json`, any
+`candidates.json`, `label-review.md`, the `prompts/` folders, the saved Experiment 03 batch
+artefacts, or anything under `runs/`. Do not reopen Experiment 03's paid-call guard. Do not
+push, and do not send anything to the lab. Full rules in `AGENTS.md` and section 8.
+
+**Verify the state offline, from the repository root.**
+
+```
+python3 -m unittest discover -s experiments/03-oos-values-first -p 'test_*.py' -v
+cd experiments/04-open-weight-cross-section && python3 -m unittest -v test_runner
+python3 experiments/03-oos-values-first/audit_saved_run.py
+python3 experiments/04-open-weight-cross-section/legacy_provenance.py X12 X14 X15 X16 X17 X19 X20
+python3 experiments/04-open-weight-cross-section/run_openrouter.py score
+python3 experiments/04-open-weight-cross-section/report.py
+```
+
+The last two write into the run directory and need it present. `run_openrouter.py submit` is
+the only path that spends money; it refuses without the authorization file and a matching
+manifest hash.
+
+**Open, and all Robert's.**
+
+1. Send the lab update. The final draft in Robert's voice is
+   `/Users/robert/Developer/giesecke/lab-update-final-2026-09-13.md`, outside the repository,
+   unsent, with the attachment list at the end. It supersedes the three earlier drafts.
+2. Repository visibility. It is public and holds Moody's copyrighted methodology PDF and
+   Moody's-derived rating data. Five commits are unpushed. Decide before pushing or sharing a
+   link; the email attaches files instead.
+3. What follows Experiment 04. The evidence points at the architecture draft
+   (`docs/architecture-codex-2026-09-13.md`), whose free first steps are closing the redaction
+   and billing controls, then the evidence ledger and the trailing-twelve-month accounting
+   baseline, then a rubric and event specification. A second model, more replicates and Arm 2
+   (D11) are not authorized.
+4. The lab's rating data. Dated Moody's histories for September 2025 to August 2026 with legal
+   entity, rating type, actions and withdrawals would verify these disclosure labels and give
+   the change decision more than two cases. The email asks for it.
+
+**Files outside the repository** in `/Users/robert/Developer/giesecke/`: the day-one brief
+(`session-brief.md`, superseded), the two Codex briefs of 2026-09-12 and 2026-09-13, three
+superseded lab drafts, and `lab-update-final-2026-09-13.md`. They live outside because the
+repository is public and they carry correspondence.
 
 ## Current instruction and review, 2026-09-12
 
@@ -138,10 +201,12 @@ goldset.json, decisions.jsonl, lists.md). Whether to make it private or remove t
 Robert's decision; nobody has acted on it yet. The raw Moody's rating-history zips under
 data/ are gitignored and not on GitHub.
 
-**Repository update, 2026-09-12.** The calibration study, integrity repairs and current
-specification/results are included in the repository update Robert requested. The main
-README links the current results. Consult Git status and the remote for synchronization
-state; do not assume an old working-tree description is current.
+**The last five commits are local only.** On 2026-09-13 local `main` is five commits ahead of
+`origin/main`: the whole of Experiment 04, its two reviews, the corrections and the repairs.
+They were not pushed because of the visibility question above. The working tree is clean.
+Everything through commit f93c0c5 (the calibration study, the integrity repairs and the
+Experiment 03 pages) is on the remote. Always consult Git status rather than an older
+description.
 
 ## 3. Correspondence requirements
 
@@ -192,6 +257,9 @@ Dates are commit dates on `main`. Each line names where the evidence lives.
 | 2026-09-10 | Experiment 03 run: pre-flight, batch of 16, 11 lost to a max_tokens ceiling, two changed cases re-run, results on n = 7; cutoff evidence snapshot | experiments/03-oos-values-first/results.md, evidence/ |
 | 2026-09-11 | Scorecard calibration study, numbers only, on 1,696 historical observations; XBRL fallback tags and raw companyfacts cache; debt double-count fix (uncommitted) | notes/scorecard-calibration.md, evaluation/calibration-summary.md, evaluation/pipeline/calibrate_scorecard.py |
 | 2026-09-12 | This handover; Experiment 03 explained against Xiaowei's ask (section 9) | HANDOVER.md, AGENTS.md |
+| 2026-09-12 | Codex's integrity review: negative-EBITDA scoring bug (three notches on one issuer), net-cash sign, rounding, unstaged probes, gold rows in the calibration folds, reusable paid cap; repairs made and Experiment 03 closed to paid calls | docs/oos-integrity-review.md, experiments/03-oos-values-first/audit_saved_run.py |
+| 2026-09-12 | Experiment 04 designed: the capability-versus-labels trade-off measured, Qwen3-235B-2507 chosen, the Arm 1 specification written, corrected twice, then refused by Codex's review with twelve acceptance gates; Robert decided D5 to D12 | experiments/04-open-weight-cross-section/, review-codex-2026-09-12.md |
+| 2026-09-13 | Experiment 04 Arm 1 implemented to the gates and executed: 111 dispatches, 99 valid, $1.38 of a $3.00 cap, three hours; then audited after the run, which found a redaction failure and two billing-guard defects; corrections and repairs applied | experiments/04-open-weight-cross-section/results.md, review-codex-2026-09-13.md |
 
 ## 5. The evaluation apparatus (built, frozen, reusable)
 
@@ -223,7 +291,7 @@ Dates are commit dates on `main`. Each line names where the evidence lives.
   system/redact.py (removes rating self-disclosures, logs what it cut). The experiment folders
   carry their own runners and prompts and import these.
 
-## 6. The three experiments and the calibration study
+## 6. The four experiments and the calibration study
 
 **Experiment 01, out-of-sample cross-section, first pass (2026-08-30).** Opus 4.5 (training
 cutoff Aug 2025) and Opus 5 (May 2026); one filing per company, no history; two prompt
@@ -276,6 +344,28 @@ signals select persistence in every fold. This is retrospective cross-company va
 not a time-ordered forecast test. Current tables: evaluation/calibration-summary.md. The
 original n=1,696 study and its corrections remain in notes/scorecard-calibration.md.
 
+**Experiment 04, Arm 1, post-release cross-section on an open-weight model (run 2026-09-13).**
+Qwen3-235B-A22B-Instruct-2507, public checkpoint 2025-07-21, DeepInfra fp8 through OpenRouter,
+temperature 0, seed 20260912, three replicates per issuer, one memory probe per issuer first.
+Same boundary, labels, prompts and scoring arithmetic as Experiment 03. Two arms: all 20
+confirmed issuers on current, repaired history packs, and the seven issuers Opus scored on the
+exact saved Experiment 03 inputs. 20 of 20 probes and 79 of 81 document requests valid;
+$1.242279 committed plus $0.141521 held, against a $3.00 cap.
+
+| Channel, primary cohort of 19, consensus | Exact | Within 1 | MAE | False alarms on 18 unchanged |
+|---|---|---|---|---|
+| Model judgement | 17/19 | 19/19 | 0.11 | 1 |
+| Scorecard from extracted inputs | 3/19 | 10/19 | 1.84 | 15 |
+| Persistence | 18/19 | 19/19 | 0.05 | 0 |
+
+Neither channel beats persistence. Both rating changes were missed by the judgement channel,
+which returned the supplied prior in 56 of 60 answers. The post-run audit found that Kohl's
+disclosed rating survived redaction in all three of its replicates, so a post-hoc sensitivity
+without it gives judgement 16/18 against persistence 17/18, and without Dollar General's
+surviving short-term rating cells 16/17 against 16/17. The scorecard channel is 1.23 notches
+favourable on average, with documented accounting-concept errors in its inputs. Full note:
+experiments/04-open-weight-cross-section/results.md; the audit: review-codex-2026-09-13.md.
+
 ## 7. Findings register (each with the note behind it)
 
 1. Ratings are inert: 94% of quarters unchanged, so persistence is the baseline, never zero
@@ -294,6 +384,20 @@ original n=1,696 study and its corrections remain in notes/scorecard-calibration
 9. Historical calibration reduces level error, but the tested annual-number signals do
    not improve on persistence. Accounting-era associations are descriptive (calibration note).
 10. Model memory of ratings is confidently wrong off the famous names (all probe rounds).
+11. Given the issuer's own prior rating, the model returns it: 56 of 60 post-cutoff answers and
+    all three replicates on 18 of 20 issuers, on a frontier and an open-weight model alike.
+    Anchoring is the plausible explanation and is untested; no prior-withheld control has run
+    (Experiment 04).
+12. A 235B open-weight model matched the frontier model's aggregate judgement accuracy on
+    byte-identical inputs at a fraction of the cost, which makes full cross-sections and
+    replicates affordable. Its extracted scorecard inputs were worse (Experiment 04).
+13. Extracted figures repeat across replicates without being right: net interest income used as
+    interest expense, lease liabilities dropped from debt, pretax income used as operating
+    income. Consistency is not extraction accuracy (Experiment 04 audit).
+14. Lexical redaction is not enough. Filings render rating tables one cell per line, and a lone
+    rating symbol survived an agency-name-based stripper and its residual scan. Redaction needs
+    structure-aware removal and an independent scan of the assembled input (Experiment 04 audit,
+    repaired in system/redact.py).
 
 ## 8. Rules that govern the work (do not relax them silently)
 
@@ -355,12 +459,13 @@ authorization.
 
 | Item | Owner | State |
 |---|---|---|
-| Repository visibility (public, contains Moody's PDF) | Robert | flagged 2026-09-12, undecided |
-| Repository synchronization | Codex, directed by Robert | Documentation and integrity/calibration changes consolidated in the 2026-09-12 update; verify remote with Git |
+| Repository visibility (public, contains Moody's PDF) | Robert | flagged 2026-09-12, undecided; five commits are unpushed for this reason |
+| Repository synchronization | Robert | local `main` is five commits ahead of `origin/main` as of 2026-09-13; do not push without the visibility decision |
 | Experiment 03 completion, 13 observations | Robert | Closed 2026-09-12 at Robert's request. Do not run or request a top-up; see D11. |
-| Send specification and results to the lab | Robert | Corrected draft of 2026-09-13 outside the repository, with the Experiment 04 numbers; not sent |
-| Experiment 04, Arm 1 | done 2026-09-13 | 79 of 81 document requests valid, $1.38 of the $3.00 cap; results.md; a second model, more replicates and Arm 2 not authorized |
-| Analyst architecture | Robert / lab | Proposal in docs/oos-integrity-review.md; prototype and TTM baseline not built |
+| Send specification and results to the lab | Robert | Final draft of 2026-09-13 in Robert's voice, outside the repository, with the attachment list; not sent |
+| Experiment 04, Arm 1 | done 2026-09-13 | 79 of 81 document requests valid, $1.38 of the $3.00 cap; audited, corrected; a second model, more replicates and Arm 2 (D11) not authorized |
+| Analyst architecture | Robert / lab | First draft from the evidence in docs/architecture-codex-2026-09-13.md (supersedes docs/architecture.md); nothing built yet; its free first steps are the redaction and billing controls, then the evidence ledger and TTM accounting baseline |
+| Verified outstanding labels for the post-cutoff window | Robert / Ding | the disclosure labels are unverified at the observation date; the lab's dated histories would settle it and give the change decision more cases |
 | Sector strategy: methodology-faithful per sector versus sector-agnostic prediction | Giesecke / Ding | open |
 | Whether peer ratings (not only peer figures) are admissible input | Giesecke / Ding | open |
 | Five scope calls: CVS, Samsonite, Good Sam, Amazon, Sherwin-Williams | Robert | open, currently "uncertain" or "out" in the frame |
@@ -373,10 +478,16 @@ authorization.
 
 ## 11. Practical: environment, data, commands
 
-- Machine: macOS, Python 3.13.7. Packages present: anthropic 1.2.0, httpx2, numpy 2.3.3,
-  scipy 1.17.1, scikit-learn 1.8.0, pandas 2.3.2. The `openai` package is not installed.
-- Secrets: `.env` in the repository root (gitignored) holds `ANTHROPIC_API_KEY` only. The
-  experiment runners read it from the environment (`set -a; source .env; set +a`).
+- Machine: macOS, Python 3.13.7. Packages present: anthropic 1.2.0, httpx 0.28.1, httpx2,
+  jsonschema 4.25.1, transformers 4.57.6, tokenizers 0.22.2, numpy 2.3.3, scipy 1.17.1,
+  scikit-learn 1.8.0, pandas 2.3.2. The `openai` package is not installed and is not needed:
+  Experiment 04 talks to OpenRouter over HTTPS with `httpx`.
+- Secrets: `.env` in the repository root (gitignored) holds `ANTHROPIC_API_KEY` and
+  `OPEN_ROUTER_API_KEY` (that spelling). The runners read them from the environment
+  (`set -a; source .env; set +a`) or from `.env` directly. Never print a key.
+- The Qwen tokenizer is in the Hugging Face cache, revision
+  `ac9c66cc9b46af7306746a9250f23d47083d689e`, and every Experiment 04 script runs with
+  `HF_HUB_OFFLINE=1`, so token counting needs no network.
 - Data that cannot be regenerated by a script: the two Moody's 17g-7 zips (downloaded with
   Robert's Moody's account, not redistributable). Everything else under data/ and
   evaluation/companies/ regenerates from the pipeline (data/README.md lists sources and dates).
@@ -391,6 +502,14 @@ authorization.
   - `python3 evaluation/pipeline/run_eval.py --dry-run ...` : cost of a selection, no spend (see evaluation/README.md).
   - `python3 experiments/03-oos-values-first/run_batch.py --dry` : builds every request, counts tokens, prices the worst case, no spend; paid `--submit`, `--rerun` and the miniature preflight are closed by D11. Use the offline audit for saved results.
   - `python3 evaluation/pipeline/history_pack.py <slug> <date>` : prints a history pack.
+  - `python3 experiments/04-open-weight-cross-section/prepare_inputs.py` : rebuilds every
+    Experiment 04 body, hash, token count and the manifest, offline, no spend. It refuses if a
+    rating fragment survives redaction.
+  - `python3 experiments/04-open-weight-cross-section/run_openrouter.py gates` : the acceptance
+    gates and the test suite, offline. `status` reads the ledger. `score` and `report.py`
+    rebuild the tables. `submit` is the only paid path and needs `authorization.json`.
+  - `python3 experiments/04-open-weight-cross-section/legacy_provenance.py <ids>` : proves the
+    saved Experiment 03 inputs reconstruct byte for byte and prints their source dates.
 - Run artefacts: experiments/*/runs/ and evaluation/runs/ are gitignored; each holds the
   verbatim requests, raw outputs, audit.json with the date checks, and results.json. Batch IDs
   in LAST_BATCH files. Experiment 03 batches: msgbatch_01EwnHhsKjahuwhmL8S5h2Sx (16) and
@@ -400,7 +519,18 @@ authorization.
 - The parent folder /Users/robert/Developer/giesecke holds the day-one brief
   (session-brief.md, superseded by this file) and an unrelated screenshot in personal/.
 
-## 12. If the next session uses OpenAI models
+## 12. If the next session uses another vendor
+
+A working non-Anthropic path already exists: `experiments/04-open-weight-cross-section/`
+reaches an open-weight model through OpenRouter with `httpx`, an OpenAI-shaped chat
+completions body, `response_format` for the JSON schema, and pinned provider routing. Reuse
+`prepare_inputs.py` and `run_openrouter.py` rather than writing a new runner, and keep the
+guards: the authorization file bound to a manifest hash, reservations before dispatch, price
+ceilings, a live price check per process, staged memory probes, halts on anything unexplained,
+and a raw record of every response. The notes below about the Anthropic call sites still apply
+to `system/analyst.py`, `evaluation/pipeline/run_eval.py` and the Experiment 01 to 03 runners.
+
+### If the next session uses OpenAI models
 
 Nothing in the evaluation apparatus depends on the model vendor; the deterministic parts
 (mapping, observations, gold set, scorecard, redaction, XBRL, calibration, metrics) run as
@@ -528,3 +658,8 @@ they are. The model-facing code is Anthropic-specific and small:
   51 Experiment 04 tests and 10 Experiment 03 regressions pass. Found Dollar General's
   short-term rating cells as a second, weaker residual. Wrote the final lab email draft
   outside the repository. Committed; nothing sent.
+- 2026-09-13, Claude (Opus 5) at Robert's direction: rewrote the top of this file as a single
+  current state section for a new session in another tool, added the 2026-09-12 and 2026-09-13
+  rows to the chronology, added Experiment 04 to section 6, added findings 11 to 14, updated
+  the open items, the environment and commands, and the vendor note in section 12. No code or
+  result changed in this step.
