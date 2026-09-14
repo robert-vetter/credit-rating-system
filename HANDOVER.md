@@ -663,3 +663,12 @@ they are. The model-facing code is Anthropic-specific and small:
   rows to the chronology, added Experiment 04 to section 6, added findings 11 to 14, updated
   the open items, the environment and commands, and the vendor note in section 12. No code or
   result changed in this step.
+- 2026-09-13, OpenAI Codex at Robert Vetter's direction: rewrote
+  `docs/architecture-codex-2026-09-13.md` and Experiment 04 `RUN-SPEC.md` for the lab's
+  first reading. The architecture now focuses on objective, five analysis components,
+  forecasting/calibration, evaluation and build order; the specification leads with the
+  research question, cutoff evidence, sample, inputs, exact prompt links and persistence
+  comparisons. Verified against the frozen manifest and revised results, including both
+  residual-disclosure cases and the post-hoc 17-issuer sensitivity. Detailed execution and
+  audit history remain in their existing records. Documentation only; no model calls,
+  experiment changes, commits, pushes or messages.
