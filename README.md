@@ -51,6 +51,19 @@ Start with the [experiment specification](experiments/03-oos-values-first/README
 original run from safeguards added afterwards. Original prompts and human label decisions
 are preserved. Paid completion is closed; the remaining 13 cases will not be run.
 
+## The four experiments
+
+| Experiment | Question | State |
+|---|---|---|
+| [01, out-of-sample cross-section](experiments/01-oos-cross-section/) | does a single filing without history place an issuer on the scale, after the cutoff | done 2026-08-30; the direct rating equalled persistence |
+| [02, relative with history](experiments/02-relative-with-history/) | does the issuer's own rating history and a relative framing move the judgement off persistence | done 2026-09-04; it did, but all nine observations predate the model's cutoff, so the result is in sample |
+| [03, post-cutoff values first](experiments/03-oos-values-first/) | the outstanding rating after a documented training cutoff, on a frontier model | run 2026-09-10 on Opus 4.6; seven usable issuers, closed to further paid calls |
+| [04, post-release open weights](experiments/04-open-weight-cross-section/) | the same test at a price that covers the whole cross-section with replicates | run 2026-09-13 on Qwen3-235B-2507; 20 issuers, three replicates, audited afterwards |
+
+Each folder holds the specification, the decision log with owners and dates, the verbatim
+prompts and the results note. Experiment 04 additionally holds its two independent reviews,
+the runner and its acceptance tests.
+
 ## What is built
 
 The evaluation apparatus links 186 Moody's Retail/Apparel entities to SEC filers, grouped
@@ -100,12 +113,16 @@ from a fresh clone. Local replay requires the original saved requests and filing
 
 ## Next work
 
-The architecture proposal (docs/architecture.md, 2026-09-12) maps Giesecke's blocks onto the
-methodology's own pipeline and separates dated evidence, quantitative normalization, qualitative
-factor analysis, methodology scoring and overall judgement. Its next proposed implementation
-is an evidence ledger and a quarterly/TTM quantitative baseline, using non-gold data and no
-paid model calls. The prototype is not yet built. Rating-entity/type consistency, label
-freshness and a complete supplied rubric remain prerequisites for a stronger benchmark.
+The [architecture draft of 2026-09-13](docs/architecture-codex-2026-09-13.md) is written from
+what the four experiments showed, and it is a proposal, not an implementation. It builds the
+analyst around verified source evidence, explicit accounting definitions with the methodology's
+own adjustments, factor grades tied to the rubric with quotes, and a rating-change decision
+evaluated separately from the rating level. Its first steps cost nothing: close the redaction
+and billing controls, then build the evidence ledger and a trailing-twelve-month accounting
+baseline on non-gold data, then version the rubric and the event specification. Nothing beyond
+that is authorized, and no paid run is planned.
 
-Sector expansion, the admissibility of peer ratings, unresolved scope decisions, access to
-lab labels and methodology usage terms remain open. They are not assumed settled by this pilot.
+Open and not settled by any of this: which entity and rating type the target should be,
+independently verified labels for the recent window, sector expansion, whether peer ratings
+are admissible input, five scope calls in the frame, and the terms of use of the methodology
+documents. They are tracked in [HANDOVER.md](HANDOVER.md) section 10 with an owner each.

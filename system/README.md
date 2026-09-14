@@ -18,3 +18,12 @@ Review update, 2026-09-12, by Codex at Robert's direction: negative Debt/EBITDA 
 RCF scoring now follow page 5 footnotes 2 and 3. Non-finite inputs and undefined ratio cases
 fail explicitly. Regression checks live in `experiments/03-oos-values-first/test_integrity.py`;
 measured impact and limitations are in `docs/oos-integrity-review.md`.
+
+Redaction update, 2026-09-13: `redact.py` gained `redact_v2()`, which runs the original pass
+and then removes rating tables rendered one cell per line and orphan rating symbols near rating
+context, and `rating_fragments()`, which scans an assembled model input and must return nothing
+before a run. The original `redact()` is unchanged, so the saved Experiment 03 and 04 inputs
+still replay byte for byte. The reason is a real failure: a disclosed rating survived the first
+pass and reached the model in Experiment 04 (docs/leakage-audit.md, update of 2026-09-13).
+Cases from Kohl's and Dollar General are regressions in
+`experiments/04-open-weight-cross-section/test_runner.py`.

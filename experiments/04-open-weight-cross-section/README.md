@@ -1,6 +1,14 @@
 # Experiment 04: the post-cutoff test on cheap models, design plan v0.2
 
-*Written 2026-09-12 by Claude (Fable 5.1), directed by Robert Vetter. Nothing has been run.
+> **Status: Arm 1 ran on 2026-09-13.** This page is the design plan that chose the model and
+> the window, written before the run. The specification as executed is [RUN-SPEC.md](RUN-SPEC.md),
+> the results are [results.md](results.md), the decisions are [decisions.md](decisions.md), and
+> the two independent reviews are [review-codex-2026-09-12.md](review-codex-2026-09-12.md),
+> before the run, and [review-codex-2026-09-13.md](review-codex-2026-09-13.md), after it.
+> Section 5a records what changed between this plan and the run. Arm 2 is not authorized.
+
+*Written 2026-09-12 by Claude (Fable 5.1), directed by Robert Vetter. Nothing had been run when
+this plan was written.
 Prices, context lengths, quantisation and parameter support per provider were read from
 OpenRouter's public endpoints API on 2026-09-12 (evidence/); cutoff statements from the vendor
 documents named in evidence/cutoffs-2026-09-12.md; label and document counts computed locally

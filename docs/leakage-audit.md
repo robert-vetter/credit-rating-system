@@ -150,3 +150,27 @@ Whether other sectors' filings differ. The sample is entirely Retail and Apparel
 
 Proxy statements and earnings releases, which the document review flagged as useful inputs, have not
 been checked for rating disclosures at all.
+
+
+## Update, 2026-09-13: a channel this audit expected but did not verify
+
+*Added by Claude (Opus 5), directed by Robert Vetter, after the post-run audit of Experiment 04
+(experiments/04-open-weight-cross-section/review-codex-2026-09-13.md).*
+
+"What was not tested" above asks whether 10-Q bodies carry the same ratings table as 10-Ks.
+They do, and the more important finding is how such a table survives stripping. EDGAR renders
+the table one cell per line, so Kohl's 10-K and 10-Q read "Financing Activities", "Corporate
+credit", "B2", "B+", "BB-", "Outlook", "Stable", "Negative", "Negative". The stripper removed
+the line naming the agencies and stopped at the row label, because a lone "B2" is not a rating
+row under its cell heuristic. Kohl's disclosed rating therefore reached the model in all three
+of its Experiment 04 replicates, and Dollar General's short-term rating and outlook cells
+reached it the same way. Neither was caught by a scan for the word Moody's, because the word
+had been removed.
+
+Two lessons. Redaction has to work on the structure of a rendered table, not on agency names:
+`system/redact.py` now has a second pass that removes rating-table blocks and orphan symbol
+cells, plus `rating_fragments()`, which scans the assembled input and must return nothing
+before a run. And the check has to run on the exact text that is sent, not on the stripper's
+own log of what it removed. Both are regression-tested in
+`experiments/04-open-weight-cross-section/test_runner.py`. A clean scan means those specific
+checks passed, nothing more.
