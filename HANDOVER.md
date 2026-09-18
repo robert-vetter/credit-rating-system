@@ -7,6 +7,34 @@ correspondence that is not in the repository, that is said. Read this file first
 README.md, then the experiment folders. Keep this file current: append a dated entry to
 section 13 whenever the state changes.*
 
+## Latest increment: reply to the lab's eight-point review, 2026-09-18
+
+*Claude (Fable 5.1), directed by Robert Vetter. Verified against the executed Experiment 04
+specification and results, candidates.json, the frozen token counts, the local 17g-7 records,
+the Experiment 05 study record, system/scorecard.py, and the vendor and agency pages named in
+the new files with their retrieval dates. No label, run record or result changed.*
+
+Xiaowei replied to the 2026-09-17 folder with eight points (input-data table, imbalance, a
+top commercial model, filing and action dates in one table with day precision, the Signet
+sentence, one deterministic calculation, the meaning of hand-labelled data, a specification)
+and framed the main problem as decipher the Moody's logic from real data with LLMs as a tool,
+then encode it into agents. New files, committed and pushed to public GitHub main on 2026-09-18 at Robert's instruction; the email is not sent:
+`docs/lab-update-2026-09-18/SPECIFICATION.md` (the experiment as executed, data tables, the
+per-issuer table with prior-rating type and date, filings, label, action and results, the ten
+input definitions, the calculation, controls, defects, nine decisions for consensus) and
+`docs/lab-update-2026-09-18/README.md` (point-by-point answers with the Signet worked
+calculation and the decipher/encode status table). The reply draft is outside the repository
+at `/Users/robert/Developer/giesecke/lab-reply-2026-09-18.txt`; the correspondence log and
+Xiaowei's expectations are in `/Users/robert/Developer/giesecke/correspondence/`.
+
+External facts read on 2026-09-18 and not yet snapshotted under an `evidence/` folder: Nike's
+downgrade is dated 12 November 2025 (Moody's release, ratings.moodys.com/ratings-news/454361);
+GPT-5.2's vendor page states a 31 August 2025 knowledge cutoff, 400,000 context, $1.75/$14
+per million tokens; GPT-5.5's states 1 December 2025. Qurate's October 2025 action day was
+not found without the Moody's login. Proposed and not authorized: GPT-5.2 on the frozen
+Experiment 04 inputs as Experiment 07, three replicates, cap about $25. The folder is
+on public GitHub main; the repository itself is still public, which remains Robert's open decision.
+
 ## Latest result: accounting interventions, 2026-09-17
 
 *OpenAI Codex, directed by Robert Vetter. Verified against original current-arm outputs,
@@ -631,6 +659,12 @@ they are. The model-facing code is Anthropic-specific and small:
 
 ## 13. Change log of this file
 
+- 2026-09-18, Claude (Fable 5.1) at Robert's direction: wrote the reply package to Xiaowei's
+  eight-point review: `docs/lab-update-2026-09-18/SPECIFICATION.md` and `README.md`, the
+  email draft and the private correspondence log outside the repository. Read Nike's action
+  date and the GPT-5.2 and GPT-5.5 cutoffs from public pages (recorded inline with dates).
+  No model calls, no spend, no label or result change. Committed and pushed at Robert's
+  instruction the same day; the email is not sent.
 - 2026-09-17, publication preparation, OpenAI Codex at Robert's direction: Robert explicitly
   authorized publishing the lab folder and supporting work to public GitHub main at the
   requested URL. Revised the proposed next study to distinguish evidence insufficiency
