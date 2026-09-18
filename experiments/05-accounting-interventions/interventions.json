@@ -1,0 +1,133 @@
+{
+  "study": "accounting-interventions-v1",
+  "author": "OpenAI Codex",
+  "directed_by": "Robert Vetter",
+  "date": "2026-09-17",
+  "as_of": "2026-08-29",
+  "review_status": "source_supported_researcher_interpretation_pending_human_review",
+  "design_status": "Post-hoc known development cases; source choices fixed before replacement scoring, not blinded or prospectively preregistered.",
+  "original_run": "experiments/04-open-weight-cross-section/runs/EXP04-ARM1-A1",
+  "methodology": {
+    "path": "methodologies/Rating_Methodology-Rating-Methodology-Retail-and-12Sep2025-PBC_1450282.pdf",
+    "sha256": "dded0ac947398a7b20ff5ac0652a3ecf7f1c8ca3e7a36918f27ffb83ba3ec5e0",
+    "basis": "Page 6: total reported revenue. Page 8: debt/EBITDA, RCF/net debt, and (EBITDA-Capex)/interest expense. Complete cross-sector adjustments unavailable. Working-capital intervention follows the executed task's sum-of-cash-flow-lines definition, not certified Moody's FFO."
+  },
+  "conditions": ["original", "interest", "debt", "other", "combined"],
+  "field_ownership": {"interest": ["interest"], "debt": ["debt"], "other": ["revenue", "operating_income", "wc_swing"]},
+  "cases": [
+    {
+      "id": "X20", "slug": "walmart", "cik": 104169,
+      "start": "2025-02-01", "end": "2026-01-31",
+      "source": {
+        "path": "evaluation/companies/walmart/filings/2026-03-13_10-K_000010416926000055.htm",
+        "sha256": "276a6accff6066f00342ba03b390c6c2bd51aa7246f0346df22df0b839a5bf5c",
+        "accession": "0000104169-26-000055", "filed": "2026-03-13", "form": "10-K"
+      },
+      "patches": [
+        {
+          "group": "interest", "field": "interest", "operation": "replace", "value_usd_m": 2799,
+          "rationale": "Income-statement gross interest: debt interest 2318 plus finance-lease/financing-obligation interest 481. Reconciles to net expense 2431 after interest income 368. The lease-note standard tag383 is narrower than the custom income-statement line481. This is reported gross expense, not complete agency-adjusted interest.",
+          "quotes": ["Interest: Debt 2,318 2,249 2,259 Finance lease 481 479 424 Interest income ( 368 ) ( 483 ) ( 546 ) Interest, net 2,431 2,245 2,137"],
+          "operands": [
+            {"element_id": "f-99", "tag": "us-gaap:InterestExpenseDebt", "context": "c-1", "value_usd_m": 2318, "coefficient": 1},
+            {"element_id": "f-102", "tag": "wmt:FinanceLeaseAndFinancingObligationInterestExpense", "context": "c-1", "value_usd_m": 481, "coefficient": 1}
+          ]
+        },
+        {
+          "group": "other", "field": "revenue", "operation": "replace", "value_usd_m": 713163,
+          "rationale": "Total reported revenues, not net sales. Membership and other income6750 explains the difference from net sales706413. Methodology page6 specifies total reported revenue.",
+          "quotes": ["Membership and other income (1) 6,750 6,447 5,488 Total revenues 713,163 680,985 648,125"],
+          "operands": [{"element_id": "f-87", "tag": "us-gaap:Revenues", "context": "c-1", "value_usd_m": 713163, "coefficient": 1}]
+        },
+        {
+          "group": "other", "field": "wc_swing", "operation": "replace", "value_usd_m": 752,
+          "rationale": "Sum all five lines under Changes in certain assets and liabilities, using displayed cash-flow signs: -1136-1443+1611+1607+113=752. Asset-change XBRL semantic signs are not the same as displayed cash-flow signs. This follows the executed task, not an independently established agency FFO definition.",
+          "quotes": ["Changes in certain assets and liabilities, net of effects of acquisitions and dispositions: Receivables, net ( 1,136 ) ( 1,106 ) ( 797 ) Inventories ( 1,443 ) ( 2,755 ) 2,017 Accounts payable 1,611 3,228 2,515 Accrued liabilities 1,607 379 ( 1,324 ) Accrued income taxes 113 435 ( 468 )"],
+          "operands": [
+            {"element_id": "f-390", "tag": "us-gaap:IncreaseDecreaseInAccountsAndOtherReceivables", "context": "c-1", "value_usd_m": 1136, "coefficient": -1},
+            {"element_id": "f-393", "tag": "us-gaap:IncreaseDecreaseInRetailRelatedInventories", "context": "c-1", "value_usd_m": 1443, "coefficient": -1},
+            {"element_id": "f-396", "tag": "us-gaap:IncreaseDecreaseInAccountsPayable", "context": "c-1", "value_usd_m": 1611, "coefficient": 1},
+            {"element_id": "f-399", "tag": "us-gaap:IncreaseDecreaseInAccruedLiabilities", "context": "c-1", "value_usd_m": 1607, "coefficient": 1},
+            {"element_id": "f-402", "tag": "us-gaap:IncreaseDecreaseInAccruedTaxesPayable", "context": "c-1", "value_usd_m": 113, "coefficient": 1}
+          ]
+        }
+      ],
+      "unresolved": [
+        {"field": "debt", "reason": "No full replacement: completeness and financing-obligation inclusion require further adjudication. Original debt67095 is retained, not certified."},
+        {"field": "agency_adjustments", "reason": "Reported gross interest and executed-task working-capital definition do not establish all cross-sector adjustments."}
+      ]
+    },
+    {
+      "id": "X12", "slug": "nike", "cik": 320187,
+      "start": "2025-06-01", "end": "2026-05-31",
+      "source": {
+        "path": "evaluation/companies/nike/filings/2026-07-15_10-K_000032018726000088.htm",
+        "sha256": "6dd837804f1ede7b42ea6511402f3d01e59331ed3a362a88e1e4fc7269d7d41a",
+        "accession": "0000320187-26-000088", "filed": "2026-07-15", "form": "10-K"
+      },
+      "patches": [
+        {
+          "group": "other", "field": "operating_income", "operation": "replace", "value_usd_m": 3797,
+          "rationale": "Declared operating-subtotal convention: gross profit19911 less selling and administrative expense16114=3797. The company's EBIT3850 adds other nonoperating income53; pretax3900 also includes net interest income50. This is a convention sensitivity, not a claim that Moody's necessarily excludes those53.",
+          "quotes": ["Total selling and administrative expense 16,114 16,088 16,576 Interest (income) expense, net ( 50 ) ( 107 ) ( 161 ) Other (income) expense, net ( 53 ) ( 76 ) ( 228 ) Income before income taxes 3,900 3,885 6,700"],
+          "operands": [
+            {"element_id": "f-62", "tag": "us-gaap:GrossProfit", "context": "c-1", "value_usd_m": 19911, "coefficient": 1},
+            {"element_id": "f-71", "tag": "us-gaap:SellingGeneralAndAdministrativeExpense", "context": "c-1", "value_usd_m": 16114, "coefficient": -1}
+          ]
+        },
+        {
+          "group": "other", "field": "wc_swing", "operation": "replace", "value_usd_m": -1678,
+          "rationale": "Executed-task subtotal -1207-31+519-959=-1678. Includes the disclosed broader operating asset/liability lines, not a certified agency working-capital-only definition. Matches original responses, retained as a zero-change control.",
+          "quotes": ["Changes in certain working capital components and other assets and liabilities: (Increase) decrease in accounts receivable ( 1,207 ) ( 257 ) ( 329 ) (Increase) decrease in inventories ( 31 ) 120 908 (Increase) decrease in prepaid expenses, operating lease right-of-use assets and other current and non-current assets 519 ( 224 ) ( 260 ) Increase (decrease) in accounts payable, accrued liabilities, operating lease liabilities and other current and non-current liabilities ( 959 ) ( 426 ) 397"] ,
+          "operands": [
+            {"element_id": "f-201", "tag": "us-gaap:IncreaseDecreaseInAccountsReceivable", "context": "c-1", "value_usd_m": 1207, "coefficient": -1},
+            {"element_id": "f-204", "tag": "us-gaap:IncreaseDecreaseInInventories", "context": "c-1", "value_usd_m": 31, "coefficient": -1},
+            {"element_id": "f-207", "tag": "us-gaap:IncreaseDecreaseInPrepaidDeferredExpenseAndOtherAssets", "context": "c-1", "value_usd_m": -519, "coefficient": -1},
+            {"element_id": "f-210", "tag": "us-gaap:IncreaseDecreaseInAccountsPayableAndOtherOperatingLiabilities", "context": "c-1", "value_usd_m": -959, "coefficient": 1}
+          ]
+        }
+      ],
+      "unresolved": [
+        {"field": "interest", "reason": "Net interest income50 and cash interest paid323 are not gross expense. Portfolio interest income278 is not demonstrated complete; do not infer228 gross expense from a partial disclosure."},
+        {"field": "debt", "reason": "Borrowings plus recognized operating leases are visible but complete financing/agency-adjustment treatment not established. Original11033 retained, not certified."},
+        {"field": "agency_adjustments", "reason": "Operating subtotal differs from company EBIT; both interpretations remain visible. Broader adjustments unresolved."}
+      ]
+    },
+    {
+      "id": "X15", "slug": "signet", "cik": 832988,
+      "start": "2025-02-02", "end": "2026-01-31",
+      "source": {
+        "path": "evaluation/companies/signet/filings/2026-03-19_10-K_000083298826000055.htm",
+        "sha256": "94645c32dffab6ab8819657b8f26ede00bc48b30dfce39ab632f2984a52d4dec",
+        "accession": "0000832988-26-000055", "filed": "2026-03-19", "form": "10-K"
+      },
+      "patches": [
+        {
+          "group": "debt", "field": "debt", "operation": "floor", "value_usd_m": 1217.3,
+          "rationale": "Lower-bound inclusion test only: debt=max(original debt, recognized operating lease liability1217.3), since the executed debt construct includes operating leases. This tests the minimum inclusion implied by disclosed obligations, NOT a complete replacement or certified total adjusted debt. Do not add1217.3 to an original total that already includes it.",
+          "quotes": ["The Company had no outstanding debt as of January 31, 2026, nor were there any borrowings on the ABL during Fiscal 2026."],
+          "operands": [{"element_id": "f-1517", "tag": "us-gaap:OperatingLeaseLiability", "context": "c-14", "value_usd_m": 1217.3, "coefficient": 1}]
+        },
+        {
+          "group": "other", "field": "wc_swing", "operation": "replace", "value_usd_m": 92.5,
+          "rationale": "Sum all seven operating-asset/liability change lines with displayed cash-flow signs:23.2+16.9+5.4+14.7-9+35.9+5.4=92.5. Increases/decreases in assets use semantic XBRL signs opposite to displayed cash contributions. Includes lease/tax/deferred-revenue lines per the executed task; not certified agency RCF.",
+          "quotes": ["Changes in operating assets and liabilities, net of acquisitions and divestitures: Inventories 23.2 1.0 182.5 Other assets 16.9 49.6 ( 36.8 ) Accounts payable 5.4 28.7 ( 134.5 ) Accrued expenses and other liabilities 14.7 ( 31.2 ) ( 252.5 ) Change in operating lease assets and liabilities ( 9.0 ) ( 18.8 ) ( 39.7 ) Deferred revenue 35.9 5.1 ( 7.0 ) Income tax receivable and payable 5.4 ( 19.3 ) ( 3.0 )"],
+          "operands": [
+            {"element_id": "f-270", "tag": "us-gaap:IncreaseDecreaseInInventories", "context": "c-1", "value_usd_m": -23.2, "coefficient": -1},
+            {"element_id": "f-273", "tag": "us-gaap:IncreaseDecreaseInOtherReceivables", "context": "c-1", "value_usd_m": -16.9, "coefficient": -1},
+            {"element_id": "f-276", "tag": "us-gaap:IncreaseDecreaseInAccountsPayable", "context": "c-1", "value_usd_m": 5.4, "coefficient": 1},
+            {"element_id": "f-279", "tag": "us-gaap:IncreaseDecreaseInAccruedLiabilitiesAndOtherOperatingLiabilities", "context": "c-1", "value_usd_m": 14.7, "coefficient": 1},
+            {"element_id": "f-282", "tag": "us-gaap:IncreaseDecreaseInOperatingLeaseLiability", "context": "c-1", "value_usd_m": -9, "coefficient": 1},
+            {"element_id": "f-285", "tag": "us-gaap:IncreaseDecreaseInContractWithCustomerLiability", "context": "c-1", "value_usd_m": 35.9, "coefficient": 1},
+            {"element_id": "f-288", "tag": "us-gaap:IncreaseDecreaseInIncomeTaxesPayableNetOfIncomeTaxesReceivable", "context": "c-1", "value_usd_m": 5.4, "coefficient": 1}
+          ]
+        }
+      ],
+      "unresolved": [
+        {"field": "interest", "reason": "Net interest income4 and cash interest paid7.6 do not establish gross expense. No zero-expense inference from zero borrowings."},
+        {"field": "debt", "reason": "Debt condition is only a recognized-lease floor, not full total-debt adjudication; unspecified finance/financing and agency adjustments remain unresolved."},
+        {"field": "agency_adjustments", "reason": "Working-capital subtotal follows executed task; no complete agency-adjusted RCF claim."}
+      ]
+    }
+  ]
+}

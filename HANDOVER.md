@@ -7,7 +7,76 @@ correspondence that is not in the repository, that is said. Read this file first
 README.md, then the experiment folders. Keep this file current: append a dated entry to
 section 13 whenever the state changes.*
 
-## State of the project, 2026-09-13 (read this first)
+## Latest result: accounting interventions, 2026-09-17
+
+*OpenAI Codex, directed by Robert Vetter. Verified against original current-arm outputs,
+23 exact filing operands and deterministic replay; source interpretations pending human review.*
+
+Robert asked for substantive new research before finalizing the lab reply. Experiment05
+(`experiments/05-accounting-interventions/`) is complete locally: nine current-arm responses
+for Walmart/Nike/Signet, fixed original qualitative grades, original/interest/debt/other/
+combined conditions, no new model calls. The Signet debt intervention is a recognized-lease
+floor, not certified total adjusted debt; Nike operating income is a declared subtotal
+sensitivity, not an agency-adjustment claim. Gross interest stays unresolved for Nike/Signet.
+
+Main results: Walmart gross expense2799 versus net2431 changes coverage7.1518x→6.2115x but
+no notch; Signet r3 lease inclusion moves Aa2→A1 (two notches). Combined issuer consensuses
+remain Aa3/Aa3/A3, 0/3 exact and MAE3.000 versus persistence2/3 and0.333. Repetition-level
+MAE29/9→27/9, entirely the one Signet response; not nine independent observations. After
+supported interventions Signet and Walmart have identical within-issuer financial vectors;
+stored grades alone yield three-notch and one-notch within-issuer spreads respectively.
+This isolates grading instability in the fixed calculation, not grade correctness or all
+remaining label error. Nike interest remains unequal, so no full grade attribution there.
+
+Saved new local output: `evaluation/runs/accounting-interventions-2026-09-17/study.json`
+and `results.md`. Source choices are in `interventions.json`, fixed before replacement
+scoring; spread diagnostics are a disclosed follow-up after the initial computation. All21
+study tests,19 prototype tests and61 old regressions pass. No edits to old labels/runs,
+scorecard/caches; no paid calls, downloads, commit, push or external publication. Next useful
+study distinguishes insufficient evidence from inconsistent rubric application using fixed
+financial inputs AND evidence, independent reviewer assessments/ranges and separate reference
+agreement/repeatability measures. Reference annotations are not yet available; do not infer them
+from agency ratings or claim lower variability alone is improvement. The lab packet/email should lead with the measured study,
+not retrospective prompt criticism; material limitations remain documented.
+
+## Earlier increment, 2026-09-17
+
+*Written by OpenAI Codex, directed by Robert Vetter. Verified against local raw facts,
+matching cached numeric filing elements and offline tests. Human accounting review pending.*
+
+Robert has sent the earlier email and received a request from Xiaowei for clearer tables
+of cutoff dates, filing dates, rating changes and results. The immediate approved work is
+an offline accounting/evidence prototype, not a full agent or new paid experiment.
+
+New modules `system/evidence_ledger.py`, `system/accounting_checks.py` and
+`evaluation/pipeline/accounting_benchmark.py` produce a three-case development review
+for Walmart, Nike and Signet at 2026-08-29. Existing gold, mapping, candidate labels,
+run bodies, scoring code and compact financial caches are not rewritten. The new reader
+uses true elapsed calendar days, while the legacy duration approximation remains unchanged.
+See `evaluation/README.md` for commands and test scope.
+
+The prototype separates source matching and arithmetic checks from accounting adjudication.
+All interpretations remain machine-proposed, pending Robert's review. It reports conflicting
+Walmart revenue concepts, gross/net/cash-interest distinctions, and debt/lease component
+reconciliations without asserting a complete adjusted total or final rating. Full TTM and
+rating-model comparisons are later work. These are known development issuers, not a holdout.
+
+For the next email, Robert is unsure whether Xiaowei or Prof. Giesecke previously mentioned
+hand-labelled data. Ask whether such data exists and is accessible; do not assert it does:
+“I may be remembering our earlier discussion incorrectly: do you or Prof. Giesecke have
+any hand-labelled credit-analysis examples, such as checked financial inputs or factor
+assessments, that might be available for this research? Separately, do we have access to
+complete dated rating histories that would let me verify the outstanding ratings at the
+evaluation date?” A later task in this session prepared a full English reply at
+`/Users/robert/Developer/giesecke/lab-reply-2026-09-17.txt`, outside the public repository.
+It is not sent. Its GitHub URL is a future destination until the local packet is approved,
+committed/pushed and checked for recipient access.
+
+The 2026-09-13 snapshot below is historical, including its unsent-email and unpushed-commit
+statements. At the start of this increment local main matched origin/main at 0588c64;
+no network synchronization or repository-visibility change was performed.
+
+## State of the project, 2026-09-13 (historical snapshot)
 
 *Written by Claude (Opus 5) at Robert Vetter's direction on 2026-09-13, as a gapless handover
 for a new session in any tool. It replaces the earlier continuation sections at the top of
@@ -561,6 +630,51 @@ they are. The model-facing code is Anthropic-specific and small:
 - Install and key: `pip install openai`, add `OPENAI_API_KEY` to `.env`. Set a cap first.
 
 ## 13. Change log of this file
+
+- 2026-09-17, publication preparation, OpenAI Codex at Robert's direction: Robert explicitly
+  authorized publishing the lab folder and supporting work to public GitHub main at the
+  requested URL. Revised the proposed next study to distinguish evidence insufficiency
+  from inconsistent rubric application under fixed inputs/evidence, using independent
+  reference assessments and separate agreement/repeatability measures. These assessments
+  are not yet available; the data request remains in the unsent email outside the repo.
+  Publication outcome is to be checked against GitHub after the push.
+
+- 2026-09-17, accounting intervention task, OpenAI Codex at Robert's direction: implemented
+  Experiment05 with frozen source-backed patches, exact baseline replay, original-period
+  checks and dispatched-input hash binding. All45 condition slots retained,12 unestimable.
+  Saved new ignored results, wrote the study findings and updated the three-file lab packet
+  and unsent English reply. Found score saturation and unchanged consensus despite one
+  two-notch individual move; identical Signet financial vectors leave a three-notch range
+  from stored grades. Twenty-one new study tests pass; prior80 tests pass. No original
+  experiment artifacts, human labels, mapping, scoring rules or financial caches changed.
+
+- 2026-09-17, subsequent task, OpenAI Codex at Robert's direction: prepared exactly three
+  English GitHub-native documents under `docs/lab-update-2026-09-17/`: README, dates/labels,
+  and exact prompts. Checked the system/task/main schema against all 60 frozen current
+  requests, the probe system/schema against saved probes, and all 19 date-table rows
+  against 47 actual supplied documents and accepted label-source dates. Prompt limitations
+  (required numeric values, net-interest fallback, abbreviated rubric), both residual
+  disclosures and the one changed primary issuer are explicit. Additional prototype work
+  is separate from unrun proposed experiments. Prepared an unsent email outside the repo;
+  folder is local only, with no commit, push, external publication or access verification.
+
+- 2026-09-17, OpenAI Codex at Robert's direction: implemented the approved offline
+  three-case accounting development prototype. Saved a new ignored packet at
+  `evaluation/runs/accounting-development-2026-09-17/` (`evidence.json`, `review.txt`).
+  Retained 93 relevant raw observations, quarantined two Signet facts filed after the
+  observation date, and matched all 52 referenced facts to cached consolidated numeric
+  inline-XBRL elements (Walmart 34, Nike 9, Signet 9). This verifies numeric provenance,
+  not expert accounting correctness. Of 50 review rows, 38 pass mechanical checks,
+  two flag conflicting Walmart revenue concepts, seven lack required facts and three
+  adjusted-debt totals require review. New tests: 19 passing, including real-cache
+  integration, no skips. Existing Experiment 03/04 suites: 10 and 51 passing, with
+  pre-existing ResourceWarnings in the latter. Focused review prompted regressions for
+  goods-only revenue, CIK identifier schemes, partial-source preservation and conflicting
+  reconciliation lineage. Checksums of all 1,875 pre-existing protected source/cache/run
+  files match the pre-implementation snapshot. No legacy cache, paid run, rating label,
+  scorecard or frozen decision changed. No paid calls, commit, push or publication.
+  Preserved the email question about whether hand-labelled examples are available,
+  separate from the request for complete dated rating histories.
 
 - 2026-09-12: created. State: three experiments done; calibration study uncommitted; Exp 03
   at n = 7 with 13 labels runnable after top-up; repository found public; balance about $1.26.

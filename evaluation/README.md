@@ -57,6 +57,55 @@ Per company folder:
 Every step is re-runnable and deterministic given `data/` (see `data/README.md` for where each
 input comes from). Decisions are the only human input and survive every re-run.
 
+## Offline accounting development review
+
+*Written by OpenAI Codex, directed by Robert Vetter, 2026-09-17. Verified against the
+three local development cases and offline tests; not human-labelled accounting truth.*
+
+`pipeline/accounting_benchmark.py` is an independent component-development check, not
+another paid rating experiment or a replacement for pipeline steps 10/12. It reads
+cached raw companyfacts, compact financials for legacy comparison, and cached filing
+metadata/HTML for Walmart, Nike and Signet as of 2026-08-29. These issuers were used
+previously; the sample deliberately targets known failures and is not a fresh holdout.
+Exact gold observation keys are excluded before analysis. Rating labels are not used.
+
+```sh
+python3 evaluation/pipeline/accounting_benchmark.py
+python3 evaluation/pipeline/accounting_benchmark.py --out evaluation/runs/accounting-development-2026-09-17
+python3 -m unittest discover -s evaluation/tests -p 'test_*.py' -v
+```
+
+The first command prints only; the second creates a new ignored directory containing
+`evidence.json` and `review.txt`, and refuses existing destinations. Missing caches are
+reported, never fetched. Every proposed interpretation is pending human review.
+Mechanical checks and numeric filing matches are not extraction-accuracy measurements.
+Full TTM, adjusted debt, RCF and ratings remain outside this first milestone. Synthetic
+tests need no local corpus; the optional real-case test explicitly skips without caches.
+
+## Accounting intervention study
+
+*Added by OpenAI Codex, directed by Robert Vetter, 2026-09-17; verified against saved
+responses and source evidence, with accounting interpretations pending human review.*
+
+[Experiment 05](../experiments/05-accounting-interventions/README.md) replays nine saved
+current-arm responses for Walmart, Nike and Signet, changes only declared source-supported
+financial inputs, and holds each response's qualitative grades fixed. It makes no model
+calls. [Results](../experiments/05-accounting-interventions/results.md) separate factor,
+aggregate and rating effects. One Signet response moves two notches; issuer consensuses
+remain unchanged. Identical financial vectors still produce a three-notch Signet range
+because of stored qualitative grades. This is a development diagnostic, not validation
+of the grades or complete agency-adjusted financials.
+
+```sh
+python3 experiments/05-accounting-interventions/run_study.py
+python3 -m unittest discover -s experiments/05-accounting-interventions -p 'test_*.py' -v
+```
+
+The `--out evaluation/runs/accounting-interventions-<new-id>` option writes a fresh
+ignored directory and refuses overwrite. Original requests, responses and caches remain
+unchanged. The source-backed intervention specification records uncertainties and uses
+no target-label fitting.
+
 ## Running the evaluation
 
 `run_eval.py` needs an Anthropic API key (`export ANTHROPIC_API_KEY=...`). One observation is
