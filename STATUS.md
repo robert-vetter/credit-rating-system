@@ -40,12 +40,14 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 04 | Qwen3-235B, 19 post-cutoff issuers, 3 runs, $1.24 | 17/19, MAE 0.11 | 3/19, MAE 1.84 | 18/19, MAE 0.05 |
 | 05 | no model; corrected inputs replayed through the scorecard, Walmart, Nike, Signet | | 0/3 | 2/3 |
 | 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
+| 07 | no model; how often and how much ratings change, 2012 to 2025; specification drafted 2026-09-26 | not run | | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
 
 | Decision | Owner | State |
 |---|---|---|
+| Experiment 07 specification: seven decisions, including whether it runs before chair consensus | Robert | drafted 2026-09-26; [section 13](experiments/07-rating-change-base-rates/README.md#13-decisions-that-need-consensus-before-the-run) |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |
 | A widely used commercial model | Robert | Robert agrees with Xiaowei (2026-09-26). GPT-5.2 fits the window (cutoff 2025-08-31); about $10 to $25 for 20 issuers × 3 runs; no cap approved |
@@ -87,6 +89,8 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-26, Claude (Opus 5.5) at Robert's direction: drafted the Experiment 07 specification
+  (base rates of rating changes, no model, $0). Not run, not reviewed.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: wrote EXPERIMENT-POLICY.md (seven
   stages, design requirements from the chair's reviews, pre-checks P1 to P14, analysis and
   report structure) and the experiment and report templates. Robert confirmed the three
