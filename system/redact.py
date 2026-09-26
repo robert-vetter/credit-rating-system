@@ -1,10 +1,10 @@
 """
 Rating-disclosure redaction, importable form of the blind test's stripper.
 
-Written by Claude (Opus 5). Original: notes/scripts/strip_ratings.py (kept as the experiment
-artifact); logic identical, packaged as functions.
+Written by Claude (Opus 5). Original: the blind test's strip_ratings.py (removed 2026-09-26, in git
+history); logic identical, packaged as functions.
 
-Why this exists: filings disclose their own credit ratings (docs/leakage-audit.md), so feeding
+Why this exists: filings disclose their own credit ratings (evaluation/leakage-audit.md), so feeding
 a raw filing to the system hands it the answer. Two passes over the text lines: (1) any line
 mentioning an agency or rating vocabulary is removed together with up to 16 following lines
 that look like rating-table rows, (2) orphaned rating-table rows are removed on their own.

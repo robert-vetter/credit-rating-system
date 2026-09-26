@@ -1,8 +1,8 @@
 """
 Retail and Apparel scorecard arithmetic, Moody's methodology of 12 Sep 2025.
 
-Written by Claude (Opus 5) as part of the baseline runs described in walmart-first-test.md and
-kohls-second-test.md.
+Written by Claude (Opus 5) as part of the first manual runs on Walmart and Kohl's, 2026-08-08 (notes in git
+history).
 
 The engine in the lower half is exact and deterministic. The upper half is company inputs, extracted
 from the 10-Ks by the model, and that is where every contestable decision sits: which balance sheet

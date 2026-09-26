@@ -3,7 +3,7 @@
 ## DECIDED (Robert, 2026-09-12, via chat)
 
 **D1 Model: Qwen3-235B-A22B-2507 through OpenRouter.** Robert's reasoning, recorded for the
-lab update: Opus 4.6 is the strongest model but at 60,000 to 300,000 tokens per issuer it cost
+update to the chair: Opus 4.6 is the strongest model but at 60,000 to 300,000 tokens per issuer it cost
 about a dollar per observation, which capped Experiment 03 at seven. He then looked for the
 sweet spot between model strength and cutoff date, early enough that labelled rating changes
 lie after the bound, recent enough to be strong, cheap enough to run the whole cross-section.

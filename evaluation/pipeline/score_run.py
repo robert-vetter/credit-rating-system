@@ -6,7 +6,7 @@ Written by Claude (Opus 5), directed by Robert Vetter. Reads evaluation/runs/<ta
 
 Why a separate script: the runner records raw outcomes; what they mean is a scoring question
 with its own definitions, and those definitions must be reusable across runs and models. The
-headline constraint from docs/experiment-plan.md applies throughout: ratings are inert, so
+headline constraint from the experiment plan of 2026-08-11 (in git history) applies throughout: ratings are inert, so
 accuracy alone flatters any system - the persistence baseline gets every unchanged quarter
 right for free. Everything here is therefore reported per subset:
 

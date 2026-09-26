@@ -1,6 +1,6 @@
 # Scorecard calibration summary
 
-*Generated 2026-09-12 by evaluation/pipeline/calibrate_scorecard.py; reviewed by Codex, directed by Robert Vetter. Verified against the local XBRL and observation records. Gold excluded before development analysis; threshold-feature fitting nested within outer training folds. No model calls. Seed 20260911, 5 folds by company. Retrospective cross-company validation, not a rolling forecast. Definitions and caveats in the script; study history in notes/scorecard-calibration.md.*
+*Generated 2026-09-12 by evaluation/pipeline/calibrate_scorecard.py; reviewed by Codex, directed by Robert Vetter. Verified against the local XBRL and observation records. Gold excluded before development analysis; threshold-feature fitting nested within outer training folds. No model calls. Seed 20260911, 5 folds by company. Retrospective cross-company validation, not a rolling forecast. Definitions and caveats in the script; study history in evaluation/scorecard-calibration.md.*
 
 ## Coverage
 

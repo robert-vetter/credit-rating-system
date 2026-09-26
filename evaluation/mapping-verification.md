@@ -83,8 +83,8 @@ Ratings"; the 17g-7 file (data through August 2025) still carries A1. So Moody's
 Nike inside the 12-month publication embargo, where the public file is blind. The snippet
 simultaneously confirms the mapping (the filer names a Moody's senior unsecured rating on
 exactly the line we track, one notch adjacent) and demonstrates live why labels for
-observation dates after August 2025 must come from the lab's dataset, never from the public
-file (notes/rating-history-file.md, Finding 1).
+observation dates after August 2025 must come from the chair's dataset, never from the public
+file (evaluation/rating-history-file.md, Finding 1).
 
 **All seven original study companies are MATCH** (Walmart Aa2, Target A2, Dollar General,
 Kohl's, Macy's Ba1, Gap Ba2, Victoria's Secret), which closes the loop on their labels a

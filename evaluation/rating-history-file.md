@@ -32,8 +32,8 @@ Consequences, now measured rather than feared. The public file provides complete
 persistence baselines **up to twelve months ago**, which fully powers the historical arm of the
 evaluation: the pre-cutoff side of the within-model contrast, the persistence baseline, and the Task B
 rating-path inputs for observation dates up to August 2025. It provides **nothing** for the
-post-cutoff clean window. For that window the labels must come from the lab's dataset or another
-source, which upgrades the lab-dataset question from important to strictly blocking for the
+post-cutoff clean window. For that window the labels must come from the chair's dataset or another
+source, which upgrades the chair-dataset question from important to strictly blocking for the
 clean-window arm.
 
 ## Finding 2: the label pipeline must join both file sets

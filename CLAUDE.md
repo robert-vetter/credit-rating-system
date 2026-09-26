@@ -1,1 +1,1 @@
-Read AGENTS.md, then HANDOVER.md. Both apply to every session in this repository.
+Read AGENTS.md, then STATUS.md. Both apply to every session in this repository.

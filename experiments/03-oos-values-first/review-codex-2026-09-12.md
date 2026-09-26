@@ -163,10 +163,10 @@ as zero. Do not fit a final policy until the target and evaluation split are fix
 
 Two alternatives are useful but secondary. A factor-by-factor methodology specification
 and citation validator would directly strengthen the analyst prompts. Additional labels from
-the lab would strengthen later evaluation, but changing the labels or sample remains Robert's
+the chair would strengthen later evaluation, but changing the labels or sample remains Robert's
 decision. Buying 13 more responses does not resolve the defects identified here.
 
-For the lab update, the defensible story is: the evaluation apparatus is built; a small
+For the update to the chair, the defensible story is: the evaluation apparatus is built; a small
 post-cutoff pilot is recorded with persistence; the audit found and repaired a methodology
 implementation bug; the free calibration finding survived stricter validation; and the
 next architecture addresses source evidence, events and update decisions. Do not claim

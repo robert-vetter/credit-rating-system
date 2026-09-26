@@ -169,6 +169,6 @@ source and result summaries, not a complete replay bundle.
 
 A stronger subsequent experiment needs a fixed target entity/rating type, verified
 outstanding labels, the supplied methodology rubric, citation validation, and completed
-probe review before document submission. The [integrity review](../../docs/oos-integrity-review.md)
+probe review before document submission. The [integrity review](review-codex-2026-09-12.md)
 details these limitations and proposes the analyst architecture. No new experiment has
 been launched.

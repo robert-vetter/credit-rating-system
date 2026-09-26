@@ -9,7 +9,7 @@ arithmetic sits systematically above Moody's assigned rating, and the model's ow
 is reluctant to call a change. Both can be studied on the historical frame without a model.
 Every observation whose four quantitative subfactors are computable from point-in-time XBRL
 is scored with system/scorecard.py and compared with the rating Moody's actually had in
-effect. This is rung 1 of the blinding ladder in docs/experiment-plan.md: numbers only, so
+effect. This is rung 1 of the blinding ladder in the experiment plan of 2026-08-11 (in git history): numbers only, so
 no training memory and no document leakage can be involved, and it is the floor that every
 model-based channel has to beat.
 
@@ -42,7 +42,7 @@ rating in effect at t and at the previous quarter end. In-scope companies only.
 
 Outputs: evaluation/runs/calibration/rows.json (one record per observation, gitignored) and
 evaluation/calibration-summary.md (generated tables, committed). The reading of the numbers
-lives in notes/scorecard-calibration.md.
+lives in evaluation/scorecard-calibration.md.
 
 Run: python3 evaluation/pipeline/calibrate_scorecard.py
 """
@@ -394,7 +394,7 @@ def write_summary(cov, gap, level, change, curve, rows, tim):
          "fitting nested within outer training folds. No model calls. "
          f"Seed {SEED}, {FOLDS} folds by company. Retrospective cross-company validation, "
          "not a rolling forecast. Definitions and caveats in the script; study history in "
-         "notes/scorecard-calibration.md.*",
+         "evaluation/scorecard-calibration.md.*",
          "",
          "## Coverage",
          "",

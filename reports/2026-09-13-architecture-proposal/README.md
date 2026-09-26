@@ -1,6 +1,6 @@
 # Credit rating analyst: proposed architecture
 
-*Written by OpenAI Codex, directed by Robert Vetter, 13 September 2026. Proposal based on the [experiment results](../experiments/04-open-weight-cross-section/results.md) and [integrity review](oos-integrity-review.md); not yet implemented as a complete system.*
+*Written by OpenAI Codex, directed by Robert Vetter, 13 September 2026. Proposal based on the [experiment results](../../experiments/04-open-weight-cross-section/results.md) and [integrity review](../../experiments/03-oos-values-first/review-codex-2026-09-12.md); not yet implemented as a complete system.*
 
 ## Objective
 
@@ -36,4 +36,4 @@ Report exact accuracy and notch MAE against persistence on the same issuers, alo
 
 Build the evidence records and accounting/TTM baseline first using cached data. Then test rubric-grounded grading and the separate rating decision. Add forecasts after those components are reliable. Measure each addition on the same evaluation set so its contribution is identifiable.
 
-For the lab: agree the target rating type, obtain dated histories establishing outstanding ratings, and define the acceptable tradeoff between missed changes and false alarms. Faster event sources beyond 10-Ks/10-Qs would require a separate source policy.
+For the chair: agree the target rating type, obtain dated histories establishing outstanding ratings, and define the acceptable tradeoff between missed changes and false alarms. Faster event sources beyond 10-Ks/10-Qs would require a separate source policy.

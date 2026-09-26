@@ -4,18 +4,23 @@ Instructions for any AI coding agent or new session working in this repository.
 
 ## Read first
 
-1. `HANDOVER.md` : where the project stands, what was done, the correspondence with the lab,
-   open items, and how to run things. Keep its change log (section 13) current.
-2. `README.md` : the map of the repository and the headline findings.
-3. The experiment folder you are touching: its `README.md` (specification), `decisions.md`
+1. `STATUS.md`: where the project stands, open decisions, findings, money. Keep it current.
+2. `README.md`: the overview the chair reads, and the map of the repository.
+3. The latest report in `reports/`: what the chair has been told, and its specification.
+4. The experiment folder you are touching: its `README.md` (specification), `decisions.md`
    (decisions with owner and date), `results.md`.
+
+Private files outside the repository, in `/Users/robert/Developer/giesecke/correspondence/`:
+the email log, Robert's thinking log and Xiaowei's expectations. Never copy their contents
+into the repository; it is public.
 
 ## Who decides what
 
 Robert Vetter directs the project and makes every decision that costs money, changes scope,
-touches the gold set or the mapping, or goes to the lab (Prof. Giesecke, Xiaowei Ding). The
-agent proposes, implements, measures and writes; it does not spend, commit, publish or send
-without being asked. Decisions are recorded in the relevant `decisions.md` with owner and date.
+touches the gold set or the mapping, or goes to the chair (Prof. Giesecke, Xiaowei Ding). The
+chair is the Chair of AI and Quantitative Finance; never call it "the lab". The agent proposes,
+implements, measures and writes; it does not spend, commit, publish or send without being
+asked. Decisions are recorded in the relevant `decisions.md` with owner and date.
 
 ## Rules that must not be relaxed
 
@@ -35,21 +40,42 @@ without being asked. Decisions are recorded in the relevant `decisions.md` with 
 ## Writing style
 
 Plain English, short sentences, no em dashes, no emoji or badges, no marketing words, no
-bullet list where two sentences of prose would do, no files nobody asked for. Write only what
-is true now and say when something is undecided. Every note starts with an attribution header
-saying who wrote it, who directed it, the date, and what was verified against which source.
-Commit messages: one line describing the deliverable, no attribution trailers.
+bullet list where two sentences of prose would do, no files nobody asked for. Facts, dates and
+numbers go in tables. Write only what is true now and say when something is undecided. Every
+note starts with an attribution header saying who wrote it, who directed it, the date, and what
+was verified against which source. Commit messages: one line describing the deliverable, no
+attribution trailers.
 
 ## Where things go
 
-- `system/` the rating system under test; `evaluation/` the measuring apparatus (pipeline
-  steps listed in run order in `evaluation/README.md`); `experiments/NN-name/` one folder per
-  experiment; `notes/` chronological experiment logs indexed in `notes/README.md`; `docs/`
-  plan, audits, reviews; `data/` raw and derived data, gitignored except its README.
-- Generated artefacts (`evaluation/companies/`, `evaluation/runs/`, `experiments/*/runs/`)
-  are gitignored and regenerable; do not commit them.
+| Folder | Contents |
+|---|---|
+| `reports/YYYY-MM-DD-topic/` | anything written for the chair; never edited after it is sent |
+| `system/` | the rating system under test |
+| `experiments/NN-name/` | one folder per experiment: specification, decisions, prompts, code, results, its audits |
+| `evaluation/` | the measuring apparatus; pipeline steps in run order in `evaluation/README.md` |
+| `data/` | raw and derived data, gitignored except its README |
+
+Generated artefacts (`evaluation/companies/`, `evaluation/runs/`, `experiments/*/runs/`) are
+gitignored and on this machine only; do not commit them. The two Moody's 17g-7 zips under
+`data/moodys/` cannot be downloaded again without Robert's account; never delete them.
 
 ## Environment
 
-Python 3.13, packages in `HANDOVER.md` section 11, secrets in `.env` (gitignored). Run scripts
-from the repository root with `python3 path/to/script.py`.
+macOS, Python 3.13 with anthropic, httpx, jsonschema, transformers, tokenizers, numpy, scipy,
+scikit-learn and pandas. Secrets in `.env` (gitignored): `ANTHROPIC_API_KEY` and
+`OPEN_ROUTER_API_KEY`. Never print a key. Run scripts from the repository root.
+
+| Command | What it does |
+|---|---|
+| `python3 system/scorecard.py` | the scorecard on two worked examples |
+| `python3 -m unittest discover -s experiments/03-oos-values-first -p 'test_*.py'` | Experiment 03 regressions |
+| `cd experiments/04-open-weight-cross-section && python3 -m unittest test_runner` | Experiment 04 acceptance tests |
+| `python3 -m unittest discover -s experiments/05-accounting-interventions -p 'test_*.py'` | Experiment 05 tests |
+| `python3 -m unittest discover -s evaluation/tests` | evidence-ledger prototype tests |
+| `python3 evaluation/pipeline/calibrate_scorecard.py` | the historical calibration study, no cost |
+| `python3 evaluation/pipeline/history_pack.py <slug> <date>` | prints a point-in-time history pack |
+| `python3 experiments/04-open-weight-cross-section/prepare_inputs.py` | rebuilds every Experiment 04 input offline; refuses if a rating survives redaction |
+
+`run_openrouter.py submit` is the only paid path in the repository. It refuses without an
+authorization file bound to the manifest hash. Experiment 03's paid paths are closed.

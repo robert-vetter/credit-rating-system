@@ -1,0 +1,56 @@
+{
+  "version": "qualitative-evidence-v1",
+  "author": "OpenAI Codex",
+  "directed_by": "Robert Vetter",
+  "date": "2026-09-17",
+  "methodology_path": "methodologies/Rating_Methodology-Rating-Methodology-Retail-and-12Sep2025-PBC_1450282.pdf",
+  "methodology_sha256": "dded0ac947398a7b20ff5ac0652a3ecf7f1c8ca3e7a36918f27ffb83ba3ec5e0",
+  "ordering": "Checklist fixed before examining saved qualitative rationales in this study; previous grade and rating exposure acknowledged. Not blinded or preregistered.",
+  "interpretation": "Paraphrased analytical reference, not the original supplied prompt or a deterministic grading algorithm. Holistic best fit: not every attribute is required; predominant characteristics and sometimes one overriding characteristic matter. No target rating or implied anchor is independent factor evidence.",
+  "factors": [
+    {
+      "name": "Market Characteristics", "pages": [3, 6, 7],
+      "criteria": [
+        {"id": "MC-competition", "question": "How competitive and contestable are the markets served, including entry barriers and disruption?"},
+        {"id": "MC-demand", "question": "How exposed is demand to discretionary spending, cyclicality, changing preferences and fashion?"},
+        {"id": "MC-country", "question": "What geography and economic-strength exposure is established by supplied evidence?"}
+      ],
+      "band_distinctions": "Upper bands describe limited competitive threats, stronger barriers and demand resilience; lower bands imply greater cyclicality, disruption or sensitivity. A strong company position alone does not demonstrate an uncompetitive market.",
+      "historical_instruction": "Scale, growth, cyclicality and disruption exposure of the segments served; grade relative to implied anchor.",
+      "review_rules": "Generic competitive risk language is adverse evidence, not proof of a precise band. Country presence alone does not establish economic-strength assessment."
+    },
+    {
+      "name": "Market Position", "pages": [4, 7, 8],
+      "criteria": [
+        {"id": "MP-position", "question": "Is leadership/share trajectory documented, and at what product/geographic scope?"},
+        {"id": "MP-strength", "question": "What supports brand, pricing power, channels, operations and sustainable cash generation?"},
+        {"id": "MP-concentration", "question": "How diversified or concentrated is the business; what challenges weaken its position?"}
+      ],
+      "band_distinctions": "The strongest bands distinguish durable, broad leadership and differentiated capabilities from being one of several leading competitors. A favourable issuer self-description is not independent market-share validation.",
+      "historical_instruction": "Competitive strength, share trajectory, brand and pricing power; grade relative to implied anchor.",
+      "review_rules": "Separate issuer assertion, observed scale/trend and independent market comparison. Missing share data may prevent discrimination among adjacent bands without disproving broad strength."
+    },
+    {
+      "name": "Revenue and Earnings Stability", "pages": [4, 8],
+      "criteria": [
+        {"id": "RS-track", "question": "What do supplied multiyear and interim revenue, margin and earnings paths show?"},
+        {"id": "RS-peer", "question": "Are comparative peer performance and cyclicality actually supported by like-for-like evidence?"},
+        {"id": "RS-target", "question": "Is performance versus management targets established, and are unusual items distinguished?"}
+      ],
+      "band_distinctions": "Higher bands combine a sustained growth/stability record, resilience, peer-relative performance and achievement of targets. A single recent positive quarter does not establish an exceptional long-term record.",
+      "historical_instruction": "Volatility of revenue and margins through cycles; secular decline grades low; relative to implied anchor.",
+      "review_rules": "Do not equate a negative year with secular decline automatically. A one-year peer snapshot is not a longitudinal peer-cycle benchmark. Accounting quality of supplied packs remains qualified."
+    },
+    {
+      "name": "Financial Policy", "pages": [5, 8, 9],
+      "criteria": [
+        {"id": "FP-capital", "question": "What capital-structure targets, public commitments and demonstrated adherence are supplied?"},
+        {"id": "FP-allocation", "question": "How are distributions, investment and debt financed; how are creditor and shareholder interests balanced?"},
+        {"id": "FP-event", "question": "What evidence bears on acquisition, ownership, refinancing and other balance-sheet-transforming risks?"}
+      ],
+      "band_distinctions": "Strong bands require predictable credit-supportive policy and sustained risk/liquidity management; weaker bands allow greater shareholder preference or credit-changing transactions. Low borrowings at one date do not prove conservative future policy.",
+      "historical_instruction": "Leverage appetite, buybacks, dividends, M&A and ownership; debt-funded returns/PE ownership grade low; relative to implied anchor.",
+      "review_rules": "A repurchase is not automatically debt-funded or adverse. Borrowing versus lease-inclusive debt must be distinguished. Do not use disclosed agency ratings or implied anchors to justify a policy grade."
+    }
+  ]
+}

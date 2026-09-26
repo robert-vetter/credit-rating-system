@@ -50,7 +50,7 @@ Per company folder:
 | 10 | `pipeline/fetch_xbrl.py` | structured financials per company from SEC's companyfacts API, merged across tag variants (fallback chains extended 2026-09-11, tag recorded per value), annual and quarterly values with filed dates → `companies/<slug>/xbrl.json`. The raw responses are kept under `data/edgar/companyfacts/` so the extraction re-runs offline. Foreign IFRS filers (Gildan, JD.com, ...) have no us-gaap tags and come back empty - known gap |
 | 11 | `pipeline/score_run.py` | scores a run directory the way the experiment plan demands: per-subset metrics (changed-subset lift over persistence, direction accuracy, false-alarm rate on unchanged, change-detection recall), Spearman, paired bootstrap CI on system-minus-persistence → `scores.json`. Verified against a hand-computed fixture |
 | 12 | `pipeline/check_extraction.py` | scores the extraction step against XBRL without any model cost: seven one-to-one figures compared per observation (`--run <dir>`) or for the two hand-extracted baselines (`--manual`); interest flagged (gross/net ambiguity), debt compared against summed components, wc_swing not comparable - all stated in the output |
-| 13 | `pipeline/calibrate_scorecard.py` | the numbers-only rung: scores non-gold in-scope observations whose four quantitative subfactors are computable from point-in-time XBRL with `system/scorecard.py` and compares with the assigned rating; monotone (isotonic) level calibration and a one-notch change detector, both out-of-fold with whole companies held out (seed 20260911), metrics as in `score_run.py` → `calibration-summary.md` (tables, committed) and `runs/calibration/` (per-observation rows). No model call. Findings in notes/scorecard-calibration.md |
+| 13 | `pipeline/calibrate_scorecard.py` | the numbers-only rung: scores non-gold in-scope observations whose four quantitative subfactors are computable from point-in-time XBRL with `system/scorecard.py` and compares with the assigned rating; monotone (isotonic) level calibration and a one-notch change detector, both out-of-fold with whole companies held out (seed 20260911), metrics as in `score_run.py` → `calibration-summary.md` (tables, committed) and `runs/calibration/` (per-observation rows). No model call. Findings in evaluation/scorecard-calibration.md |
 
 `pipeline/peer_table.py` is the library behind `--peers`: a point-in-time filtered (both period end and filed date before t), ratings-free key-figure table of the in-scope peers, generated from XBRL for the Market Position subfactor.
 
@@ -173,7 +173,7 @@ reference live in `pipeline/build_observations.py` and the aggregate numbers in
 `observations-summary.md`. One observation = (company, date t, label at t, document references
 filed before t, rating path up to t, changed flag, persistence baseline). The label horizon
 ends 2025-06-30 because the public rating file is embargoed twelve months (dated 2026-08-11,
-content through August 2025); observation dates beyond that need the lab's dataset.
+content through August 2025); observation dates beyond that need the chair's dataset.
 
 ## Integrity review, 2026-09-12
 
@@ -184,7 +184,7 @@ saved primary documents, checks request dates, joins earlier probes with reruns 
 recorded with corrected scoring. It makes no network or model calls and writes an ignored
 `runs/offline-review-2026-09-12/audit.json`. Its companion `test_integrity.py` covers methodology
 edge cases, source-date boundaries, peers and closed paid execution. See
-[the review](../docs/oos-integrity-review.md) for the remaining limitations.
+[the review](../experiments/03-oos-values-first/review-codex-2026-09-12.md) for the remaining limitations.
 
 Calibration step 13 now excludes gold before all development work and nests feature fitting
 within outer training folds. Its default command regenerates the standard calibration

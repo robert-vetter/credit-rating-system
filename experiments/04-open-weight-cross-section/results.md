@@ -8,7 +8,7 @@ DeepInfra's fp8 endpoint. Every number was computed offline from the append-only
 raw responses, the frozen manifest and the audit files under runs/EXP04-ARM1-A1/ (gitignored,
 on this machine) by `run_openrouter.py score` and `report.py`, which score both models through
 `evaluation/pipeline/score_run.py`; the audit reconstructed them independently. Nothing has
-been sent to the lab.*
+been sent to the chair.*
 
 ## What this measures
 

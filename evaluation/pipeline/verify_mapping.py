@@ -4,7 +4,7 @@ Independent verification of the Moody's-to-SEC mapping via self-disclosure.
 Written by Claude (Opus 5), directed by Robert Vetter.
 
 The idea: companies disclose their own credit ratings in their filings (found originally as a
-leakage channel, docs/leakage-audit.md). That turns into a mapping check: if the 10-K of the
+leakage channel, evaluation/leakage-audit.md). That turns into a mapping check: if the 10-K of the
 SEC filer we mapped names the same Moody's rating that the mapped Moody's entity's 17g-7 file
 carries at the filing date, then the company itself confirms the pair. This is independent of
 name matching: it compares rating values across the join, not names.

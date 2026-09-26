@@ -110,7 +110,7 @@ short qualitative descriptions rather than the complete methodology rubric. Its 
 reported agreement with XBRL is a consistency result, since XBRL was already part of the
 input. It does not prove that extraction or financial adjustments are solved.
 
-The [integrity review](../../docs/oos-integrity-review.md) records the full findings and
+The [integrity review](review-codex-2026-09-12.md) records the full findings and
 repairs. Original paid artifacts remain under the two ignored run directories:
 `msgbatch_01EwnHhsKjahuwhmL8S5h2Sx` and `msgbatch_01QsBQnMF1itHj1Ysz3jguKZ`.
 The local offline audit is `runs/offline-review-2026-09-12/audit.json`; raw files are not

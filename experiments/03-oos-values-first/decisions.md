@@ -53,7 +53,7 @@ recorded; pure direct variant retired with the documented evidence.
 **D8 — Bedrock route (Sonnet 4 / Opus 4.1, Mar-2025 cutoffs, file-labeled window Apr–Aug
 2025 with 11 actions at 8 companies).** Parked: requires an AWS account with existing Bedrock
 usage (new customers cannot use Legacy models) and re-verification of those cutoffs from
-system cards (their docs pages are gone). Robert to check HPI/lab access.
+system cards (their docs pages are gone). Robert to check HPI/chair access.
 
 **D9 — Budget cap: $10 total** (Robert). Consequence: if the full document package for all
 labeled companies exceeds the cap at count_tokens time, the subset rule is: all changed cases

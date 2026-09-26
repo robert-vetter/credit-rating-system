@@ -41,7 +41,7 @@ Two things stand out. The retail 10-K season is February to April, so a bound af
 2025 loses the 10-Ks and leaves 10-Q packages, which are smaller and thinner. And the
 official window dries up after May 2025; from there on the only labels are the 20
 disclosures. Every month Moody's extends its file adds roughly two changes among our issuers
-to the official window; with the lab's rating data the gap closes at once.
+to the official window; with the chair's rating data the gap closes at once.
 
 ## 2. Candidates and where each one sits
 

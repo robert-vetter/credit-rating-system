@@ -351,7 +351,7 @@ neither preserving labels nor repeating on a new model creates a never-seen hold
 6. Replace the universal 2% truncation rule with rendered per-request counts, explicit schema/template allowances, context checks and a documented stop-and-investigate policy for discrepancies.
 7. Implement and test shared corrected scoring with independent channel coverage, visible failures, fixed denominators, paired persistence and an explicit three-valid-replicate consensus rule.
 8. Record revised V1 to V6 and R1 to R5 before execution, including probe staging, contamination flags, instability handling and no automatic escalation to more paid work.
-9. Correct the run specification and decision summaries and identify the frozen prompt's missing-rubric and missing-value limitations, with the separate lab-draft corrections required before sending rather than before execution.
+9. Correct the run specification and decision summaries and identify the frozen prompt's missing-rubric and missing-value limitations, with the separate email-draft corrections required before sending rather than before execution.
 10. Obtain Robert's Arm 1 decisions D5 to D9 and D12, leave D10 deferred unless separately authorized, and complete second-stage verification of the runner plus every free pre-flight body, count and cost bound before authorizing the probe and inspected document request.
 
 ## Recommendations that may wait
@@ -393,9 +393,9 @@ honestly; it is not a documented exact training cutoff.
 any paid request, including the supposedly small inspection. Full analyst redesign,
 extra models, more repetitions and Arm 2 can wait. Verified outstanding labels may also
 wait only if Robert explicitly accepts the narrower disclosure-label pilot and its
-limited claims. No request to the lab is authorized here.
+limited claims. No request to the chair is authorized here.
 
-**3. What may the lab claim afterward?** Once results exist, state the model and provider,
+**3. What may the report to the chair claim afterward?** Once results exist, state the model and provider,
 public release bound and source, as-of and history dates, input variant, redaction and
 no-retrieval configuration, attempted and valid counts, both channels' exact accuracy,
 within-one rate and MAE, persistence on the same cohorts, changed/unchanged diagnostics,

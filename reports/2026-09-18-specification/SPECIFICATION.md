@@ -2,7 +2,7 @@
 
 *Written 18 September 2026 by Claude (Fable 5.1), directed by Robert Vetter. Version 1.0, for review and consensus. It specifies the experiment as executed (Experiment 03 on Claude Opus 4.6, Experiment 04 on Qwen3-235B) and marks, as DECISION, every item that must be agreed before the next run. Checked against: the executed [Experiment 04 specification](../../experiments/04-open-weight-cross-section/RUN-SPEC.md) and [results](../../experiments/04-open-weight-cross-section/results.md), the [Experiment 03 specification](../../experiments/03-oos-values-first/README.md), the accepted [candidate labels](../../experiments/03-oos-values-first/candidates.json), the frozen Qwen token counts, the local Moody's 17g-7 rating records, the [accounting study](../../experiments/05-accounting-interventions/results.md), `system/scorecard.py`, and the vendor and agency sources cited inline with their retrieval dates. No label, run record or result was changed.*
 
-[Answers to the review questions](README.md) · [Previous folder: results, dates, prompts](../lab-update-2026-09-17/README.md)
+[Answers to the review questions](README.md) · [Previous folder: results, dates, prompts](../2026-09-17-results-dates-prompts/README.md)
 
 ## 1. Purpose and question
 
@@ -37,7 +37,7 @@
 | Step | Count | Where |
 |---|---|---|
 | Moody's Retail and Apparel entities joined to SEC filers by stable identifiers | 186 | `evaluation/mapping.json` |
-| Distinct in-scope groups with an active Moody's rating at 2025-08-28 | 66 | `notes/rating-history-file.md` |
+| Distinct in-scope groups with an active Moody's rating at 2025-08-28 | 66 | `evaluation/rating-history-file.md` |
 | Groups that are current annual SEC filers, usable at the target date | 63 | same |
 | Filings scanned for the issuer's own Moody's rating disclosure after B | 725 documents, 63 companies | `experiments/03-oos-values-first/label-review.md` |
 | Issuers with a hand-read, confirmed disclosure label | 20 | `candidates.json` |
@@ -153,7 +153,7 @@ GPT-5.5 (vendor page: knowledge cutoff 1 December 2025) cannot be used for this 
 
 ## 7. Prompt and output
 
-The verbatim system prompt, task, memory probe and both output schemas are in [PROMPTS.md](../lab-update-2026-09-17/PROMPTS.md). In summary the model must: (1) extract ten financial inputs in USD millions for the most recent full fiscal year in the documents; (2) grade four qualitative factors on Aaa to Ca relative to the implied anchor, with a one-line justification each; (3) give its own overall rating judgement and whether it is an upgrade, unchanged or downgrade against the last rating in the history pack.
+The verbatim system prompt, task, memory probe and both output schemas are in [PROMPTS.md](../2026-09-17-results-dates-prompts/PROMPTS.md). In summary the model must: (1) extract ten financial inputs in USD millions for the most recent full fiscal year in the documents; (2) grade four qualitative factors on Aaa to Ca relative to the implied anchor, with a one-line justification each; (3) give its own overall rating judgement and whether it is an upgrade, unchanged or downgrade against the last rating in the history pack.
 
 Two channels are scored. The **scorecard channel** sends the ten figures and four grades through the deterministic engine of section 8. The **judgement channel** is the model's own overall rating. The prompt gave brief factor descriptions, not the methodology's full rubric text.
 
@@ -281,12 +281,12 @@ Neither channel beats persistence on any cohort. The judgement channel returned 
 | # | Decision | Options | Proposed |
 |---|---|---|---|
 | 1 | Target rating type | corporate family rating for speculative grade and senior unsecured for investment grade (methodology page 14); or one type for all; or the issuer's own disclosed rating as now | methodology rule, once histories with rating types are available |
-| 2 | Label source | the lab's dated Moody's histories September 2025 to August 2026; or company disclosures as now | the lab's histories, if they exist |
+| 2 | Label source | the chair's dated Moody's histories September 2025 to August 2026; or company disclosures as now | the chair's histories, if they exist |
 | 3 | Imbalance policy | state the cost of a missed change against a false alarm; report precision and recall of the change decision once more changed cases exist; add Arm 2 (boundary 2024-09-30, official labels, 59 issuers, 12 changes) as a second window | all three |
 | 4 | Commercial model | GPT-5.2 on the identical frozen inputs, three replicates, all 20 issuers, under a cap of about $25; Gemini optional | run GPT-5.2 as Experiment 07 |
 | 5 | Prior visible or withheld | both arms, same inputs | both |
-| 6 | Input definitions | the ten definitions of section 8.1, computed in code, signed off by the lab | sign off or amend |
-| 7 | Reference data | hand-checked inputs, adjustments and factor grades for a small set of issuers, from Moody's Credit Opinions or the lab; otherwise built here and reviewed by the lab | ask, then build |
+| 6 | Input definitions | the ten definitions of section 8.1, computed in code, signed off by the chair | sign off or amend |
+| 7 | Reference data | hand-checked inputs, adjustments and factor grades for a small set of issuers, from Moody's Credit Opinions or the chair; otherwise built here and reviewed by the chair | ask, then build |
 | 8 | Moody's documents | access and terms of use for Credit Opinions and rating-action releases through Robert's account | settle before the decipher work of the README |
 | 9 | Repository | the repository is public and holds the methodology PDF | Robert's decision |
 

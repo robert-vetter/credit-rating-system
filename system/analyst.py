@@ -11,10 +11,10 @@ scorecard-mediated and free-form prediction can be compared.
 
 Contamination controls built into the request shape: a raw Messages API call with NO tools
 array (retrieval and web access structurally impossible, per the verified finding in
-docs/experiment-plan.md), documents redacted by system/redact.py before they get here, and an
+the experiment plan of 2026-08-11 (in git history)), documents redacted by system/redact.py before they get here, and an
 instruction not to use recalled knowledge of the company's actual rating. Model memory of the
 company itself cannot be switched off; the experiment design (update prediction against a
-persistence baseline, docs/experiment-plan.md) is what neutralises it, not this prompt.
+persistence baseline, the experiment plan of 2026-08-11 (in git history)) is what neutralises it, not this prompt.
 
 Structured output via output_config JSON schema: the response is machine-readable by
 construction, no parsing heuristics. Streaming is used because inputs run to hundreds of

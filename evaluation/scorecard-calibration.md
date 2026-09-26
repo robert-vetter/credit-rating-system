@@ -4,7 +4,7 @@
 > rows to train other folds. Threshold features also required nested fitting. Both paths
 > are fixed. The corrected development run excludes all 50 gold observations, covers 1,665
 > rows and has raw/calibrated/persistence MAE 1.919/1.492/0.053. All tested change detectors
-> still choose persistence. See [the review](../docs/oos-integrity-review.md) for all splits.
+> still choose persistence. See [the review](../experiments/03-oos-values-first/review-codex-2026-09-12.md) for all splits.
 > The earlier study below is retained as historical evidence. It is not a rolling forecast
 > evaluation; its causal and "extraction solved" language is not supported by these tests.
 
@@ -25,7 +25,7 @@ fallback value against the filing text itself.*
 
 Experiments 01 to 03 left the picture: reading the figures out of a filing is solved (46 of 47
 within 2% of XBRL), the scorecard arithmetic sits above Moody's assigned rating, and the
-model's holistic judgement is reluctant to call a change. docs/experiment-plan.md named two
+model's holistic judgement is reluctant to call a change. the experiment plan of 2026-08-11 (in git history) named two
 cheap things for exactly this situation: rung 1 of the blinding ladder (numbers only, no
 model, so no memory and no document leakage), and a monotone recalibration of the scorecard
 as the most promising ablation. Both can be measured on the historical frame for nothing.

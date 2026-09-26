@@ -1,6 +1,6 @@
 # Answers to the review questions of 17 September 2026
 
-*Written 18 September 2026 by Claude (Fable 5.1), directed by Robert Vetter. Answers to the eight points and the two main-problem questions raised in the lab's review of the previous folder. Checked against the [specification](SPECIFICATION.md) in this folder, the [accounting study](../../experiments/05-accounting-interventions/results.md) and its saved study record, the [calibration summary](../../evaluation/calibration-summary.md), `system/`, and the vendor pages named inline. Nothing was rerun; no label or result changed.*
+*Written 18 September 2026 by Claude (Fable 5.1), directed by Robert Vetter. Answers to the eight points and the two main-problem questions raised in the chair's review of the previous folder. Checked against the [specification](SPECIFICATION.md) in this folder, the [accounting study](../../experiments/05-accounting-interventions/results.md) and its saved study record, the [calibration summary](../../evaluation/calibration-summary.md), `system/`, and the vendor pages named inline. Nothing was rerun; no label or result changed.*
 
 | # | Question | Short answer | Detail |
 |---|---|---|---|
@@ -30,7 +30,7 @@ The post-cutoff sample has one changed issuer in nineteen. The historical grid s
 | Precision and recall of the change decision | not possible with one changed case | |
 | A stated cost of a missed change against a false alarm | not agreed; needed for any decision rule | Spec decision 3 |
 
-The one fitted component, the change thresholds in the historical calibration study, selected "never alarm" in all five folds on 1,665 observations with 78 changes. That is the textbook result of imbalance plus a weak signal, and it is reported as a negative result, not hidden behind accuracy. More changed cases can only come from the lab's dated rating histories for the post-cutoff window, or from an older boundary with official labels (Arm 2: 59 issuers, 12 changes, not yet authorized).
+The one fitted component, the change thresholds in the historical calibration study, selected "never alarm" in all five folds on 1,665 observations with 78 changes. That is the textbook result of imbalance plus a weak signal, and it is reported as a negative result, not hidden behind accuracy. More changed cases can only come from the chair's dated rating histories for the post-cutoff window, or from an older boundary with official labels (Arm 2: 59 issuers, 12 changes, not yet authorized).
 
 ## 3. A top commercial model
 
@@ -89,7 +89,7 @@ For one issuer at one date, a human analyst's checked record of:
 | the four qualitative factor grades with the reasons | Market Position: Baa, because ... |
 | the scorecard-indicated outcome next to the assigned rating | scorecard Ba2, assigned Ba3, difference explained by ... |
 
-Why it matters: the final rating alone cannot tell whether an error came from extraction, from an adjustment, from a grade or from committee judgement. Moody's Credit Opinions contain this grid for each rated issuer. Access through Robert's Moody's account was being checked and is not concluded. Moody's rating-action releases sometimes state the scorecard-indicated outcome as well. If the lab holds anything like this, or the dataset mentioned at the start of the project contains it, it changes what can be measured. If not, a small set is built here (the Experiment 06 protocol drafts how, and is pending human review) and the lab reviews it.
+Why it matters: the final rating alone cannot tell whether an error came from extraction, from an adjustment, from a grade or from committee judgement. Moody's Credit Opinions contain this grid for each rated issuer. Access through Robert's Moody's account was being checked and is not concluded. Moody's rating-action releases sometimes state the scorecard-indicated outcome as well. If the chair holds anything like this, or the dataset mentioned at the start of the project contains it, it changes what can be measured. If not, a small set is built here (the Experiment 06 protocol drafts how, and is pending human review) and the chair reviews it.
 
 ## 8. The main problem: decipher and encode
 
@@ -101,6 +101,6 @@ Why it matters: the final rating alone cannot tell whether an error came from ex
 | Qualitative grading logic | not deciphered; the model grades from brief descriptions | encoded only as a prompt; grades are unstable (section 5) |
 | Considerations outside the scorecard, committee judgement, timing of changes | not deciphered | not encoded |
 | Reading Moody's rating-action releases and Credit Opinions with an LLM to extract stated adjustments, grades and scorecard outcomes into an explicit rule set | **not done**; the natural next decipher step; depends on document access (spec decision 8) | |
-| Agent | | not built. The model side is one structured call with no tools by design (leakage control). The architecture is a [proposal](../architecture-codex-2026-09-13.md) |
+| Agent | | not built. The model side is one structured call with no tools by design (leakage control). The architecture is a [proposal](../2026-09-13-architecture-proposal/README.md) |
 
 Codex and Claude Code have been used throughout as the engineering and audit tools: they built the apparatus, ran the experiments and audited each other, which found the three-notch scoring bug and the redaction failure. As a decipher tool on real data they have been used once, for the calibration study. The honest state is that deciphering from data is at its beginning, and nothing beyond the published arithmetic has been deciphered, so nothing beyond it is encoded.

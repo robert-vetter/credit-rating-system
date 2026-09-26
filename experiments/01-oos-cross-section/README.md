@@ -26,7 +26,7 @@ Three leakage channels have to be handled, not assumed away:
    model has no retrieval, no web access, nothing to call (verified earlier in this project:
    without a tools array there is no mechanism to fetch anything).
 3. **The documents themselves.** Filings disclose their own ratings (see
-   docs/leakage-audit.md in the main repo); the redaction module strips these before input,
+   evaluation/leakage-audit.md); the redaction module strips these before input,
    and every removed line is stored with the run.
 
 **Labels.** Moody's public 17g-7 rating history is embargoed 12 months (file in hand ends
