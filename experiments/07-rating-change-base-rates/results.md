@@ -1,39 +1,50 @@
 # Experiment 07: results
 
 *Written 2026-09-26 by Claude (Opus 5.5), directed by Robert Vetter. Follows section 6 of
-[EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Verified against run R1-2026-09-26
-(`runs/R1-2026-09-26/`: manifest with 172 input hashes, results.json, tables.md) and the post-hoc
-direction check (`posthoc_direction.json`). Independent post-run audit: waived by Robert for this
-study (decision 2). 15 tests pass.*
+[EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Verified against run R2-2026-09-26
+(`runs/R2-2026-09-26/`: manifest with 320 input hashes, results.json, tables.md, the post-hoc
+direction check), its rebuilt inputs (`runs/R2-inputs-withdrawn/`) and run R1-2026-09-26, the
+survivors-only run it corrects. Independent post-run audit: waived by Robert for this study
+(decision 2). 17 tests pass.*
+
+This note replaces the version written after run R1 on the same day. R1 contained only companies
+still rated in 2025 (section 10). R2 adds the 74 groups whose ratings were withdrawn earlier and
+is the result. The R1 figures appear as the survivors-only comparison.
 
 ## 1. Summary
 
 | Item | Answer |
 |---|---|
 | Question | How often, by how much and in which direction do Moody's Retail and Apparel ratings change, 2012 to 2025? |
-| Answer | 6.2% of company-quarters change; 22.1% of companies see a change within the next 12 months; 45.9% within three years. 85% of changes are one notch |
-| Next to persistence | persistence is right on 93.8% of quarters and 77.9% of 12-month windows |
-| Strongest pattern | the rating level: 3.5% per quarter for investment grade, 9.1% for speculative grade, 45.5% within 12 months for B and 87.5% for Caa |
-| Most important limitation | only companies still rated in 2025 are in the data; retailers whose ratings were withdrawn earlier (Sears, Toys 'R' Us, Bon-Ton and others) are missing |
+| Next quarter (target horizon, decision 5) | 7.8% of company-quarters change; persistence is right on 92.2% |
+| Within 12 months (context) | 26.7% change; persistence is right on 73.3% |
+| Size | 81% of changes are one notch |
+| Strongest pattern | the rating level: next-quarter change rate 2.5% at A, 4.4% at Baa, 7.1% at Ba, 12.9% at B, 18.5% at Caa |
+| Survivorship | companies whose rating was later withdrawn change twice as often as survivors (12.7% against 6.2% per quarter) |
 
 ## 2. Headline
 
-In-scope companies (primary cohort, 72 companies with quarterly records). Persistence is the
-complement of the change rate.
+Primary cohort: every in-scope group with quarterly records, active or withdrawn (125
+companies). Persistence is the complement of the change rate.
 
 | Horizon | n | Changed | Change rate (95% Wilson) | Company bootstrap | Persistence right | Upgrades | Downgrades |
 |---|---|---|---|---|---|---|---|
-| Quarter | 3,011 | 188 | 6.2% (5.4 to 7.2) | 5.1 to 7.5 | 93.8% | 101 | 87 |
-| Year, Q4 to Q4 | 693 | 154 | 22.2% (19.3 to 25.5) | | 77.8% | 90 | 64 |
-| Within the next 12 months | 2,792 | 618 | 22.1% (20.6 to 23.7) | 18.5 to 26.1 | 77.9% | 364 | 264 |
-| Three years | 2,226 | 1,022 | 45.9% (43.9 to 48.0) | | 54.1% | 618 | 404 |
-
-The earlier figure of 6.0% (218 of 3,646) divided by all observations including each company's
-first quarter, which cannot change. With the correct denominator the same 218 changes over all 86
-companies give 6.1%.
+| **Next quarter** | 4,002 | 314 | **7.8%** (7.1 to 8.7) | 6.7 to 9.1 | 92.2% | 145 | 169 |
+| Year, Q4 to Q4 | 905 | 245 | 27.1% (24.3 to 30.1) | | 72.9% | 125 | 120 |
+| Within the next 12 months | 3,614 | 965 | 26.7% (25.3 to 28.2) | 23.1 to 30.6 | 73.3% | 506 | 485 |
+| Three years | 2,697 | 1,367 | 50.7% (48.8 to 52.6) | | 49.3% | 753 | 614 |
 
 For the 12-month and three-year rows, upgrades and downgrades count windows containing at least
 one move in that direction; a window with both counts twice.
+
+How much the missing companies mattered:
+
+| Cohort | Companies | Next quarter | Within 12 months | Three years |
+|---|---|---|---|---|
+| Survivors only (run R1) | 72 | 6.2% | 22.1% | 45.9% |
+| Withdrawn-rating companies only | 53 | 12.7% | 42.2% | 73.2% |
+| **Both (primary)** | 125 | **7.8%** | **26.7%** | **50.7%** |
+| All groups regardless of scope | | 7.5% | 26.0% | 51.2% |
 
 ## 3. Dates
 
@@ -41,125 +52,148 @@ one move in that direction; a window with both counts twice.
 |---|---|
 | Moody's files | dated 2026-08-11, actions through August 2025 |
 | Quarterly grid | 2012-09-30 to 2025-06-30 |
-| Run | 2026-09-26 |
-
-No date changed from the specification.
+| Runs | R1 and R2, both 2026-09-26 |
 
 ## 4. Input data characteristics
 
 | Characteristic | Value |
 |---|---|
-| Companies in the primary cohort | 73 in scope, 72 with quarterly records (Gildan has none) |
-| Quarterly records (a label at t and at t-1) | 3,011 |
-| Gap quarters (no label inside a company's span) | 12 |
-| Companies whose label ends before 2025-06-30 | 0: every company in the data is still rated at the end, see section 10 |
-| Rating actions on the line that carries the label | 175 |
-| Input files hashed | 172 |
+| Confirmed mapping groups | 161; 86 with an active rating at the file end (existing folders), 75 without |
+| Rebuilt for R2 | 74 withdrawn-rating groups; 1 skipped (CDW CORPORATION, an earlier entity of CDW, out of scope) |
+| Companies in the primary cohort with quarterly records | 125 (72 survivors, 53 withdrawn-rating) |
+| In-scope rebuilt groups that contribute no quarterly record | 5: Toys 'R' Us and Birkenstock carry only secured-debt ratings in the files, which the label rule does not use; Oxford Industries was withdrawn in July 2012, before the grid; Claire's and Destination Maternity have a single labelled quarter (the Claire's entity in the files is the one rated after its 2018 bankruptcy) |
+| Quarterly records (a label at t and at t-1) | 4,002 |
+| Companies whose rating ends before 2025-06-30 | 54 |
+| Gap quarters | 64 |
+| Rating actions on the line that carries the label | 302 |
+| Input files hashed | 320 |
 
 ## 5. Results in detail
 
-### 5.1 Size of changes (quarterly)
+### 5.1 Next quarter, by rating at the start of the quarter
+
+The table for a next-quarter predictor. Rates are per company-quarter.
+
+| Rating | Quarters | Any change (95% Wilson) | Downgrade | Upgrade | Change within 12 months |
+|---|---|---|---|---|---|
+| Aa | 83 | 0.0% (0.0 to 4.4) | 0.0% | 0.0% | 0.0% |
+| A | 439 | 2.5% (1.4 to 4.4) | 0.7% | 1.8% | 10.7% |
+| Baa | 1,051 | 4.4% (3.3 to 5.8) | 2.4% | 2.0% | 16.8% |
+| Ba | 1,229 | 7.1% (5.8 to 8.7) | 3.7% | 3.3% | 24.2% |
+| B | 923 | 12.9% (10.9 to 15.2) | 7.7% | 5.2% | 44.8% |
+| Caa | 260 | 18.5% (14.2 to 23.6) | 8.8% | 9.6% | 58.5% |
+| Ca to C | 17 | 17.6% (6.2 to 41.0) | 5.9% | 11.8% | 50.0% (6 windows) |
+| Investment grade | 1,573 | 3.6% (2.8 to 4.7) | 1.8% | 1.8% | 14.2% |
+| Speculative grade | 2,429 | 10.6% (9.4 to 11.9) | 5.8% | 4.8% | 35.4% |
+
+The 12-month column by rating was added while writing the analysis code, before any result
+was seen. The downgrade and upgrade columns were computed from the saved counts after the run.
+
+### 5.2 Size of changes, next quarter
 
 | Notches | Upgrades | Downgrades | Total | Share |
 |---|---|---|---|---|
-| 1 | 91 | 69 | 160 | 85.1% |
-| 2 | 7 | 14 | 21 | 11.2% |
-| 3 or more | 3 | 4 | 7 | 3.7% |
-| Total | 101 | 87 | 188 | |
+| 1 | 130 | 125 | 255 | 81.2% |
+| 2 | 11 | 35 | 46 | 14.6% |
+| 3 or more | 4 | 9 | 13 | 4.1% |
+| Total | 145 | 169 | 314 | |
 
-Mean size 1.23 notches. Downgrades are more often large: 18 of 87 downgrades moved two or more
-notches, against 10 of 101 upgrades.
+Mean size 1.26 notches. Downgrades are larger: 44 of 169 downgrades moved two or more notches,
+against 15 of 145 upgrades.
 
-### 5.2 By rating at the start of the quarter
+### 5.3 One-year moves between categories (Q4 to Q4, counts)
 
-| Rating | Quarters | Quarterly change rate | Upgrades | Downgrades | 12-month windows | Change within 12 months |
-|---|---|---|---|---|---|---|
-| Aa | 83 | 0.0% | 0 | 0 | 74 | 0.0% |
-| A | 439 | 2.5% | 8 | 3 | 412 | 10.7% |
-| Baa | 1,030 | 4.3% | 20 | 24 | 981 | 16.7% |
-| Ba | 1,017 | 6.9% | 37 | 33 | 935 | 23.3% |
-| B | 405 | 12.6% | 26 | 25 | 356 | 45.5% |
-| Caa | 35 | 31.4% | 9 | 2 | 32 | 87.5% |
-| Ca to C | 2 | 50.0% | 1 | 0 | 2 | 100.0% |
-| Investment grade | 1,552 | 3.5% | 28 | 27 | 1,467 | 14.2% |
-| Speculative grade | 1,459 | 9.1% | 73 | 60 | 1,325 | 30.9% |
+| From \ to | Aa | A | Baa | Ba | B | Caa | Ca-C |
+|---|---|---|---|---|---|---|---|
+| Aa | 19 | | | | | | |
+| A | 2 | 98 | 2 | | | | |
+| Baa | | 4 | 233 | 9 | 2 | | |
+| Ba | | | 6 | 254 | 14 | 3 | |
+| B | | | | 21 | 154 | 25 | |
+| Caa | | | | | 18 | 38 | 2 |
+| Ca-C | | | | | | | 1 |
 
-The 12-month column by rating category was added while writing the analysis code, before any
-result was seen; it is not in the specification's list.
+The diagonal is "stayed in the category" and includes notch moves inside it.
 
-One-year moves between categories, Q4 to Q4 (counts; the diagonal is "stayed in the category",
-which includes notch moves inside it):
-
-| From \ to | Aa | A | Baa | Ba | B | Caa |
-|---|---|---|---|---|---|---|
-| Aa | 19 | | | | | |
-| A | 2 | 98 | 2 | | | |
-| Baa | | 4 | 229 | 9 | 2 | |
-| Ba | | | 6 | 216 | 9 | |
-| B | | | | 12 | 72 | 4 |
-| Caa | | | | | 5 | 4 |
-
-### 5.3 By company
+### 5.4 By company
 
 | Item | Value |
 |---|---|
-| Companies with at least one change | 59 of 72 |
-| Never changed in the period | 13: Arko, Cencosud, Crocs, Kontoor Brands, Lithia Motors, Nike (until its 2025-11-12 downgrade, after the file ends), Tapestry, Target, Tractor Supply, Victoria's Secret, Vipshop, Walmart, Wayfair |
-| Share of all changes from the ten most active companies | 34.0% |
-| Median company change rate per quarter | 5.6% |
-| Most changes | J.Jill 9 in 40 quarters, National Vision 8 in 45, Petco 7 in 50 |
+| Companies with at least one change | 98 of 125 |
+| Never changed | 27, among them Walmart, Target, Nike (until its 2025-11-12 downgrade, after the file ends), Tapestry, Tractor Supply |
+| Share of all changes from the ten most active companies | 23.2% |
+| Median company change rate per quarter | 7.3% |
 
-Changes are spread across most companies, not concentrated in a few. The full per-company
-table is in the appendix.
+Changes are spread across most companies. The full per-company table is in the appendix.
 
-### 5.4 By year
+### 5.5 By year
 
 | Year | Quarters | Changed | Rate | Upgrades | Downgrades |
 |---|---|---|---|---|---|
-| 2012 (Q4 only) | 42 | 0 | 0.0% | 0 | 0 |
-| 2013 | 173 | 13 | 7.5% | 11 | 2 |
-| 2014 | 181 | 11 | 6.1% | 10 | 1 |
-| 2015 | 199 | 15 | 7.5% | 13 | 2 |
-| 2016 | 213 | 4 | 1.9% | 3 | 1 |
-| 2017 | 228 | 9 | 3.9% | 5 | 4 |
-| 2018 | 237 | 15 | 6.3% | 11 | 4 |
-| 2019 | 242 | 9 | 3.7% | 4 | 5 |
-| 2020 | 245 | 27 | 11.0% | 10 | 17 |
-| 2021 | 264 | 21 | 8.0% | 16 | 5 |
-| 2022 | 279 | 13 | 4.7% | 6 | 7 |
-| 2023 | 280 | 24 | 8.6% | 4 | 20 |
-| 2024 | 284 | 15 | 5.3% | 6 | 9 |
-| 2025 (Q1 and Q2) | 144 | 12 | 8.3% | 2 | 10 |
+| 2012 (Q4 only) | 70 | 3 | 4.3% | 0 | 3 |
+| 2013 | 293 | 29 | 9.9% | 18 | 11 |
+| 2014 | 312 | 17 | 5.4% | 13 | 4 |
+| 2015 | 327 | 29 | 8.9% | 23 | 6 |
+| 2016 | 336 | 16 | 4.8% | 8 | 8 |
+| 2017 | 343 | 31 | 9.0% | 8 | 23 |
+| 2018 | 333 | 26 | 7.8% | 15 | 11 |
+| 2019 | 331 | 18 | 5.4% | 5 | 13 |
+| 2020 | 301 | 42 | 14.0% | 13 | 29 |
+| 2021 | 302 | 28 | 9.3% | 22 | 6 |
+| 2022 | 306 | 19 | 6.2% | 7 | 12 |
+| 2023 | 300 | 27 | 9.0% | 4 | 23 |
+| 2024 | 301 | 17 | 5.6% | 7 | 10 |
+| 2025 (Q1 and Q2) | 147 | 12 | 8.2% | 2 | 10 |
 
-Direction follows the cycle: mostly upgrades 2013 to 2015 and 2021, mostly downgrades in 2020
-and from 2023 on.
+Direction follows the cycle: mostly upgrades 2013 to 2015 and 2021, mostly downgrades in 2017
+(retail store closures), 2020 and from 2023 on.
 
-### 5.5 Follow-on changes
+### 5.6 Follow-on changes
 
 | Starting quarter | n | Another change within 4 quarters | Rate (95% Wilson) |
 |---|---|---|---|
-| After a change | 164 | 54 | 32.9% (26.2 to 40.4) |
-| After no change | 2,556 | 551 | 21.6% (20.0 to 23.2) |
+| After a change | 255 | 97 | 38.0% (32.3 to 44.1) |
+| After no change | 3,234 | 837 | 25.9% (24.4 to 27.4) |
 
-After a change, the next move is usually in the same direction: 46 windows had another move in
-the same direction, 11 a reversal.
+After a change, the next move is usually in the same direction: 80 windows had another move in
+the same direction, 22 a reversal.
 
-### 5.6 What this means for a balanced test set
+### 5.7 Ratings that end
+
+54 companies' ratings end before 2025-06-30. The files carry no reason: a withdrawal can follow
+a default, a buyout or the repayment of all rated debt.
+
+| Last rating | Companies |
+|---|---|
+| Baa | 1 |
+| Ba | 12 |
+| B | 18 |
+| Caa | 18 |
+| Ca to C | 5 |
+
+23 of the 54 end at Caa or below, the zone where defaults happen (Sears Holdings, Gymboree,
+Bon-Ton, Ascena, Guitar Center, Party City and others). A default followed by a withdrawal is not counted as a change under the definitions, so
+the default itself is invisible in the change rates. The full list is in `tables.md` of run R2.
+
+### 5.8 What this means for a next-quarter predictor
 
 | Item | Value |
 |---|---|
-| Changed company-quarters available | 188, from 59 companies |
-| 12-month windows with a change / without | 618 / 2,174 |
+| Changed company-quarters available | 314, from 98 companies |
 | All of these are before the training cutoff of current LLMs | usable for counting and for analysis without a model, not as an out-of-sample LLM test |
 
 How often an alarm would be right, for an illustrative detector:
 
 | Framing | Base rate | Finds changes | Correct on stable | Alarm is right |
 |---|---|---|---|---|
-| Next quarter | 6.2% | 90% | 90% | 37.5% |
-| Next quarter | 6.2% | 80% | 95% | 51.6% |
-| Within 12 months | 22.1% | 90% | 90% | 71.9% |
-| Within 12 months | 22.1% | 80% | 95% | 82.0% |
+| Next quarter, all ratings | 7.8% | 90% | 90% | 43.4% |
+| Next quarter, all ratings | 7.8% | 80% | 95% | 57.7% |
+| Within 12 months | 26.7% | 90% | 90% | 76.6% |
+| Within 12 months | 26.7% | 80% | 95% | 85.4% |
+
+At the next-quarter horizon most alarms are false unless the detector is very specific, because
+92% of quarters do not change. The rating level already sorts companies: a B-rated company is
+five times as likely to change next quarter as an A-rated one.
 
 ## 6. Model, settings and cost
 
@@ -169,137 +203,214 @@ No model. $0. Seed 20260926, 2,000 company bootstrap resamples.
 
 | Item | Count |
 |---|---|
-| Quarterly records | 3,011 |
-| 12-month windows kept | 2,792 |
-| 12-month windows censored (the last four quarters of each company, and gaps) | 292 |
-| Annual pairs | 693 |
-| Three-year pairs | 2,226 |
+| Quarterly records | 4,002 |
+| 12-month windows kept | 3,614 |
+| 12-month windows censored (last four quarters of each company, gaps, ratings that end) | 522 |
+| Annual pairs | 905 |
+| Three-year pairs | 2,697 |
 
 ## 8. Where a counted change may not be a real change
 
 | Check | Count | Meaning |
 |---|---|---|
-| Change agrees with a rating action on the label line in the same direction | 172 of 188 | real |
-| Change with no rating action on the label line | 15 | all coincide with a level or entity switch; mostly companies falling from investment grade that receive a new corporate family rating (Gap, Macy's, Kohl's, Under Armour, V.F. and others), so the direction is real but the size is measured across two rating types |
-| Change contradicting the action | 1 | Albertsons 2015-09-30, label moved between Albertsons and Safeway bonds during the merger (B2 to Baa3 while the action was a downgrade) |
-| Level switches | 23 (21 with a change) | |
-| Entity switches | 11 (9 with a change) | |
+| Change agrees with a rating action on the label line in the same direction | 290 of 314 | real |
+| Change with no rating action on the label line | 21 | all coincide with a level or entity switch; mostly companies falling from investment grade that receive a new corporate family rating. Direction real, size measured across two rating types |
+| Change contradicting the action | 3 | all coincide with a switch (Albertsons 2015 during the Safeway merger among them) |
+| Level switches | 30 (27 with a change) | |
+| Entity switches | 15 (12 with a change) | |
 | Ambiguous labels | 43 records | |
-| Reversals inside a quarter, invisible on the grid | 0 | |
-| Quarters with two or more actions | 2 | |
+| Reversal inside a quarter, invisible on the grid | 1 | |
+| Quarters with two or more actions | 8 | |
 
-The direction check (rows 1 to 3) is post-hoc: it was added after reading the run, prompted by the
-Albertsons case, and is saved separately (`posthoc_direction.py`).
+The direction check (first three rows) is post-hoc: added after reading run R1, prompted by the
+Albertsons case, saved separately (`posthoc_direction.py`).
 
 ## 9. Sensitivities
 
 | Variant | n | Changed | Rate | 95% Wilson |
 |---|---|---|---|---|
-| Primary, quarter | 3,011 | 188 | 6.2% | 5.4 to 7.2 |
-| Level switches excluded, quarter | 2,988 | 167 | 5.6% | 4.8 to 6.5 |
-| Ambiguous labels excluded, quarter | 2,968 | 183 | 6.2% | 5.4 to 7.1 |
-| All 86 companies, quarter | 3,560 | 218 | 6.1% | 5.4 to 7.0 |
-| Primary, within 12 months | 2,792 | 618 | 22.1% | 20.6 to 23.7 |
-| Level switches excluded, within 12 months | 2,707 | 539 | 19.9% | 18.5 to 21.5 |
-| Ambiguous labels excluded, within 12 months | 2,743 | 603 | 22.0% | 20.5 to 23.6 |
-| All 86 companies, within 12 months | 3,302 | 727 | 22.0% | 20.6 to 23.5 |
+| Primary, next quarter | 4,002 | 314 | 7.8% | 7.1 to 8.7 |
+| Level switches excluded, next quarter | 3,972 | 287 | 7.2% | 6.5 to 8.1 |
+| Ambiguous labels excluded, next quarter | 3,959 | 309 | 7.8% | 7.0 to 8.7 |
+| Survivors only (R1), next quarter | 3,011 | 188 | 6.2% | 5.4 to 7.2 |
+| Withdrawn-rating companies only, next quarter | 991 | 126 | 12.7% | 10.8 to 14.9 |
+| All groups regardless of scope, next quarter | 4,792 | 359 | 7.5% | 6.8 to 8.3 |
+| Primary, within 12 months | 3,614 | 965 | 26.7% | 25.3 to 28.2 |
+| Level switches excluded, within 12 months | 3,511 | 871 | 24.8% | 23.4 to 26.3 |
 
-No variant moves the picture: about 6% per quarter, about 20 to 22% within 12 months.
+Only the cohort matters: excluding switches or ambiguous labels moves the rate by less than a
+percentage point; leaving out the withdrawn-rating companies moves it by 1.6 points per quarter
+and 4.6 points over 12 months.
 
 ## 10. What went wrong
 
 | Defect | Effect | Fix | Rule that now prevents it |
 |---|---|---|---|
-| **Survivorship: only companies still rated in 2025 are in the company folders.** Retailers whose ratings were withdrawn before then (Abercrombie & Fitch, Birkenstock, Sportsman's Warehouse, Sprouts, Vince, Pep Boys, Bon-Ton, Sears, Toys 'R' Us) are in the frame but have no folder | companies that defaulted or were bought out are missing, so downgrades, large moves and the Caa end are under-counted. This may be why upgrades (101) outnumber downgrades (87), against the stated expectation | not fixed. Their rating histories are in the local Moody's files; building folders for them is a free follow-up | the specification template's limitations must now name how companies entered the sample |
-| Specification 0.1 described bond switches as visible in `label_oi`; they are not | none on results; found by the tests before the run | corrected to version 0.2 before the run | tests before every run (P13) |
-| The first run attempt crashed in table T6 on a missing field | nothing written; the run folder did not exist yet | fixed; a whole-analysis test added | same |
+| **Run R1 saw survivors only.** `compile_folders.py` writes folders only for groups with an active rating at the file end; 75 of 161 confirmed groups were skipped, 58 in scope | R1 understated the change rate (6.2% against 7.8% per quarter) and showed more upgrades than downgrades (101 against 87); with all companies, downgrades lead (169 against 145) | the skipped groups rebuilt for R2 inside the run folder; `evaluation/companies/` unchanged | the specification template's limitations must name how companies entered the sample, and whether companies that left are included |
+| Specification 0.1 described bond switches as visible in `label_oi`; they are not | none; found by the tests before R1 | corrected to version 0.2 before R1 | tests before every run (P13) |
+| The label rule reads only company-wide ratings and senior unsecured bonds | companies rated only on secured debt (Toys 'R' Us, Birkenstock) are invisible, in R1 and R2 alike | not fixed; a label rule for secured-only issuers is a separate decision | limitations name the label rule's coverage |
+| The first R1 attempt crashed in table T6 on a missing field | nothing written | fixed; a whole-analysis test added | same |
+| The rebuild first collided with an existing folder (CDW) | none; found by the tests before R2 | the builder skips and lists such groups | same |
 | In chat on 2026-09-26 the Kohl's switch was described as one notch; it is two (Baa2 to Ba1) | none on results | test corrected | |
 
-Expectations written in the specification, checked:
+Expectations written in the specification, checked on R2:
 
 | Expectation | Result |
 |---|---|
-| Speculative grade changes more often than investment grade | confirmed: 9.1% against 3.5% per quarter |
-| Downgrades outnumber upgrades | not confirmed: 87 against 101; likely affected by survivorship |
-| Changes concentrate in few companies | not confirmed: 59 of 72 companies changed; the top ten hold 34% |
+| Speculative grade changes more often than investment grade | confirmed: 10.6% against 3.6% per quarter |
+| Downgrades outnumber upgrades | confirmed on the full cohort: 169 against 145 per quarter; not on survivors alone |
+| Changes concentrate in few companies | not confirmed: 98 of 125 companies changed; the top ten hold 23% |
 
 ## 11. Decipher and encode
 
 | | What this study adds |
 |---|---|
-| Decipher | Three measured regularities of Moody's behaviour: the chance of a change rises steeply as the rating falls; a change is almost always one notch; a change raises the chance of another in the same direction. None of these comes from filings; they come from the rating history alone |
-| Encode | nothing encoded. These regularities define the baselines a change detector must beat before it adds anything |
+| Decipher | Four measured regularities of Moody's behaviour: the chance of a change rises steeply as the rating falls; a change is almost always one notch, and large moves are mostly downgrades; a change raises the chance of another in the same direction; the direction follows the economic cycle. All come from the rating history alone, not from filings |
+| Encode | nothing encoded. These regularities define the baselines a next-quarter predictor must beat |
 
 ## 12. Decisions for consensus
 
-| # | Decision | Options | Proposed |
+| # | Decision | Options | State |
 |---|---|---|---|
-| 1 | Horizon of a change test | next quarter (6% base rate); within 12 months (22%) | within 12 months: it matches annual filings, the imbalance is moderate, and an alarm can be right most of the time |
-| 2 | Baselines a change detector must beat | persistence only; plus a rating-level rule (flag speculative grade) and a momentum rule (flag after a change) | all three |
-| 3 | Survivorship | accept; build folders for the withdrawn-rating retailers and rerun | rerun with them before using these rates in a report to the chair |
-| 4 | Source of changed cases for testing an LLM | historical cases (in the models' training data); post-cutoff cases from the chair's histories; an older window with an older model | unchanged from the 2026-09-18 specification: this study does not solve it |
+| 1 | Horizon of the predictor | next quarter; 12 months | **decided by Robert 2026-09-26: next quarter** (decision 5) |
+| 2 | Baselines a next-quarter predictor must beat | persistence only; plus a rating-level rule (section 5.1) and a momentum rule (section 5.6) | proposed: all three |
+| 3 | Survivorship | accept; rebuild the withdrawn-rating companies | **done in R2** (decision 4) |
+| 4 | Source of changed cases for testing an LLM | historical cases (in the models' training data); post-cutoff cases from the chair's histories; an older window with an older model | open, as in the 2026-09-18 specification |
+| 5 | Unit of observation for the uses Robert described (faster agency reviews, trading ahead of an action) | calendar quarter end, as here; each filing or disclosure, with the rating action dated to the day | open; the 17g-7 files date every action to the day, so a filing-based design is possible |
+| 6 | Ratings that end at Caa or below | leave as withdrawals; treat as default events from a default source | open; needs a source that says which withdrawals were defaults |
 
-## Appendix: changes per company, primary cohort
+## Appendix: changes per company, primary cohort (run R2)
 
-| Company | Quarters | Changes | Upgrades | Downgrades | Largest move |
-|---|---|---|---|---|---|
-| J.Jill | 40 | 9 | 6 | 3 | 2 |
-| National Vision | 45 | 8 | 5 | 3 | 1 |
-| Petco | 50 | 7 | 3 | 4 | 2 |
-| Albertsons | 51 | 6 | 4 | 2 | 5 |
-| Leslie's | 33 | 6 | 2 | 4 | 2 |
-| Macy's | 51 | 6 | 3 | 3 | 2 |
-| PetSmart | 41 | 6 | 3 | 3 | 2 |
-| Wolverine World Wide | 51 | 6 | 2 | 4 | 2 |
-| Bath & Body Works | 51 | 5 | 2 | 3 | 2 |
-| BJ's Wholesale Club | 51 | 5 | 4 | 1 | 2 |
-| Carvana | 27 | 5 | 3 | 2 | 3 |
-| Gap | 51 | 5 | 2 | 3 | 2 |
-| Hanesbrands | 51 | 5 | 2 | 3 | 1 |
-| Kohl's | 51 | 5 | 0 | 5 | 2 |
-| Michaels | 38 | 5 | 0 | 5 | 1 |
-| Under Armour | 36 | 5 | 1 | 4 | 2 |
-| V.F. | 51 | 5 | 0 | 5 | 1 |
-| Nordstrom | 51 | 4 | 0 | 4 | 1 |
-| Qurate/QVC | 51 | 4 | 1 | 3 | 2 |
-| Signet | 44 | 4 | 1 | 3 | 1 |
-| Walgreens | 51 | 4 | 0 | 4 | 2 |
-| Whole Foods Market | 38 | 4 | 4 | 0 | 2 |
-| Advance Auto Parts | 51 | 3 | 1 | 2 | 1 |
-| Dillard's | 51 | 3 | 3 | 0 | 1 |
-| Dollar General | 51 | 3 | 2 | 1 | 1 |
-| Dollar Tree | 41 | 3 | 3 | 0 | 1 |
-| Foot Locker | 51 | 3 | 1 | 2 | 1 |
-| JD.com | 36 | 3 | 3 | 0 | 1 |
-| Levi Strauss | 51 | 3 | 3 | 0 | 1 |
-| RH | 15 | 3 | 0 | 3 | 2 |
-| Staples | 51 | 3 | 0 | 3 | 5 |
-| Torrid | 16 | 3 | 1 | 2 | 1 |
-| Ahold Delhaize | 51 | 2 | 2 | 0 | 1 |
-| Asbury Automotive | 51 | 2 | 2 | 0 | 1 |
-| Best Buy | 51 | 2 | 2 | 0 | 1 |
-| Floor & Decor | 35 | 2 | 2 | 0 | 1 |
-| Ingles Markets | 51 | 2 | 2 | 0 | 1 |
-| O'Reilly | 51 | 2 | 2 | 0 | 1 |
-| Penske Automotive | 51 | 2 | 2 | 0 | 1 |
-| PVH | 51 | 2 | 2 | 0 | 1 |
-| Ralph Lauren | 51 | 2 | 1 | 1 | 1 |
-| Sally Beauty | 51 | 2 | 2 | 0 | 1 |
-| Sonic Automotive | 51 | 2 | 2 | 0 | 1 |
-| Tiffany | 43 | 2 | 2 | 0 | 4 |
-| 7-Eleven | 51 | 1 | 0 | 1 | 1 |
-| Amer Sports | 5 | 1 | 1 | 0 | 1 |
-| AutoNation | 51 | 1 | 1 | 0 | 1 |
-| AutoZone | 51 | 1 | 1 | 0 | 1 |
-| Canada Goose | 19 | 1 | 1 | 0 | 1 |
-| Costco | 51 | 1 | 1 | 0 | 1 |
-| Dick's Sporting Goods | 13 | 1 | 1 | 0 | 1 |
-| Group 1 Automotive | 51 | 1 | 1 | 0 | 1 |
-| Home Depot | 51 | 1 | 1 | 0 | 1 |
-| Kroger | 51 | 1 | 1 | 0 | 1 |
-| Lowe's | 51 | 1 | 0 | 1 | 1 |
-| Men's Wearhouse | 18 | 1 | 1 | 0 | 3 |
-| Murphy USA | 47 | 1 | 1 | 0 | 1 |
-| Ross Stores | 43 | 1 | 1 | 0 | 1 |
-| TJX | 51 | 1 | 1 | 0 | 1 |
-| 13 companies, listed in 5.3 | | 0 | 0 | 0 | 0 |
+| Company | Scope | Quarters | Changes | Upgrades | Downgrades | Largest move |
+|---|---|---|---|---|---|---|
+| j-jill | in | 40 | 9 | 6 | 3 | 2 |
+| joann | in | 45 | 9 | 3 | 6 | 3 |
+| party-city | in | 41 | 9 | 4 | 5 | 2 |
+| national-vision | in | 45 | 8 | 5 | 3 | 1 |
+| old-copper-company | in | 30 | 7 | 2 | 5 | 3 |
+| petco | in | 50 | 7 | 3 | 4 | 2 |
+| albertsons | in | 51 | 6 | 4 | 2 | 5 |
+| caleres | in | 37 | 6 | 4 | 2 | 1 |
+| guitar-center | in | 32 | 6 | 2 | 4 | 2 |
+| leslie-s-poolmart | in | 33 | 6 | 2 | 4 | 2 |
+| macy-s | in | 51 | 6 | 3 | 3 | 2 |
+| petsmart | in | 41 | 6 | 3 | 3 | 2 |
+| rite-aid | in | 51 | 6 | 3 | 3 | 2 |
+| wolverine-world-wide | in | 51 | 6 | 2 | 4 | 2 |
+| ascena-retail-group | in | 22 | 5 | 0 | 5 | 2 |
+| bath-body-works | in | 51 | 5 | 2 | 3 | 2 |
+| bj-s-wholesale-club | in | 51 | 5 | 4 | 1 | 2 |
+| carvana | in | 27 | 5 | 3 | 2 | 3 |
+| fresh-market-inc-the | in | 24 | 5 | 2 | 3 | 1 |
+| gap-inc-the | in | 51 | 5 | 2 | 3 | 2 |
+| general-nutrition-centers | in | 30 | 5 | 2 | 3 | 3 |
+| hanesbrands | in | 51 | 5 | 2 | 3 | 1 |
+| jones-group-inc-the | in | 22 | 5 | 0 | 5 | 5 |
+| kohl-s | in | 51 | 5 | 0 | 5 | 2 |
+| michaels | in | 38 | 5 | 0 | 5 | 1 |
+| under-armour | in | 36 | 5 | 1 | 4 | 2 |
+| v-f | in | 51 | 5 | 0 | 5 | 1 |
+| abercrombie-fitch | in | 39 | 4 | 3 | 1 | 1 |
+| gamestop | in | 26 | 4 | 1 | 3 | 3 |
+| nordstrom | in | 51 | 4 | 0 | 4 | 1 |
+| qurate-qvc | in | 51 | 4 | 1 | 3 | 2 |
+| signet | in | 44 | 4 | 1 | 3 | 1 |
+| true-religion-apparel | in | 15 | 4 | 0 | 4 | 2 |
+| walgreens | in | 51 | 4 | 0 | 4 | 2 |
+| whole-foods-market | in | 38 | 4 | 4 | 0 | 2 |
+| advance-auto-parts | in | 51 | 3 | 1 | 2 | 1 |
+| at-home-group | in | 15 | 3 | 0 | 3 | 2 |
+| bon-ton | in | 21 | 3 | 1 | 2 | 2 |
+| conn-s | in | 31 | 3 | 1 | 2 | 1 |
+| dillard-s | in | 51 | 3 | 3 | 0 | 1 |
+| dollar-general | in | 51 | 3 | 2 | 1 | 1 |
+| dollar-tree | in | 41 | 3 | 3 | 0 | 1 |
+| foot-locker | in | 51 | 3 | 1 | 2 | 1 |
+| jd-com | in | 36 | 3 | 3 | 0 | 1 |
+| levi-strauss | in | 51 | 3 | 3 | 0 | 1 |
+| restoration-hardware | in | 15 | 3 | 0 | 3 | 2 |
+| rue21 | in | 14 | 3 | 1 | 2 | 1 |
+| sears-holdings | in | 20 | 3 | 1 | 2 | 1 |
+| sprouts | in | 10 | 3 | 3 | 0 | 1 |
+| staples | in | 51 | 3 | 0 | 3 | 5 |
+| talbots-inc-the | in | 30 | 3 | 1 | 2 | 3 |
+| torrid | in | 16 | 3 | 1 | 2 | 1 |
+| ahold-delhaize | in | 51 | 2 | 2 | 0 | 1 |
+| asbury-automotive-group | in | 51 | 2 | 2 | 0 | 1 |
+| best-buy-co | in | 51 | 2 | 2 | 0 | 1 |
+| bluestem-brands | in | 20 | 2 | 0 | 2 | 2 |
+| fairway-group-holdings | in | 14 | 2 | 0 | 2 | 2 |
+| family-dollar-stores | in | 21 | 2 | 1 | 1 | 2 |
+| floor-decor | in | 35 | 2 | 2 | 0 | 1 |
+| gymboree-corporation-the | in | 18 | 2 | 0 | 2 | 2 |
+| hot-topic | in | 8 | 2 | 1 | 1 | 2 |
+| ingles-markets-incorporated | in | 51 | 2 | 2 | 0 | 1 |
+| kate-spade | in | 19 | 2 | 2 | 0 | 1 |
+| lands-end | in | 26 | 2 | 0 | 2 | 1 |
+| o-reilly | in | 51 | 2 | 2 | 0 | 1 |
+| odp-corporation-the | in | 30 | 2 | 2 | 0 | 1 |
+| orchard-supply | in | 2 | 2 | 0 | 2 | 1 |
+| penske-automotive-group | in | 51 | 2 | 2 | 0 | 1 |
+| pvh | in | 51 | 2 | 2 | 0 | 1 |
+| radioshack | in | 9 | 2 | 0 | 2 | 1 |
+| ralph-lauren | in | 51 | 2 | 1 | 1 | 1 |
+| sally-beauty | in | 51 | 2 | 2 | 0 | 1 |
+| sonic-automotive | in | 51 | 2 | 2 | 0 | 1 |
+| tiffany | in | 43 | 2 | 2 | 0 | 4 |
+| vince | in | 19 | 2 | 0 | 2 | 2 |
+| 7-eleven | in | 51 | 1 | 0 | 1 | 1 |
+| academy-sports-outdoors | in | 10 | 1 | 1 | 0 | 2 |
+| amer-sports | in | 5 | 1 | 1 | 0 | 1 |
+| autonation | in | 51 | 1 | 1 | 0 | 1 |
+| autozone | in | 51 | 1 | 1 | 0 | 1 |
+| burlington | in | 5 | 1 | 1 | 0 | 1 |
+| canada-goose | in | 19 | 1 | 1 | 0 | 1 |
+| costco-wholesale | in | 51 | 1 | 1 | 0 | 1 |
+| cumberland-farms | in | 9 | 1 | 1 | 0 | 1 |
+| dick-s-sporting-goods | in | 13 | 1 | 1 | 0 | 1 |
+| great-atlantic-pacific-tea-co-inc-the | in | 8 | 1 | 0 | 1 | 1 |
+| group-1-automotive | in | 51 | 1 | 1 | 0 | 1 |
+| home-depot-inc-the | in | 51 | 1 | 1 | 0 | 1 |
+| j-crew-group | in | 16 | 1 | 0 | 1 | 1 |
+| kroger-co-the | in | 51 | 1 | 1 | 0 | 1 |
+| lowe-s-companies | in | 51 | 1 | 0 | 1 | 1 |
+| men-s-wearhouse-llc-the | in | 18 | 1 | 1 | 0 | 3 |
+| murphy-usa | in | 47 | 1 | 1 | 0 | 1 |
+| ross-stores | in | 43 | 1 | 1 | 0 | 1 |
+| saks-incorporated | in | 4 | 1 | 1 | 0 | 1 |
+| smart-final-stores | in | 20 | 1 | 0 | 1 | 1 |
+| tjx-companies-inc-the | in | 51 | 1 | 1 | 0 | 1 |
+| tops | in | 21 | 1 | 0 | 1 | 1 |
+| arko | in | 14 | 0 | 0 | 0 | 0 |
+| birkenstock | in | 0 | 0 | 0 | 0 | 0 |
+| carter-s | in | 15 | 0 | 0 | 0 | 0 |
+| cencosud-s-a | in | 51 | 0 | 0 | 0 | 0 |
+| charlotte-russe-holding | in | 8 | 0 | 0 | 0 | 0 |
+| claire-s-stores | in | 0 | 0 | 0 | 0 | 0 |
+| container-store-group-inc-the | in | 14 | 0 | 0 | 0 | 0 |
+| controladora-comercial-mexicana-s-a-b-de-c-v | in | 10 | 0 | 0 | 0 | 0 |
+| crocs | in | 17 | 0 | 0 | 0 | 0 |
+| cst-brands | in | 16 | 0 | 0 | 0 | 0 |
+| david-s-bridal | in | 1 | 0 | 0 | 0 | 0 |
+| destination-maternity | in | 0 | 0 | 0 | 0 | 0 |
+| g-iii-apparel | in | 32 | 0 | 0 | 0 | 0 |
+| gildan-activewear | in | 0 | 0 | 0 | 0 | 0 |
+| kontoor-brands | in | 24 | 0 | 0 | 0 | 0 |
+| lithia-motors | in | 31 | 0 | 0 | 0 | 0 |
+| mattress-holding | in | 3 | 0 | 0 | 0 | 0 |
+| nike | in | 51 | 0 | 0 | 0 | 0 |
+| oxford-industries | in | 0 | 0 | 0 | 0 | 0 |
+| pep-boys | in | 13 | 0 | 0 | 0 | 0 |
+| perry-ellis-international | in | 22 | 0 | 0 | 0 | 0 |
+| sears | in | 5 | 0 | 0 | 0 | 0 |
+| sportsman-s-warehouse | in | 7 | 0 | 0 | 0 | 0 |
+| stater-bros-holdings | in | 10 | 0 | 0 | 0 | 0 |
+| tapestry | in | 41 | 0 | 0 | 0 | 0 |
+| target | in | 51 | 0 | 0 | 0 | 0 |
+| toys-r-us | in | 0 | 0 | 0 | 0 | 0 |
+| tractor-supply | in | 18 | 0 | 0 | 0 | 0 |
+| victoria-s-secret | in | 16 | 0 | 0 | 0 | 0 |
+| vipshop-holdings-limited | in | 33 | 0 | 0 | 0 | 0 |
+| walmart | in | 51 | 0 | 0 | 0 | 0 |
+| warnaco | in | 1 | 0 | 0 | 0 | 0 |
+| wayfair | in | 3 | 0 | 0 | 0 | 0 |

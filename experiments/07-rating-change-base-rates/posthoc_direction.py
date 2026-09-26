@@ -7,6 +7,7 @@ Albertsons 2015, where the label moved between Albertsons and Safeway bonds.
 Written by Claude (Opus 5.5), directed by Robert Vetter. Reads the same inputs as run_study.py;
 writes runs/<run_id>/posthoc_direction.json and prints a table. Refuses to overwrite.
     python3 experiments/07-rating-change-base-rates/posthoc_direction.py R1-2026-09-26
+    python3 experiments/07-rating-change-base-rates/posthoc_direction.py R2-2026-09-26 <withdrawn_dir>
 """
 import json
 import os
@@ -48,11 +49,11 @@ def classify(companies):
     return rows
 
 
-def main(run_id):
+def main(run_id, extra_dir=None):
     out = os.path.join(S.HERE, "runs", run_id, "posthoc_direction.json")
     if os.path.exists(out):
         sys.exit(f"refusing to overwrite {out}")
-    rows = classify(S.load())
+    rows = classify(S.load(extra_dir))
     json.dump(rows, open(out, "w"), indent=1)
     kinds = {}
     for r in rows:
@@ -69,4 +70,4 @@ def main(run_id):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], os.path.abspath(sys.argv[2]) if len(sys.argv) == 3 else None)

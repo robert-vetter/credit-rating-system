@@ -1,13 +1,13 @@
 # Experiment 07: how often and how much Moody's ratings change, specification
 
-*Written 2026-09-26 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.2, fixed before the run; 0.1 misdescribed the bond switch (section 8). Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Checked against: the
+*Written 2026-09-26 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.3 (amendment of 2026-09-26 after run R1, section 15); 0.2 was fixed before run R1; 0.1 misdescribed the bond switch (section 8). Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Checked against: the
 observation builder `evaluation/pipeline/build_observations.py`, the field inventory of the 86
 local `ratings.json` and `observations.json` files (read 2026-09-26: rating records carry only
 rating, action date, action code and rating type; action codes present are NW, HS, UP, DG, WE, WO), [evaluation/observations-summary.md](../../evaluation/observations-summary.md)
 and [evaluation/rating-history-file.md](../../evaluation/rating-history-file.md). No result has
 been computed yet.*
 
-State: run 2026-09-26 (Robert's decisions 1 to 3 in `decisions.md`). Results in `results.md`.
+State: run R1 2026-09-26 on companies still rated in 2025; run R2 with the withdrawn-rating companies added, per the amendment in section 15. Results in `results.md`.
 
 ## 1. Purpose and question
 
@@ -190,3 +190,21 @@ $0. No API calls, no downloads.
 | Notch | one step on Moody's 21-step scale | A1 to A2 is one notch down |
 | Balanced test set | a test set with a chosen share of changed cases, larger than the natural rate, plus matched unchanged cases | 30 changed and 20 unchanged in the frozen gold set |
 | Precision at the base rate | share of alarms that are real changes | a detector that finds 90% of changes and wrongly flags 10% of stable companies is right on about 1 alarm in 3 at a 6% base rate |
+
+## 15. Amendment 0.3, 2026-09-26, after run R1
+
+Written after run R1 had been read. Its purpose is to correct a sampling defect found in R1, not
+to tune any result. Robert's decisions 4 and 5 in `decisions.md`.
+
+| Item | Change |
+|---|---|
+| Defect | `evaluation/pipeline/compile_folders.py` writes folders only for groups with an active rating at the file end. 75 of the 161 confirmed groups were skipped, 58 of them in scope. R1 therefore saw only survivors |
+| Cohort | the 75 skipped groups are rebuilt from the same confirmed mapping (`evaluation/mapping.json`, read only) and the same Moody's archives, with `entity_history` from `compile_folders.py` and the label rule of `build_observations.py`. They are written into the run folder, never into `evaluation/companies/`, so no other experiment changes |
+| Primary cohort for R2 | all in-scope groups, active and withdrawn |
+| Comparisons reported next to it | R1 cohort (survivors only); withdrawn-rating companies only; all groups regardless of scope |
+| New table T9 | companies whose label ends before 2025-06-30: count by last rating category and by year of the end, with the downgrades in the four quarters before the end |
+| Horizon | the next quarter is the target horizon (decision 5). T3's quarterly column is the headline by rating; the 12-month column stays as context |
+| New test | the rebuilt label loop reproduces the label fields of an existing company's `observations.json` exactly |
+| Unchanged | all definitions of section 8; withdrawals are still never counted as changes. A default followed by a withdrawal can therefore be invisible as a change; T9 shows how many ratings end, and where |
+| Found by the tests before R2 | one skipped group, CDW CORPORATION (out of scope), is an earlier Moody's entity of CDW, which already has an active folder; the builder skips such groups and lists them. The two in-scope Sears groups (Sears, Roebuck and Co. to 2013; Sears Holdings to 2018) are separate entities as mapped and stay separate; they overlap in five unchanged quarters |
+| Still out | Moody's retail entities without a confirmed SEC filer (none are in the mapping as confirmed-no-filer; the frame's 186 entities are all confirmed) |

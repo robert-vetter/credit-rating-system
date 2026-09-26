@@ -16,6 +16,9 @@ Outputs, in a new folder that must not exist yet: experiments/07-rating-change-b
 
 Run from the repository root:
     python3 experiments/07-rating-change-base-rates/run_study.py R1-2026-09-26
+    python3 experiments/07-rating-change-base-rates/run_study.py R2-2026-09-26 <withdrawn_dir>
+The second form (amendment 0.3) adds the withdrawn-rating companies built by build_withdrawn.py;
+the primary cohort is then every in-scope company, active or withdrawn.
 """
 import hashlib
 import json
@@ -208,16 +211,20 @@ def precision(base, sens, spec):
 
 # ----------------------------------------------------------------------------- the study
 
-def load():
+def load(extra_dir=None):
     companies = []
-    for slug in sorted(os.listdir(COMPANIES)):
-        op = os.path.join(COMPANIES, slug, "observations.json")
-        rp = os.path.join(COMPANIES, slug, "ratings.json")
-        if not os.path.exists(op):
+    for base, origin in ((COMPANIES, "active"), (extra_dir, "withdrawn")):
+        if not base:
             continue
-        obs_doc = json.load(open(op))
-        ratings = json.load(open(rp)) if os.path.exists(rp) else None
-        companies.append((slug, obs_doc, ratings, op, rp))
+        for slug in sorted(os.listdir(base)):
+            op = os.path.join(base, slug, "observations.json")
+            rp = os.path.join(base, slug, "ratings.json")
+            if not os.path.exists(op):
+                continue
+            obs_doc = json.load(open(op))
+            obs_doc["origin"] = origin
+            ratings = json.load(open(rp)) if os.path.exists(rp) else None
+            companies.append((slug, obs_doc, ratings, op, rp))
     return companies
 
 
@@ -360,7 +367,21 @@ def analyse(companies, cohort_filter):
               for name, row in (("quarter", t1[0]), ("within 12 months", t1[2]))
               for s, sp in ((0.9, 0.9), (0.8, 0.95))]}
 
-    return {"companies": len(cs), "T1": t1, "sensitivities": sens, "T2": t2, "T3": t3,
+    ended = []
+    for c in cs:
+        if not c["ends_early"]:
+            continue
+        last = docs[c["slug"]]["observations"][-1]
+        before = [q for q in c["quarters"] if GRID[QI[last["date"]] - 4] < q["date"] <= last["date"]]
+        ended.append({"company": c["slug"], "last_date": last["date"], "last_label": last["label"],
+                      "category": category(last["label"]),
+                      "downgrades_4q_before": sum(1 for q in before if q["changed"] and (q["delta"] or 0) > 0),
+                      "upgrades_4q_before": sum(1 for q in before if q["changed"] and (q["delta"] or 0) < 0)})
+    t9 = {"companies": ended,
+          "by_category": dict(Counter(e["category"] for e in ended)),
+          "by_year": dict(sorted(Counter(e["last_date"][:4] for e in ended).items()))}
+
+    return {"companies": len(cs), "T9": t9, "T1": t1, "sensitivities": sens, "T2": t2, "T3": t3,
             "T3_grade": t3_grade, "T3_grade_fwd12": t3_grade_fwd, "T3_matrix": t3_matrix,
             "T4": t4, "T4_summary": t4_summary, "T5": t5, "T6": t6, "T7": t7, "T8": t8}
 
@@ -375,7 +396,7 @@ def ci(r, lo="wilson_lo", hi="wilson_hi"):
     return "" if r.get(lo) is None else f"{pct(r[lo])} to {pct(r[hi])}"
 
 
-def to_markdown(res, alt):
+def to_markdown(res, comparisons):
     L = []
     w = L.append
     w("## T1 Base rate by horizon (primary: in-scope companies)\n")
@@ -390,8 +411,9 @@ def to_markdown(res, alt):
     w("|---|---|---|---|---|")
     for k, r in res["sensitivities"].items():
         w(f"| {k} | {r['n']} | {r['changed']} | {pct(r['rate'])} | {ci(r)} |")
-    for r in alt["T1"]:
-        w(f"| all 86 companies, {r['row']} | {r['n']} | {r['changed']} | {pct(r['rate'])} | {ci(r)} |")
+    for name, alt in comparisons:
+        for r in alt["T1"]:
+            w(f"| {name}, {r['row']} | {r['n']} | {r['changed']} | {pct(r['rate'])} | {ci(r)} |")
     w("\n## T2 Size of quarterly changes\n")
     w("| Notches | Direction | Changes |")
     w("|---|---|---|")
@@ -455,6 +477,23 @@ def to_markdown(res, alt):
     w("|---|---|---|---|---|")
     for e in t8["precision_examples"]:
         w(f"| {e['base']} | {pct(e['rate'])} | {e['sensitivity']:.0%} | {e['specificity']:.0%} | {pct(e['precision'])} |")
+    t9 = res.get("T9")
+    if t9 is not None:
+        w("\n## T9 Companies whose label ends before 2025-06-30\n")
+        w(f"Companies: {len(t9['companies'])}.\n")
+        w("| Last rating category | Companies |")
+        w("|---|---|")
+        for k in CATS:
+            if k in t9["by_category"]:
+                w(f"| {k} | {t9['by_category'][k]} |")
+        w("\n| Year the label ends | Companies |")
+        w("|---|---|")
+        for k, v in t9["by_year"].items():
+            w(f"| {k} | {v} |")
+        w("\n| Company | Last labelled quarter | Last rating | Downgrades in the 4 quarters before | Upgrades |")
+        w("|---|---|---|---|---|")
+        for e in sorted(t9["companies"], key=lambda e: e["last_date"]):
+            w(f"| {e['company']} | {e['last_date']} | {e['last_label']} | {e['downgrades_4q_before']} | {e['upgrades_4q_before']} |")
     return "\n".join(L) + "\n"
 
 
@@ -462,13 +501,20 @@ def sha(path):
     return hashlib.sha256(open(path, "rb").read()).hexdigest()
 
 
-def main(run_id):
+def main(run_id, extra_dir=None):
     out = os.path.join(HERE, "runs", run_id)
     if os.path.exists(out):
         sys.exit(f"refusing to overwrite {out}")
-    companies = load()
+    companies = load(extra_dir)
     primary = analyse(companies, lambda d: d["scope"] == "in")
-    everyone = analyse(companies, lambda d: True)
+    if extra_dir:
+        comparisons = [
+            ("survivors only (R1 cohort)", analyse(companies, lambda d: d["scope"] == "in" and d["origin"] == "active")),
+            ("withdrawn-rating companies only", analyse(companies, lambda d: d["scope"] == "in" and d["origin"] == "withdrawn")),
+            ("all groups regardless of scope", analyse(companies, lambda d: True)),
+        ]
+    else:
+        comparisons = [("all 86 companies", analyse(companies, lambda d: True))]
     os.makedirs(out)
     manifest = {
         "run_id": run_id, "seed": SEED, "bootstrap": BOOT,
@@ -480,13 +526,15 @@ def main(run_id):
                    for p in (op, rp) if os.path.exists(p)},
     }
     json.dump(manifest, open(os.path.join(out, "manifest.json"), "w"), indent=1)
-    json.dump({"primary_in_scope": primary, "all_86": everyone},
+    manifest["extra_dir"] = os.path.relpath(extra_dir, ROOT) if extra_dir else None
+    json.dump(manifest, open(os.path.join(out, "manifest.json"), "w"), indent=1)
+    json.dump({"primary_in_scope": primary, **{n: r for n, r in comparisons}},
               open(os.path.join(out, "results.json"), "w"), indent=1)
-    open(os.path.join(out, "tables.md"), "w").write(to_markdown(primary, everyone))
+    open(os.path.join(out, "tables.md"), "w").write(to_markdown(primary, comparisons))
     print(f"wrote {out}: {len(manifest['inputs'])} input files hashed")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
-    main(sys.argv[1])
+    main(sys.argv[1], os.path.abspath(sys.argv[2]) if len(sys.argv) == 3 else None)

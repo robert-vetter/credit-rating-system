@@ -175,7 +175,32 @@ class WholeAnalysis(unittest.TestCase):
         self.assertEqual((q["upgrades"], q["downgrades"]), (1, 2))
         self.assertEqual(res["T7"]["level_switches"], 1)
         self.assertEqual(res["T6"]["after_change"]["n"] + res["T6"]["after_no_change"]["n"] > 0, True)
-        self.assertIn("## T8", S.to_markdown(res, res))
+        self.assertIn("## T9", S.to_markdown(res, [("same", res)]))
+        self.assertEqual(len(res["T9"]["companies"]), 1)          # the Caa1 company withdrawn in 2016
+
+
+class RebuiltCompanies(unittest.TestCase):
+    def test_rebuilt_label_loop_reproduces_an_existing_folder(self):
+        import json
+        import build_withdrawn as B
+        base = os.path.join(S.COMPANIES, "kohl-s")
+        with open(os.path.join(base, "ratings.json")) as f:
+            ratings = json.load(f)
+        with open(os.path.join(base, "observations.json")) as f:
+            existing = json.load(f)["observations"]
+        built = B.quarterly_labels(ratings)
+        fields = ("date", "quarter", "label", "label_level", "label_oi", "label_ambiguous", "persistence", "changed")
+        self.assertEqual([{k: o[k] for k in fields} for o in built],
+                         [{k: o[k] for k in fields} for o in existing])
+
+    def test_skipped_groups_are_exactly_those_without_a_current_rating(self):
+        import json
+        import build_withdrawn as B
+        with open(os.path.join(S.ROOT, "evaluation", "mapping.json")) as f:
+            items = json.load(f)
+        skipped = B.skipped_groups(items)
+        self.assertEqual(len(skipped), 75)
+        self.assertEqual(set(B.slug(g) for g in skipped) & set(os.listdir(S.COMPANIES)), {"cdw"})   # skipped by the builder
 
 
 class Statistics(unittest.TestCase):

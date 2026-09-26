@@ -51,7 +51,7 @@ on a widely used commercial model (GPT-5.2) are proposed and not yet run.
 | [04](experiments/04-open-weight-cross-section/) | Same test on the whole cross-section with replicates | done 2026-09-13 on Qwen3-235B; 20 issuers, 3 runs, $1.24 |
 | [05](experiments/05-accounting-interventions/) | Do corrected financial inputs fix the scorecard? | done 2026-09-17, no model calls; they do not fix it alone |
 | [06](experiments/06-qualitative-evidence/) | What does the evidence support for each qualitative grade? | protocol drafted, not run |
-| [07](experiments/07-rating-change-base-rates/) | How often and how much do ratings change in the historical record? | done 2026-09-26, no model; 6.2% of quarters, 22.1% within 12 months, mostly one notch |
+| [07](experiments/07-rating-change-base-rates/) | How often and how much do ratings change in the historical record? | done 2026-09-26, no model; 7.8% of quarters change, rising from 2.5% at A to 18.5% at Caa; mostly one notch |
 
 Each folder holds the specification, the decisions with owner and date, the prompts, the code
 and the results. From 2026-09-26 every experiment and report follows the
