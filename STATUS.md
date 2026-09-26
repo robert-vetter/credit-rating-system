@@ -40,14 +40,14 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 04 | Qwen3-235B, 19 post-cutoff issuers, 3 runs, $1.24 | 17/19, MAE 0.11 | 3/19, MAE 1.84 | 18/19, MAE 0.05 |
 | 05 | no model; corrected inputs replayed through the scorecard, Walmart, Nike, Signet | | 0/3 | 2/3 |
 | 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
-| 07 | no model; how often and how much ratings change, 2012 to 2025; specification drafted 2026-09-26 | not run | | |
+| 07 | no model; how often and how much ratings change, 72 in-scope companies, 2012 to 2025 | | 6.2% of quarters change; 22.1% within 12 months; 85% of changes one notch | 93.8% per quarter, 77.9% per 12 months |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
 
 | Decision | Owner | State |
 |---|---|---|
-| Experiment 07 specification: seven decisions, including whether it runs before chair consensus | Robert | drafted 2026-09-26; [section 13](experiments/07-rating-change-base-rates/README.md#13-decisions-that-need-consensus-before-the-run) |
+| After Experiment 07: horizon of a change test, baselines to beat, survivorship rerun | Robert | [results, section 12](experiments/07-rating-change-base-rates/results.md#12-decisions-for-consensus); proposed: 12-month horizon, rating-level and momentum baselines next to persistence, rerun with withdrawn-rating retailers first |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |
 | A widely used commercial model | Robert | Robert agrees with Xiaowei (2026-09-26). GPT-5.2 fits the window (cutoff 2025-08-31); about $10 to $25 for 20 issuers × 3 runs; no cap approved |
@@ -72,6 +72,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 8 | Lexical redaction is not enough: a rating table rendered one cell per line leaked Kohl's B2. Repaired with a structural second pass | same; [system/redact.py](system/redact.py) |
 | 9 | Fixing the numbers alone does not fix the scorecard: Signet's three runs with identical corrected inputs gave A3, Baa1 and A1 from their qualitative grades alone | [Exp 05 results](experiments/05-accounting-interventions/results.md) |
 | 10 | Historical numbers-only scorecard: Moody's assigns on average 0.71 notches worse; no tested annual-number signal predicts a change | [evaluation/calibration-summary.md](evaluation/calibration-summary.md) |
+| 11 | Rating changes: 6.2% of quarters, 22.1% within 12 months; the chance rises steeply as the rating falls (A 10.7%, B 45.5% within 12 months); 85% of changes are one notch; after a change, another follows more often (32.9% against 21.6%), mostly in the same direction. Survivors only | [Exp 07 results](experiments/07-rating-change-base-rates/results.md) |
 
 ## Money
 
@@ -89,6 +90,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-26, Claude (Opus 5.5) at Robert's direction: ran Experiment 07 (no model, $0). Robert
+  waived the Codex review and chair consensus for it. Results written; survivorship bias found
+  (only companies still rated in 2025 are in the folders).
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: drafted the Experiment 07 specification
   (base rates of rating changes, no model, $0). Not run, not reviewed.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: wrote EXPERIMENT-POLICY.md (seven

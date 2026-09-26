@@ -1,14 +1,13 @@
 # Experiment 07: how often and how much Moody's ratings change, specification
 
-*Written 2026-09-26 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.1, for review and
-consensus. Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Checked against: the
+*Written 2026-09-26 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.2, fixed before the run; 0.1 misdescribed the bond switch (section 8). Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Checked against: the
 observation builder `evaluation/pipeline/build_observations.py`, the field inventory of the 86
 local `ratings.json` and `observations.json` files (read 2026-09-26: rating records carry only
 rating, action date, action code and rating type; action codes present are NW, HS, UP, DG, WE, WO), [evaluation/observations-summary.md](../../evaluation/observations-summary.md)
 and [evaluation/rating-history-file.md](../../evaluation/rating-history-file.md). No result has
 been computed yet.*
 
-State: design. Awaiting review and the decisions in section 13.
+State: run 2026-09-26 (Robert's decisions 1 to 3 in `decisions.md`). Results in `results.md`.
 
 ## 1. Purpose and question
 
@@ -117,7 +116,7 @@ All counts are computed by one script, `run_study.py`, covered by tests on hand-
 | Rating action | an upgrade (UP) or downgrade (DG) record on the entity or senior unsecured line of the company. Records on several instruments with the same date and same new rating count as one action. Catches moves that reverse within a quarter and are invisible on the grid |
 | Withdrawal | the company's label stops existing (the rating value becomes WR, with action code WE or WO, on every line that carried the label). Counted separately; never counted as a change. An instrument withdrawn at maturity while the company stays rated is not a company event |
 | Gap | a quarter with no label. The builder then leaves the next quarter without a previous rating, so that quarter drops out of the change denominator. Gaps are counted in T7 |
-| Label source switch | the rating record behind the label (field `label_oi`) changes between t-1 and t, for example when the bond that carried the label matures. Flagged in T7 with the level switches |
+| Label source switch | the rated entity behind the label (field `label_oi`) changes between t-1 and t, for example between members of a group. A switch between bonds of the same entity is not visible in this field: because the label rule takes the most recently dated live record, a new bond issued at a different rating moves the label without any rating action. Such cases are counted in T7 as grid changes without a rating action (correction of 2026-09-26, found by the tests before the run) |
 | Investment grade | Baa3 or better at t-1 |
 | Follow-on change | a change within four quarters after a change, split into same direction and reversal |
 
