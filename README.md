@@ -53,7 +53,8 @@ on a widely used commercial model (GPT-5.2) are proposed and not yet run.
 | [06](experiments/06-qualitative-evidence/) | What does the evidence support for each qualitative grade? | protocol drafted, not run |
 
 Each folder holds the specification, the decisions with owner and date, the prompts, the code
-and the results.
+and the results. From 2026-09-26 every experiment and report follows the
+[experiment policy](EXPERIMENT-POLICY.md).
 
 ## Repository
 
@@ -65,6 +66,7 @@ and the results.
 | [evaluation/](evaluation/) | the measuring apparatus: company mapping, observations, gold set, pipeline, audits |
 | [methodologies/](methodologies/) | the Moody's methodology |
 | [STATUS.md](STATUS.md) | current state, open decisions, findings |
+| [EXPERIMENT-POLICY.md](EXPERIMENT-POLICY.md) | how every experiment is designed, checked, run, analysed and reported |
 
 Raw filings, rating files and run records are not in the repository. They are listed in
 [data/README.md](data/README.md).

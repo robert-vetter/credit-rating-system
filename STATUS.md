@@ -26,6 +26,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | Reply | Robert writes it himself. Claude's earlier draft (E08) is not sent. Robert's reasoning is logged privately |
 | Written answer to the review | [reports/2026-09-18-specification/](reports/2026-09-18-specification/), pushed |
 | Work in flight | none |
+| Rules for new experiments and reports | [EXPERIMENT-POLICY.md](EXPERIMENT-POLICY.md) and the templates in `experiments/_template/` and `reports/_template/`, from 2026-09-26 |
 | Paid calls authorized | none |
 | Repository | public on GitHub, holds the Moody's methodology PDF; visibility is Robert's open decision |
 
@@ -38,7 +39,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 03 | Opus 4.6, 7 post-cutoff issuers, $8.74 | 4/7, MAE 0.57 | 3/7, MAE 1.14 | 5/7, MAE 0.43 |
 | 04 | Qwen3-235B, 19 post-cutoff issuers, 3 runs, $1.24 | 17/19, MAE 0.11 | 3/19, MAE 1.84 | 18/19, MAE 0.05 |
 | 05 | no model; corrected inputs replayed through the scorecard, Walmart, Nike, Signet | | 0/3 | 2/3 |
-| 06 | protocol for reviewing the evidence behind qualitative grades | not run | | |
+| 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
@@ -86,6 +87,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-26, Claude (Opus 5.5) at Robert's direction: wrote EXPERIMENT-POLICY.md (seven
+  stages, design requirements from the chair's reviews, pre-checks P1 to P14, analysis and
+  report structure) and the experiment and report templates.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: restructured the repository. Reports
   moved to `reports/`, HANDOVER.md replaced by this file, early notes and superseded planning
   documents deleted (in git history at f4951ea), audits moved next to what they audit,

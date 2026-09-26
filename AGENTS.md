@@ -6,8 +6,11 @@ Instructions for any AI coding agent or new session working in this repository.
 
 1. `STATUS.md`: where the project stands, open decisions, findings, money. Keep it current.
 2. `README.md`: the overview the chair reads, and the map of the repository.
-3. The latest report in `reports/`: what the chair has been told, and its specification.
-4. The experiment folder you are touching: its `README.md` (specification), `decisions.md`
+3. `EXPERIMENT-POLICY.md`: the stages, pre-checks, analysis rules and report structure every
+   experiment and every report follows. Start new experiments and reports from
+   `experiments/_template/` and `reports/_template/`.
+4. The latest report in `reports/`: what the chair has been told, and its specification.
+5. The experiment folder you are touching: its `README.md` (specification), `decisions.md`
    (decisions with owner and date), `results.md`.
 
 Private files outside the repository, in `/Users/robert/Developer/giesecke/correspondence/`:
@@ -23,6 +26,9 @@ implements, measures and writes; it does not spend, commit, publish or send with
 asked. Decisions are recorded in the relevant `decisions.md` with owner and date.
 
 ## Rules that must not be relaxed
+
+The full set is in `EXPERIMENT-POLICY.md`; these are the ones that are never waived.
+
 
 - No paid model call without a dollar cap Robert approved and a free pre-flight that prices
   the exact worst case; the runner refuses to submit above the cap.
