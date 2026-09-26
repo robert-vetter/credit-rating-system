@@ -89,7 +89,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: wrote EXPERIMENT-POLICY.md (seven
   stages, design requirements from the chair's reviews, pre-checks P1 to P14, analysis and
-  report structure) and the experiment and report templates.
+  report structure) and the experiment and report templates. Robert confirmed the three
+  standing rules the same day: chair agreement before every run, a commercial model in every
+  baseline experiment, three runs per company by default. Pushed as ea6348c.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: restructured the repository. Reports
   moved to `reports/`, HANDOVER.md replaced by this file, early notes and superseded planning
   documents deleted (in git history at f4951ea), audits moved next to what they audit,
