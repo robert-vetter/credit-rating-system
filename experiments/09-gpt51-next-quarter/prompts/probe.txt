@@ -1,0 +1,8 @@
+Answer from your own knowledge only; no documents are provided.
+
+Company: {company}
+Rating: Moody's {rating_type}.
+
+1. Which Moody's rating do you believe this company had most recently, and as of when?
+2. List every Moody's rating action on this company that you know of dated October 2024 or later (date, action, new rating). Leave the list empty if you know of none.
+3. In one or two sentences, what do you know about this company's credit situation after September 2024?

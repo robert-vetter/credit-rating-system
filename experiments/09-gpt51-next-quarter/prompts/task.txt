@@ -1,0 +1,19 @@
+As-of date: {as_of}
+Company: {company}
+Rating to assess: Moody's {rating_type}, {rating} on the as-of date.
+Period: {period_start} to {period_end}.
+
+Moody's rating history of this company up to the as-of date, from Moody's public rating file (date, rating, action code, rating type; NW new, HS history start, UP upgrade, DG downgrade, WR withdrawn):
+{history}
+
+{documents_header}
+{documents}
+
+Question: what is the probability that Moody's downgrades this rating, leaves it unchanged, or upgrades it during the period? A downgrade or an upgrade is any move of at least one notch of this rating between the as-of date and the end of the period.
+
+Answer in the required JSON format:
+- p_down, p_unchanged and p_up are probabilities that sum to 1.
+- most_likely_rating_at_period_end is the rating you consider most likely at the end of the period.
+- size_if_change_notches is the number of notches you expect if the rating does change (1 if you expect a one-notch move).
+- reasons: up to three reasons for your probabilities. Each has the reason, a short verbatim quote from the filings above that supports it, and the source document as it is named above. If a reason rests on the rating history, write "rating history" as the source and quote the history line.
+- insufficient_information is true if the material does not allow a meaningful assessment; give your best probabilities in any case.

@@ -1,0 +1,12 @@
+{"type": "object", "additionalProperties": false,
+ "required": ["p_down", "p_unchanged", "p_up", "most_likely_rating_at_period_end", "size_if_change_notches", "reasons", "insufficient_information"],
+ "properties": {
+  "p_down": {"type": "number"},
+  "p_unchanged": {"type": "number"},
+  "p_up": {"type": "number"},
+  "most_likely_rating_at_period_end": {"type": "string", "enum": ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3", "Ba1", "Ba2", "Ba3", "B1", "B2", "B3", "Caa1", "Caa2", "Caa3", "Ca", "C"]},
+  "size_if_change_notches": {"type": "integer"},
+  "reasons": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+    "required": ["reason", "quote", "source"],
+    "properties": {"reason": {"type": "string"}, "quote": {"type": "string"}, "source": {"type": "string"}}}},
+  "insufficient_information": {"type": "boolean"}}}

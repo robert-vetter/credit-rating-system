@@ -1,14 +1,13 @@
 # Experiment 09: GPT-5.1 predicting next quarter's rating change after its cutoff, specification
 
-*Written 2026-09-27 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.1, for review and
-consensus. Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Built on Robert's decisions
+*Written 2026-09-27 by Claude (Opus 5.5), directed by Robert Vetter. Version 0.2 (decisions of 2026-09-27, section 15); 0.1 was the draft. Follows [EXPERIMENT-POLICY.md](../../EXPERIMENT-POLICY.md). Built on Robert's decisions
 of 2026-09-27 (GPT-5.1, all company-quarters of the 2025 window) and the Experiment 08 results.
 Checked against: the OpenAI model page for GPT-5.1 and the Batch API guide (read 2026-09-27, not
 yet snapshotted), Experiment 08 run R1 (`predictions.json`, window rows), Experiment 07 run R2
 (labels), and the SEC filing manifests under `evaluation/companies/*/filings/manifest.json`. No
 request has been sent and nothing has been spent.*
 
-State: design. Awaiting the decisions in section 13, an OpenAI key and a cap.
+State: decisions taken 2026-09-27 (`decisions.md` 2 to 6); implementation. Section 15 lists what changed from 0.1.
 
 ## 1. Purpose and question
 
@@ -231,3 +230,17 @@ Estimate before the pre-flight, list prices from the model page:
 | Consensus probability | the mean of the three replicates' probabilities | replicates 0.10, 0.14, 0.12 give 0.12 |
 | PR area | area under the precision-recall curve for a ranking; random ranking scores the change rate | 0.093 for 11 changes in 118 rows |
 | M1, M3 | Experiment 08's rating-level model and its model with rating history and reported numbers | M1 scored 0.133 on all 147 window rows |
+
+## 15. Changes in version 0.2, 2026-09-27, before any request
+
+| Item | Version 0.1 | Version 0.2 | Decision |
+|---|---|---|---|
+| Access | OpenAI API | OpenRouter, provider pinned to `openai/flex` (OpenAI's own servers, snapshot `gpt-5.1-20251113`), no fallback | 4, 6 |
+| Discount | Batch API, 50% | OpenAI flex tier, 50%: $0.625 input, $5 output per million tokens | 6 |
+| Replicates | 3 | 1; stability across replicates is therefore not measured | 3 |
+| Consensus | mean of three replicates | the single answer | 3 |
+| Cap | after the pre-flight | $50 for now; at the cap the runner stops and progress is reported | 4 |
+| Review | Codex review proposed | none; Robert's go stands in for consensus | 5 |
+| Budget estimate | $45 to $50 with batch for three replicates | one replicate at the flex price: about $11 input (17.7 million tokens) plus $3 to $6 output, about $15 to $20 in total, exact figure from the pre-flight | |
+| Section 9, stability row | range across three replicates | not available; dropped | 3 |
+| Redaction | `redact_v2` and the fragment scan | plus a final pass that removes exactly the lines the scan flags (logged per document), then rescans; added after the scan stopped the build on two orphaned "Stable" outlook cells in Best Buy's 2024 10-K. Nothing had been sent | 2 (decision 6 of section 13) |

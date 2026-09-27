@@ -43,7 +43,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
 | 07 | no model; how often and how much ratings change, 125 in-scope companies incl. withdrawn ratings, 2012 to 2025 | | 7.8% of quarters change (A 2.5%, Baa 4.4%, Ba 7.1%, B 12.9%, Caa 18.5%); 26.7% within 12 months; 81% one notch | 92.2% per quarter |
 | 08 | no model; next-quarter predictor from rating history and quarterly numbers, trained to 2020, tested 2021 to mid-2025 (1,356 company-quarters, 103 changes) | direction right 74.8% with numbers, 42.7% without | any change: ranking score 0.148 (rating level) to 0.160; numbers add nothing measurable. Downgrades alone (post-hoc): 0.142 with numbers, 0.071 without | ranks nothing (0.076) |
-| 09 | GPT-5.1 on 118 eligible company-quarters of the 2025 window (11 changes); specification drafted 2026-09-27 | not run | | |
+| 09 | GPT-5.1 via OpenRouter (OpenAI flex tier), 118 company-quarters with filings plus 29 with rating history only, one run each; built, tested, priced (worst case $36.94, cap $50), authorized; waiting for a funded OpenRouter key | not run | | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
@@ -95,6 +95,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-27, Claude (Opus 5.5) at Robert's direction: built Experiment 09 (EDGAR download of 234
+  filings, prompts, input builder, guarded runner with 16 tests, exact pre-flight, authorization for
+  $50). Nothing sent: the OpenRouter key in `.env` has no credits; Robert's other key not found.
 - 2026-09-27, Claude (Opus 5.5): drafted the Experiment 09 specification (GPT-5.1, 2025 window,
   10 decisions open, no spend).
 - 2026-09-27, Claude (Opus 5.5) at Robert's direction: ran Experiment 08 (no model, $0; SEC

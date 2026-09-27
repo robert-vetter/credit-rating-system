@@ -1,0 +1,9 @@
+{"type": "object", "additionalProperties": false,
+ "required": ["recalled_rating", "recalled_as_of", "actions_from_october_2024", "credit_situation_after_september_2024"],
+ "properties": {
+  "recalled_rating": {"type": "string"},
+  "recalled_as_of": {"type": "string"},
+  "actions_from_october_2024": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+    "required": ["date", "action", "new_rating"],
+    "properties": {"date": {"type": "string"}, "action": {"type": "string"}, "new_rating": {"type": "string"}}}},
+  "credit_situation_after_september_2024": {"type": "string"}}}
