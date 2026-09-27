@@ -42,22 +42,24 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 05 | no model; corrected inputs replayed through the scorecard, Walmart, Nike, Signet | | 0/3 | 2/3 |
 | 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
 | 07 | no model; how often and how much ratings change, 125 in-scope companies incl. withdrawn ratings, 2012 to 2025 | | 7.8% of quarters change (A 2.5%, Baa 4.4%, Ba 7.1%, B 12.9%, Caa 18.5%); 26.7% within 12 months; 81% one notch | 92.2% per quarter |
+| 08 | no model; next-quarter predictor from rating history and quarterly numbers; specification drafted 2026-09-27 | not run | | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
 
 | Decision | Owner | State |
 |---|---|---|
-| After Experiment 07: baselines a next-quarter predictor must beat; unit of observation (quarter end or each filing); how to treat ratings that end in default; LLM test cases | Robert | [results, section 12](experiments/07-rating-change-base-rates/results.md#12-decisions-for-consensus). Decided 2026-09-26: the predictor targets the next quarter |
+| Next experiments | Robert | Decided 2026-09-27: one after another. **08** next (next-quarter predictor without an LLM). **09** after it: GPT-5.1 on all 147 company-quarters of the 2025 window; cap and OpenAI key when it comes up. 10 dropped. 11 (newest window) needs the chair's dated histories, to be requested in the email. 12 not now |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |
-| A widely used commercial model | Robert | Robert agrees with Xiaowei (2026-09-26). GPT-5.2 fits the window (cutoff 2025-08-31); about $10 to $25 for 20 issuers × 3 runs; no cap approved |
+| A widely used commercial model | Robert | GPT-5.1 chosen 2026-09-27 (vendor knowledge cutoff 2024-09-30, read 2026-09-26); tested on the public-file window of 2025 as Experiment 09; no cap approved yet |
 | The nine consensus decisions | the chair | [specification, section 13](reports/2026-09-18-specification/SPECIFICATION.md#13-decisions-that-need-consensus-before-the-next-run) |
 | Target rating type (corporate family versus senior unsecured) | the chair | asked 2026-09-13, no answer |
 | Hand-checked reference data (inputs, adjustments, factor grades) | the chair | asked 2026-09-17; Xiaowei asked what it means; answered in the 2026-09-18 report |
 | Access to Moody's Credit Opinions and rating-action releases | Robert | not settled |
 | Qurate's October 2025 action day | Robert | needs the Moody's login |
-| Snapshot of the Nike action and GPT cutoff pages under `evidence/` | any session | read 2026-09-18, not yet saved |
+| Snapshot of the Nike action and GPT cutoff pages under `evidence/` | any session | read 2026-09-18 and 2026-09-26, not yet saved |
+| Defect: `fetch_xbrl.py` drops quarterly flows for about 26 companies (months × 30 days approximation) | any session | found 2026-09-27; Experiment 08 works around it; effect on Experiments 03 and 04 inputs to be assessed as a separate task |
 
 ## Findings
 
@@ -91,6 +93,8 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-27, Claude (Opus 5.5): recorded Robert's order of experiments (08, then 09 on GPT-5.1;
+  10 dropped; 11 as a data request); drafted the Experiment 08 specification.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: reran Experiment 07 (R2) with the 74
   withdrawn-rating groups rebuilt inside the run folder; results rewritten on R2. Robert set the
   target horizon of the eventual predictor to the next quarter.
