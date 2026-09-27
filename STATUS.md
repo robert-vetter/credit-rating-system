@@ -42,14 +42,14 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 05 | no model; corrected inputs replayed through the scorecard, Walmart, Nike, Signet | | 0/3 | 2/3 |
 | 06 | protocol for reviewing the evidence behind qualitative grades; must be brought to the experiment policy before it runs | not run | | |
 | 07 | no model; how often and how much ratings change, 125 in-scope companies incl. withdrawn ratings, 2012 to 2025 | | 7.8% of quarters change (A 2.5%, Baa 4.4%, Ba 7.1%, B 12.9%, Caa 18.5%); 26.7% within 12 months; 81% one notch | 92.2% per quarter |
-| 08 | no model; next-quarter predictor from rating history and quarterly numbers; specification drafted 2026-09-27 | not run | | |
+| 08 | no model; next-quarter predictor from rating history and quarterly numbers, trained to 2020, tested 2021 to mid-2025 (1,356 company-quarters, 103 changes) | direction right 74.8% with numbers, 42.7% without | any change: ranking score 0.148 (rating level) to 0.160; numbers add nothing measurable. Downgrades alone (post-hoc): 0.142 with numbers, 0.071 without | ranks nothing (0.076) |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
 
 | Decision | Owner | State |
 |---|---|---|
-| Next experiments | Robert | Decided 2026-09-27: one after another. **08** next (next-quarter predictor without an LLM). **09** after it: GPT-5.1 on all 147 company-quarters of the 2025 window; cap and OpenAI key when it comes up. 10 dropped. 11 (newest window) needs the chair's dated histories, to be requested in the email. 12 not now |
+| Next experiments | Robert | Decided 2026-09-27: one after another. 08 done. **09** next: GPT-5.1 on all 147 company-quarters of the 2025 window, judged against the Experiment 08 baselines (M1 main bar) on any change, direction, and downgrades and upgrades separately (Exp 08 results, section 12); cap and OpenAI key when it comes up. 10 dropped. 11 needs the chair's dated histories (email). 12 not now |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |
 | A widely used commercial model | Robert | GPT-5.1 chosen 2026-09-27 (vendor knowledge cutoff 2024-09-30, read 2026-09-26); tested on the public-file window of 2025 as Experiment 09; no cap approved yet |
@@ -76,6 +76,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 9 | Fixing the numbers alone does not fix the scorecard: Signet's three runs with identical corrected inputs gave A3, Baa1 and A1 from their qualitative grades alone | [Exp 05 results](experiments/05-accounting-interventions/results.md) |
 | 10 | Historical numbers-only scorecard: Moody's assigns on average 0.71 notches worse; no tested annual-number signal predicts a change | [evaluation/calibration-summary.md](evaluation/calibration-summary.md) |
 | 11 | Rating changes, all in-scope companies including withdrawn ratings: 7.8% of quarters, 26.7% within 12 months. The next-quarter chance rises steeply as the rating falls (A 2.5%, B 12.9%, Caa 18.5%); 81% of changes are one notch; after a change another follows more often (38.0% against 25.9% within a year), mostly in the same direction. Survivors alone understate it (6.2%) | [Exp 07 results](experiments/07-rating-change-base-rates/results.md) |
+| 12 | Whether a rating changes next quarter is mostly told by its level; which way it goes is told by the reported numbers (74.8% against 42.7%). Weak numbers (low coverage, falling margin, negative EBITDA, a rating better than the numbers justify) come before downgrades; nothing observable here comes before upgrades beyond the rating level | [Exp 08 results](experiments/08-next-quarter-baselines/results.md) |
 
 ## Money
 
@@ -93,6 +94,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-09-27, Claude (Opus 5.5) at Robert's direction: ran Experiment 08 (no model, $0; SEC
+  companyfacts downloaded for 53 withdrawn-rating companies). Robert waived the Codex review and
+  chair consensus. Results and a supplement written.
 - 2026-09-27, Claude (Opus 5.5): recorded Robert's order of experiments (08, then 09 on GPT-5.1;
   10 dropped; 11 as a data request); drafted the Experiment 08 specification.
 - 2026-09-26, Claude (Opus 5.5) at Robert's direction: reran Experiment 07 (R2) with the 74

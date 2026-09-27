@@ -7,7 +7,7 @@ labels, counts), the cached SEC companyfacts files under `data/edgar/companyfact
 `evaluation/companies/*/xbrl.json`, `evaluation/pipeline/calibrate_scorecard.py` and
 `history_pack.py`, and `evaluation/goldset.json`. No result has been computed.*
 
-State: design. Awaiting the decisions in section 13.
+State: run R1 2026-09-27, with a supplement. Results in `results.md`.
 
 ## 1. Purpose and question
 
