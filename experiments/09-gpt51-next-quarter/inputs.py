@@ -50,7 +50,7 @@ PRICE_IN, PRICE_OUT = Decimal("0.625"), Decimal("5")     # USD per million token
 CUTOFF, BOUNDARY = "2024-09-30", "2024-10-31"
 REASONING = "medium"
 MAX_TOKENS_FORECAST, MAX_TOKENS_PROBE = 32000, 6000
-CONTEXT, TOKEN_MARGIN = 400000, 1.03
+CONTEXT, INPUT_LIMIT, TOKEN_MARGIN = 400000, 272000, 1.03   # OpenAI: 272,000 input + 128,000 output
 ELIGIBLE_DAYS = 450
 PERIOD = {"2024-12-31": ("2025-01-01", "2025-03-31"), "2025-03-31": ("2025-04-01", "2025-06-30")}
 
@@ -280,7 +280,7 @@ def prepare(run_id):
         tokens = len(enc.encode(SYSTEM)) + len(enc.encode(user)) + schema_tokens
         bound = int(tokens * TOKEN_MARGIN) + 200
         dropped = []
-        while eligible and bound + MAX_TOKENS_FORECAST > CONTEXT and len(docs) > 1:
+        while eligible and bound > INPUT_LIMIT and len(docs) > 1:
             dropped.append(docs.pop(1)["filingDate"])             # the oldest 10-Q goes first
             documents, meta, removed = assemble(c, docs)
             user = TASK.format(as_of=t, company=c["name"], rating_type=rt, rating=r["rating_t"],
@@ -288,7 +288,7 @@ def prepare(run_id):
                                documents_header=header, documents=documents)
             tokens = len(enc.encode(SYSTEM)) + len(enc.encode(user)) + schema_tokens
             bound = int(tokens * TOKEN_MARGIN) + 200
-        assert bound + MAX_TOKENS_FORECAST <= CONTEXT, f"{c['slug']} {t}: {bound} tokens do not fit"
+        assert bound <= INPUT_LIMIT and bound + MAX_TOKENS_FORECAST <= CONTEXT, f"{c['slug']} {t}: {bound} tokens do not fit"
         rid = f"F-{c['slug']}-{t}"
         body = forecast_body(user)
         raw = canonical(body)

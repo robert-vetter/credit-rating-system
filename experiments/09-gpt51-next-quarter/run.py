@@ -563,7 +563,8 @@ def main():
         path = os.path.join(run_dir, "authorization.json")
         if os.path.exists(path):
             sys.exit("authorization exists")
-        json.dump({"authorization_id": f"EXP09-{run_id}-A1", "manifest_sha256": sha(raw), "cap_usd": "50",
+        cap = sys.argv[3] if len(sys.argv) > 3 else "50"
+        json.dump({"authorization_id": f"EXP09-{run_id}-A1", "manifest_sha256": sha(raw), "cap_usd": cap,
                    "approved_by": "Robert Vetter", "approved_on": "2026-09-27",
                    "source": "decisions.md, decision 4: cap $50 for now; stop at the cap and report",
                    "model": ("gpt-5.1-2025-11-13, direct OpenAI Chat Completions, service_tier flex (decisions 9, 10)"

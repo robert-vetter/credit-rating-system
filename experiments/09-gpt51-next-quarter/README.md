@@ -243,4 +243,5 @@ Estimate before the pre-flight, list prices from the model page:
 | Review | Codex review proposed | none; Robert's go stands in for consensus | 5 |
 | Budget estimate | $45 to $50 with batch for three replicates | one replicate at the flex price: about $11 input (17.7 million tokens) plus $3 to $6 output, about $15 to $20 in total, exact figure from the pre-flight | |
 | Section 9, stability row | range across three replicates | not available; dropped | 3 |
+| Input limit | the context of 400,000 was read as input plus output | OpenAI limits GPT-5.1's input to 272,000 tokens (plus 128,000 output); found by the pilot request of run R2 (HTTP 400, not billed). The section 6 rule applies: the oldest 10-Q is dropped until the request fits; 11 requests affected, among them Carvana 2024-12-31 (a change). New run R3 | 11 |
 | Redaction | `redact_v2` and the fragment scan | plus a final pass that removes exactly the lines the scan flags (logged per document), then rescans; added after the scan stopped the build on two orphaned "Stable" outlook cells in Best Buy's 2024 10-K. Nothing had been sent | 2 (decision 6 of section 13) |
