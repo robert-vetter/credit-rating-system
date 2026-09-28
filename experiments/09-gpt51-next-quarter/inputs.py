@@ -6,6 +6,7 @@ of README.md (version 0.2).
 
     python3 experiments/09-gpt51-next-quarter/inputs.py fetch            # downloads (decision 2)
     python3 experiments/09-gpt51-next-quarter/inputs.py prepare R1       # offline; refuses to overwrite
+    python3 experiments/09-gpt51-next-quarter/inputs.py prepare R2 --openai   # direct OpenAI flex (decision 10)
 
 fetch: for every one of the 147 window rows of Experiment 08, reads the company's SEC filing
 manifest (fetched from EDGAR for withdrawn-rating companies that have none), picks the latest 10-K
@@ -40,7 +41,9 @@ E07_WITHDRAWN = os.path.join(ROOT, "experiments", "07-rating-change-base-rates",
 COMPANIES = os.path.join(ROOT, "evaluation", "companies")
 EXTRA = os.path.join(HERE, "runs", "inputs")            # manifests and filings of withdrawn-rating companies
 
+TARGET = "openai" if "--openai" in sys.argv else "openrouter"
 MODEL = "openai/gpt-5.1"
+OPENAI_MODEL = "gpt-5.1-2025-11-13"
 EXPECTED_SNAPSHOT = "gpt-5.1-20251113"
 PROVIDER_SLUG = "openai/flex"
 PRICE_IN, PRICE_OUT = Decimal("0.625"), Decimal("5")     # USD per million tokens, approved ceilings
@@ -166,6 +169,13 @@ def provider():
 
 
 def forecast_body(user_text):
+    if TARGET == "openai":
+        return {"model": OPENAI_MODEL,
+                "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user_text}],
+                "reasoning_effort": REASONING, "max_completion_tokens": MAX_TOKENS_FORECAST,
+                "response_format": {"type": "json_schema", "json_schema": {"name": "rating_forecast", "strict": True,
+                                                                           "schema": SCHEMA}},
+                "service_tier": "flex", "store": False}
     return {"model": MODEL,
             "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user_text}],
             "reasoning": {"effort": REASONING}, "max_tokens": MAX_TOKENS_FORECAST,
@@ -175,6 +185,13 @@ def forecast_body(user_text):
 
 
 def probe_body(question):
+    if TARGET == "openai":
+        return {"model": OPENAI_MODEL,
+                "messages": [{"role": "system", "content": PROBE_SYSTEM}, {"role": "user", "content": question}],
+                "reasoning_effort": REASONING, "max_completion_tokens": MAX_TOKENS_PROBE,
+                "response_format": {"type": "json_schema", "json_schema": {"name": "memory_probe", "strict": True,
+                                                                           "schema": PROBE_SCHEMA}},
+                "service_tier": "flex", "store": False}
     return {"model": MODEL,
             "messages": [{"role": "system", "content": PROBE_SYSTEM}, {"role": "user", "content": question}],
             "reasoning": {"effort": REASONING}, "max_tokens": MAX_TOKENS_PROBE,
@@ -297,8 +314,10 @@ def prepare(run_id):
                              "reservation_usd": reservation(pbound, MAX_TOKENS_PROBE), "body_sha256": sha(praw)})
     worst = sum(Decimal(x["reservation_usd"]) for x in requests)
     expected_in = sum(x["input_tokens"] for x in requests)
-    manifest = {"created": dt.datetime.now(dt.timezone.utc).isoformat(), "model": MODEL,
-                "expected_snapshot": EXPECTED_SNAPSHOT, "provider_slug": PROVIDER_SLUG,
+    manifest = {"created": dt.datetime.now(dt.timezone.utc).isoformat(), "api": TARGET,
+                "model": OPENAI_MODEL if TARGET == "openai" else MODEL,
+                "expected_snapshot": OPENAI_MODEL if TARGET == "openai" else EXPECTED_SNAPSHOT,
+                "provider_slug": "openai service_tier flex" if TARGET == "openai" else PROVIDER_SLUG,
                 "price_ceiling_per_million": {"input": str(PRICE_IN), "output": str(PRICE_OUT)},
                 "cutoff": CUTOFF, "boundary": BOUNDARY, "reasoning_effort": REASONING,
                 "tokenizer": "tiktoken " + tiktoken.__version__ + " o200k_base", "token_margin": TOKEN_MARGIN,
@@ -321,7 +340,7 @@ def prepare(run_id):
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "fetch":
         fetch()
-    elif len(sys.argv) == 3 and sys.argv[1] == "prepare":
+    elif len(sys.argv) in (3, 4) and sys.argv[1] == "prepare":
         prepare(sys.argv[2])
     else:
         sys.exit(__doc__)

@@ -40,6 +40,12 @@ CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 GEN_URL = "https://openrouter.ai/api/v1/generation"
 ENDPOINTS_URL = "https://openrouter.ai/api/v1/models/openai/gpt-5.1/endpoints"
 PROVIDER_TAG = "openai/flex"
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+OPENAI_SNAPSHOT = "gpt-5.1-2025-11-13"
+# OpenAI pricing page, saved as evidence/openai-pricing-page-2026-09-28.html (USD per million tokens)
+OPENAI_PRICE = {"flex": (Decimal("0.625"), Decimal("0.0625"), Decimal("5")),
+                "default": (Decimal("1.25"), Decimal("0.125"), Decimal("10"))}
+MAX_TOTAL_ATTEMPTS = 8
 PRICE_IN, PRICE_OUT = Decimal("0.625"), Decimal("5")
 MAX_ATTEMPTS = 2
 SCALE = ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3",
@@ -60,6 +66,25 @@ def now():
 
 def sha(b):
     return hashlib.sha256(b).hexdigest()
+
+
+def openai_key():
+    """The key file is named at run time (decision 9); the key is never written anywhere."""
+    path = os.environ.get("EXP09_OPENAI_KEY_FILE")
+    if not path or not os.path.exists(path):
+        raise Refusal("EXP09_OPENAI_KEY_FILE not set or missing")
+    for line in open(path):
+        if line.startswith("OPENAI_API_KEY="):
+            return line.split("=", 1)[1].strip().strip('"').strip("'")
+    raise Refusal("OPENAI_API_KEY not in the key file")
+
+
+def openai_charge(usage, tier):
+    p_in, p_cached, p_out = OPENAI_PRICE.get(tier, OPENAI_PRICE["default"])
+    prompt = int(usage["prompt_tokens"])
+    cached = int((usage.get("prompt_tokens_details") or {}).get("cached_tokens") or 0)
+    out = int(usage["completion_tokens"])
+    return ((prompt - cached) * p_in + cached * p_cached + out * p_out) / Decimal(10 ** 6)
 
 
 def api_key():
@@ -171,6 +196,19 @@ class HttpxTransport:
         return self._do("GET", ENDPOINTS_URL)
 
 
+class OpenAITransport(HttpxTransport):
+    """Direct OpenAI Chat Completions; same no-retry client."""
+
+    def __init__(self, key):
+        import httpx
+        self.client = httpx.Client(timeout=httpx.Timeout(connect=30.0, read=1800.0, write=120.0, pool=60.0),
+                                   headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+                                   transport=httpx.HTTPTransport(retries=0))
+
+    def send(self, body):
+        return self._do("POST", OPENAI_URL, body)
+
+
 # ----------------------------------------------------------------------------- validation
 
 def parse_json(text):
@@ -225,6 +263,7 @@ class Runner:
         self.cap = Decimal(self.auth["cap_usd"])
         self.lock = threading.Lock()
         self.priced = False
+        self.api = self.manifest.get("api", "openrouter")
         os.makedirs(os.path.join(run_dir, "responses"), exist_ok=True)
 
     def _authorization(self):
@@ -237,6 +276,19 @@ class Runner:
         return a
 
     def price_check(self):
+        if self.api == "openai":
+            ev = os.path.join(HERE, "evidence", "openai-pricing-page-2026-09-28.html")
+            if not os.path.exists(ev):
+                raise Refusal("pricing evidence missing")
+            p_in, p_cached, p_out = OPENAI_PRICE["flex"]
+            ok = p_in <= PRICE_IN and p_out <= PRICE_OUT
+            self.ledger.append({"event": "price_check", "api": "openai", "tier": "flex",
+                                "input_per_million": str(p_in), "cached_input_per_million": str(p_cached),
+                                "output_per_million": str(p_out), "source": os.path.basename(ev), "ok": ok})
+            if not ok:
+                raise Refusal("flex price above the ceilings")
+            self.priced = True
+            return
         r = self.transport.endpoints()
         if r.status != 200:
             raise Refusal(f"price check failed: HTTP {r.status} {r.error or ''}")
@@ -271,7 +323,8 @@ class Runner:
             atts = st["attempts"].get(rid, [])
             if any(a["status"] in ("reserved", "dispatched", "unresolved") for a in atts):
                 raise Refusal(f"{rid}: an earlier attempt is still open or unresolved")
-            if len(atts) >= MAX_ATTEMPTS:
+            counted = [a for a in atts if a["status"] != "failed_not_billed"]
+            if len(counted) >= MAX_ATTEMPTS or len(atts) >= MAX_TOTAL_ATTEMPTS:
                 return None
             if req["kind"] == "forecast":
                 if req["probe_id"] not in st["valid"] or req["company"] not in self.reviewed_probes():
@@ -308,6 +361,8 @@ class Runner:
         return None, None
 
     def dispatch(self, rid):
+        if self.api == "openai":
+            return self.dispatch_openai(rid)
         got = self._reserve(rid)
         if got is None:
             return "skipped"
@@ -375,6 +430,73 @@ class Runner:
             return "invalid"
         self.ledger.append({"event": "valid", "request_id": rid, "attempt_id": aid})
         return "valid"
+
+    def _validate(self, rid, aid, choice):
+        try:
+            if choice.get("finish_reason") not in ("stop", None):
+                raise ValueError(f"finish_reason {choice.get('finish_reason')}")
+            obj = parse_json(choice["message"]["content"])
+            problem = (check_forecast if self.requests[rid]["kind"] == "forecast" else check_probe)(obj)
+            if problem:
+                raise ValueError(problem)
+        except (KeyError, IndexError, TypeError, ValueError) as exc:
+            self.ledger.append({"event": "invalid", "request_id": rid, "attempt_id": aid, "reason": str(exc)[:300]})
+            return "invalid"
+        self.ledger.append({"event": "valid", "request_id": rid, "attempt_id": aid})
+        return "valid"
+
+    def dispatch_openai(self, rid):
+        got = self._reserve(rid)
+        if got is None:
+            return "skipped"
+        aid, body, res = got
+        self.ledger.append({"event": "dispatch", "request_id": rid, "attempt_id": aid})
+        r = self.transport.send(body)
+        raw_path = os.path.join(self.dir, "responses", f"{aid.replace('#', '_')}.json")
+        with open(raw_path, "wb") as f:
+            f.write(json.dumps({"status": r.status, "error": r.error}).encode() + b"\n" + (r.body or b""))
+        if r.status is None:
+            self.ledger.append({"event": "unresolved", "request_id": rid, "attempt_id": aid, "reason": r.error})
+            self._halt(rid, aid, f"transport error, billing unknown: {r.error}")
+            return "unresolved"
+        try:
+            j = json.loads(r.body) if r.body else {}
+        except ValueError:
+            j = {}
+        if r.status != 200:
+            err = j.get("error") if isinstance(j.get("error"), dict) else {}
+            reason = f"HTTP {r.status} {err.get('code') or err.get('type') or ''}: {(err.get('message') or '')[:160]}"
+            self.ledger.append({"event": "failed_not_billed", "request_id": rid, "attempt_id": aid, "reason": reason})
+            if r.status in (400, 401, 402, 403, 404):
+                self._halt(rid, aid, reason)
+            return "failed"
+        usage = j.get("usage")
+        if not usage or "prompt_tokens" not in usage or "completion_tokens" not in usage:
+            self.ledger.append({"event": "unresolved", "request_id": rid, "attempt_id": aid, "reason": "no usage"})
+            self._halt(rid, aid, "response without usage")
+            return "unresolved"
+        tier = j.get("service_tier")
+        charge = openai_charge(usage, tier)
+        self.ledger.append({"event": "reconcile", "request_id": rid, "attempt_id": aid,
+                            "charge_usd": str(charge.quantize(Decimal("0.000001"))), "response_id": j.get("id"),
+                            "model": j.get("model"), "service_tier": tier,
+                            "prompt_tokens": usage.get("prompt_tokens"),
+                            "cached_tokens": (usage.get("prompt_tokens_details") or {}).get("cached_tokens"),
+                            "completion_tokens": usage.get("completion_tokens"),
+                            "reasoning_tokens": (usage.get("completion_tokens_details") or {}).get("reasoning_tokens")})
+        if charge > res:
+            self._halt(rid, aid, f"charge {charge} above reservation {res}")
+        if j.get("model") != OPENAI_SNAPSHOT or tier != "flex":
+            self.ledger.append({"event": "suspect", "request_id": rid, "attempt_id": aid,
+                                "reason": f"served as {j.get('model')} at tier {tier}"})
+            self._halt(rid, aid, "unexpected snapshot or service tier")
+            return "suspect"
+        try:
+            choice = j["choices"][0]
+        except (KeyError, IndexError, TypeError):
+            self.ledger.append({"event": "invalid", "request_id": rid, "attempt_id": aid, "reason": "no choices"})
+            return "invalid"
+        return self._validate(rid, aid, choice)
 
     def submit(self, ids, workers=1):
         if not self.priced:
@@ -444,7 +566,9 @@ def main():
         json.dump({"authorization_id": f"EXP09-{run_id}-A1", "manifest_sha256": sha(raw), "cap_usd": "50",
                    "approved_by": "Robert Vetter", "approved_on": "2026-09-27",
                    "source": "decisions.md, decision 4: cap $50 for now; stop at the cap and report",
-                   "model": "openai/gpt-5.1 via OpenRouter, provider openai/flex, no fallback",
+                   "model": ("gpt-5.1-2025-11-13, direct OpenAI Chat Completions, service_tier flex (decisions 9, 10)"
+                             if json.loads(raw).get("api") == "openai"
+                             else "openai/gpt-5.1 via OpenRouter, provider openai/flex, no fallback"),
                    "written": now()}, open(path, "w"), indent=1)
         print(open(path).read())
     elif cmd == "status":
@@ -464,12 +588,22 @@ def main():
             ids = [r["request_id"] for r in man["requests"] if r["kind"] == "forecast"]
         else:
             sys.exit(__doc__)
-        runner = Runner(run_dir, HttpxTransport(api_key()))
-        results, stop = runner.submit(ids, workers)
-        counts = {}
-        for v in results.values():
-            counts[v] = counts.get(v, 0) + 1
-        print(json.dumps({"results": counts, "stopped": stop, "status": status(run_dir)}, indent=1))
+        man_api = man.get("api", "openrouter")
+        transport = OpenAITransport(openai_key()) if man_api == "openai" else HttpxTransport(api_key())
+        runner = Runner(run_dir, transport)
+        passes = int(args[args.index("--passes") + 1]) if "--passes" in args else 1
+        todo, counts, stop = list(ids), {}, None
+        for n in range(passes):
+            results, stop = runner.submit(todo, workers)
+            counts = {}
+            for v in results.values():
+                counts[v] = counts.get(v, 0) + 1
+            print(json.dumps({"pass": n + 1, "results": counts, "stopped": stop,
+                              "status": status(run_dir)}), flush=True)
+            todo = [rid for rid, v in results.items() if v == "failed"]
+            if stop or not todo or runner.ledger.state()["halts"]:
+                break
+            time.sleep(60)
     else:
         sys.exit(__doc__)
 

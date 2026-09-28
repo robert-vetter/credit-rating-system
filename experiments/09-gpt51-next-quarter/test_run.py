@@ -54,7 +54,7 @@ class Fake:
         return R.Response(404, b"")
 
 
-def make_run(requests, cap="50", authorize=True):
+def make_run(requests, cap="50", authorize=True, api=None):
     d = tempfile.mkdtemp()
     os.makedirs(os.path.join(d, "bodies"))
     reqs = []
@@ -62,7 +62,7 @@ def make_run(requests, cap="50", authorize=True):
         body = json.dumps({"model": "openai/gpt-5.1", "id": r["request_id"]}).encode()
         open(os.path.join(d, "bodies", f"{r['request_id']}.json"), "wb").write(body)
         reqs.append({**r, "body_sha256": hashlib.sha256(body).hexdigest()})
-    raw = json.dumps({"requests": reqs}).encode()
+    raw = json.dumps({"requests": reqs, **({"api": api} if api else {})}).encode()
     open(os.path.join(d, "manifest.json"), "wb").write(raw)
     if authorize:
         json.dump({"manifest_sha256": hashlib.sha256(raw).hexdigest(), "cap_usd": cap},
@@ -222,6 +222,78 @@ class Outcomes(unittest.TestCase):
         run, _ = self.runner(R.Response(502, b"bad gateway"))
         self.assertEqual(run.dispatch("F-x-2024-12-31"), "unresolved")
         self.assertEqual(run.ledger.state()["unresolved"], Decimal("0.30"))
+
+
+def oa(obj, prompt=1000, cached=0, out=500, tier="flex", model="gpt-5.1-2025-11-13", finish="stop", raw=None):
+    return R.Response(200, json.dumps({"id": "chatcmpl-1", "model": model, "service_tier": tier,
+                                       "choices": [{"finish_reason": finish, "message": {
+                                           "content": raw if raw is not None else json.dumps(obj)}}],
+                                       "usage": {"prompt_tokens": prompt, "completion_tokens": out,
+                                                 "prompt_tokens_details": {"cached_tokens": cached},
+                                                 "completion_tokens_details": {"reasoning_tokens": out // 2}}}).encode())
+
+
+class OpenAIPath(unittest.TestCase):
+    def setUp(self):
+        self.d = make_run([PROBE_REQ, FORE_REQ], api="openai")
+        review(self.d)
+
+    def tearDown(self):
+        shutil.rmtree(self.d, ignore_errors=True)
+
+    def runner(self, *replies):
+        t = Fake(replies=[oa(PROBE)] + list(replies))
+        run = R.Runner(self.d, t)
+        run.price_check()
+        self.assertEqual(run.dispatch("P-x"), "valid")
+        return run, t
+
+    def test_charge_from_usage_at_flex_prices(self):
+        run, _ = self.runner(oa(GOOD, prompt=200000, cached=50000, out=8000))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "valid")
+        # probe 1000 x 0.625 + 500 x 5; forecast 150000 x 0.625 + 50000 x 0.0625 + 8000 x 5, per million
+        expected = (Decimal(1000) * Decimal("0.625") + 500 * 5 + 150000 * Decimal("0.625")
+                    + 50000 * Decimal("0.0625") + 8000 * 5) / Decimal(10 ** 6)
+        self.assertEqual(run.ledger.state()["committed"], expected)
+
+    def test_capacity_error_is_not_billed_and_can_be_retried(self):
+        busy = R.Response(429, json.dumps({"error": {"code": "resource_unavailable", "message": "busy"}}).encode())
+        run, t = self.runner(busy, oa(GOOD))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "failed")
+        self.assertFalse(run.ledger.state()["halts"])
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "valid")
+        self.assertEqual(len(t.sent), 3)
+
+    def test_not_flex_tier_halts(self):
+        run, _ = self.runner(oa(GOOD, tier="default"))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "suspect")
+        self.assertTrue(run.ledger.state()["halts"])
+
+    def test_other_snapshot_halts(self):
+        run, _ = self.runner(oa(GOOD, model="gpt-5.1-2026-01-01"))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "suspect")
+
+    def test_timeout_stays_counted_and_halts(self):
+        run, _ = self.runner(R.Response(None, b"", "ReadTimeout"))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "unresolved")
+        self.assertEqual(run.ledger.state()["unresolved"], Decimal("0.30"))
+
+    def test_bad_request_halts(self):
+        run, _ = self.runner(R.Response(400, json.dumps({"error": {"code": "invalid_request", "message": "x"}}).encode()))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "failed")
+        self.assertTrue(run.ledger.state()["halts"])
+
+    def test_truncated_answer_is_invalid_but_charged(self):
+        run, _ = self.runner(oa(GOOD, finish="length"))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "invalid")
+        self.assertGreater(run.ledger.state()["committed"], Decimal("0.003"))
+        self.assertFalse(run.ledger.state()["halts"])
+
+    def test_attempt_limit(self):
+        run, t = self.runner(oa(dict(GOOD, p_up=0.4)), oa(dict(GOOD, p_up=0.4)), oa(GOOD))
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "invalid")
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "invalid")
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "skipped")     # two billed attempts used
 
 
 if __name__ == "__main__":
