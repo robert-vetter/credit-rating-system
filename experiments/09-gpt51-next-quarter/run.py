@@ -144,6 +144,9 @@ class Ledger:
                 self._att(st, rid, aid).update(status="reconciled", charge_usd=e["charge_usd"])
             elif ev in ("valid", "invalid", "suspect"):
                 self._att(st, rid, aid).update(status=ev, reason=e.get("reason"))
+            elif ev == "unresolved_accepted":
+                # stays counted in st["unresolved"] at its full reservation; the request may be retried
+                self._att(st, rid, aid).update(status="unresolved_accepted", reason=e.get("note"))
             elif ev == "halt":
                 st["halts"][e["halt_id"]] = e
             elif ev == "clear_halt":
@@ -572,6 +575,17 @@ def main():
                              else "openai/gpt-5.1 via OpenRouter, provider openai/flex, no fallback"),
                    "written": now()}, open(path, "w"), indent=1)
         print(open(path).read())
+    elif cmd == "clear-halt":
+        halt_id, note = sys.argv[3], sys.argv[4]
+        led = Ledger(os.path.join(run_dir, "ledger.jsonl"))
+        st = led.state()
+        h = st["halts"][halt_id]
+        att = next(a for a in st["attempts"].get(h["request_id"], []) if a["attempt_id"] == h["attempt_id"])
+        if att["status"] == "unresolved":
+            led.append({"event": "unresolved_accepted", "request_id": h["request_id"], "attempt_id": h["attempt_id"],
+                        "note": "kept counted at its full reservation as if billed; request may be retried"})
+        led.append({"event": "clear_halt", "halt_id": halt_id, "note": note})
+        print(json.dumps(status(run_dir), indent=1))
     elif cmd == "status":
         print(json.dumps(status(run_dir), indent=1))
     elif cmd == "probes":

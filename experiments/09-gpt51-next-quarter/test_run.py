@@ -296,5 +296,25 @@ class OpenAIPath(unittest.TestCase):
         self.assertEqual(run.dispatch("F-x-2024-12-31"), "skipped")     # two billed attempts used
 
 
+class ClearHalt(unittest.TestCase):
+    def test_accepted_unresolved_stays_counted_and_allows_retry(self):
+        d = make_run([PROBE_REQ, FORE_REQ], api="openai")
+        review(d)
+        t = Fake(replies=[oa(PROBE), R.Response(None, b"", "ReadTimeout"), oa(GOOD)])
+        run = R.Runner(d, t)
+        run.price_check()
+        run.dispatch("P-x")
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "unresolved")
+        st = run.ledger.state()
+        hid = next(iter(st["halts"]))
+        run.ledger.append({"event": "unresolved_accepted", "request_id": "F-x-2024-12-31",
+                           "attempt_id": st["halts"][hid]["attempt_id"], "note": "test"})
+        run.ledger.append({"event": "clear_halt", "halt_id": hid, "note": "test"})
+        self.assertEqual(run.dispatch("F-x-2024-12-31"), "valid")
+        st = run.ledger.state()
+        self.assertEqual(st["unresolved"], Decimal("0.30"))
+        shutil.rmtree(d, ignore_errors=True)
+
+
 if __name__ == "__main__":
     unittest.main()
