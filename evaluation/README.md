@@ -9,6 +9,12 @@ From the confirmed join, one folder per company is compiled that holds everythin
 needs about that company: identity, the full rating history (the answers), the SEC filing
 inventory (the inputs), and the verification evidence.
 
+## Two universes
+
+This README describes the **Retail and Apparel** universe of Experiments 01 to 09. The
+**all-sector** universe of Experiment 10 onwards lives in `all-sectors/` with its own README and
+records; it does not change anything described here.
+
 ## Layout
 
 | Path | What it is | In git |

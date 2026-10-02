@@ -1,10 +1,30 @@
-# data/ — raw and derived data
+# data/: raw and derived data
 
 *Everything in this directory except this README is gitignored: bulk, refetchable, or subject
 to the open Moody's terms-of-use question. This file documents what lives here, where each file
 comes from, and which script consumes it.*
 
-## moodys/ — the rating histories (the evaluation's answers)
+## Two universes
+
+The repository holds two separate universes of companies. They share the raw Moody's files and
+the SEC name lists; everything else is kept apart.
+
+| | Retail and Apparel (Experiments 01 to 09) | All sectors (Experiment 10 onwards) |
+|---|---|---|
+| Here in data/ | `frame/retail_frame.json`, `edgar/companyfacts/`, `edgar/companyfacts-withdrawn/` | `all-sectors/` |
+| Mapping and other committed records | `evaluation/mapping.json`, `evaluation/decisions.jsonl` | `evaluation/all-sectors/` |
+| Built by | `evaluation/pipeline/build_frame.py` and the steps after it | `evaluation/pipeline/map_all_sectors.py` |
+
+Details: `evaluation/all-sectors/README.md`.
+
+## all-sectors/: the all-sector universe (added 2026-10-01)
+
+| File | What / where from |
+|---|---|
+| `moodys-quarterly-labels.json` | Quarterly labels 2012-09-30 to 2025-06-30 for all 13,025 corporate issuers of both Moody's sets (name, LEI, label, level, persistence, change), by the label rule of `build_observations.py`. Built by `map_all_sectors.py labels` from the two zips |
+| `sec-submissions/CIK##########.json` | SEC submissions (company metadata and filing list) for the companies matched to Moody's issuers rated in the 2025 window and for the candidates of ambiguous names. https://data.sec.gov/submissions/, fetched 2026-10-01 (Robert's approval); first 532 by the Experiment 10 sizing step |
+
+## moodys/: the rating histories (the evaluation's answers; shared by both universes)
 
 | File | What / where from |
 |---|---|
@@ -16,7 +36,7 @@ Consumed by `build_frame.py`, `compile_folders.py` (ratings.json extraction) and
 `build_observations.py` indirectly through the folders. The zips stay local and are not
 redistributed pending the terms-of-use question (assumptions review of 2026-08-12, in git history).
 
-## edgar/ — SEC reference lists and caches
+## edgar/: SEC reference lists (shared) and the Retail caches
 
 | File | What / where from |
 |---|---|
@@ -26,7 +46,7 @@ redistributed pending the terms-of-use question (assumptions review of 2026-08-1
 | `sic_sweep_listed.done` | Marker that the listed-universe sweep completed, with counts |
 | `companyfacts/<slug>.json` | Raw SEC XBRL companyfacts response per company folder (5-20 MB each, 218 MB total, 82 companies; four historical or foreign filers return 404 and are recorded as such), https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json, fetched 2026-09-11; `_fetched.json` records the date per company. Kept so `fetch_xbrl.py` can re-extract offline and reproducibly; `fetch_xbrl.py --refresh` re-downloads |
 
-## frame/ — the sample frame
+## frame/: the Retail and Apparel sample frame
 
 | File | What |
 |---|---|

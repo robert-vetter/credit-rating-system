@@ -44,13 +44,14 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 07 | no model; how often and how much ratings change, 125 in-scope companies incl. withdrawn ratings, 2012 to 2025 | | 7.8% of quarters change (A 2.5%, Baa 4.4%, Ba 7.1%, B 12.9%, Caa 18.5%); 26.7% within 12 months; 81% one notch | 92.2% per quarter |
 | 08 | no model; next-quarter predictor from rating history and quarterly numbers, trained to 2020, tested 2021 to mid-2025 (1,356 company-quarters, 103 changes) | direction right 74.8% with numbers, 42.7% without | any change: ranking score 0.148 (rating level) to 0.160; numbers add nothing measurable. Downgrades alone (post-hoc): 0.142 with numbers, 0.071 without | ranks nothing (0.076) |
 | 09 | GPT-5.1 (cutoff 2024-09-30), 118 company-quarters with filings, 11 changes after its cutoff, one run, OpenAI flex, $12.63 | ranking score 0.237 (rating level 0.173, numbers model 0.209); direction 11 of 11; downgrades 0.238 against 0.110 | difference to the rating level not proven with 11 changes (interval -0.17 to +0.30) | 0.093 random |
-| 10 (design) | sizing an all-sector GPT-5.1 test, no model | | 95 testable changes automatically (about 150 to 200 with a mapping pass) against 11 in Experiment 09 | |
+| 10 (design) | all-sector GPT-5.1 test: sizing done; mapping proposed by rules for 4,894 issuers rated in the 2025 window (1,710 by unique name, 187 by 10-K tie-break, 26 conflicts dropped); 974 proposals file 10-Ks; spot check of 30 waiting for Robert | | | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
 
 | Decision | Owner | State |
 |---|---|---|
+| All-sector mapping spot check | Robert | 30 lines in `evaluation/all-sectors/spot-check-2026-10-01.md`; all right accepts the rules as Robert's decision |
 | Next experiments | Robert | 08 and 09 done. Open after 09 (results, section 12): more changes (the chair's histories, sector widening), recalibration, combining GPT-5.1 with the numbers model, a stability rerun, an outlook arm. 10 dropped; 11 needs the chair's histories (email) |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |
@@ -97,6 +98,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-10-01, Claude (Opus 5.5) at Robert's direction: built the all-sector universe (labels for
+  13,025 corporate issuers, SEC submissions for 2,535 companies, proposed mapping, spot-check sheet),
+  stored apart from the Retail universe; READMEs explain the two universes.
 - 2026-10-01, Claude (Opus 5.5) at Robert's direction: sizing step for Experiment 10 (all sectors,
   GPT-5.1 window): 526 changes worldwide, 95 testable automatically; note in
   experiments/10-all-sector-next-quarter/sizing.md. Robert's E08 email recorded privately.

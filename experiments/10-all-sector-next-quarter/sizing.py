@@ -5,7 +5,8 @@ Experiment 10, design stage: sizing. How many next-quarter rating changes in the
 Written 2026-10-01 by Claude (Opus 5.5), directed by Robert Vetter (decision 0 in decisions.md). No model
 call. Reads the two Moody's 17g-7 archives (data/moodys/), the SEC name list (data/edgar/cik-lookup-data.txt),
 the confirmed mapping (evaluation/mapping.json, read only, used as the answer key for the matcher), and
-downloads SEC submissions JSON for matched companies (Robert's approval of 2026-10-01).
+downloads SEC submissions JSON for matched companies (Robert's approval of 2026-10-01) into the shared
+cache data/all-sectors/sec-submissions/.
 
 Steps, each writing into runs/sizing/ (gitignored):
     labels     quarterly labels of every corporate issuer, the label rule of build_observations.py
@@ -36,6 +37,7 @@ from compile_folders import IND_META, ORD_FLD, STAMP  # noqa: E402
 from fetch_xbrl import UA  # noqa: E402
 
 OUT = os.path.join(HERE, "runs", "sizing")
+SUBS = os.path.join(ROOT, "data", "all-sectors", "sec-submissions")   # shared cache since 2026-10-01
 OB_ZIP = os.path.join(ROOT, "data", "moodys", "xbrl100-obligor-2026-08-11.zip")
 IS_ZIP = os.path.join(ROOT, "data", "moodys", "xbrl100-issuer-2026-08-11.zip")
 PRED = ("2024-12-31", "2025-03-31")
@@ -192,7 +194,7 @@ def fetch():
     rng = random.Random(SEED)
     sample = set(rng.sample(stable_ois, min(STABLE_SAMPLE, len(stable_ois))))
     ciks = sorted(changed | {mt[o]["cik"] for o in sample})
-    d = os.path.join(OUT, "submissions")
+    d = SUBS
     os.makedirs(d, exist_ok=True)
     json.dump({"stable_sample_ois": sorted(sample), "seed": SEED}, open(os.path.join(OUT, "stable_sample.json"), "w"))
     got = 0
@@ -212,7 +214,7 @@ def fetch():
 
 
 def filings_of(cik):
-    path = os.path.join(OUT, "submissions", f"CIK{cik:010d}.json")
+    path = os.path.join(SUBS, f"CIK{cik:010d}.json")
     if not os.path.exists(path):
         return None
     j = json.load(open(path))
