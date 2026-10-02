@@ -44,6 +44,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 | 07 | no model; how often and how much ratings change, 125 in-scope companies incl. withdrawn ratings, 2012 to 2025 | | 7.8% of quarters change (A 2.5%, Baa 4.4%, Ba 7.1%, B 12.9%, Caa 18.5%); 26.7% within 12 months; 81% one notch | 92.2% per quarter |
 | 08 | no model; next-quarter predictor from rating history and quarterly numbers, trained to 2020, tested 2021 to mid-2025 (1,356 company-quarters, 103 changes) | direction right 74.8% with numbers, 42.7% without | any change: ranking score 0.148 (rating level) to 0.160; numbers add nothing measurable. Downgrades alone (post-hoc): 0.142 with numbers, 0.071 without | ranks nothing (0.076) |
 | 09 | GPT-5.1 (cutoff 2024-09-30), 118 company-quarters with filings, 11 changes after its cutoff, one run, OpenAI flex, $12.63 | ranking score 0.237 (rating level 0.173, numbers model 0.209); direction 11 of 11; downgrades 0.238 against 0.110 | difference to the rating level not proven with 11 changes (interval -0.17 to +0.30) | 0.093 random |
+| 10 (design) | sizing an all-sector GPT-5.1 test, no model | | 95 testable changes automatically (about 150 to 200 with a mapping pass) against 11 in Experiment 09 | |
 | Calibration | no model; 1,665 historical observations | | MAE 1.92 raw, 1.49 calibrated | MAE 0.05 |
 
 ## Open decisions
@@ -96,6 +97,9 @@ for the next reply), `xiaowei-expectations.md` (what Xiaowei asks for, with a ch
 
 ## Log
 
+- 2026-10-01, Claude (Opus 5.5) at Robert's direction: sizing step for Experiment 10 (all sectors,
+  GPT-5.1 window): 526 changes worldwide, 95 testable automatically; note in
+  experiments/10-all-sector-next-quarter/sizing.md. Robert's E08 email recorded privately.
 - 2026-09-28, Claude (Opus 5.5) at Robert's direction: ran Experiment 09 on OpenAI flex with the
   Certus AI key (Robert's decision): 147 forecasts and 74 probes, all valid, $12.63 of $50. Pilot
   found OpenAI's 272,000-token input limit (not billed); one timeout halt cleared with a note.
