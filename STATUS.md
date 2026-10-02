@@ -51,7 +51,7 @@ Moody's rating logic from real data with LLMs as a tool, (2) encode it into agen
 
 | Decision | Owner | State |
 |---|---|---|
-| All-sector mapping spot check | Robert | 30 lines in `evaluation/all-sectors/spot-check-2026-10-01.md`; all right accepts the rules as Robert's decision |
+| All-sector mapping spot check | Robert | sample 1: Robert all right, Claude's check found Six Flags wrong, rules tightened; sample 2 (`evaluation/all-sectors/spot-check-2026-10-01-seed20261002.md`) waiting for Robert; Claude's check: all 30 consistent |
 | Next experiments | Robert | 08 and 09 done. Open after 09 (results, section 12): more changes (the chair's histories, sector widening), recalibration, combining GPT-5.1 with the numbers model, a stability rerun, an outlook arm. 10 dropped; 11 needs the chair's histories (email) |
 | A sample with enough rating changes (balanced against unchanged controls) | Robert, then the chair | Robert wants it (2026-09-26). Sources: the chair's dated Moody's histories September 2025 to August 2026 (asked twice, no answer); Arm 2, an older window with official labels (59 issuers, 12 changes); more sectors |
 | Is the task the outstanding rating or the change decision? | Robert, then Xiaowei | Robert asks whether, with 94% unchanged, the real difficulty is when a rating changes. In his first-step ask (E01), Xiaowei set the target as the outstanding rating. Not settled |

@@ -36,6 +36,18 @@ Both universes read the same raw Moody's archives (`data/moodys/`) and SEC name 
 | Conflict | several of them filed such a 10-K | dropped (Robert, 2026-10-01) |
 | Unmapped | no registrant, or none of several files 10-Ks | not mapped |
 | LEI | where SEC lists an LEI: equal to Moody's confirms; different rejects | dropped if different |
+| /OLD (added after spot check 1) | an SEC registrant currently named "/OLD" is never a candidate; "/NEW" and "/OLD" suffixes are ignored when names are compared | not a candidate |
+| GLEIF (added after spot check 1) | where Moody's has an LEI, GLEIF's legal, other or transliterated names must agree with the SEC company's current or former names; names without a Latin-script version count as not checkable | dropped if they disagree |
+| Subsidiary to parent | a rated subsidiary whose cleaned name matches its filing parent's former name maps to the parent, as in the Retail mapping | proposed |
+
+## Spot checks
+
+| Sample | Seed | Robert | Claude's verification | Outcome |
+|---|---|---|---|---|
+| 1 (`spot-check-2026-10-01.md`) | 20261001 | all 30 right | 29 right; #25 Six Flags matched to its pre-merger registration | rules tightened (/OLD, GLEIF), proposals rebuilt |
+| 2 (`spot-check-2026-10-01-seed20261002.md`) | 20261002 | pending | all 30 consistent | if Robert confirms, the rules are accepted for every proposed match |
+
+After the rebuild: 977 proposed matches file 10-Ks in the window, 685 of them confirmed by GLEIF.
 
 Measured on the 186 Retail decisions: every rule-A match that also files a recent 10-K (56 of 56)
 was the company Robert had chosen by hand. Matches that fail the 10-K check never enter a test.
