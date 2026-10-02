@@ -54,6 +54,7 @@ on a widely used commercial model (GPT-5.2) are proposed and not yet run.
 | [07](experiments/07-rating-change-base-rates/) | How often and how much do ratings change in the historical record? | done 2026-09-26, no model; 7.8% of quarters change, rising from 2.5% at A to 18.5% at Caa; mostly one notch |
 | [08](experiments/08-next-quarter-baselines/) | Can simple rules and the reported numbers predict next quarter's rating change, without an LLM? | done 2026-09-27; the rating level tells whether, the numbers tell which way (74.8% against 42.7%) |
 | [09](experiments/09-gpt51-next-quarter/) | Can GPT-5.1 rank next quarter's rating changes after its cutoff better than the rating level? | done 2026-09-28; better on the point estimate (0.237 against 0.173), not proven with 11 changes; direction right on all 11 |
+| [10](experiments/10-all-sector-next-quarter/) | The Experiment 09 test across all sectors, with enough rating changes (118) to answer it | specification drafted 2026-10-01, not run |
 
 Each folder holds the specification, the decisions with owner and date, the prompts, the code
 and the results. From 2026-09-26 every experiment and report follows the

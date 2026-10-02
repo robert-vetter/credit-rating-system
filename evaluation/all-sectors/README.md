@@ -45,7 +45,7 @@ Both universes read the same raw Moody's archives (`data/moodys/`) and SEC name 
 | Sample | Seed | Robert | Claude's verification | Outcome |
 |---|---|---|---|---|
 | 1 (`spot-check-2026-10-01.md`) | 20261001 | all 30 right | 29 right; #25 Six Flags matched to its pre-merger registration | rules tightened (/OLD, GLEIF), proposals rebuilt |
-| 2 (`spot-check-2026-10-01-seed20261002.md`) | 20261002 | pending | all 30 consistent | if Robert confirms, the rules are accepted for every proposed match |
+| 2 (`spot-check-2026-10-01-seed20261002.md`) | 20261002 | all 30 right | all 30 consistent | **rules accepted by Robert for every proposed match (2026-10-01)** |
 
 After the rebuild: 977 proposed matches file 10-Ks in the window, 685 of them confirmed by GLEIF.
 
